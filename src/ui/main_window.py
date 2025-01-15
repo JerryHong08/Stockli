@@ -150,28 +150,43 @@ class MainWindowUI(QMainWindow):
         layout.setSpacing(10)
         layout.setContentsMargins(20, 20, 20, 20)
 
+        # 紧凑布局容器
+        control_container = QWidget()
+        control_layout = QGridLayout()
+        control_layout.setSpacing(5)
+        control_layout.setContentsMargins(0, 0, 0, 0)
+        
         # 搜索框和确认按钮
         self.search_box = QLineEdit()
-        self.search_box.setPlaceholderText("输入股票代码或名称进行搜索...")
-        layout.addWidget(self.search_box, 0, 0)
+        self.search_box.setPlaceholderText("搜索股票...")
+        self.search_box.setFixedHeight(30)
+        control_layout.addWidget(self.search_box, 0, 0, 1, 2)
 
-        self.search_button = QPushButton("确认搜索")
-        layout.addWidget(self.search_button, 0, 1)
+        self.search_button = QPushButton("搜索")
+        self.search_button.setFixedHeight(30)
+        control_layout.addWidget(self.search_button, 0, 2)
         
         # 股票代码选择器
         self.stock_selector = QComboBox()
-        layout.addWidget(self.stock_selector, 1, 0, 1, 2)
+        self.stock_selector.setFixedHeight(30)
+        control_layout.addWidget(self.stock_selector, 1, 0, 1, 2)
 
         # 周期选择器和加载按钮
-        self.period_label = QLabel("选择查看最近N个时间周期：")
-        layout.addWidget(self.period_label, 2, 0)
+        self.period_label = QLabel("周期:")
+        self.period_label.setFixedHeight(30)
+        control_layout.addWidget(self.period_label, 1, 2)
 
         self.period_selector = QComboBox()
         self.period_selector.addItems(["50", "200", "500", "1000"])
-        layout.addWidget(self.period_selector, 2, 1)
+        self.period_selector.setFixedHeight(30)
+        control_layout.addWidget(self.period_selector, 1, 3)
 
-        self.load_button = QPushButton("加载数据并绘制蜡烛图")
-        layout.addWidget(self.load_button, 3, 0, 1, 2)
+        self.load_button = QPushButton("加载")
+        self.load_button.setFixedHeight(30)
+        control_layout.addWidget(self.load_button, 1, 4)
+
+        control_container.setLayout(control_layout)
+        layout.addWidget(control_container, 0, 0, 1, 2)
 
         # 鼠标悬停显示开关
         self.hover_toggle = QCheckBox("启用鼠标悬停显示")
