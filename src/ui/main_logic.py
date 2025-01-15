@@ -120,6 +120,10 @@ class MainWindowLogic:
                 summary_text.setWordWrap(True)
                 self.ui.stock_info_layout.addWidget(summary_text)
             
+            # 更新股票选择器并自动加载数据
+            self.ui.stock_selector.setCurrentText(random_stock)
+            self.load_and_plot_data()
+            
         except Exception as e:
             QMessageBox.warning(self.ui, "错误", f"获取股票信息失败: {str(e)}")
 
@@ -162,6 +166,7 @@ class MainWindowLogic:
                 self.ui.stock_selector.setCurrentText(partial_matches[0])
             else:
                 QMessageBox.warning(self.ui, "未找到", f"未找到匹配的股票代码: {search_text}")
+                
     def mouse_hover(self):
         """根据复选框状态启用或禁用鼠标悬停功能"""
         if self.ui.hover_toggle.isChecked():
@@ -290,7 +295,3 @@ class MainWindowLogic:
             QMessageBox.information(self.ui, "成功", "数据库配置已保存")
         except Exception as e:
             QMessageBox.warning(self.ui, "错误", f"保存配置失败: {str(e)}")
-
-
-
-
