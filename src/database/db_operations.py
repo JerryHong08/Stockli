@@ -123,18 +123,20 @@ def clean_symbol_for_postgres(symbol):
 
     return cleaned_symbol
 
-def save_to_table(data, table_name, db_config):
+def save_to_table(data, table_name, db_config, batch_size=1000):
     """
     将数据保存到 PostgreSQL 数据库的指定表中。
 
     :param data: 要保存的数据
     :param table_name: 表名
     :param db_config: 数据库连接配置（字典）
+    :param batch_size: 批量插入的大小，默认1000条
     """
     try:
         # 清洗表名
         table_name = clean_symbol_for_postgres(table_name)
 
+        # 使用连接池管理连接
         conn = psycopg2.connect(**db_config)
         if not conn:
             raise Exception("数据库连接失败")
@@ -168,16 +170,21 @@ def save_to_table(data, table_name, db_config):
                 for candlestick in data
             ]
 
-            # 执行批量插入
-            execute_values(cursor, insert_query, values)
-            conn.commit()
-            logger.info(f"Saved {len(values)} records to table '{table_name}'.")
-            print(f"Saved {len(values)} records to table '{table_name}'.")
+            # 分批次插入数据
+            total_inserted = 0
+            for i in range(0, len(values), batch_size):
+                batch = values[i:i + batch_size]
+                execute_values(cursor, insert_query, batch)
+                conn.commit()
+                total_inserted += len(batch)
+                logger.info(f"Inserted {len(batch)} records to table '{table_name}' (total: {total_inserted})")
 
         except Exception as e:
             logger.error(f"保存数据到数据库失败: {e}")
+            conn.rollback()
             raise Exception(f"保存数据到数据库失败: {e}")
         finally:
+            cursor.close()
             conn.close()
 
     except ValueError as e:
