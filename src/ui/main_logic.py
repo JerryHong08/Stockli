@@ -120,12 +120,27 @@ class MainWindowLogic:
                 summary_text.setWordWrap(True)
                 self.ui.stock_info_layout.addWidget(summary_text)
             
-            # 更新股票选择器并自动加载数据
+            # 清空搜索框并更新股票选择器
+            self.ui.search_box.clear()
             self.ui.stock_selector.setCurrentText(random_stock)
             self.load_and_plot_data()
             
         except Exception as e:
             QMessageBox.warning(self.ui, "错误", f"获取股票信息失败: {str(e)}")
+
+    def filter_stock_selector(self):
+        """根据搜索框内容过滤股票代码选择器"""
+        # 如果搜索框为空，显示所有股票
+        search_text = self.ui.search_box.text().strip().lower()
+        if not search_text:
+            self.ui.stock_selector.clear()
+            self.ui.stock_selector.addItems(self.all_stock_symbols)
+            return
+            
+        # 过滤股票代码
+        filtered_symbols = [symbol for symbol in self.all_stock_symbols if search_text in symbol.lower()]
+        self.ui.stock_selector.clear()
+        self.ui.stock_selector.addItems(filtered_symbols)
 
 
     def update_stock_selector(self):
