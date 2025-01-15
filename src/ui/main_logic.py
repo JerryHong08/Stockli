@@ -144,14 +144,24 @@ class MainWindowLogic:
 
     def confirm_search(self):
         """确认搜索"""
-        search_text = self.ui.search_box.text().strip()
+        search_text = self.ui.search_box.text().strip().upper()  # 转换为大写
         if search_text:
-            matched_symbols = [symbol for symbol in self.all_stock_symbols if search_text.lower() in symbol.lower()]
-            if matched_symbols:
-                self.ui.stock_selector.setCurrentText(matched_symbols[0])
+            # 优先精确匹配
+            exact_matches = [symbol for symbol in self.all_stock_symbols 
+                        if symbol.upper() == search_text]
+            
+            # 如果没有精确匹配，再找包含匹配
+            if not exact_matches:
+                partial_matches = [symbol for symbol in self.all_stock_symbols 
+                                if search_text in symbol.upper()]
+            
+            # 如果有匹配结果
+            if exact_matches:
+                self.ui.stock_selector.setCurrentText(exact_matches[0])
+            elif partial_matches:
+                self.ui.stock_selector.setCurrentText(partial_matches[0])
             else:
                 QMessageBox.warning(self.ui, "未找到", f"未找到匹配的股票代码: {search_text}")
-
     def mouse_hover(self):
         """根据复选框状态启用或禁用鼠标悬停功能"""
         if self.ui.hover_toggle.isChecked():
