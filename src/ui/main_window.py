@@ -14,8 +14,54 @@ class MainWindowUI(QMainWindow):
         self.setWindowTitle("股票数据可视化")
         self.setGeometry(100, 100, 800, 600)
         
-        # 初始化样式
-        self.init_styles()
+        # 设置全局样式表
+        self.setStyleSheet("""
+            QMainWindow {
+                background-color: #f5f5f5;
+            }
+            QPushButton {
+                background-color: #C0C0C0;
+                color: white;
+                font-size: 14px;
+                padding: 10px;
+                border-radius: 5px;
+            }
+            QPushButton:hover {
+                background-color: #808080;
+            }
+            QLabel {
+                font-size: 14px;
+                color: #333;
+            }
+            QLineEdit, QComboBox {
+                padding: 8px;
+                font-size: 14px;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+            }
+            QLineEdit:focus, QComboBox:focus {
+                border: 1px solid #4CAF50;
+            }
+            QFrame {
+                border: 1px solid #ccc;
+            }
+            QTabWidget::pane {
+                border: 1px solid #ccc;
+                padding: 10px;
+            }
+            QTabBar::tab {
+                background: #e0e0e0;
+                padding: 10px;
+                border: 1px solid #ccc;
+                border-bottom: none;
+                border-top-left-radius: 5px;
+                border-top-right-radius: 5px;
+            }
+            QTabBar::tab:selected {
+                background: #fff;
+                border-bottom: 2px solid #579190;
+            }
+        """)
         
         # 初始化 UI
         self.init_ui()
@@ -31,29 +77,35 @@ class MainWindowUI(QMainWindow):
         self.search_box.textChanged.connect(self.logic.filter_stock_selector)
 
     def init_ui(self):
+        
         """初始化UI界面"""
         self.layout = QVBoxLayout()
 
-        # 创建选项卡容器
+        # 创建选项卡
         self.tabs = QTabWidget()
         self.layout.addWidget(self.tabs)
 
-        # 初始化各个选项卡
+        # 数据获取选项卡
         self.data_fetch_tab = QWidget()
         self.init_data_fetch_tab()
         self.tabs.addTab(self.data_fetch_tab, "数据获取")
 
+        # 数据可视化选项卡
         self.data_visualization_tab = QWidget()
         self.init_data_visualization_tab()
         self.tabs.addTab(self.data_visualization_tab, "数据可视化")
-
+        
+        # 每日随机推荐股
         self.random_stock_info = QWidget()
         self.init_random_stock_info_tab()
         self.tabs.addTab(self.random_stock_info, "随机股票生成")
 
+        # 设置选项卡
         self.settings_tab = QWidget()
         self.init_settings_tab()
         self.tabs.addTab(self.settings_tab, "设置")
+        
+        
 
         # 设置主窗口的中心部件
         container = QWidget()
@@ -67,7 +119,8 @@ class MainWindowUI(QMainWindow):
         layout.setContentsMargins(20, 20, 20, 20)
 
         # 批量获取数据按钮
-        self.batch_fetch_button = self.create_button("一次性获取列表中的股票数据", 40)
+        self.batch_fetch_button = QPushButton("一次性获取列表中的股票数据")
+        self.batch_fetch_button.setFixedHeight(40)
         layout.addWidget(self.batch_fetch_button, 0, 0, 1, 2)
 
         # 进度条
@@ -102,12 +155,13 @@ class MainWindowUI(QMainWindow):
         self.input_label = QLabel("输入股票代码（如 SMCI):")
         self.stock_input = QLineEdit()
         self.stock_input.setPlaceholderText("请输入股票代码...")
-        layout.addWidget(self.input_label, 4, 0)
-        layout.addWidget(self.stock_input, 4, 1)
+        layout.addWidget(self.input_label, 2, 0)
+        layout.addWidget(self.stock_input, 2, 1)
 
         # 获取数据按钮
-        self.fetch_button = self.create_button("获取数据并存储到数据库", 40)
-        layout.addWidget(self.fetch_button, 5, 0, 1, 2)
+        self.fetch_button = QPushButton("获取数据并存储到数据库")
+        self.fetch_button.setFixedHeight(40)
+        layout.addWidget(self.fetch_button, 3, 0, 1, 2)
 
         # 设置布局
         self.data_fetch_tab.setLayout(layout)
@@ -184,75 +238,12 @@ class MainWindowUI(QMainWindow):
         # 设置布局
         self.data_visualization_tab.setLayout(layout)
 
-    def create_button(self, text, height):
-        """创建标准按钮"""
-        try:
-            button = QPushButton(text)
-            button.setFixedHeight(height)
-            return button
-        except Exception as e:
-            print(f"创建按钮时出错: {str(e)}")
-            return QPushButton("Error")
-
-    def init_styles(self):
-        """初始化所有样式"""
-        self.setStyleSheet("""
-            QMainWindow {
-                background-color: #f5f5f5;
-            }
-            QPushButton {
-                background-color: #C0C0C0;
-                color: white;
-                font-size: 14px;
-                padding: 10px;
-                border-radius: 5px;
-            }
-            QPushButton:hover {
-                background-color: #808080;
-            }
-            QLabel {
-                font-size: 14px;
-                color: #333;
-            }
-            QLineEdit, QComboBox {
-                padding: 8px;
-                font-size: 14px;
-                border: 1px solid #ccc;
-                border-radius: 5px;
-            }
-            QLineEdit:focus, QComboBox:focus {
-                border: 1px solid #4CAF50;
-            }
-            QFrame {
-                border: 1px solid #ccc;
-            }
-            QTabWidget::pane {
-                border: 1px solid #ccc;
-                padding: 10px;
-            }
-            QTabBar::tab {
-                background: #e0e0e0;
-                padding: 10px;
-                border: 1px solid #ccc;
-                border-bottom: none;
-                border-top-left-radius: 5px;
-                border-top-right-radius: 5px;
-            }
-            QTabBar::tab:selected {
-                background: #fff;
-                border-bottom: 2px solid #579190;
-            }
-        """)
-
     def set_plot_style(self, plot_widget):
         """设置图表样式"""
-        try:
-            plot_widget.setBackground("w")  # 设置背景为白色
-            plot_widget.showGrid(x=True, y=True, alpha=0.3)  # 显示网格线
-            plot_widget.setLabel("left", "Price" if plot_widget == self.main_plot else "Volume")  # 设置Y轴标签
-            plot_widget.setLabel("bottom", "Date")  # 设置X轴标签
-        except Exception as e:
-            print(f"设置图表样式时出错: {str(e)}")
+        plot_widget.setBackground("w")  # 设置背景为白色
+        plot_widget.showGrid(x=True, y=True, alpha=0.3)  # 显示网格线
+        plot_widget.setLabel("left", "Price" if plot_widget == self.main_plot else "Volume")  # 设置Y轴标签
+        plot_widget.setLabel("bottom", "Date")  # 设置X轴标签
         
     def init_random_stock_info_tab(self):
         """初始化每日股票推荐选项卡"""
