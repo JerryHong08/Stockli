@@ -1,0 +1,972 @@
+Symbol,Error
+ETX           ,"OpenApiException: (code=301600, trace_id=) invalid symbol"
+A,save_to_table() missing 1 required positional argument: 'db_config'
+AA,save_to_table() missing 1 required positional argument: 'db_config'
+AACG,save_to_table() missing 1 required positional argument: 'db_config'
+AACT,save_to_table() missing 1 required positional argument: 'db_config'
+AADI,save_to_table() missing 1 required positional argument: 'db_config'
+AAL,save_to_table() missing 1 required positional argument: 'db_config'
+AAM,save_to_table() missing 1 required positional argument: 'db_config'
+AAME,save_to_table() missing 1 required positional argument: 'db_config'
+AAOI,save_to_table() missing 1 required positional argument: 'db_config'
+AAON,save_to_table() missing 1 required positional argument: 'db_config'
+AAP,save_to_table() missing 1 required positional argument: 'db_config'
+AAPL,save_to_table() missing 1 required positional argument: 'db_config'
+AAT,save_to_table() missing 1 required positional argument: 'db_config'
+AB,save_to_table() missing 1 required positional argument: 'db_config'
+ABAT,save_to_table() missing 1 required positional argument: 'db_config'
+ABBV,save_to_table() missing 1 required positional argument: 'db_config'
+ABCB,save_to_table() missing 1 required positional argument: 'db_config'
+ABCL,save_to_table() missing 1 required positional argument: 'db_config'
+ABEO,save_to_table() missing 1 required positional argument: 'db_config'
+ABEV,save_to_table() missing 1 required positional argument: 'db_config'
+ABG,save_to_table() missing 1 required positional argument: 'db_config'
+ABL,save_to_table() missing 1 required positional argument: 'db_config'
+ABLLL,save_to_table() missing 1 required positional argument: 'db_config'
+ABLLW,save_to_table() missing 1 required positional argument: 'db_config'
+ABLV,save_to_table() missing 1 required positional argument: 'db_config'
+ABM,save_to_table() missing 1 required positional argument: 'db_config'
+ABNB,save_to_table() missing 1 required positional argument: 'db_config'
+ABOS,save_to_table() missing 1 required positional argument: 'db_config'
+ABP,save_to_table() missing 1 required positional argument: 'db_config'
+ABPWW,save_to_table() missing 1 required positional argument: 'db_config'
+ABR,save_to_table() missing 1 required positional argument: 'db_config'
+ABR^D,"OpenApiException: (code=301600, trace_id=) invalid symbol"
+ABR^E,"OpenApiException: (code=301600, trace_id=) invalid symbol"
+ABR^F,"OpenApiException: (code=301600, trace_id=) invalid symbol"
+ABSI,save_to_table() missing 1 required positional argument: 'db_config'
+ABT,save_to_table() missing 1 required positional argument: 'db_config'
+ABTS,save_to_table() missing 1 required positional argument: 'db_config'
+ABUS,save_to_table() missing 1 required positional argument: 'db_config'
+ABVC,save_to_table() missing 1 required positional argument: 'db_config'
+A,save_to_table() missing 1 required positional argument: 'db_config'
+AA,save_to_table() missing 1 required positional argument: 'db_config'
+AACG,save_to_table() missing 1 required positional argument: 'db_config'
+AACT,save_to_table() missing 1 required positional argument: 'db_config'
+AADI,save_to_table() missing 1 required positional argument: 'db_config'
+AAL,save_to_table() missing 1 required positional argument: 'db_config'
+AAM,save_to_table() missing 1 required positional argument: 'db_config'
+AAME,save_to_table() missing 1 required positional argument: 'db_config'
+AAOI,save_to_table() missing 1 required positional argument: 'db_config'
+AAON,save_to_table() missing 1 required positional argument: 'db_config'
+AAP,save_to_table() missing 1 required positional argument: 'db_config'
+AAPL,save_to_table() missing 1 required positional argument: 'db_config'
+AAT,save_to_table() missing 1 required positional argument: 'db_config'
+AB,save_to_table() missing 1 required positional argument: 'db_config'
+ABAT,save_to_table() missing 1 required positional argument: 'db_config'
+ABBV,save_to_table() missing 1 required positional argument: 'db_config'
+ABCB,save_to_table() missing 1 required positional argument: 'db_config'
+ABCL,save_to_table() missing 1 required positional argument: 'db_config'
+ABEO,save_to_table() missing 1 required positional argument: 'db_config'
+ABEV,save_to_table() missing 1 required positional argument: 'db_config'
+ABG,save_to_table() missing 1 required positional argument: 'db_config'
+ABL,save_to_table() missing 1 required positional argument: 'db_config'
+ABLLL,save_to_table() missing 1 required positional argument: 'db_config'
+ABLLW,save_to_table() missing 1 required positional argument: 'db_config'
+ABLV,save_to_table() missing 1 required positional argument: 'db_config'
+ABM,save_to_table() missing 1 required positional argument: 'db_config'
+ABNB,save_to_table() missing 1 required positional argument: 'db_config'
+ABOS,save_to_table() missing 1 required positional argument: 'db_config'
+ABP,save_to_table() missing 1 required positional argument: 'db_config'
+ABPWW,save_to_table() missing 1 required positional argument: 'db_config'
+ABR,save_to_table() missing 1 required positional argument: 'db_config'
+ABR^D,"OpenApiException: (code=301600, trace_id=) invalid symbol"
+ABR^E,"OpenApiException: (code=301600, trace_id=) invalid symbol"
+ABR^F,"OpenApiException: (code=301600, trace_id=) invalid symbol"
+ABSI,save_to_table() missing 1 required positional argument: 'db_config'
+ABT,save_to_table() missing 1 required positional argument: 'db_config'
+ABTS,save_to_table() missing 1 required positional argument: 'db_config'
+ABUS,save_to_table() missing 1 required positional argument: 'db_config'
+ABVC,save_to_table() missing 1 required positional argument: 'db_config'
+ABVE,save_to_table() missing 1 required positional argument: 'db_config'
+ABVEW,save_to_table() missing 1 required positional argument: 'db_config'
+ABVX,save_to_table() missing 1 required positional argument: 'db_config'
+AC,save_to_table() missing 1 required positional argument: 'db_config'
+ACA,save_to_table() missing 1 required positional argument: 'db_config'
+A,save_to_table() missing 1 required positional argument: 'db_config'
+AA,save_to_table() missing 1 required positional argument: 'db_config'
+AACG,save_to_table() missing 1 required positional argument: 'db_config'
+AACT,save_to_table() missing 1 required positional argument: 'db_config'
+AADI,save_to_table() missing 1 required positional argument: 'db_config'
+AAL,save_to_table() missing 1 required positional argument: 'db_config'
+AAM,save_to_table() missing 1 required positional argument: 'db_config'
+AAME,save_to_table() missing 1 required positional argument: 'db_config'
+AAOI,save_to_table() missing 1 required positional argument: 'db_config'
+AAON,save_to_table() missing 1 required positional argument: 'db_config'
+AAP,save_to_table() missing 1 required positional argument: 'db_config'
+AAPL,save_to_table() missing 1 required positional argument: 'db_config'
+AAT,save_to_table() missing 1 required positional argument: 'db_config'
+AB,save_to_table() missing 1 required positional argument: 'db_config'
+ABAT,save_to_table() missing 1 required positional argument: 'db_config'
+ABBV,save_to_table() missing 1 required positional argument: 'db_config'
+ABCB,save_to_table() missing 1 required positional argument: 'db_config'
+ABCL,save_to_table() missing 1 required positional argument: 'db_config'
+ABEO,save_to_table() missing 1 required positional argument: 'db_config'
+ABEV,save_to_table() missing 1 required positional argument: 'db_config'
+ABG,save_to_table() missing 1 required positional argument: 'db_config'
+ABL,save_to_table() missing 1 required positional argument: 'db_config'
+ABLLL,save_to_table() missing 1 required positional argument: 'db_config'
+ABLLW,save_to_table() missing 1 required positional argument: 'db_config'
+ABLV,save_to_table() missing 1 required positional argument: 'db_config'
+ABM,save_to_table() missing 1 required positional argument: 'db_config'
+ABNB,save_to_table() missing 1 required positional argument: 'db_config'
+ABOS,save_to_table() missing 1 required positional argument: 'db_config'
+ABP,save_to_table() missing 1 required positional argument: 'db_config'
+ABPWW,save_to_table() missing 1 required positional argument: 'db_config'
+ABR,save_to_table() missing 1 required positional argument: 'db_config'
+ABR^D,"OpenApiException: (code=301600, trace_id=) invalid symbol"
+ABR^E,"OpenApiException: (code=301600, trace_id=) invalid symbol"
+ABR^F,"OpenApiException: (code=301600, trace_id=) invalid symbol"
+ABSI,save_to_table() missing 1 required positional argument: 'db_config'
+A,save_to_table() missing 1 required positional argument: 'db_config'
+AA,save_to_table() missing 1 required positional argument: 'db_config'
+nan,"OpenApiException: (code=301600, trace_id=) invalid symbol"
+nan,"OpenApiException: (code=301600, trace_id=) invalid symbol"
+nan,"OpenApiException: (code=301600, trace_id=) invalid symbol"
+nan,"OpenApiException: (code=301600, trace_id=) invalid symbol"
+nan,"OpenApiException: (code=301600, trace_id=) invalid symbol"
+nan,"OpenApiException: (code=301600, trace_id=) invalid symbol"
+nan,"OpenApiException: (code=301600, trace_id=) invalid symbol"
+nan,"OpenApiException: (code=301600, trace_id=) invalid symbol"
+nan,"OpenApiException: (code=301600, trace_id=) invalid symbol"
+nan,"OpenApiException: (code=301600, trace_id=) invalid symbol"
+nan,"OpenApiException: (code=301600, trace_id=) invalid symbol"
+nan,"OpenApiException: (code=301600, trace_id=) invalid symbol"
+nan,"OpenApiException: (code=301600, trace_id=) invalid symbol"
+nan,"OpenApiException: (code=301600, trace_id=) invalid symbol"
+nan,"OpenApiException: (code=301600, trace_id=) invalid symbol"
+nan,"OpenApiException: (code=301600, trace_id=) invalid symbol"
+nan,"OpenApiException: (code=301600, trace_id=) invalid symbol"
+nan,"OpenApiException: (code=301600, trace_id=) invalid symbol"
+nan,"OpenApiException: (code=301600, trace_id=) invalid symbol"
+nan,"OpenApiException: (code=301600, trace_id=) invalid symbol"
+nan,"OpenApiException: (code=301600, trace_id=) invalid symbol"
+nan,"OpenApiException: (code=301600, trace_id=) invalid symbol"
+nan,"OpenApiException: (code=301600, trace_id=) invalid symbol"
+nan,"OpenApiException: (code=301600, trace_id=) invalid symbol"
+nan,"OpenApiException: (code=301600, trace_id=) invalid symbol"
+nan,"OpenApiException: (code=301600, trace_id=) invalid symbol"
+nan,"OpenApiException: (code=301600, trace_id=) invalid symbol"
+nan,"OpenApiException: (code=301600, trace_id=) invalid symbol"
+nan,"OpenApiException: (code=301600, trace_id=) invalid symbol"
+nan,"OpenApiException: (code=301600, trace_id=) invalid symbol"
+nan,"OpenApiException: (code=301600, trace_id=) invalid symbol"
+nan,"OpenApiException: (code=301600, trace_id=) invalid symbol"
+nan,"OpenApiException: (code=301600, trace_id=) invalid symbol"
+nan,"OpenApiException: (code=301600, trace_id=) invalid symbol"
+nan,"OpenApiException: (code=301600, trace_id=) invalid symbol"
+nan,"OpenApiException: (code=301600, trace_id=) invalid symbol"
+nan,"OpenApiException: (code=301600, trace_id=) invalid symbol"
+nan,"OpenApiException: (code=301600, trace_id=) invalid symbol"
+A,save_to_table() missing 1 required positional argument: 'db_config'
+AA,save_to_table() missing 1 required positional argument: 'db_config'
+A,save_to_table() missing 1 required positional argument: 'db_config'
+AA,save_to_table() missing 1 required positional argument: 'db_config'
+ETX           ,"OpenApiException: (code=301600, trace_id=) invalid symbol"
+nan,'float' object has no attribute 'replace'
+SAND          ,"OpenApiException: (code=301600, trace_id=) invalid symbol"
+ETX           ,"OpenApiException: (code=301600, trace_id=) invalid symbol"
+ETX           ,"OpenApiException: (code=301600, trace_id=) invalid symbol"
+ETX           ,"OpenApiException: (code=301600, trace_id=) invalid symbol"
+nan,'float' object has no attribute 'replace'
+SAND          ,"OpenApiException: (code=301600, trace_id=) invalid symbol"
+nan,"OpenApiException: (code=301600, trace_id=) invalid symbol"
+nan,'float' object has no attribute 'replace'
+nan,'float' object has no attribute 'replace'
+nan,'float' object has no attribute 'replace'
+nan,"OpenApiException: (code=301600, trace_id=) invalid symbol"
+nan,'float' object has no attribute 'replace'
+ABR^D,Textual SQL expression '\n                    CREA...' should be explicitly declared as text('\n                    CREA...')
+ABR^E,Textual SQL expression '\n                    CREA...' should be explicitly declared as text('\n                    CREA...')
+ABR^F,Textual SQL expression '\n                    CREA...' should be explicitly declared as text('\n                    CREA...')
+ACP^A,Textual SQL expression '\n                    CREA...' should be explicitly declared as text('\n                    CREA...')
+ACR^C,Textual SQL expression '\n                    CREA...' should be explicitly declared as text('\n                    CREA...')
+ACR^D,Textual SQL expression '\n                    CREA...' should be explicitly declared as text('\n                    CREA...')
+ADC^A,Textual SQL expression '\n                    CREA...' should be explicitly declared as text('\n                    CREA...')
+AGM^D,Textual SQL expression '\n                    CREA...' should be explicitly declared as text('\n                    CREA...')
+AGM^E,Textual SQL expression '\n                    CREA...' should be explicitly declared as text('\n                    CREA...')
+AGM^F,Textual SQL expression '\n                    CREA...' should be explicitly declared as text('\n                    CREA...')
+AGM^G,Textual SQL expression '\n                    CREA...' should be explicitly declared as text('\n                    CREA...')
+AHH^A,Textual SQL expression '\n                    CREA...' should be explicitly declared as text('\n                    CREA...')
+AHL^C,Textual SQL expression '\n                    CREA...' should be explicitly declared as text('\n                    CREA...')
+AHL^D,Textual SQL expression '\n                    CREA...' should be explicitly declared as text('\n                    CREA...')
+AHL^E,Textual SQL expression '\n                    CREA...' should be explicitly declared as text('\n                    CREA...')
+AHL^F,Textual SQL expression '\n                    CREA...' should be explicitly declared as text('\n                    CREA...')
+AHT^D,Textual SQL expression '\n                    CREA...' should be explicitly declared as text('\n                    CREA...')
+AHT^F,Textual SQL expression '\n                    CREA...' should be explicitly declared as text('\n                    CREA...')
+AHT^G,Textual SQL expression '\n                    CREA...' should be explicitly declared as text('\n                    CREA...')
+AHT^H,Textual SQL expression '\n                    CREA...' should be explicitly declared as text('\n                    CREA...')
+AHT^I,Textual SQL expression '\n                    CREA...' should be explicitly declared as text('\n                    CREA...')
+AKO/A,Textual SQL expression '\n                    CREA...' should be explicitly declared as text('\n                    CREA...')
+AKO/B,Textual SQL expression '\n                    CREA...' should be explicitly declared as text('\n                    CREA...')
+ALB^A,Textual SQL expression '\n                    CREA...' should be explicitly declared as text('\n                    CREA...')
+ALL^B,Textual SQL expression '\n                    CREA...' should be explicitly declared as text('\n                    CREA...')
+ALL^H,Textual SQL expression '\n                    CREA...' should be explicitly declared as text('\n                    CREA...')
+ALL^I,Textual SQL expression '\n                    CREA...' should be explicitly declared as text('\n                    CREA...')
+ALL^J,Textual SQL expression '\n                    CREA...' should be explicitly declared as text('\n                    CREA...')
+ALTG^A,Textual SQL expression '\n                    CREA...' should be explicitly declared as text('\n                    CREA...')
+AMH^G,Textual SQL expression '\n                    CREA...' should be explicitly declared as text('\n                    CREA...')
+AMH^H,Textual SQL expression '\n                    CREA...' should be explicitly declared as text('\n                    CREA...')
+ANG^A,Textual SQL expression '\n                    CREA...' should be explicitly declared as text('\n                    CREA...')
+ANG^B,Textual SQL expression '\n                    CREA...' should be explicitly declared as text('\n                    CREA...')
+APO^A,Textual SQL expression '\n                    CREA...' should be explicitly declared as text('\n                    CREA...')
+ARES^B,Textual SQL expression '\n                    CREA...' should be explicitly declared as text('\n                    CREA...')
+ARGO^A,Textual SQL expression '\n                    CREA...' should be explicitly declared as text('\n                    CREA...')
+ARR^C,Textual SQL expression '\n                    CREA...' should be explicitly declared as text('\n                    CREA...')
+ABR^D,"(psycopg2.errors.SyntaxError) 错误:  语法错误 在 ""-"" 或附近的
+LINE 12: ...                CREATE INDEX IF NOT EXISTS idx_ABR-D_timesta...
+                                                              ^
+
+[SQL: 
+                    CREATE TABLE IF NOT EXISTS ""ABR-D"" (
+                        id SERIAL PRIMARY KEY,
+                        timestamp TIMESTAMP NOT NULL UNIQUE,
+                        open_price DECIMAL(18, 6),
+                        high_price DECIMAL(18, 6),
+                        low_price DECIMAL(18, 6),
+                        close_price DECIMAL(18, 6),
+                        volume BIGINT,
+                        turnover DECIMAL(18, 6)
+                    );
+                    CREATE INDEX IF NOT EXISTS idx_ABR-D_timestamp ON ""ABR-D""(timestamp);
+                ]
+(Background on this error at: https://sqlalche.me/e/20/f405)"
+ABR^E,"(psycopg2.errors.SyntaxError) 错误:  语法错误 在 ""-"" 或附近的
+LINE 12: ...                CREATE INDEX IF NOT EXISTS idx_ABR-E_timesta...
+                                                              ^
+
+[SQL: 
+                    CREATE TABLE IF NOT EXISTS ""ABR-E"" (
+                        id SERIAL PRIMARY KEY,
+                        timestamp TIMESTAMP NOT NULL UNIQUE,
+                        open_price DECIMAL(18, 6),
+                        high_price DECIMAL(18, 6),
+                        low_price DECIMAL(18, 6),
+                        close_price DECIMAL(18, 6),
+                        volume BIGINT,
+                        turnover DECIMAL(18, 6)
+                    );
+                    CREATE INDEX IF NOT EXISTS idx_ABR-E_timestamp ON ""ABR-E""(timestamp);
+                ]
+(Background on this error at: https://sqlalche.me/e/20/f405)"
+ABR^F,"(psycopg2.errors.SyntaxError) 错误:  语法错误 在 ""-"" 或附近的
+LINE 12: ...                CREATE INDEX IF NOT EXISTS idx_ABR-F_timesta...
+                                                              ^
+
+[SQL: 
+                    CREATE TABLE IF NOT EXISTS ""ABR-F"" (
+                        id SERIAL PRIMARY KEY,
+                        timestamp TIMESTAMP NOT NULL UNIQUE,
+                        open_price DECIMAL(18, 6),
+                        high_price DECIMAL(18, 6),
+                        low_price DECIMAL(18, 6),
+                        close_price DECIMAL(18, 6),
+                        volume BIGINT,
+                        turnover DECIMAL(18, 6)
+                    );
+                    CREATE INDEX IF NOT EXISTS idx_ABR-F_timestamp ON ""ABR-F""(timestamp);
+                ]
+(Background on this error at: https://sqlalche.me/e/20/f405)"
+ACP^A,"(psycopg2.errors.SyntaxError) 错误:  语法错误 在 ""-"" 或附近的
+LINE 12: ...                CREATE INDEX IF NOT EXISTS idx_ACP-A_timesta...
+                                                              ^
+
+[SQL: 
+                    CREATE TABLE IF NOT EXISTS ""ACP-A"" (
+                        id SERIAL PRIMARY KEY,
+                        timestamp TIMESTAMP NOT NULL UNIQUE,
+                        open_price DECIMAL(18, 6),
+                        high_price DECIMAL(18, 6),
+                        low_price DECIMAL(18, 6),
+                        close_price DECIMAL(18, 6),
+                        volume BIGINT,
+                        turnover DECIMAL(18, 6)
+                    );
+                    CREATE INDEX IF NOT EXISTS idx_ACP-A_timestamp ON ""ACP-A""(timestamp);
+                ]
+(Background on this error at: https://sqlalche.me/e/20/f405)"
+ACR^C,"(psycopg2.errors.SyntaxError) 错误:  语法错误 在 ""-"" 或附近的
+LINE 12: ...                CREATE INDEX IF NOT EXISTS idx_ACR-C_timesta...
+                                                              ^
+
+[SQL: 
+                    CREATE TABLE IF NOT EXISTS ""ACR-C"" (
+                        id SERIAL PRIMARY KEY,
+                        timestamp TIMESTAMP NOT NULL UNIQUE,
+                        open_price DECIMAL(18, 6),
+                        high_price DECIMAL(18, 6),
+                        low_price DECIMAL(18, 6),
+                        close_price DECIMAL(18, 6),
+                        volume BIGINT,
+                        turnover DECIMAL(18, 6)
+                    );
+                    CREATE INDEX IF NOT EXISTS idx_ACR-C_timestamp ON ""ACR-C""(timestamp);
+                ]
+(Background on this error at: https://sqlalche.me/e/20/f405)"
+ACR^D,"(psycopg2.errors.SyntaxError) 错误:  语法错误 在 ""-"" 或附近的
+LINE 12: ...                CREATE INDEX IF NOT EXISTS idx_ACR-D_timesta...
+                                                              ^
+
+[SQL: 
+                    CREATE TABLE IF NOT EXISTS ""ACR-D"" (
+                        id SERIAL PRIMARY KEY,
+                        timestamp TIMESTAMP NOT NULL UNIQUE,
+                        open_price DECIMAL(18, 6),
+                        high_price DECIMAL(18, 6),
+                        low_price DECIMAL(18, 6),
+                        close_price DECIMAL(18, 6),
+                        volume BIGINT,
+                        turnover DECIMAL(18, 6)
+                    );
+                    CREATE INDEX IF NOT EXISTS idx_ACR-D_timestamp ON ""ACR-D""(timestamp);
+                ]
+(Background on this error at: https://sqlalche.me/e/20/f405)"
+ADC^A,"(psycopg2.errors.SyntaxError) 错误:  语法错误 在 ""-"" 或附近的
+LINE 12: ...                CREATE INDEX IF NOT EXISTS idx_ADC-A_timesta...
+                                                              ^
+
+[SQL: 
+                    CREATE TABLE IF NOT EXISTS ""ADC-A"" (
+                        id SERIAL PRIMARY KEY,
+                        timestamp TIMESTAMP NOT NULL UNIQUE,
+                        open_price DECIMAL(18, 6),
+                        high_price DECIMAL(18, 6),
+                        low_price DECIMAL(18, 6),
+                        close_price DECIMAL(18, 6),
+                        volume BIGINT,
+                        turnover DECIMAL(18, 6)
+                    );
+                    CREATE INDEX IF NOT EXISTS idx_ADC-A_timestamp ON ""ADC-A""(timestamp);
+                ]
+(Background on this error at: https://sqlalche.me/e/20/f405)"
+AGM^D,"(psycopg2.errors.SyntaxError) 错误:  语法错误 在 ""-"" 或附近的
+LINE 12: ...                CREATE INDEX IF NOT EXISTS idx_AGM-D_timesta...
+                                                              ^
+
+[SQL: 
+                    CREATE TABLE IF NOT EXISTS ""AGM-D"" (
+                        id SERIAL PRIMARY KEY,
+                        timestamp TIMESTAMP NOT NULL UNIQUE,
+                        open_price DECIMAL(18, 6),
+                        high_price DECIMAL(18, 6),
+                        low_price DECIMAL(18, 6),
+                        close_price DECIMAL(18, 6),
+                        volume BIGINT,
+                        turnover DECIMAL(18, 6)
+                    );
+                    CREATE INDEX IF NOT EXISTS idx_AGM-D_timestamp ON ""AGM-D""(timestamp);
+                ]
+(Background on this error at: https://sqlalche.me/e/20/f405)"
+AGM^E,"(psycopg2.errors.SyntaxError) 错误:  语法错误 在 ""-"" 或附近的
+LINE 12: ...                CREATE INDEX IF NOT EXISTS idx_AGM-E_timesta...
+                                                              ^
+
+[SQL: 
+                    CREATE TABLE IF NOT EXISTS ""AGM-E"" (
+                        id SERIAL PRIMARY KEY,
+                        timestamp TIMESTAMP NOT NULL UNIQUE,
+                        open_price DECIMAL(18, 6),
+                        high_price DECIMAL(18, 6),
+                        low_price DECIMAL(18, 6),
+                        close_price DECIMAL(18, 6),
+                        volume BIGINT,
+                        turnover DECIMAL(18, 6)
+                    );
+                    CREATE INDEX IF NOT EXISTS idx_AGM-E_timestamp ON ""AGM-E""(timestamp);
+                ]
+(Background on this error at: https://sqlalche.me/e/20/f405)"
+AGM^F,"(psycopg2.errors.SyntaxError) 错误:  语法错误 在 ""-"" 或附近的
+LINE 12: ...                CREATE INDEX IF NOT EXISTS idx_AGM-F_timesta...
+                                                              ^
+
+[SQL: 
+                    CREATE TABLE IF NOT EXISTS ""AGM-F"" (
+                        id SERIAL PRIMARY KEY,
+                        timestamp TIMESTAMP NOT NULL UNIQUE,
+                        open_price DECIMAL(18, 6),
+                        high_price DECIMAL(18, 6),
+                        low_price DECIMAL(18, 6),
+                        close_price DECIMAL(18, 6),
+                        volume BIGINT,
+                        turnover DECIMAL(18, 6)
+                    );
+                    CREATE INDEX IF NOT EXISTS idx_AGM-F_timestamp ON ""AGM-F""(timestamp);
+                ]
+(Background on this error at: https://sqlalche.me/e/20/f405)"
+AGM^G,"(psycopg2.errors.SyntaxError) 错误:  语法错误 在 ""-"" 或附近的
+LINE 12: ...                CREATE INDEX IF NOT EXISTS idx_AGM-G_timesta...
+                                                              ^
+
+[SQL: 
+                    CREATE TABLE IF NOT EXISTS ""AGM-G"" (
+                        id SERIAL PRIMARY KEY,
+                        timestamp TIMESTAMP NOT NULL UNIQUE,
+                        open_price DECIMAL(18, 6),
+                        high_price DECIMAL(18, 6),
+                        low_price DECIMAL(18, 6),
+                        close_price DECIMAL(18, 6),
+                        volume BIGINT,
+                        turnover DECIMAL(18, 6)
+                    );
+                    CREATE INDEX IF NOT EXISTS idx_AGM-G_timestamp ON ""AGM-G""(timestamp);
+                ]
+(Background on this error at: https://sqlalche.me/e/20/f405)"
+AHH^A,"(psycopg2.errors.SyntaxError) 错误:  语法错误 在 ""-"" 或附近的
+LINE 12: ...                CREATE INDEX IF NOT EXISTS idx_AHH-A_timesta...
+                                                              ^
+
+[SQL: 
+                    CREATE TABLE IF NOT EXISTS ""AHH-A"" (
+                        id SERIAL PRIMARY KEY,
+                        timestamp TIMESTAMP NOT NULL UNIQUE,
+                        open_price DECIMAL(18, 6),
+                        high_price DECIMAL(18, 6),
+                        low_price DECIMAL(18, 6),
+                        close_price DECIMAL(18, 6),
+                        volume BIGINT,
+                        turnover DECIMAL(18, 6)
+                    );
+                    CREATE INDEX IF NOT EXISTS idx_AHH-A_timestamp ON ""AHH-A""(timestamp);
+                ]
+(Background on this error at: https://sqlalche.me/e/20/f405)"
+AHL^C,"(psycopg2.errors.SyntaxError) 错误:  语法错误 在 ""-"" 或附近的
+LINE 12: ...                CREATE INDEX IF NOT EXISTS idx_AHL-C_timesta...
+                                                              ^
+
+[SQL: 
+                    CREATE TABLE IF NOT EXISTS ""AHL-C"" (
+                        id SERIAL PRIMARY KEY,
+                        timestamp TIMESTAMP NOT NULL UNIQUE,
+                        open_price DECIMAL(18, 6),
+                        high_price DECIMAL(18, 6),
+                        low_price DECIMAL(18, 6),
+                        close_price DECIMAL(18, 6),
+                        volume BIGINT,
+                        turnover DECIMAL(18, 6)
+                    );
+                    CREATE INDEX IF NOT EXISTS idx_AHL-C_timestamp ON ""AHL-C""(timestamp);
+                ]
+(Background on this error at: https://sqlalche.me/e/20/f405)"
+AHL^D,"(psycopg2.errors.SyntaxError) 错误:  语法错误 在 ""-"" 或附近的
+LINE 12: ...                CREATE INDEX IF NOT EXISTS idx_AHL-D_timesta...
+                                                              ^
+
+[SQL: 
+                    CREATE TABLE IF NOT EXISTS ""AHL-D"" (
+                        id SERIAL PRIMARY KEY,
+                        timestamp TIMESTAMP NOT NULL UNIQUE,
+                        open_price DECIMAL(18, 6),
+                        high_price DECIMAL(18, 6),
+                        low_price DECIMAL(18, 6),
+                        close_price DECIMAL(18, 6),
+                        volume BIGINT,
+                        turnover DECIMAL(18, 6)
+                    );
+                    CREATE INDEX IF NOT EXISTS idx_AHL-D_timestamp ON ""AHL-D""(timestamp);
+                ]
+(Background on this error at: https://sqlalche.me/e/20/f405)"
+AHL^E,"(psycopg2.errors.SyntaxError) 错误:  语法错误 在 ""-"" 或附近的
+LINE 12: ...                CREATE INDEX IF NOT EXISTS idx_AHL-E_timesta...
+                                                              ^
+
+[SQL: 
+                    CREATE TABLE IF NOT EXISTS ""AHL-E"" (
+                        id SERIAL PRIMARY KEY,
+                        timestamp TIMESTAMP NOT NULL UNIQUE,
+                        open_price DECIMAL(18, 6),
+                        high_price DECIMAL(18, 6),
+                        low_price DECIMAL(18, 6),
+                        close_price DECIMAL(18, 6),
+                        volume BIGINT,
+                        turnover DECIMAL(18, 6)
+                    );
+                    CREATE INDEX IF NOT EXISTS idx_AHL-E_timestamp ON ""AHL-E""(timestamp);
+                ]
+(Background on this error at: https://sqlalche.me/e/20/f405)"
+AHL^F,"(psycopg2.errors.SyntaxError) 错误:  语法错误 在 ""-"" 或附近的
+LINE 12: ...                CREATE INDEX IF NOT EXISTS idx_AHL-F_timesta...
+                                                              ^
+
+[SQL: 
+                    CREATE TABLE IF NOT EXISTS ""AHL-F"" (
+                        id SERIAL PRIMARY KEY,
+                        timestamp TIMESTAMP NOT NULL UNIQUE,
+                        open_price DECIMAL(18, 6),
+                        high_price DECIMAL(18, 6),
+                        low_price DECIMAL(18, 6),
+                        close_price DECIMAL(18, 6),
+                        volume BIGINT,
+                        turnover DECIMAL(18, 6)
+                    );
+                    CREATE INDEX IF NOT EXISTS idx_AHL-F_timestamp ON ""AHL-F""(timestamp);
+                ]
+(Background on this error at: https://sqlalche.me/e/20/f405)"
+AHT^D,"(psycopg2.errors.SyntaxError) 错误:  语法错误 在 ""-"" 或附近的
+LINE 12: ...                CREATE INDEX IF NOT EXISTS idx_AHT-D_timesta...
+                                                              ^
+
+[SQL: 
+                    CREATE TABLE IF NOT EXISTS ""AHT-D"" (
+                        id SERIAL PRIMARY KEY,
+                        timestamp TIMESTAMP NOT NULL UNIQUE,
+                        open_price DECIMAL(18, 6),
+                        high_price DECIMAL(18, 6),
+                        low_price DECIMAL(18, 6),
+                        close_price DECIMAL(18, 6),
+                        volume BIGINT,
+                        turnover DECIMAL(18, 6)
+                    );
+                    CREATE INDEX IF NOT EXISTS idx_AHT-D_timestamp ON ""AHT-D""(timestamp);
+                ]
+(Background on this error at: https://sqlalche.me/e/20/f405)"
+AHT^F,"(psycopg2.errors.SyntaxError) 错误:  语法错误 在 ""-"" 或附近的
+LINE 12: ...                CREATE INDEX IF NOT EXISTS idx_AHT-F_timesta...
+                                                              ^
+
+[SQL: 
+                    CREATE TABLE IF NOT EXISTS ""AHT-F"" (
+                        id SERIAL PRIMARY KEY,
+                        timestamp TIMESTAMP NOT NULL UNIQUE,
+                        open_price DECIMAL(18, 6),
+                        high_price DECIMAL(18, 6),
+                        low_price DECIMAL(18, 6),
+                        close_price DECIMAL(18, 6),
+                        volume BIGINT,
+                        turnover DECIMAL(18, 6)
+                    );
+                    CREATE INDEX IF NOT EXISTS idx_AHT-F_timestamp ON ""AHT-F""(timestamp);
+                ]
+(Background on this error at: https://sqlalche.me/e/20/f405)"
+AHT^G,"(psycopg2.errors.SyntaxError) 错误:  语法错误 在 ""-"" 或附近的
+LINE 12: ...                CREATE INDEX IF NOT EXISTS idx_AHT-G_timesta...
+                                                              ^
+
+[SQL: 
+                    CREATE TABLE IF NOT EXISTS ""AHT-G"" (
+                        id SERIAL PRIMARY KEY,
+                        timestamp TIMESTAMP NOT NULL UNIQUE,
+                        open_price DECIMAL(18, 6),
+                        high_price DECIMAL(18, 6),
+                        low_price DECIMAL(18, 6),
+                        close_price DECIMAL(18, 6),
+                        volume BIGINT,
+                        turnover DECIMAL(18, 6)
+                    );
+                    CREATE INDEX IF NOT EXISTS idx_AHT-G_timestamp ON ""AHT-G""(timestamp);
+                ]
+(Background on this error at: https://sqlalche.me/e/20/f405)"
+AHT^H,"(psycopg2.errors.SyntaxError) 错误:  语法错误 在 ""-"" 或附近的
+LINE 12: ...                CREATE INDEX IF NOT EXISTS idx_AHT-H_timesta...
+                                                              ^
+
+[SQL: 
+                    CREATE TABLE IF NOT EXISTS ""AHT-H"" (
+                        id SERIAL PRIMARY KEY,
+                        timestamp TIMESTAMP NOT NULL UNIQUE,
+                        open_price DECIMAL(18, 6),
+                        high_price DECIMAL(18, 6),
+                        low_price DECIMAL(18, 6),
+                        close_price DECIMAL(18, 6),
+                        volume BIGINT,
+                        turnover DECIMAL(18, 6)
+                    );
+                    CREATE INDEX IF NOT EXISTS idx_AHT-H_timestamp ON ""AHT-H""(timestamp);
+                ]
+(Background on this error at: https://sqlalche.me/e/20/f405)"
+AHT^I,"(psycopg2.errors.SyntaxError) 错误:  语法错误 在 ""-"" 或附近的
+LINE 12: ...                CREATE INDEX IF NOT EXISTS idx_AHT-I_timesta...
+                                                              ^
+
+[SQL: 
+                    CREATE TABLE IF NOT EXISTS ""AHT-I"" (
+                        id SERIAL PRIMARY KEY,
+                        timestamp TIMESTAMP NOT NULL UNIQUE,
+                        open_price DECIMAL(18, 6),
+                        high_price DECIMAL(18, 6),
+                        low_price DECIMAL(18, 6),
+                        close_price DECIMAL(18, 6),
+                        volume BIGINT,
+                        turnover DECIMAL(18, 6)
+                    );
+                    CREATE INDEX IF NOT EXISTS idx_AHT-I_timestamp ON ""AHT-I""(timestamp);
+                ]
+(Background on this error at: https://sqlalche.me/e/20/f405)"
+AKO/A,"(psycopg2.errors.SyntaxError) 错误:  语法错误 在 ""."" 或附近的
+LINE 12: ...                CREATE INDEX IF NOT EXISTS idx_AKO.A_timesta...
+                                                              ^
+
+[SQL: 
+                    CREATE TABLE IF NOT EXISTS ""AKO.A"" (
+                        id SERIAL PRIMARY KEY,
+                        timestamp TIMESTAMP NOT NULL UNIQUE,
+                        open_price DECIMAL(18, 6),
+                        high_price DECIMAL(18, 6),
+                        low_price DECIMAL(18, 6),
+                        close_price DECIMAL(18, 6),
+                        volume BIGINT,
+                        turnover DECIMAL(18, 6)
+                    );
+                    CREATE INDEX IF NOT EXISTS idx_AKO.A_timestamp ON ""AKO.A""(timestamp);
+                ]
+(Background on this error at: https://sqlalche.me/e/20/f405)"
+AKO/B,"(psycopg2.errors.SyntaxError) 错误:  语法错误 在 ""."" 或附近的
+LINE 12: ...                CREATE INDEX IF NOT EXISTS idx_AKO.B_timesta...
+                                                              ^
+
+[SQL: 
+                    CREATE TABLE IF NOT EXISTS ""AKO.B"" (
+                        id SERIAL PRIMARY KEY,
+                        timestamp TIMESTAMP NOT NULL UNIQUE,
+                        open_price DECIMAL(18, 6),
+                        high_price DECIMAL(18, 6),
+                        low_price DECIMAL(18, 6),
+                        close_price DECIMAL(18, 6),
+                        volume BIGINT,
+                        turnover DECIMAL(18, 6)
+                    );
+                    CREATE INDEX IF NOT EXISTS idx_AKO.B_timestamp ON ""AKO.B""(timestamp);
+                ]
+(Background on this error at: https://sqlalche.me/e/20/f405)"
+ALB^A,"(psycopg2.errors.SyntaxError) 错误:  语法错误 在 ""-"" 或附近的
+LINE 12: ...                CREATE INDEX IF NOT EXISTS idx_ALB-A_timesta...
+                                                              ^
+
+[SQL: 
+                    CREATE TABLE IF NOT EXISTS ""ALB-A"" (
+                        id SERIAL PRIMARY KEY,
+                        timestamp TIMESTAMP NOT NULL UNIQUE,
+                        open_price DECIMAL(18, 6),
+                        high_price DECIMAL(18, 6),
+                        low_price DECIMAL(18, 6),
+                        close_price DECIMAL(18, 6),
+                        volume BIGINT,
+                        turnover DECIMAL(18, 6)
+                    );
+                    CREATE INDEX IF NOT EXISTS idx_ALB-A_timestamp ON ""ALB-A""(timestamp);
+                ]
+(Background on this error at: https://sqlalche.me/e/20/f405)"
+ALL^B,"(psycopg2.errors.SyntaxError) 错误:  语法错误 在 ""-"" 或附近的
+LINE 12: ...                CREATE INDEX IF NOT EXISTS idx_ALL-B_timesta...
+                                                              ^
+
+[SQL: 
+                    CREATE TABLE IF NOT EXISTS ""ALL-B"" (
+                        id SERIAL PRIMARY KEY,
+                        timestamp TIMESTAMP NOT NULL UNIQUE,
+                        open_price DECIMAL(18, 6),
+                        high_price DECIMAL(18, 6),
+                        low_price DECIMAL(18, 6),
+                        close_price DECIMAL(18, 6),
+                        volume BIGINT,
+                        turnover DECIMAL(18, 6)
+                    );
+                    CREATE INDEX IF NOT EXISTS idx_ALL-B_timestamp ON ""ALL-B""(timestamp);
+                ]
+(Background on this error at: https://sqlalche.me/e/20/f405)"
+ALL^H,"(psycopg2.errors.SyntaxError) 错误:  语法错误 在 ""-"" 或附近的
+LINE 12: ...                CREATE INDEX IF NOT EXISTS idx_ALL-H_timesta...
+                                                              ^
+
+[SQL: 
+                    CREATE TABLE IF NOT EXISTS ""ALL-H"" (
+                        id SERIAL PRIMARY KEY,
+                        timestamp TIMESTAMP NOT NULL UNIQUE,
+                        open_price DECIMAL(18, 6),
+                        high_price DECIMAL(18, 6),
+                        low_price DECIMAL(18, 6),
+                        close_price DECIMAL(18, 6),
+                        volume BIGINT,
+                        turnover DECIMAL(18, 6)
+                    );
+                    CREATE INDEX IF NOT EXISTS idx_ALL-H_timestamp ON ""ALL-H""(timestamp);
+                ]
+(Background on this error at: https://sqlalche.me/e/20/f405)"
+ALL^I,"(psycopg2.errors.SyntaxError) 错误:  语法错误 在 ""-"" 或附近的
+LINE 12: ...                CREATE INDEX IF NOT EXISTS idx_ALL-I_timesta...
+                                                              ^
+
+[SQL: 
+                    CREATE TABLE IF NOT EXISTS ""ALL-I"" (
+                        id SERIAL PRIMARY KEY,
+                        timestamp TIMESTAMP NOT NULL UNIQUE,
+                        open_price DECIMAL(18, 6),
+                        high_price DECIMAL(18, 6),
+                        low_price DECIMAL(18, 6),
+                        close_price DECIMAL(18, 6),
+                        volume BIGINT,
+                        turnover DECIMAL(18, 6)
+                    );
+                    CREATE INDEX IF NOT EXISTS idx_ALL-I_timestamp ON ""ALL-I""(timestamp);
+                ]
+(Background on this error at: https://sqlalche.me/e/20/f405)"
+ALL^J,"(psycopg2.errors.SyntaxError) 错误:  语法错误 在 ""-"" 或附近的
+LINE 12: ...                CREATE INDEX IF NOT EXISTS idx_ALL-J_timesta...
+                                                              ^
+
+[SQL: 
+                    CREATE TABLE IF NOT EXISTS ""ALL-J"" (
+                        id SERIAL PRIMARY KEY,
+                        timestamp TIMESTAMP NOT NULL UNIQUE,
+                        open_price DECIMAL(18, 6),
+                        high_price DECIMAL(18, 6),
+                        low_price DECIMAL(18, 6),
+                        close_price DECIMAL(18, 6),
+                        volume BIGINT,
+                        turnover DECIMAL(18, 6)
+                    );
+                    CREATE INDEX IF NOT EXISTS idx_ALL-J_timestamp ON ""ALL-J""(timestamp);
+                ]
+(Background on this error at: https://sqlalche.me/e/20/f405)"
+ALTG^A,"(psycopg2.errors.SyntaxError) 错误:  语法错误 在 ""-"" 或附近的
+LINE 12: ...               CREATE INDEX IF NOT EXISTS idx_ALTG-A_timesta...
+                                                              ^
+
+[SQL: 
+                    CREATE TABLE IF NOT EXISTS ""ALTG-A"" (
+                        id SERIAL PRIMARY KEY,
+                        timestamp TIMESTAMP NOT NULL UNIQUE,
+                        open_price DECIMAL(18, 6),
+                        high_price DECIMAL(18, 6),
+                        low_price DECIMAL(18, 6),
+                        close_price DECIMAL(18, 6),
+                        volume BIGINT,
+                        turnover DECIMAL(18, 6)
+                    );
+                    CREATE INDEX IF NOT EXISTS idx_ALTG-A_timestamp ON ""ALTG-A""(timestamp);
+                ]
+(Background on this error at: https://sqlalche.me/e/20/f405)"
+AMH^G,"(psycopg2.errors.SyntaxError) 错误:  语法错误 在 ""-"" 或附近的
+LINE 12: ...                CREATE INDEX IF NOT EXISTS idx_AMH-G_timesta...
+                                                              ^
+
+[SQL: 
+                    CREATE TABLE IF NOT EXISTS ""AMH-G"" (
+                        id SERIAL PRIMARY KEY,
+                        timestamp TIMESTAMP NOT NULL UNIQUE,
+                        open_price DECIMAL(18, 6),
+                        high_price DECIMAL(18, 6),
+                        low_price DECIMAL(18, 6),
+                        close_price DECIMAL(18, 6),
+                        volume BIGINT,
+                        turnover DECIMAL(18, 6)
+                    );
+                    CREATE INDEX IF NOT EXISTS idx_AMH-G_timestamp ON ""AMH-G""(timestamp);
+                ]
+(Background on this error at: https://sqlalche.me/e/20/f405)"
+AMH^H,"(psycopg2.errors.SyntaxError) 错误:  语法错误 在 ""-"" 或附近的
+LINE 12: ...                CREATE INDEX IF NOT EXISTS idx_AMH-H_timesta...
+                                                              ^
+
+[SQL: 
+                    CREATE TABLE IF NOT EXISTS ""AMH-H"" (
+                        id SERIAL PRIMARY KEY,
+                        timestamp TIMESTAMP NOT NULL UNIQUE,
+                        open_price DECIMAL(18, 6),
+                        high_price DECIMAL(18, 6),
+                        low_price DECIMAL(18, 6),
+                        close_price DECIMAL(18, 6),
+                        volume BIGINT,
+                        turnover DECIMAL(18, 6)
+                    );
+                    CREATE INDEX IF NOT EXISTS idx_AMH-H_timestamp ON ""AMH-H""(timestamp);
+                ]
+(Background on this error at: https://sqlalche.me/e/20/f405)"
+ANG^A,"(psycopg2.errors.SyntaxError) 错误:  语法错误 在 ""-"" 或附近的
+LINE 12: ...                CREATE INDEX IF NOT EXISTS idx_ANG-A_timesta...
+                                                              ^
+
+[SQL: 
+                    CREATE TABLE IF NOT EXISTS ""ANG-A"" (
+                        id SERIAL PRIMARY KEY,
+                        timestamp TIMESTAMP NOT NULL UNIQUE,
+                        open_price DECIMAL(18, 6),
+                        high_price DECIMAL(18, 6),
+                        low_price DECIMAL(18, 6),
+                        close_price DECIMAL(18, 6),
+                        volume BIGINT,
+                        turnover DECIMAL(18, 6)
+                    );
+                    CREATE INDEX IF NOT EXISTS idx_ANG-A_timestamp ON ""ANG-A""(timestamp);
+                ]
+(Background on this error at: https://sqlalche.me/e/20/f405)"
+ANG^B,"(psycopg2.errors.SyntaxError) 错误:  语法错误 在 ""-"" 或附近的
+LINE 12: ...                CREATE INDEX IF NOT EXISTS idx_ANG-B_timesta...
+                                                              ^
+
+[SQL: 
+                    CREATE TABLE IF NOT EXISTS ""ANG-B"" (
+                        id SERIAL PRIMARY KEY,
+                        timestamp TIMESTAMP NOT NULL UNIQUE,
+                        open_price DECIMAL(18, 6),
+                        high_price DECIMAL(18, 6),
+                        low_price DECIMAL(18, 6),
+                        close_price DECIMAL(18, 6),
+                        volume BIGINT,
+                        turnover DECIMAL(18, 6)
+                    );
+                    CREATE INDEX IF NOT EXISTS idx_ANG-B_timestamp ON ""ANG-B""(timestamp);
+                ]
+(Background on this error at: https://sqlalche.me/e/20/f405)"
+APO^A,"(psycopg2.errors.SyntaxError) 错误:  语法错误 在 ""-"" 或附近的
+LINE 12: ...                CREATE INDEX IF NOT EXISTS idx_APO-A_timesta...
+                                                              ^
+
+[SQL: 
+                    CREATE TABLE IF NOT EXISTS ""APO-A"" (
+                        id SERIAL PRIMARY KEY,
+                        timestamp TIMESTAMP NOT NULL UNIQUE,
+                        open_price DECIMAL(18, 6),
+                        high_price DECIMAL(18, 6),
+                        low_price DECIMAL(18, 6),
+                        close_price DECIMAL(18, 6),
+                        volume BIGINT,
+                        turnover DECIMAL(18, 6)
+                    );
+                    CREATE INDEX IF NOT EXISTS idx_APO-A_timestamp ON ""APO-A""(timestamp);
+                ]
+(Background on this error at: https://sqlalche.me/e/20/f405)"
+ARES^B,"(psycopg2.errors.SyntaxError) 错误:  语法错误 在 ""-"" 或附近的
+LINE 12: ...               CREATE INDEX IF NOT EXISTS idx_ARES-B_timesta...
+                                                              ^
+
+[SQL: 
+                    CREATE TABLE IF NOT EXISTS ""ARES-B"" (
+                        id SERIAL PRIMARY KEY,
+                        timestamp TIMESTAMP NOT NULL UNIQUE,
+                        open_price DECIMAL(18, 6),
+                        high_price DECIMAL(18, 6),
+                        low_price DECIMAL(18, 6),
+                        close_price DECIMAL(18, 6),
+                        volume BIGINT,
+                        turnover DECIMAL(18, 6)
+                    );
+                    CREATE INDEX IF NOT EXISTS idx_ARES-B_timestamp ON ""ARES-B""(timestamp);
+                ]
+(Background on this error at: https://sqlalche.me/e/20/f405)"
+ARGO^A,"(psycopg2.errors.SyntaxError) 错误:  语法错误 在 ""-"" 或附近的
+LINE 12: ...               CREATE INDEX IF NOT EXISTS idx_ARGO-A_timesta...
+                                                              ^
+
+[SQL: 
+                    CREATE TABLE IF NOT EXISTS ""ARGO-A"" (
+                        id SERIAL PRIMARY KEY,
+                        timestamp TIMESTAMP NOT NULL UNIQUE,
+                        open_price DECIMAL(18, 6),
+                        high_price DECIMAL(18, 6),
+                        low_price DECIMAL(18, 6),
+                        close_price DECIMAL(18, 6),
+                        volume BIGINT,
+                        turnover DECIMAL(18, 6)
+                    );
+                    CREATE INDEX IF NOT EXISTS idx_ARGO-A_timestamp ON ""ARGO-A""(timestamp);
+                ]
+(Background on this error at: https://sqlalche.me/e/20/f405)"
+ARR^C,"(psycopg2.errors.SyntaxError) 错误:  语法错误 在 ""-"" 或附近的
+LINE 12: ...                CREATE INDEX IF NOT EXISTS idx_ARR-C_timesta...
+                                                              ^
+
+[SQL: 
+                    CREATE TABLE IF NOT EXISTS ""ARR-C"" (
+                        id SERIAL PRIMARY KEY,
+                        timestamp TIMESTAMP NOT NULL UNIQUE,
+                        open_price DECIMAL(18, 6),
+                        high_price DECIMAL(18, 6),
+                        low_price DECIMAL(18, 6),
+                        close_price DECIMAL(18, 6),
+                        volume BIGINT,
+                        turnover DECIMAL(18, 6)
+                    );
+                    CREATE INDEX IF NOT EXISTS idx_ARR-C_timestamp ON ""ARR-C""(timestamp);
+                ]
+(Background on this error at: https://sqlalche.me/e/20/f405)"
+ASB^E,"(psycopg2.errors.SyntaxError) 错误:  语法错误 在 ""-"" 或附近的
+LINE 12: ...                CREATE INDEX IF NOT EXISTS idx_ASB-E_timesta...
+                                                              ^
+
+[SQL: 
+                    CREATE TABLE IF NOT EXISTS ""ASB-E"" (
+                        id SERIAL PRIMARY KEY,
+                        timestamp TIMESTAMP NOT NULL UNIQUE,
+                        open_price DECIMAL(18, 6),
+                        high_price DECIMAL(18, 6),
+                        low_price DECIMAL(18, 6),
+                        close_price DECIMAL(18, 6),
+                        volume BIGINT,
+                        turnover DECIMAL(18, 6)
+                    );
+                    CREATE INDEX IF NOT EXISTS idx_ASB-E_timestamp ON ""ASB-E""(timestamp);
+                ]
+(Background on this error at: https://sqlalche.me/e/20/f405)"
+ASB^F,"(psycopg2.errors.SyntaxError) 错误:  语法错误 在 ""-"" 或附近的
+LINE 12: ...                CREATE INDEX IF NOT EXISTS idx_ASB-F_timesta...
+                                                              ^
+
+[SQL: 
+                    CREATE TABLE IF NOT EXISTS ""ASB-F"" (
+                        id SERIAL PRIMARY KEY,
+                        timestamp TIMESTAMP NOT NULL UNIQUE,
+                        open_price DECIMAL(18, 6),
+                        high_price DECIMAL(18, 6),
+                        low_price DECIMAL(18, 6),
+                        close_price DECIMAL(18, 6),
+                        volume BIGINT,
+                        turnover DECIMAL(18, 6)
+                    );
+                    CREATE INDEX IF NOT EXISTS idx_ASB-F_timestamp ON ""ASB-F""(timestamp);
+                ]
+(Background on this error at: https://sqlalche.me/e/20/f405)"
+ATCO^D,"(psycopg2.errors.SyntaxError) 错误:  语法错误 在 ""-"" 或附近的
+LINE 12: ...               CREATE INDEX IF NOT EXISTS idx_ATCO-D_timesta...
+                                                              ^
+
+[SQL: 
+                    CREATE TABLE IF NOT EXISTS ""ATCO-D"" (
+                        id SERIAL PRIMARY KEY,
+                        timestamp TIMESTAMP NOT NULL UNIQUE,
+                        open_price DECIMAL(18, 6),
+                        high_price DECIMAL(18, 6),
+                        low_price DECIMAL(18, 6),
+                        close_price DECIMAL(18, 6),
+                        volume BIGINT,
+                        turnover DECIMAL(18, 6)
+                    );
+                    CREATE INDEX IF NOT EXISTS idx_ATCO-D_timestamp ON ""ATCO-D""(timestamp);
+                ]
+(Background on this error at: https://sqlalche.me/e/20/f405)"
+ATCO^H,"(psycopg2.errors.SyntaxError) 错误:  语法错误 在 ""-"" 或附近的
+LINE 12: ...               CREATE INDEX IF NOT EXISTS idx_ATCO-H_timesta...
+                                                              ^
+
+[SQL: 
+                    CREATE TABLE IF NOT EXISTS ""ATCO-H"" (
+                        id SERIAL PRIMARY KEY,
+                        timestamp TIMESTAMP NOT NULL UNIQUE,
+                        open_price DECIMAL(18, 6),
+                        high_price DECIMAL(18, 6),
+                        low_price DECIMAL(18, 6),
+                        close_price DECIMAL(18, 6),
+                        volume BIGINT,
+                        turnover DECIMAL(18, 6)
+                    );
+                    CREATE INDEX IF NOT EXISTS idx_ATCO-H_timestamp ON ""ATCO-H""(timestamp);
+                ]
+(Background on this error at: https://sqlalche.me/e/20/f405)"
+ATH^A,"(psycopg2.errors.SyntaxError) 错误:  语法错误 在 ""-"" 或附近的
+LINE 12: ...                CREATE INDEX IF NOT EXISTS idx_ATH-A_timesta...
+                                                              ^
+
+[SQL: 
+                    CREATE TABLE IF NOT EXISTS ""ATH-A"" (
+                        id SERIAL PRIMARY KEY,
+                        timestamp TIMESTAMP NOT NULL UNIQUE,
+                        open_price DECIMAL(18, 6),
+                        high_price DECIMAL(18, 6),
+                        low_price DECIMAL(18, 6),
+                        close_price DECIMAL(18, 6),
+                        volume BIGINT,
+                        turnover DECIMAL(18, 6)
+                    );
+                    CREATE INDEX IF NOT EXISTS idx_ATH-A_timestamp ON ""ATH-A""(timestamp);
+                ]
+(Background on this error at: https://sqlalche.me/e/20/f405)"
+nan,"OpenApiException: (code=301600, trace_id=) invalid symbol"
