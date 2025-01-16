@@ -1,11 +1,10 @@
-from PyQt5.QtWidgets import (
-    QMainWindow, QVBoxLayout, QWidget, QLabel, QPushButton, QMessageBox,
-    QSplitter, QLineEdit, QFrame, QGridLayout, QCompleter, QTabWidget,
-    QComboBox, QCheckBox, QStackedLayout, QAbstractButton,QScrollArea, QProgressBar
-)
+from PyQt5.QtWidgets import QMainWindow, QVBoxLayout, QWidget, QTabWidget
 from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import Qt
-import pyqtgraph as pg
+from .components.data_fetch_tab import DataFetchTab
+from .components.visualization_tab import VisualizationTab
+from .components.settings_tab import SettingsTab
+from .components.random_stock_tab import RandomStockTab
 from .main_logic import MainWindowLogic
 
 class MainWindowUI(QMainWindow):
@@ -14,318 +13,66 @@ class MainWindowUI(QMainWindow):
         self.setWindowTitle("股票数据可视化")
         self.setGeometry(100, 100, 800, 600)
         
-        # 设置全局样式表
-        self.setStyleSheet("""
-            QMainWindow {
-                background-color: #f5f5f5;
-            }
-            QPushButton {
-                background-color: #C0C0C0;
-                color: white;
-                font-size: 14px;
-                padding: 10px;
-                border-radius: 5px;
-            }
-            QPushButton:hover {
-                background-color: #808080;
-            }
-            QLabel {
-                font-size: 14px;
-                color: #333;
-            }
-            QLineEdit, QComboBox {
-                padding: 8px;
-                font-size: 14px;
-                border: 1px solid #ccc;
-                border-radius: 5px;
-            }
-            QLineEdit:focus, QComboBox:focus {
-                border: 1px solid #4CAF50;
-            }
-            QFrame {
-                border: 1px solid #ccc;
-            }
-            QTabWidget::pane {
-                border: 1px solid #ccc;
-                padding: 10px;
-            }
-            QTabBar::tab {
-                background: #e0e0e0;
-                padding: 10px;
-                border: 1px solid #ccc;
-                border-bottom: none;
-                border-top-left-radius: 5px;
-                border-top-right-radius: 5px;
-            }
-            QTabBar::tab:selected {
-                background: #fff;
-                border-bottom: 2px solid #579190;
-            }
-        """)
-        
-        # 初始化 UI
+        # 初始化UI
         self.init_ui()
         
-        # 初始化 logic（在 UI 初始化之后）
+        # 初始化logic
         self.logic = MainWindowLogic(self)
         
-        # 连接信号（在 logic 初始化之后）
+        # 加载样式表
+        self.load_stylesheet()
+        
+        # 连接信号
         self.connect_signals()
+
+    def load_stylesheet(self):
+        """从外部文件加载样式表"""
+        try:
+            with open("src/styles/main.qss", "r", encoding="utf-8") as f:
+                self.setStyleSheet(f.read())
+        except FileNotFoundError:
+            print("样式表文件未找到，使用默认样式")
+        except Exception as e:
+            print(f"加载样式表失败: {e}")
 
     def connect_signals(self):
         """连接所有信号"""
-        self.search_box.textChanged.connect(self.logic.filter_stock_selector)
+        # 连接数据获取选项卡信号
+        self.data_fetch_tab.fetch_button.clicked.connect(
+            lambda: self.logic.fetch_single_stock(
+                self.data_fetch_tab.stock_input.text()
+            )
+        )
+        self.data_fetch_tab.batch_fetch_button.clicked.connect(
+            self.logic.batch_fetch_stocks
+        )
+        
+        # 连接可视化选项卡信号
+        self.visualization_tab.search_box.textChanged.connect(
+            self.logic.filter_stock_selector
+        )
 
     def init_ui(self):
-        
         """初始化UI界面"""
         self.layout = QVBoxLayout()
-
+        
         # 创建选项卡
         self.tabs = QTabWidget()
         self.layout.addWidget(self.tabs)
 
-        # 数据获取选项卡
-        self.data_fetch_tab = QWidget()
-        self.init_data_fetch_tab()
+        # 初始化各个选项卡
+        self.data_fetch_tab = DataFetchTab()
+        self.visualization_tab = VisualizationTab()
+        self.random_stock_tab = RandomStockTab()
+        self.settings_tab = SettingsTab()
+
+        # 添加选项卡
         self.tabs.addTab(self.data_fetch_tab, "数据获取")
-
-        # 数据可视化选项卡
-        self.data_visualization_tab = QWidget()
-        self.init_data_visualization_tab()
-        self.tabs.addTab(self.data_visualization_tab, "数据可视化")
-        
-        # 每日随机推荐股
-        self.random_stock_info = QWidget()
-        self.init_random_stock_info_tab()
-        self.tabs.addTab(self.random_stock_info, "随机股票生成")
-
-        # 设置选项卡
-        self.settings_tab = QWidget()
-        self.init_settings_tab()
+        self.tabs.addTab(self.visualization_tab, "数据可视化")
+        self.tabs.addTab(self.random_stock_tab, "随机股票生成")
         self.tabs.addTab(self.settings_tab, "设置")
-        
-        
 
         # 设置主窗口的中心部件
         container = QWidget()
         container.setLayout(self.layout)
         self.setCentralWidget(container)
-
-    def init_data_fetch_tab(self):
-        """初始化数据获取选项卡"""
-        layout = QGridLayout()
-        layout.setSpacing(10)
-        layout.setContentsMargins(20, 20, 20, 20)
-
-        # 批量获取数据按钮
-        self.batch_fetch_button = QPushButton("一次性获取列表中的股票数据")
-        self.batch_fetch_button.setFixedHeight(40)
-        layout.addWidget(self.batch_fetch_button, 0, 0, 1, 2)
-
-        # 进度条
-        self.progress_bar = QProgressBar()
-        self.progress_bar.setFixedHeight(20)
-        self.progress_bar.setTextVisible(True)
-        self.progress_bar.setStyleSheet("""
-            QProgressBar {
-                border: 1px solid #ccc;
-                border-radius: 5px;
-                text-align: center;
-            }
-            QProgressBar::chunk {
-                background-color: #579190;
-                width: 10px;
-            }
-        """)
-        layout.addWidget(self.progress_bar, 1, 0, 1, 2)
-
-        # 进度信息
-        self.progress_info = QLabel("准备中...")
-        self.progress_info.setStyleSheet("font-size: 12px; color: #666;")
-        layout.addWidget(self.progress_info, 2, 0, 1, 2)
-
-        # 添加分割线
-        line = QFrame()
-        line.setFrameShape(QFrame.HLine)
-        line.setFrameShadow(QFrame.Sunken)
-        layout.addWidget(line, 3, 0, 1, 2)
-
-        # 输入股票代码部分
-        self.input_label = QLabel("输入股票代码（如 SMCI):")
-        self.stock_input = QLineEdit()
-        self.stock_input.setPlaceholderText("请输入股票代码...")
-        layout.addWidget(self.input_label, 2, 0)
-        layout.addWidget(self.stock_input, 2, 1)
-
-        # 获取数据按钮
-        self.fetch_button = QPushButton("获取数据并存储到数据库")
-        self.fetch_button.setFixedHeight(40)
-        layout.addWidget(self.fetch_button, 3, 0, 1, 2)
-
-        # 设置布局
-        self.data_fetch_tab.setLayout(layout)
-
-    def init_data_visualization_tab(self):
-        """初始化数据可视化选项卡"""
-        layout = QGridLayout()
-        layout.setSpacing(10)
-        layout.setContentsMargins(20, 20, 20, 20)
-
-        # 紧凑布局容器
-        control_container = QWidget()
-        control_layout = QGridLayout()
-        control_layout.setSpacing(5)
-        control_layout.setContentsMargins(0, 0, 0, 0)
-        
-        # 搜索框和确认按钮
-        self.search_box = QLineEdit()
-        self.search_box.setPlaceholderText("搜索股票...")
-        self.search_box.setFixedHeight(30)
-        control_layout.addWidget(self.search_box, 0, 0, 1, 2)
-
-        self.search_button = QPushButton("搜索")
-        self.search_button.setFixedHeight(30)
-        control_layout.addWidget(self.search_button, 0, 2)
-        
-        # 股票代码选择器
-        self.stock_selector = QComboBox()
-        self.stock_selector.setFixedHeight(30)
-        control_layout.addWidget(self.stock_selector, 1, 0, 1, 2)
-
-        # 周期选择器和加载按钮
-        self.period_label = QLabel("周期:")
-        self.period_label.setFixedHeight(30)
-        control_layout.addWidget(self.period_label, 1, 2)
-
-        self.period_selector = QComboBox()
-        self.period_selector.addItems(["50", "200", "500", "1000"])
-        self.period_selector.setFixedHeight(30)
-        control_layout.addWidget(self.period_selector, 1, 3)
-
-        self.load_button = QPushButton("加载")
-        self.load_button.setFixedHeight(30)
-        control_layout.addWidget(self.load_button, 1, 4)
-
-        control_container.setLayout(control_layout)
-        layout.addWidget(control_container, 0, 0, 1, 2)
-
-        # 鼠标悬停显示开关
-        self.hover_toggle = QCheckBox("启用鼠标悬停显示")
-        layout.addWidget(self.hover_toggle, 4, 0, 1, 2)
-
-        # 使用 QSplitter 分割主图和成交量图
-        self.splitter = QSplitter(Qt.Vertical)
-        self.main_plot = pg.PlotWidget()
-        self.volume_plot = pg.PlotWidget()
-        
-        # 设置图表样式
-        self.set_plot_style(self.main_plot)
-        self.set_plot_style(self.volume_plot)
-        
-        self.splitter.addWidget(self.main_plot)
-        self.splitter.addWidget(self.volume_plot)
-        layout.addWidget(self.splitter, 5, 0, 1, 2)
-
-        # 设置自动补全pyp
-        self.completer = QCompleter([])
-        self.completer.setCaseSensitivity(False)
-        self.search_box.setCompleter(self.completer)
-        
-        # Remove the signal connection from here
-        # self.search_box.textChanged.connect(self.logic.filter_stock_selector)
-        
-        # 设置布局
-        self.data_visualization_tab.setLayout(layout)
-
-    def set_plot_style(self, plot_widget):
-        """设置图表样式"""
-        plot_widget.setBackground("w")  # 设置背景为白色
-        plot_widget.showGrid(x=True, y=True, alpha=0.3)  # 显示网格线
-        plot_widget.setLabel("left", "Price" if plot_widget == self.main_plot else "Volume")  # 设置Y轴标签
-        plot_widget.setLabel("bottom", "Date")  # 设置X轴标签
-        
-    def init_random_stock_info_tab(self):
-        """初始化每日股票推荐选项卡"""
-        layout = QVBoxLayout()
-        layout.setSpacing(15)
-        layout.setContentsMargins(20, 20, 20, 20)
-        
-        # 创建按钮
-        self.random_stock = QPushButton("🎲 随机股票")
-        self.random_stock.setFixedHeight(40)
-        self.random_stock.setStyleSheet("""
-            QPushButton {
-                background-color: #579190;
-                color: white;
-                border-radius: 5px;
-                font-size: 16px;
-                font-weight: bold;
-            }
-            QPushButton:hover {
-                background-color: #4a7a79;
-            }
-        """)
-        
-        # 信息显示区域
-        self.stock_info_scroll = QScrollArea()
-        self.stock_info_widget = QWidget()
-        self.stock_info_layout = QVBoxLayout()
-        self.stock_info_widget.setLayout(self.stock_info_layout)
-        self.stock_info_scroll.setWidget(self.stock_info_widget)
-        self.stock_info_scroll.setWidgetResizable(True)
-        self.stock_info_scroll.setStyleSheet("""
-            QScrollArea {
-                border: 1px solid #ddd;
-                border-radius: 5px;
-                background-color: #f9f9f9;
-            }
-        """)
-        
-        # 添加分隔线
-        separator = QFrame()
-        separator.setFrameShape(QFrame.HLine)
-        separator.setFrameShadow(QFrame.Sunken)
-        separator.setStyleSheet("color: #ddd;")
-        
-        # 添加到布局中
-        layout.addWidget(self.random_stock)
-        layout.addWidget(separator)
-        layout.addWidget(self.stock_info_scroll)
-        
-        self.random_stock_info.setLayout(layout)
-    
-    
-    def init_settings_tab(self):
-        """初始化设置选项卡"""
-        layout = QVBoxLayout()
-
-        # 数据库配置
-        self.db_config_label = QLabel("数据库配置：")
-        layout.addWidget(self.db_config_label)
-
-        self.db_host_input = QLineEdit()
-        self.db_host_input.setPlaceholderText("数据库主机")
-        layout.addWidget(self.db_host_input)
-
-        self.db_port_input = QLineEdit()
-        self.db_port_input.setPlaceholderText("数据库端口")
-        layout.addWidget(self.db_port_input)
-
-        self.db_user_input = QLineEdit()
-        self.db_user_input.setPlaceholderText("数据库用户")
-        layout.addWidget(self.db_user_input)
-
-        self.db_password_input = QLineEdit()
-        self.db_password_input.setPlaceholderText("数据库密码")
-        self.db_password_input.setEchoMode(QLineEdit.Password)
-        layout.addWidget(self.db_password_input)
-
-        self.db_name_input = QLineEdit()
-        self.db_name_input.setPlaceholderText("数据库名称")
-        layout.addWidget(self.db_name_input)
-
-        self.save_db_config_button = QPushButton("保存数据库配置")
-        layout.addWidget(self.save_db_config_button)
-
-        self.settings_tab.setLayout(layout)

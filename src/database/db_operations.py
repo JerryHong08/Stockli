@@ -1,11 +1,11 @@
-import psycopg2
 import pandas as pd
-from sqlalchemy import MetaData, Table
+from sqlalchemy import MetaData, Table, text, select, DDL
 from functools import lru_cache
-from psycopg2.extras import execute_values
 import pytz
 from utils.logger import setup_logger
 import logging
+from sqlalchemy.exc import SQLAlchemyError
+from database.db_connection import DatabaseConnectionError
 
 # At the top of the file, modify the logger initialization
 try:
@@ -49,29 +49,23 @@ def fetch_data_from_db(table_name, engine, limit=None):
         print(f"Error fetching data: {e}")
         return pd.DataFrame()
 
-def fetch_table_names(db_config):
+def fetch_table_names(engine):
     """
     获取数据库中的所有表名。
     """
     try:
-        conn = psycopg2.connect(**db_config)
-        cursor = conn.cursor()
-        cursor.execute(
-            """
-        SELECT table_name
-        FROM information_schema.tables
-        WHERE table_schema = 'public'
-        """
-        )
-        table_names = [row[0] for row in cursor.fetchall()]
-        conn.close()
-        return table_names
-    except Exception as e:
-        print(f"Error fetching table names: {e}")
+        with engine.connect() as conn:
+            result = conn.execute(text("""
+                SELECT table_name
+                FROM information_schema.tables
+                WHERE table_schema = 'public'
+            """))
+            return [row[0] for row in result.fetchall()]
+    except SQLAlchemyError as e:
         logger.error(f"Error fetching table names: {e}")
         return []
 
-def create_table_if_not_exists(conn, table_name):
+def create_table_if_not_exists(engine, table_name):
     """动态创建表，确保表结构符合要求。"""
     try:
         # 清洗表名
@@ -80,8 +74,7 @@ def create_table_if_not_exists(conn, table_name):
         # 创建一个有效的索引名（移除空格和特殊字符）
         index_name = f"idx_{table_name.replace(' ', '_')}_timestamp"
 
-        with conn.cursor() as cursor:
-            create_table_query = f"""
+        create_table_ddl = DDL(f"""
             CREATE TABLE IF NOT EXISTS "{table_name}" (
                 id SERIAL PRIMARY KEY,
                 timestamp TIMESTAMP NOT NULL UNIQUE,
@@ -93,15 +86,16 @@ def create_table_if_not_exists(conn, table_name):
                 turnover DECIMAL(18, 6)
             );
             CREATE INDEX IF NOT EXISTS {index_name} ON "{table_name}"(timestamp);
-            """
-            cursor.execute(create_table_query)
+        """)
+
+        with engine.connect() as conn:
+            conn.execute(create_table_ddl)
             conn.commit()
             print(f"Table '{table_name}' is ready.")
             
-    except Exception as e:
+    except SQLAlchemyError as e:
         print(f"创建表失败: {e}")
-        conn.rollback()  # 发生错误时回滚事务
-        raise
+        raise DatabaseConnectionError(f"创建表失败: {e}")
 
 def clean_symbol_for_postgres(symbol):
     """清洗股票代码中的特殊符号，用于 PostgreSQL 表名。"""
@@ -123,73 +117,60 @@ def clean_symbol_for_postgres(symbol):
 
     return cleaned_symbol
 
-def save_to_table(data, table_name, db_config, batch_size=1000):
+def save_to_table(data, table_name, engine, batch_size=1000):
     """
     将数据保存到 PostgreSQL 数据库的指定表中。
 
     :param data: 要保存的数据
     :param table_name: 表名
-    :param db_config: 数据库连接配置（字典）
+    :param engine: SQLAlchemy 引擎
     :param batch_size: 批量插入的大小，默认1000条
     """
     try:
         # 清洗表名
         table_name = clean_symbol_for_postgres(table_name)
 
-        # 使用连接池管理连接
-        conn = psycopg2.connect(**db_config)
-        if not conn:
-            raise Exception("数据库连接失败")
+        # 确保表存在
+        create_table_if_not_exists(engine, table_name)
 
-        try:
-            # 确保表存在
-            create_table_if_not_exists(conn, table_name)
+        # 设置纽约时区
+        ny_tz = pytz.timezone('America/New_York')
 
-            cursor = conn.cursor()
-            # 设置纽约时区
-            ny_tz = pytz.timezone('America/New_York')
+        # 数据转换为元组
+        values = [
+            (
+                candlestick.timestamp.astimezone(ny_tz).replace(tzinfo=None),  # 转换为纽约时间并去除时区信息
+                float(candlestick.open),
+                float(candlestick.high),
+                float(candlestick.low),
+                float(candlestick.close),
+                candlestick.volume,
+                float(candlestick.turnover)
+            )
+            for candlestick in data
+        ]
 
-            # 在 SQL 语句中使用双引号括起表名
-            insert_query = f"""
-            INSERT INTO "{table_name}" (timestamp, open_price, high_price, low_price, close_price, volume, turnover)
-            VALUES %s
-            ON CONFLICT (timestamp) DO NOTHING;  -- 避免重复插入
-            """
-
-            # 数据转换为元组
-            values = [
-                (
-                    candlestick.timestamp.astimezone(ny_tz).replace(tzinfo=None),  # 转换为纽约时间并去除时区信息
-                    float(candlestick.open),
-                    float(candlestick.high),
-                    float(candlestick.low),
-                    float(candlestick.close),
-                    candlestick.volume,
-                    float(candlestick.turnover)
-                )
-                for candlestick in data
-            ]
-
-            # 分批次插入数据
-            total_inserted = 0
+        # 分批次插入数据
+        total_inserted = 0
+        with engine.connect() as conn:
             for i in range(0, len(values), batch_size):
                 batch = values[i:i + batch_size]
-                execute_values(cursor, insert_query, batch)
+                conn.execute(
+                    text(f"""
+                        INSERT INTO "{table_name}" 
+                        (timestamp, open_price, high_price, low_price, close_price, volume, turnover)
+                        VALUES :values
+                        ON CONFLICT (timestamp) DO NOTHING
+                    """), 
+                    [{"values": row} for row in batch]
+                )
                 conn.commit()
                 total_inserted += len(batch)
                 logger.info(f"Inserted {len(batch)} records to table '{table_name}' (total: {total_inserted})")
 
-        except Exception as e:
-            logger.error(f"保存数据到数据库失败: {e}")
-            conn.rollback()
-            raise Exception(f"保存数据到数据库失败: {e}")
-        finally:
-            cursor.close()
-            conn.close()
-
     except ValueError as e:
         logger.error(f"表名无效: {e}")
-        print(f"表名无效: {e}")
-    except Exception as e:
+        raise DatabaseConnectionError(f"表名无效: {e}")
+    except SQLAlchemyError as e:
         logger.error(f"保存数据失败: {e}")
-        print(f"保存数据失败: {e}")
+        raise DatabaseConnectionError(f"保存数据失败: {e}")
