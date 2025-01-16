@@ -1,3 +1,4 @@
+import time
 from PyQt5.QtCore import QThread, pyqtSignal, QStringListModel
 from PyQt5.QtWidgets import (
     QMessageBox, QToolTip, QWidget, QLabel, QHBoxLayout)
@@ -221,9 +222,30 @@ class MainWindowLogic:
         except Exception as e:
             self.show_error(f"读取 CSV 文件失败: {e}")
 
-    def update_progress(self, message):
+    def update_progress(self, progress_data):
         """更新进度信息"""
-        self.ui.statusBar().showMessage(message)
+        current = progress_data.get('current', 0)
+        total = progress_data.get('total', 1)
+        start_time = progress_data.get('start_time')
+        
+        # 更新进度条
+        self.ui.progress_bar.setMaximum(total)
+        self.ui.progress_bar.setValue(current)
+        
+        # 计算时间
+        if start_time:
+            elapsed = time.time() - start_time
+            remaining = (elapsed / current) * (total - current) if current > 0 else 0
+            
+            # 格式化时间显示
+            elapsed_str = time.strftime("%H:%M:%S", time.gmtime(elapsed))
+            remaining_str = time.strftime("%H:%M:%S", time.gmtime(remaining))
+            
+            # 更新进度信息
+            self.ui.progress_info.setText(
+                f"进度: {current}/{total} ({current/total*100:.1f}%) | "
+                f"已用: {elapsed_str} | 剩余: {remaining_str}"
+            )
 
     def on_batch_fetch_complete(self, message):
         """批量获取完成后的回调"""

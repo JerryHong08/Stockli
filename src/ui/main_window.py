@@ -1,7 +1,7 @@
 from PyQt5.QtWidgets import (
     QMainWindow, QVBoxLayout, QWidget, QLabel, QPushButton, QMessageBox,
     QSplitter, QLineEdit, QFrame, QGridLayout, QCompleter, QTabWidget,
-    QComboBox, QCheckBox, QStackedLayout, QAbstractButton,QScrollArea
+    QComboBox, QCheckBox, QStackedLayout, QAbstractButton,QScrollArea, QProgressBar
 )
 from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import Qt
@@ -123,14 +123,36 @@ class MainWindowUI(QMainWindow):
         self.batch_fetch_button.setFixedHeight(40)
         layout.addWidget(self.batch_fetch_button, 0, 0, 1, 2)
 
+        # 进度条
+        self.progress_bar = QProgressBar()
+        self.progress_bar.setFixedHeight(20)
+        self.progress_bar.setTextVisible(True)
+        self.progress_bar.setStyleSheet("""
+            QProgressBar {
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                text-align: center;
+            }
+            QProgressBar::chunk {
+                background-color: #579190;
+                width: 10px;
+            }
+        """)
+        layout.addWidget(self.progress_bar, 1, 0, 1, 2)
+
+        # 进度信息
+        self.progress_info = QLabel("准备中...")
+        self.progress_info.setStyleSheet("font-size: 12px; color: #666;")
+        layout.addWidget(self.progress_info, 2, 0, 1, 2)
+
         # 添加分割线
         line = QFrame()
         line.setFrameShape(QFrame.HLine)
         line.setFrameShadow(QFrame.Sunken)
-        layout.addWidget(line, 1, 0, 1, 2)
+        layout.addWidget(line, 3, 0, 1, 2)
 
         # 输入股票代码部分
-        self.input_label = QLabel("输入股票代码（如 SMCI）：")
+        self.input_label = QLabel("输入股票代码（如 SMCI):")
         self.stock_input = QLineEdit()
         self.stock_input.setPlaceholderText("请输入股票代码...")
         layout.addWidget(self.input_label, 2, 0)
