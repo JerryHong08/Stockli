@@ -155,13 +155,13 @@ class MainWindowUI(QMainWindow):
         self.input_label = QLabel("输入股票代码（如 SMCI):")
         self.stock_input = QLineEdit()
         self.stock_input.setPlaceholderText("请输入股票代码...")
-        layout.addWidget(self.input_label, 2, 0)
-        layout.addWidget(self.stock_input, 2, 1)
+        layout.addWidget(self.input_label, 4, 0)
+        layout.addWidget(self.stock_input, 4, 1)
 
         # 获取数据按钮
         self.fetch_button = QPushButton("获取数据并存储到数据库")
         self.fetch_button.setFixedHeight(40)
-        layout.addWidget(self.fetch_button, 3, 0, 1, 2)
+        layout.addWidget(self.fetch_button, 5, 0, 1, 2)
 
         # 设置布局
         self.data_fetch_tab.setLayout(layout)
