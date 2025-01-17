@@ -2,6 +2,7 @@ import pandas as pd
 from sqlalchemy import MetaData, Table, text, select, DDL
 from functools import lru_cache
 import pytz
+ny_tz = pytz.timezone('America/New_York')  # 定义纽约时区
 from utils.logger import setup_logger
 import logging
 from sqlalchemy.exc import SQLAlchemyError
@@ -45,7 +46,7 @@ def fetch_data_from_db(table_name, engine, limit=None):
         logger.info(df.iloc[-1])  # Log the latest column of the DataFrame
         return df
     except Exception as e:
-        logger.error(f"Error fetching data: {e}")
+        logger.error(f"Error fetching data from{table_name}: {e}")
         print(f"Error fetching data: {e}")
         return pd.DataFrame()
 
@@ -67,35 +68,64 @@ def fetch_table_names(engine):
 
 def create_table_if_not_exists(engine, table_name):
     """动态创建表，确保表结构符合要求。"""
-    try:
-        # 清洗表名
-        table_name = clean_symbol_for_postgres(table_name)
-        
-        # 创建一个有效的索引名（移除空格和特殊字符）
-        index_name = f"idx_{table_name.replace(' ', '_')}_timestamp"
+    max_retries = 3
+    retry_count = 0
+    
+    while retry_count < max_retries:
+        try:
+            # 清洗表名
+            table_name = clean_symbol_for_postgres(table_name)
+            index_name = f'idx_{table_name}_timestamp'
 
-        create_table_ddl = DDL(f"""
-            CREATE TABLE IF NOT EXISTS "{table_name}" (
-                id SERIAL PRIMARY KEY,
-                timestamp TIMESTAMP NOT NULL UNIQUE,
-                open_price DECIMAL(18, 6),
-                high_price DECIMAL(18, 6),
-                low_price DECIMAL(18, 6),
-                close_price DECIMAL(18, 6),
-                volume BIGINT,
-                turnover DECIMAL(18, 6)
-            );
-            CREATE INDEX IF NOT EXISTS {index_name} ON "{table_name}"(timestamp);
-        """)
-
-        with engine.connect() as conn:
-            conn.execute(create_table_ddl)
-            conn.commit()
-            print(f"Table '{table_name}' is ready.")
-            
-    except SQLAlchemyError as e:
-        print(f"创建表失败: {e}")
-        raise DatabaseConnectionError(f"创建表失败: {e}")
+            with engine.connect() as conn:
+                # 设置事务隔离级别为SERIALIZABLE
+                conn.execute(text("SET TRANSACTION ISOLATION LEVEL SERIALIZABLE"))
+                
+                # 开始事务
+                try:
+                    # 创建表
+                    conn.execute(text(f"""
+                        CREATE TABLE IF NOT EXISTS "{table_name}" (
+                            id SERIAL PRIMARY KEY,
+                            timestamp TIMESTAMP NOT NULL UNIQUE,
+                            open_price DECIMAL(18, 6),
+                            high_price DECIMAL(18, 6),
+                            low_price DECIMAL(18, 6),
+                            close_price DECIMAL(18, 6),
+                            volume BIGINT,
+                            turnover DECIMAL(18, 6)
+                        );
+                    """))
+                    
+                    # 检查索引是否存在
+                    result = conn.execute(text(f"""
+                        SELECT 1
+                        FROM pg_indexes
+                        WHERE tablename = :table_name
+                        AND indexname = :index_name
+                    """), {"table_name": table_name, "index_name": index_name})
+                    
+                    # 如果索引不存在则创建
+                    if not result.fetchone():
+                        conn.execute(text(f"""
+                            CREATE INDEX "{index_name}" ON "{table_name}"(timestamp);
+                        """))
+                    
+                    # 提交事务
+                    conn.commit()
+                    logger.debug(f"表 '{table_name}' 已准备就绪")
+                    return
+                except Exception as e:
+                    # 回滚事务
+                    conn.rollback()
+                    raise e
+                    
+        except SQLAlchemyError as e:
+            retry_count += 1
+            if retry_count == max_retries:
+                print(f"创建表失败: {e}")
+                raise DatabaseConnectionError(f"创建表失败: {e}")
+            continue
 
 def clean_symbol_for_postgres(symbol):
     """清洗股票代码中的特殊符号，用于 PostgreSQL 表名。"""
@@ -105,17 +135,87 @@ def clean_symbol_for_postgres(symbol):
     # 去除前后空格
     cleaned_symbol = symbol.strip()
     
-    # 将中间的空格替换为下划线
-    cleaned_symbol = cleaned_symbol.replace(" ", "_")
+    # 将中间的空格替换为空
+    cleaned_symbol = cleaned_symbol.replace(" ", "")
     
-    # 将其他特殊字符替换为下划线
-    cleaned_symbol = cleaned_symbol.replace("^", "_").replace("/", "_").replace("-", "_")
+    # 将特殊字符替换为指定字符
+    cleaned_symbol = cleaned_symbol.replace("^", "-").replace("/", ".")
     
     # 如果清洗后的表名为空，抛出异常
     if not cleaned_symbol:
         raise ValueError(f"清洗后的表名为空: {symbol}")
 
     return cleaned_symbol
+
+def clean_duplicate_timestamps(table_name, engine):
+    """
+    清理重复的时间戳数据，删除所有时间戳不是00:00:00的数据
+    """
+    try:
+        # 清洗表名
+        cleaned_table_name = clean_symbol_for_postgres(table_name)
+        with engine.connect() as conn:
+            # 开始事务
+            conn.execute(text("SET TRANSACTION ISOLATION LEVEL SERIALIZABLE"))
+            try:
+                # 删除所有时间戳不是00:00:00的数据
+                conn.execute(text(f"""
+                    DELETE FROM "{cleaned_table_name}"
+                    WHERE EXTRACT(HOUR FROM timestamp) != 0
+                    OR EXTRACT(MINUTE FROM timestamp) != 0
+                    OR EXTRACT(SECOND FROM timestamp) != 0;
+                """))
+                conn.commit()
+                logger.info(f"Cleaned duplicate timestamps in table '{table_name}'")
+            except Exception as e:
+                conn.rollback()
+                logger.error(f"Error cleaning timestamps: {e}")
+                raise DatabaseConnectionError(f"Error cleaning timestamps: {e}")
+                
+    except SQLAlchemyError as e:
+        logger.error(f"Database error while cleaning timestamps: {e}")
+        raise DatabaseConnectionError(f"Database error while cleaning timestamps: {e}")
+
+
+def get_latest_timestamp(table_name, engine):
+    """获取表中最新数据的日期"""
+    try:
+        # 清洗表名
+        cleaned_table_name = clean_symbol_for_postgres(table_name)
+        with engine.connect() as conn:
+            result = conn.execute(text(f"""
+                SELECT timestamp 
+                FROM "{cleaned_table_name}"
+                ORDER BY timestamp DESC
+                LIMIT 1
+            """))
+            row = result.fetchone()
+            return row[0] if row else None
+    except SQLAlchemyError as e:
+        logger.error(f"获取最新日期失败: {e}")
+        return None
+
+def should_skip_save(api_data, table_name, engine):
+    """判断是否需要跳过保存"""
+    if not api_data:
+        return True
+        
+    # 清洗表名
+    cleaned_table_name = clean_symbol_for_postgres(table_name)
+        
+    # 获取API数据的最新日期（转换为纽约时区）
+    api_latest = max(candlestick.timestamp for candlestick in api_data)
+    api_latest_ny = api_latest.astimezone(pytz.timezone('America/New_York'))
+    
+    # 获取数据库最新日期
+    db_latest = get_latest_timestamp(cleaned_table_name, engine)
+    if db_latest is None:
+        return False
+        
+    # 转换为纽约时区比较
+    db_latest_ny = db_latest.astimezone(pytz.timezone('America/New_York'))
+    
+    return api_latest_ny.date() == db_latest_ny.date()
 
 def save_to_table(data, table_name, engine, batch_size=1000):
     """
@@ -126,20 +226,27 @@ def save_to_table(data, table_name, engine, batch_size=1000):
     :param engine: SQLAlchemy 引擎
     :param batch_size: 批量插入的大小，默认1000条
     """
+    # 检查是否需要跳过保存
+    if should_skip_save(data, table_name, engine):
+        logger.info(f"跳过保存 {table_name}，数据已是最新")
+        return
+        
+    # 添加调试日志
+    logger.debug(f"开始保存数据到表 {table_name}")
     try:
         # 清洗表名
         table_name = clean_symbol_for_postgres(table_name)
 
         # 确保表存在
         create_table_if_not_exists(engine, table_name)
-
-        # 设置纽约时区
-        ny_tz = pytz.timezone('America/New_York')
+        
+        # 清理旧的时间戳数据
+        clean_duplicate_timestamps(table_name, engine)
 
         # 数据转换为元组
         values = [
             (
-                candlestick.timestamp.astimezone(ny_tz).replace(tzinfo=None),  # 转换为纽约时间并去除时区信息
+                candlestick.timestamp.astimezone(pytz.timezone('America/New_York')).replace(hour=0, minute=0, second=0, microsecond=0, tzinfo=None),  # 转换为纽约时间并统一为00:00:00
                 float(candlestick.open),
                 float(candlestick.high),
                 float(candlestick.low),
@@ -160,13 +267,19 @@ def save_to_table(data, table_name, engine, batch_size=1000):
                         INSERT INTO "{table_name}" 
                         (timestamp, open_price, high_price, low_price, close_price, volume, turnover)
                         VALUES :values
-                        ON CONFLICT (timestamp) DO NOTHING
+                        ON CONFLICT (timestamp) DO UPDATE SET
+                            open_price = EXCLUDED.open_price,
+                            high_price = EXCLUDED.high_price,
+                            low_price = EXCLUDED.low_price,
+                            close_price = EXCLUDED.close_price,
+                            volume = EXCLUDED.volume,
+                            turnover = EXCLUDED.turnover
                     """), 
                     [{"values": row} for row in batch]
                 )
                 conn.commit()
                 total_inserted += len(batch)
-                logger.info(f"Inserted {len(batch)} records to table '{table_name}' (total: {total_inserted})")
+                logger.info(f"Inserted/Updated {len(batch)} records to table '{table_name}' (total: {total_inserted})")
 
     except ValueError as e:
         logger.error(f"表名无效: {e}")

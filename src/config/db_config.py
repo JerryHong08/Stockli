@@ -7,12 +7,7 @@ DB_CONFIG: Dict[str, Any] = {
     "user": os.getenv("DB_USER", "postgres"),
     "password": os.getenv("DB_PASSWORD", "12138"),
     "host": os.getenv("DB_HOST", "localhost"),
-    "port": os.getenv("DB_PORT", "5432"),
-    # 连接池配置
-    "pool_size": int(os.getenv("DB_POOL_SIZE", 5)),
-    "max_overflow": int(os.getenv("DB_MAX_OVERFLOW", 10)),
-    "pool_timeout": int(os.getenv("DB_POOL_TIMEOUT", 30)),
-    "pool_recycle": int(os.getenv("DB_POOL_RECYCLE", 3600)),
+    "port": os.getenv("DB_PORT", "5432")
 }
 
 def update_db_config(new_config: Dict[str, Any]) -> None:

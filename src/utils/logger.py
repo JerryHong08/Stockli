@@ -5,7 +5,7 @@ from config.paths import LOG_PATH
 
 def setup_logger(name='app'):
     logger = logging.getLogger(name)
-    logger.setLevel(logging.INFO)
+    logger.setLevel(logging.DEBUG)  # 修改为DEBUG级别
     
     # Create formatter
     formatter = logging.Formatter('%(asctime)s - %(name)s - %(levelname)s - %(message)s')
