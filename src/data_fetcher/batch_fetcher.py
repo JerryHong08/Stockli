@@ -9,7 +9,7 @@ from datetime import datetime
 from database.db_operations import save_to_table, fetch_table_names
 from utils.logger import setup_logger
 from config.paths import ERRORstock_PATH
-from database.db_connection import DB_CONFIG
+from database.db_connection import get_engine
 from database.db_operations import clean_symbol_for_postgres
 
 logger = setup_logger("batch_fetcher")
@@ -30,6 +30,7 @@ class BatchDataFetcher(QThread):
             self.start_time = time.time()
             config = Config.from_env()
             ctx = QuoteContext(config)
+            self.error_count = 0  # 初始化错误计数器
 
             # 初始化错误日志文件
             if not os.path.exists(self.error_log_path):
@@ -40,7 +41,9 @@ class BatchDataFetcher(QThread):
             # 获取最新数据日期
             latest_date = self.get_latest_date_from_longport(ctx)
             if not latest_date:
-                self.error_occurred.emit("无法从 Longport 获取最新数据日期")
+                error_msg = "无法从 Longport 获取最新数据日期"
+                logger.error(error_msg)
+                self.error_occurred.emit(error_msg)
                 return
 
             # 获取数据库中第一个表的最新日期
@@ -93,11 +96,18 @@ class BatchDataFetcher(QThread):
                         continue
 
                     table_name = symbol
-                    save_to_table(resp, table_name, DB_CONFIG)
+                    engine = get_engine()
+                    save_to_table(resp, table_name, engine)
 
                 except Exception as e:
-                    error_message = str(e)
-                    self.error_occurred.emit(f"更新 {symbol} 数据失败: {error_message}")
+                    self.error_count += 1
+                    error_message = f"更新 {symbol} 数据失败: {str(e)}"
+                    logger.error(error_message)
+                    
+                    # 每10个错误弹窗一次
+                    if self.error_count % 10 == 0:
+                        self.error_occurred.emit(f"已遇到 {self.error_count} 个错误，最新错误：{error_message}")
+                    
                     with open(self.error_log_path, mode="a", newline="", encoding="utf-8") as file:
                         writer = csv.writer(file)
                         writer.writerow([symbol, error_message])
@@ -108,7 +118,8 @@ class BatchDataFetcher(QThread):
     def check_new_stocks(self, ctx):
         """检查是否有新股票"""
         try:
-            db_tables = fetch_table_names(DB_CONFIG)
+            engine = get_engine()
+            db_tables = fetch_table_names(engine)
             total = len(self.stock_symbols)
             new_stocks_found = False
 
@@ -130,8 +141,8 @@ class BatchDataFetcher(QThread):
                         resp = ctx.candlesticks(stock_symbol_with_suffix, Period.Day, 1000, AdjustType.ForwardAdjust)
                         if not resp:
                             continue
-
-                        save_to_table(resp, table_name, DB_CONFIG)
+                        engine = get_engine()
+                        save_to_table(resp, table_name, engine)
                         logger.info(f"成功获取新股票 {symbol} 的数据并保存到数据库")
 
                     except Exception as e:
@@ -167,7 +178,8 @@ class BatchDataFetcher(QThread):
     def get_latest_date_from_db(self):
         """从数据库中获取最后一个表的最新日期"""
         try:
-            conn = psycopg2.connect(**DB_CONFIG)
+            engine = get_engine()
+            conn = engine.raw_connection()
             cursor = conn.cursor()
             cursor.execute("SELECT table_name FROM information_schema.tables WHERE table_schema = 'public' ORDER BY table_name DESC LIMIT 1;")
             table_name = cursor.fetchone()[0]
@@ -182,7 +194,8 @@ class BatchDataFetcher(QThread):
     def get_table_count_from_db(self):
         """从数据库中获取表的数量"""
         try:
-            conn = psycopg2.connect(**DB_CONFIG)
+            engine = get_engine()
+            conn = engine.raw_connection()
             cursor = conn.cursor()
             cursor.execute("SELECT COUNT(table_name) FROM information_schema.tables WHERE table_schema = 'public';")
             table_count = cursor.fetchone()[0]

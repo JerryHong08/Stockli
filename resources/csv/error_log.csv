@@ -970,3 +970,1039 @@ LINE 12: ...                CREATE INDEX IF NOT EXISTS idx_ATH-A_timesta...
                 ]
 (Background on this error at: https://sqlalche.me/e/20/f405)"
 nan,"OpenApiException: (code=301600, trace_id=) invalid symbol"
+A,'dict' object has no attribute 'connect'
+AA,'dict' object has no attribute 'connect'
+AACG,'dict' object has no attribute 'connect'
+AACT,'dict' object has no attribute 'connect'
+A,'dict' object has no attribute 'connect'
+AADI,'dict' object has no attribute 'connect'
+AA,'dict' object has no attribute 'connect'
+AAL,'dict' object has no attribute 'connect'
+AACG,'dict' object has no attribute 'connect'
+AAM,'dict' object has no attribute 'connect'
+AACT,'dict' object has no attribute 'connect'
+AADI,'dict' object has no attribute 'connect'
+AAME,'dict' object has no attribute 'connect'
+AAL,'dict' object has no attribute 'connect'
+AAOI,'dict' object has no attribute 'connect'
+AAM,'dict' object has no attribute 'connect'
+AAON,'dict' object has no attribute 'connect'
+AAME,'dict' object has no attribute 'connect'
+AAP,'dict' object has no attribute 'connect'
+AAOI,'dict' object has no attribute 'connect'
+AAPL,'dict' object has no attribute 'connect'
+AAON,'dict' object has no attribute 'connect'
+AAT,'dict' object has no attribute 'connect'
+AB,'dict' object has no attribute 'connect'
+AAP,'dict' object has no attribute 'connect'
+AAPL,'dict' object has no attribute 'connect'
+ABAT,'dict' object has no attribute 'connect'
+AAT,'dict' object has no attribute 'connect'
+ABBV,'dict' object has no attribute 'connect'
+AB,'dict' object has no attribute 'connect'
+ABCB,'dict' object has no attribute 'connect'
+ABAT,'dict' object has no attribute 'connect'
+ABCL,'dict' object has no attribute 'connect'
+ABBV,'dict' object has no attribute 'connect'
+ABEO,'dict' object has no attribute 'connect'
+ABCB,'dict' object has no attribute 'connect'
+ABEV,'dict' object has no attribute 'connect'
+ABCL,'dict' object has no attribute 'connect'
+ABG,'dict' object has no attribute 'connect'
+ABEO,'dict' object has no attribute 'connect'
+ABL,'dict' object has no attribute 'connect'
+ABEV,'dict' object has no attribute 'connect'
+ABLLL,'dict' object has no attribute 'connect'
+ABLLW,'dict' object has no attribute 'connect'
+ABG,'dict' object has no attribute 'connect'
+ABL,'dict' object has no attribute 'connect'
+ABLV,'dict' object has no attribute 'connect'
+ABLLL,'dict' object has no attribute 'connect'
+ABM,'dict' object has no attribute 'connect'
+ABLLW,'dict' object has no attribute 'connect'
+ABNB,'dict' object has no attribute 'connect'
+ABLV,'dict' object has no attribute 'connect'
+ABOS,'dict' object has no attribute 'connect'
+ABM,'dict' object has no attribute 'connect'
+ABP,'dict' object has no attribute 'connect'
+ABNB,'dict' object has no attribute 'connect'
+ABPWW,'dict' object has no attribute 'connect'
+ABR,'dict' object has no attribute 'connect'
+
+ABR^D,'dict' object has no attribute 'connect'
+ABP,'dict' object has no attribute 'connect'
+ABR^E,'dict' object has no attribute 'connect'
+ABPWW,'dict' object has no attribute 'connect'
+ABR^F,'dict' object has no attribute 'connect'
+ABR,'dict' object has no attribute 'connect'
+ABR^D,'dict' object has no attribute 'connect'
+ABSI,'dict' object has no attribute 'connect'
+ABT,'dict' object has no attribute 'connect'
+ABTS,'dict' object has no attribute 'connect'
+ABR^E,'dict' object has no attribute 'connect'
+ABUS,'dict' object has no attribute 'connect'
+ABR^F,'dict' object has no attribute 'connect'
+ABSI,'dict' object has no attribute 'connect'
+ABVC,'dict' object has no attribute 'connect'
+ABVE,'dict' object has no attribute 'connect'
+ABT,'dict' object has no attribute 'connect'
+ABVEW,'dict' object has no attribute 'connect'
+ABTS,'dict' object has no attribute 'connect'
+ABVX,'dict' object has no attribute 'connect'
+ABUS,'dict' object has no attribute 'connect'
+ABVC,'dict' object has no attribute 'connect'
+AC,'dict' object has no attribute 'connect'
+ABVE,'dict' object has no attribute 'connect'
+ABVEW,'dict' object has no attribute 'connect'
+ACAD,'dict' object has no attribute 'connect'
+ABVX,'dict' object has no attribute 'connect'
+ACB,'dict' object has no attribute 'connect'
+ACCD,'dict' object has no attribute 'connect'
+AC,'dict' object has no attribute 'connect'
+ACA,'dict' object has no attribute 'connect'
+ACCO,'dict' object has no attribute 'connect'
+ACAD,'dict' object has no attribute 'connect'
+ACDC,'dict' object has no attribute 'connect'
+ACEL,'dict' object has no attribute 'connect'
+ACB,'dict' object has no attribute 'connect'
+ACCD,'dict' object has no attribute 'connect'
+ACET,'dict' object has no attribute 'connect'
+ACGL,'dict' object has no attribute 'connect'
+ACCO,'dict' object has no attribute 'connect'
+ACGLN,'dict' object has no attribute 'connect'
+ACDC,'dict' object has no attribute 'connect'
+ACGLO,'dict' object has no attribute 'connect'
+ACEL,'dict' object has no attribute 'connect'
+ACET,'dict' object has no attribute 'connect'
+ACHC,'dict' object has no attribute 'connect'
+ACGL,'dict' object has no attribute 'connect'
+ACHL,'dict' object has no attribute 'connect'
+ACGLN,'dict' object has no attribute 'connect'
+ACHR,'dict' object has no attribute 'connect'
+ACGLO,'dict' object has no attribute 'connect'
+ACHV,'dict' object has no attribute 'connect'
+ACI,'dict' object has no attribute 'connect'
+ACHC,'dict' object has no attribute 'connect'
+ACHL,'dict' object has no attribute 'connect'
+ACIC,'dict' object has no attribute 'connect'
+ACHR,'dict' object has no attribute 'connect'
+ACIU,'dict' object has no attribute 'connect'
+ACIW,'dict' object has no attribute 'connect'
+ACHV,'dict' object has no attribute 'connect'
+ACI,'dict' object has no attribute 'connect'
+ACLS,'dict' object has no attribute 'connect'
+ACLX,'dict' object has no attribute 'connect'
+ACIC,'dict' object has no attribute 'connect'
+ACIU,'dict' object has no attribute 'connect'
+ACM,'dict' object has no attribute 'connect'
+ACMR,'dict' object has no attribute 'connect'
+ACIW,'dict' object has no attribute 'connect'
+ACN,'dict' object has no attribute 'connect'
+ACLS,'dict' object has no attribute 'connect'
+ACNB,'dict' object has no attribute 'connect'
+ACLX,'dict' object has no attribute 'connect'
+ACNT,'dict' object has no attribute 'connect'
+ACM,'dict' object has no attribute 'connect'
+ACOG,'dict' object has no attribute 'connect'
+ACMR,'dict' object has no attribute 'connect'
+ACON,'dict' object has no attribute 'connect'
+ACN,'dict' object has no attribute 'connect'
+ACONW,'dict' object has no attribute 'connect'
+ACNB,'dict' object has no attribute 'connect'
+ACP,'dict' object has no attribute 'connect'
+ACNT,'dict' object has no attribute 'connect'
+ACOG,'dict' object has no attribute 'connect'
+ACP^A,'dict' object has no attribute 'connect'
+ACON,'dict' object has no attribute 'connect'
+ACR,'dict' object has no attribute 'connect'
+ACONW,'dict' object has no attribute 'connect'
+ACR^C,'dict' object has no attribute 'connect'
+A,'dict' object has no attribute 'connect'
+AA,'dict' object has no attribute 'connect'
+AACG,'dict' object has no attribute 'connect'
+AACT,'dict' object has no attribute 'connect'
+A,'dict' object has no attribute 'connect'
+AA,'dict' object has no attribute 'connect'
+AADI,'dict' object has no attribute 'connect'
+AACG,'dict' object has no attribute 'connect'
+AAL,'dict' object has no attribute 'connect'
+AAM,'dict' object has no attribute 'connect'
+AACT,'dict' object has no attribute 'connect'
+AAME,'dict' object has no attribute 'connect'
+AADI,'dict' object has no attribute 'connect'
+AAOI,'dict' object has no attribute 'connect'
+AAL,'dict' object has no attribute 'connect'
+AAON,'dict' object has no attribute 'connect'
+AAM,'dict' object has no attribute 'connect'
+AAME,'dict' object has no attribute 'connect'
+AAP,'dict' object has no attribute 'connect'
+AAOI,'dict' object has no attribute 'connect'
+AAPL,'dict' object has no attribute 'connect'
+AAON,'dict' object has no attribute 'connect'
+AAT,'dict' object has no attribute 'connect'
+AAP,'dict' object has no attribute 'connect'
+AB,'dict' object has no attribute 'connect'
+AAPL,'dict' object has no attribute 'connect'
+AAT,'dict' object has no attribute 'connect'
+ABAT,'dict' object has no attribute 'connect'
+ABBV,'dict' object has no attribute 'connect'
+AB,'dict' object has no attribute 'connect'
+ABAT,'dict' object has no attribute 'connect'
+ABBV,'dict' object has no attribute 'connect'
+ABCL,'dict' object has no attribute 'connect'
+ABCB,'dict' object has no attribute 'connect'
+ABEO,'dict' object has no attribute 'connect'
+ABEV,'dict' object has no attribute 'connect'
+ABCL,'dict' object has no attribute 'connect'
+ABEO,'dict' object has no attribute 'connect'
+ABG,'dict' object has no attribute 'connect'
+ABEV,'dict' object has no attribute 'connect'
+ABL,'dict' object has no attribute 'connect'
+ABG,'dict' object has no attribute 'connect'
+ABLLL,'dict' object has no attribute 'connect'
+ABL,'dict' object has no attribute 'connect'
+ABLLW,'dict' object has no attribute 'connect'
+ABLLL,'dict' object has no attribute 'connect'
+ABLV,'dict' object has no attribute 'connect'
+ABLLW,'dict' object has no attribute 'connect'
+ABM,'dict' object has no attribute 'connect'
+ABLV,'dict' object has no attribute 'connect'
+ABNB,'dict' object has no attribute 'connect'
+ABM,'dict' object has no attribute 'connect'
+ABOS,'dict' object has no attribute 'connect'
+ABNB,'dict' object has no attribute 'connect'
+ABP,'dict' object has no attribute 'connect'
+ABOS,'dict' object has no attribute 'connect'
+ABP,'dict' object has no attribute 'connect'
+ABPWW,'dict' object has no attribute 'connect'
+ABPWW,'dict' object has no attribute 'connect'
+ABR,'dict' object has no attribute 'connect'
+ABR,'dict' object has no attribute 'connect'
+ABR^D,'dict' object has no attribute 'connect'
+ABR^D,'dict' object has no attribute 'connect'
+ABR^E,'dict' object has no attribute 'connect'
+ABR^E,'dict' object has no attribute 'connect'
+ABR^F,'dict' object has no attribute 'connect'
+ABR^F,'dict' object has no attribute 'connect'
+ABSI,'dict' object has no attribute 'connect'
+ABSI,'dict' object has no attribute 'connect'
+ABT,'dict' object has no attribute 'connect'
+ABT,'dict' object has no attribute 'connect'
+ABTS,'dict' object has no attribute 'connect'
+ABTS,'dict' object has no attribute 'connect'
+ABUS,'dict' object has no attribute 'connect'
+ABVC,'dict' object has no attribute 'connect'
+ABVC,'dict' object has no attribute 'connect'
+ABVE,'dict' object has no attribute 'connect'
+ABVE,'dict' object has no attribute 'connect'
+ABVEW,'dict' object has no attribute 'connect'
+ABVEW,'dict' object has no attribute 'connect'
+ABVX,'dict' object has no attribute 'connect'
+ABVX,'dict' object has no attribute 'connect'
+AC,'dict' object has no attribute 'connect'
+ACA,'dict' object has no attribute 'connect'
+AC,'dict' object has no attribute 'connect'
+ACA,'dict' object has no attribute 'connect'
+ACAD,'dict' object has no attribute 'connect'
+ACAD,'dict' object has no attribute 'connect'
+ACB,'dict' object has no attribute 'connect'
+ACCD,'dict' object has no attribute 'connect'
+ACB,'dict' object has no attribute 'connect'
+ACCD,'dict' object has no attribute 'connect'
+ACCO,'dict' object has no attribute 'connect'
+ACDC,'dict' object has no attribute 'connect'
+ACDC,'dict' object has no attribute 'connect'
+ACEL,'dict' object has no attribute 'connect'
+ACEL,'dict' object has no attribute 'connect'
+ACET,'dict' object has no attribute 'connect'
+ACET,'dict' object has no attribute 'connect'
+ACGL,'dict' object has no attribute 'connect'
+ACGLN,'dict' object has no attribute 'connect'
+ACGL,'dict' object has no attribute 'connect'
+ACGLO,'dict' object has no attribute 'connect'
+ACGLN,'dict' object has no attribute 'connect'
+ACHC,'dict' object has no attribute 'connect'
+ACGLO,'dict' object has no attribute 'connect'
+ACHC,'dict' object has no attribute 'connect'
+ACHL,'dict' object has no attribute 'connect'
+ACHL,'dict' object has no attribute 'connect'
+ACHR,'dict' object has no attribute 'connect'
+ACHR,'dict' object has no attribute 'connect'
+ACHV,'dict' object has no attribute 'connect'
+ACI,'dict' object has no attribute 'connect'
+ACHV,'dict' object has no attribute 'connect'
+ACIC,'dict' object has no attribute 'connect'
+ACI,'dict' object has no attribute 'connect'
+ACIC,'dict' object has no attribute 'connect'
+ACIU,'dict' object has no attribute 'connect'
+ACIU,'dict' object has no attribute 'connect'
+ACIW,'dict' object has no attribute 'connect'
+ACIW,'dict' object has no attribute 'connect'
+ACLS,'dict' object has no attribute 'connect'
+ACLS,'dict' object has no attribute 'connect'
+ACLX,'dict' object has no attribute 'connect'
+ACM,'dict' object has no attribute 'connect'
+ACLX,'dict' object has no attribute 'connect'
+ACMR,'dict' object has no attribute 'connect'
+ACM,'dict' object has no attribute 'connect'
+ACMR,'dict' object has no attribute 'connect'
+ACN,'dict' object has no attribute 'connect'
+ACNB,'dict' object has no attribute 'connect'
+ACN,'dict' object has no attribute 'connect'
+ACNT,'dict' object has no attribute 'connect'
+ACNB,'dict' object has no attribute 'connect'
+ACOG,'dict' object has no attribute 'connect'
+ACNT,'dict' object has no attribute 'connect'
+ACOG,'dict' object has no attribute 'connect'
+ACONW,'dict' object has no attribute 'connect'
+ACP,'dict' object has no attribute 'connect'
+ACON,'dict' object has no attribute 'connect'
+ACONW,'dict' object has no attribute 'connect'
+ACP^A,'dict' object has no attribute 'connect'
+ACP,'dict' object has no attribute 'connect'
+ACR,'dict' object has no attribute 'connect'
+ACP^A,'dict' object has no attribute 'connect'
+ACR^C,'dict' object has no attribute 'connect'
+ACR,'dict' object has no attribute 'connect'
+ACR^D,'dict' object has no attribute 'connect'
+ACR^C,'dict' object has no attribute 'connect'
+ACRE,'dict' object has no attribute 'connect'
+
+ACRS,'dict' object has no attribute 'connect'
+ACRE,'dict' object has no attribute 'connect'
+ACRS,'dict' object has no attribute 'connect'
+ACRV,'dict' object has no attribute 'connect'
+ACRV,'dict' object has no attribute 'connect'
+ACT,'dict' object has no attribute 'connect'
+ACT,'dict' object has no attribute 'connect'
+ACTG,'dict' object has no attribute 'connect'
+ACTG,'dict' object has no attribute 'connect'
+ACTU,'dict' object has no attribute 'connect'
+A,更新 A 数据失败: 'dict' object has no attribute 'connect'
+AA,更新 AA 数据失败: 'dict' object has no attribute 'connect'
+AACG,更新 AACG 数据失败: 'dict' object has no attribute 'connect'
+AACT,更新 AACT 数据失败: 'dict' object has no attribute 'connect'
+AADI,更新 AADI 数据失败: 'dict' object has no attribute 'connect'
+A,更新 A 数据失败: 'dict' object has no attribute 'connect'
+AAL,更新 AAL 数据失败: 'dict' object has no attribute 'connect'
+AA,更新 AA 数据失败: 'dict' object has no attribute 'connect'
+AAM,更新 AAM 数据失败: 'dict' object has no attribute 'connect'
+AACG,更新 AACG 数据失败: 'dict' object has no attribute 'connect'
+AAME,更新 AAME 数据失败: 'dict' object has no attribute 'connect'
+AACT,更新 AACT 数据失败: 'dict' object has no attribute 'connect'
+AAOI,更新 AAOI 数据失败: 'dict' object has no attribute 'connect'
+AADI,更新 AADI 数据失败: 'dict' object has no attribute 'connect'
+AAON,更新 AAON 数据失败: 'dict' object has no attribute 'connect'
+AAL,更新 AAL 数据失败: 'dict' object has no attribute 'connect'
+AAM,更新 AAM 数据失败: 'dict' object has no attribute 'connect'
+AAP,更新 AAP 数据失败: 'dict' object has no attribute 'connect'
+AAME,更新 AAME 数据失败: 'dict' object has no attribute 'connect'
+AAPL,更新 AAPL 数据失败: 'dict' object has no attribute 'connect'
+AAOI,更新 AAOI 数据失败: 'dict' object has no attribute 'connect'
+AAT,更新 AAT 数据失败: 'dict' object has no attribute 'connect'
+AAON,更新 AAON 数据失败: 'dict' object has no attribute 'connect'
+AB,更新 AB 数据失败: 'dict' object has no attribute 'connect'
+AAP,更新 AAP 数据失败: 'dict' object has no attribute 'connect'
+ABAT,更新 ABAT 数据失败: 'dict' object has no attribute 'connect'
+AAPL,更新 AAPL 数据失败: 'dict' object has no attribute 'connect'
+ABBV,更新 ABBV 数据失败: 'dict' object has no attribute 'connect'
+AAT,更新 AAT 数据失败: 'dict' object has no attribute 'connect'
+ABCB,更新 ABCB 数据失败: 'dict' object has no attribute 'connect'
+AB,更新 AB 数据失败: 'dict' object has no attribute 'connect'
+ABCL,更新 ABCL 数据失败: 'dict' object has no attribute 'connect'
+ABAT,更新 ABAT 数据失败: 'dict' object has no attribute 'connect'
+ABEO,更新 ABEO 数据失败: 'dict' object has no attribute 'connect'
+ABBV,更新 ABBV 数据失败: 'dict' object has no attribute 'connect'
+ABEV,更新 ABEV 数据失败: 'dict' object has no attribute 'connect'
+ABCB,更新 ABCB 数据失败: 'dict' object has no attribute 'connect'
+ABG,更新 ABG 数据失败: 'dict' object has no attribute 'connect'
+ABCL,更新 ABCL 数据失败: 'dict' object has no attribute 'connect'
+ABL,更新 ABL 数据失败: 'dict' object has no attribute 'connect'
+ABEO,更新 ABEO 数据失败: 'dict' object has no attribute 'connect'
+ABLLL,更新 ABLLL 数据失败: 'dict' object has no attribute 'connect'
+ABEV,更新 ABEV 数据失败: 'dict' object has no attribute 'connect'
+ABG,更新 ABG 数据失败: 'dict' object has no attribute 'connect'
+ABLLW,更新 ABLLW 数据失败: 'dict' object has no attribute 'connect'
+ABLV,更新 ABLV 数据失败: 'dict' object has no attribute 'connect'
+ABL,更新 ABL 数据失败: 'dict' object has no attribute 'connect'
+ABLLL,更新 ABLLL 数据失败: 'dict' object has no attribute 'connect'
+ABM,更新 ABM 数据失败: 'dict' object has no attribute 'connect'
+ABLLW,更新 ABLLW 数据失败: 'dict' object has no attribute 'connect'
+ABNB,更新 ABNB 数据失败: 'dict' object has no attribute 'connect'
+ABLV,更新 ABLV 数据失败: 'dict' object has no attribute 'connect'
+ABOS,更新 ABOS 数据失败: 'dict' object has no attribute 'connect'
+ABM,更新 ABM 数据失败: 'dict' object has no attribute 'connect'
+ABP,更新 ABP 数据失败: 'dict' object has no attribute 'connect'
+ABNB,更新 ABNB 数据失败: 'dict' object has no attribute 'connect'
+ABPWW,更新 ABPWW 数据失败: 'dict' object has no attribute 'connect'
+ABOS,更新 ABOS 数据失败: 'dict' object has no attribute 'connect'
+ABR,更新 ABR 数据失败: 'dict' object has no attribute 'connect'
+ABP,更新 ABP 数据失败: 'dict' object has no attribute 'connect'
+ABR^D,更新 ABR^D 数据失败: 'dict' object has no attribute 'connect'
+ABPWW,更新 ABPWW 数据失败: 'dict' object has no attribute 'connect'
+ABR^E,更新 ABR^E 数据失败: 'dict' object has no attribute 'connect'
+ABR,更新 ABR 数据失败: 'dict' object has no attribute 'connect'
+ABR^F,更新 ABR^F 数据失败: 'dict' object has no attribute 'connect'
+ABR^D,更新 ABR^D 数据失败: 'dict' object has no attribute 'connect'
+ABSI,更新 ABSI 数据失败: 'dict' object has no attribute 'connect'
+ABR^E,更新 ABR^E 数据失败: 'dict' object has no attribute 'connect'
+ABT,更新 ABT 数据失败: 'dict' object has no attribute 'connect'
+ABR^F,更新 ABR^F 数据失败: 'dict' object has no attribute 'connect'
+ABTS,更新 ABTS 数据失败: 'dict' object has no attribute 'connect'
+ABSI,更新 ABSI 数据失败: 'dict' object has no attribute 'connect'
+ABUS,更新 ABUS 数据失败: 'dict' object has no attribute 'connect'
+ABT,更新 ABT 数据失败: 'dict' object has no attribute 'connect'
+ABVC,更新 ABVC 数据失败: 'dict' object has no attribute 'connect'
+ABTS,更新 ABTS 数据失败: 'dict' object has no attribute 'connect'
+ABVE,更新 ABVE 数据失败: 'dict' object has no attribute 'connect'
+ABUS,更新 ABUS 数据失败: 'dict' object has no attribute 'connect'
+ABVC,更新 ABVC 数据失败: 'dict' object has no attribute 'connect'
+ABVEW,更新 ABVEW 数据失败: 'dict' object has no attribute 'connect'
+ABVE,更新 ABVE 数据失败: 'dict' object has no attribute 'connect'
+ABVX,更新 ABVX 数据失败: 'dict' object has no attribute 'connect'
+ABVEW,更新 ABVEW 数据失败: 'dict' object has no attribute 'connect'
+AC,更新 AC 数据失败: 'dict' object has no attribute 'connect'
+ABVX,更新 ABVX 数据失败: 'dict' object has no attribute 'connect'
+ACA,更新 ACA 数据失败: 'dict' object has no attribute 'connect'
+AC,更新 AC 数据失败: 'dict' object has no attribute 'connect'
+ACAD,更新 ACAD 数据失败: 'dict' object has no attribute 'connect'
+ACA,更新 ACA 数据失败: 'dict' object has no attribute 'connect'
+ACB,更新 ACB 数据失败: 'dict' object has no attribute 'connect'
+ACCD,更新 ACCD 数据失败: 'dict' object has no attribute 'connect'
+ACAD,更新 ACAD 数据失败: 'dict' object has no attribute 'connect'
+ACCO,更新 ACCO 数据失败: 'dict' object has no attribute 'connect'
+ACB,更新 ACB 数据失败: 'dict' object has no attribute 'connect'
+ACDC,更新 ACDC 数据失败: 'dict' object has no attribute 'connect'
+ACCD,更新 ACCD 数据失败: 'dict' object has no attribute 'connect'
+ACEL,更新 ACEL 数据失败: 'dict' object has no attribute 'connect'
+ACCO,更新 ACCO 数据失败: 'dict' object has no attribute 'connect'
+ACET,更新 ACET 数据失败: 'dict' object has no attribute 'connect'
+ACDC,更新 ACDC 数据失败: 'dict' object has no attribute 'connect'
+ACGL,更新 ACGL 数据失败: 'dict' object has no attribute 'connect'
+ACEL,更新 ACEL 数据失败: 'dict' object has no attribute 'connect'
+ACGLN,更新 ACGLN 数据失败: 'dict' object has no attribute 'connect'
+ACET,更新 ACET 数据失败: 'dict' object has no attribute 'connect'
+ACGLO,更新 ACGLO 数据失败: 'dict' object has no attribute 'connect'
+ACGL,更新 ACGL 数据失败: 'dict' object has no attribute 'connect'
+ACHC,更新 ACHC 数据失败: 'dict' object has no attribute 'connect'
+ACGLN,更新 ACGLN 数据失败: 'dict' object has no attribute 'connect'
+ACHL,更新 ACHL 数据失败: 'dict' object has no attribute 'connect'
+ACGLO,更新 ACGLO 数据失败: 'dict' object has no attribute 'connect'
+ACHR,更新 ACHR 数据失败: 'dict' object has no attribute 'connect'
+ACHC,更新 ACHC 数据失败: 'dict' object has no attribute 'connect'
+ACHV,更新 ACHV 数据失败: 'dict' object has no attribute 'connect'
+ACHL,更新 ACHL 数据失败: 'dict' object has no attribute 'connect'
+ACI,更新 ACI 数据失败: 'dict' object has no attribute 'connect'
+ACHR,更新 ACHR 数据失败: 'dict' object has no attribute 'connect'
+ACIC,更新 ACIC 数据失败: 'dict' object has no attribute 'connect'
+ACHV,更新 ACHV 数据失败: 'dict' object has no attribute 'connect'
+ACIU,更新 ACIU 数据失败: 'dict' object has no attribute 'connect'
+ACI,更新 ACI 数据失败: 'dict' object has no attribute 'connect'
+ACIW,更新 ACIW 数据失败: 'dict' object has no attribute 'connect'
+ACIC,更新 ACIC 数据失败: 'dict' object has no attribute 'connect'
+ACLS,更新 ACLS 数据失败: 'dict' object has no attribute 'connect'
+ACIU,更新 ACIU 数据失败: 'dict' object has no attribute 'connect'
+ACLX,更新 ACLX 数据失败: 'dict' object has no attribute 'connect'
+ACIW,更新 ACIW 数据失败: 'dict' object has no attribute 'connect'
+ACM,更新 ACM 数据失败: 'dict' object has no attribute 'connect'
+ACLS,更新 ACLS 数据失败: 'dict' object has no attribute 'connect'
+ACMR,更新 ACMR 数据失败: 'dict' object has no attribute 'connect'
+ACLX,更新 ACLX 数据失败: 'dict' object has no attribute 'connect'
+ACN,更新 ACN 数据失败: 'dict' object has no attribute 'connect'
+ACM,更新 ACM 数据失败: 'dict' object has no attribute 'connect'
+ACNB,更新 ACNB 数据失败: 'dict' object has no attribute 'connect'
+ACMR,更新 ACMR 数据失败: 'dict' object has no attribute 'connect'
+ACNT,更新 ACNT 数据失败: 'dict' object has no attribute 'connect'
+ACN,更新 ACN 数据失败: 'dict' object has no attribute 'connect'
+ACOG,更新 ACOG 数据失败: 'dict' object has no attribute 'connect'
+ACNB,更新 ACNB 数据失败: 'dict' object has no attribute 'connect'
+ACON,更新 ACON 数据失败: 'dict' object has no attribute 'connect'
+ACNT,更新 ACNT 数据失败: 'dict' object has no attribute 'connect'
+ACONW,更新 ACONW 数据失败: 'dict' object has no attribute 'connect'
+ACOG,更新 ACOG 数据失败: 'dict' object has no attribute 'connect'
+ACP,更新 ACP 数据失败: 'dict' object has no attribute 'connect'
+ACON,更新 ACON 数据失败: 'dict' object has no attribute 'connect'
+ACP^A,更新 ACP^A 数据失败: 'dict' object has no attribute 'connect'
+ACONW,更新 ACONW 数据失败: 'dict' object has no attribute 'connect'
+ACR,更新 ACR 数据失败: 'dict' object has no attribute 'connect'
+ACP,更新 ACP 数据失败: 'dict' object has no attribute 'connect'
+ACP^A,更新 ACP^A 数据失败: 'dict' object has no attribute 'connect'
+ACR^C,更新 ACR^C 数据失败: 'dict' object has no attribute 'connect'
+ACR,更新 ACR 数据失败: 'dict' object has no attribute 'connect'
+ACR^D,更新 ACR^D 数据失败: 'dict' object has no attribute 'connect'
+ACR^C,更新 ACR^C 数据失败: 'dict' object has no attribute 'connect'
+ACRE,更新 ACRE 数据失败: 'dict' object has no attribute 'connect'
+ACR^D,更新 ACR^D 数据失败: 'dict' object has no attribute 'connect'
+ACRS,更新 ACRS 数据失败: 'dict' object has no attribute 'connect'
+ACRE,更新 ACRE 数据失败: 'dict' object has no attribute 'connect'
+ACRV,更新 ACRV 数据失败: 'dict' object has no attribute 'connect'
+ACRS,更新 ACRS 数据失败: 'dict' object has no attribute 'connect'
+ACT,更新 ACT 数据失败: 'dict' object has no attribute 'connect'
+ACRV,更新 ACRV 数据失败: 'dict' object has no attribute 'connect'
+ACTG,更新 ACTG 数据失败: 'dict' object has no attribute 'connect'
+ACT,更新 ACT 数据失败: 'dict' object has no attribute 'connect'
+ACTU,更新 ACTU 数据失败: 'dict' object has no attribute 'connect'
+ACTG,更新 ACTG 数据失败: 'dict' object has no attribute 'connect'
+ACU,更新 ACU 数据失败: 'dict' object has no attribute 'connect'
+ACTU,更新 ACTU 数据失败: 'dict' object has no attribute 'connect'
+ACV,更新 ACV 数据失败: 'dict' object has no attribute 'connect'
+ACU,更新 ACU 数据失败: 'dict' object has no attribute 'connect'
+ACVA,更新 ACVA 数据失败: 'dict' object has no attribute 'connect'
+ACV,更新 ACV 数据失败: 'dict' object has no attribute 'connect'
+ACXP,更新 ACXP 数据失败: 'dict' object has no attribute 'connect'
+ACVA,更新 ACVA 数据失败: 'dict' object has no attribute 'connect'
+ADAG,更新 ADAG 数据失败: 'dict' object has no attribute 'connect'
+ACXP,更新 ACXP 数据失败: 'dict' object has no attribute 'connect'
+ADAP,更新 ADAP 数据失败: 'dict' object has no attribute 'connect'
+ADAG,更新 ADAG 数据失败: 'dict' object has no attribute 'connect'
+ADBE,更新 ADBE 数据失败: 'dict' object has no attribute 'connect'
+ADAP,更新 ADAP 数据失败: 'dict' object has no attribute 'connect'
+ADC,更新 ADC 数据失败: 'dict' object has no attribute 'connect'
+ADBE,更新 ADBE 数据失败: 'dict' object has no attribute 'connect'
+ADC^A,更新 ADC^A 数据失败: 'dict' object has no attribute 'connect'
+ADC,更新 ADC 数据失败: 'dict' object has no attribute 'connect'
+ADCT,更新 ADCT 数据失败: 'dict' object has no attribute 'connect'
+ADC^A,更新 ADC^A 数据失败: 'dict' object has no attribute 'connect'
+ADD,更新 ADD 数据失败: 'dict' object has no attribute 'connect'
+ADCT,更新 ADCT 数据失败: 'dict' object has no attribute 'connect'
+ADEA,更新 ADEA 数据失败: 'dict' object has no attribute 'connect'
+ADD,更新 ADD 数据失败: 'dict' object has no attribute 'connect'
+ADGM,更新 ADGM 数据失败: 'dict' object has no attribute 'connect'
+ADI,更新 ADI 数据失败: 'dict' object has no attribute 'connect'
+ADEA,更新 ADEA 数据失败: 'dict' object has no attribute 'connect'
+ADIL,更新 ADIL 数据失败: 'dict' object has no attribute 'connect'
+ADGM,更新 ADGM 数据失败: 'dict' object has no attribute 'connect'
+ADI,更新 ADI 数据失败: 'dict' object has no attribute 'connect'
+ADM,更新 ADM 数据失败: 'dict' object has no attribute 'connect'
+ADIL,更新 ADIL 数据失败: 'dict' object has no attribute 'connect'
+ADMA,更新 ADMA 数据失败: 'dict' object has no attribute 'connect'
+ADM,更新 ADM 数据失败: 'dict' object has no attribute 'connect'
+ADN,更新 ADN 数据失败: 'dict' object has no attribute 'connect'
+ADNT,更新 ADNT 数据失败: 'dict' object has no attribute 'connect'
+ADMA,更新 ADMA 数据失败: 'dict' object has no attribute 'connect'
+ADNWW,更新 ADNWW 数据失败: 'dict' object has no attribute 'connect'
+ADN,更新 ADN 数据失败: 'dict' object has no attribute 'connect'
+ADP,更新 ADP 数据失败: 'dict' object has no attribute 'connect'
+ADNT,更新 ADNT 数据失败: 'dict' object has no attribute 'connect'
+ADNWW,更新 ADNWW 数据失败: 'dict' object has no attribute 'connect'
+ADPT,更新 ADPT 数据失败: 'dict' object has no attribute 'connect'
+ADP,更新 ADP 数据失败: 'dict' object has no attribute 'connect'
+ADSE,更新 ADSE 数据失败: 'dict' object has no attribute 'connect'
+ADPT,更新 ADPT 数据失败: 'dict' object has no attribute 'connect'
+ADSEW,更新 ADSEW 数据失败: 'dict' object has no attribute 'connect'
+ADSE,更新 ADSE 数据失败: 'dict' object has no attribute 'connect'
+ADSK,更新 ADSK 数据失败: 'dict' object has no attribute 'connect'
+ADSEW,更新 ADSEW 数据失败: 'dict' object has no attribute 'connect'
+ADT,更新 ADT 数据失败: 'dict' object has no attribute 'connect'
+ADSK,更新 ADSK 数据失败: 'dict' object has no attribute 'connect'
+ADTN,更新 ADTN 数据失败: 'dict' object has no attribute 'connect'
+ADT,更新 ADT 数据失败: 'dict' object has no attribute 'connect'
+ADTX,更新 ADTX 数据失败: 'dict' object has no attribute 'connect'
+ADTN,更新 ADTN 数据失败: 'dict' object has no attribute 'connect'
+ADUR,更新 ADUR 数据失败: 'dict' object has no attribute 'connect'
+ADTX,更新 ADTX 数据失败: 'dict' object has no attribute 'connect'
+ADUS,更新 ADUS 数据失败: 'dict' object has no attribute 'connect'
+ADUR,更新 ADUR 数据失败: 'dict' object has no attribute 'connect'
+ADV,更新 ADV 数据失败: 'dict' object has no attribute 'connect'
+ADUS,更新 ADUS 数据失败: 'dict' object has no attribute 'connect'
+ADVM,更新 ADVM 数据失败: 'dict' object has no attribute 'connect'
+ADV,更新 ADV 数据失败: 'dict' object has no attribute 'connect'
+ADVWW,更新 ADVWW 数据失败: 'dict' object has no attribute 'connect'
+ADVM,更新 ADVM 数据失败: 'dict' object has no attribute 'connect'
+ADVWW,更新 ADVWW 数据失败: 'dict' object has no attribute 'connect'
+ADX,更新 ADX 数据失败: 'dict' object has no attribute 'connect'
+ADX,更新 ADX 数据失败: 'dict' object has no attribute 'connect'
+ADXN,更新 ADXN 数据失败: 'dict' object has no attribute 'connect'
+ADXN,更新 ADXN 数据失败: 'dict' object has no attribute 'connect'
+AE,更新 AE 数据失败: 'dict' object has no attribute 'connect'
+AEE,更新 AEE 数据失败: 'dict' object has no attribute 'connect'
+AE,更新 AE 数据失败: 'dict' object has no attribute 'connect'
+AEF,更新 AEF 数据失败: 'dict' object has no attribute 'connect'
+AEE,更新 AEE 数据失败: 'dict' object has no attribute 'connect'
+AEFC,更新 AEFC 数据失败: 'dict' object has no attribute 'connect'
+AEF,更新 AEF 数据失败: 'dict' object has no attribute 'connect'
+AEG,更新 AEG 数据失败: 'dict' object has no attribute 'connect'
+AEFC,更新 AEFC 数据失败: 'dict' object has no attribute 'connect'
+AEHL,更新 AEHL 数据失败: 'dict' object has no attribute 'connect'
+AEG,更新 AEG 数据失败: 'dict' object has no attribute 'connect'
+AEHL,更新 AEHL 数据失败: 'dict' object has no attribute 'connect'
+AEHR,更新 AEHR 数据失败: 'dict' object has no attribute 'connect'
+AEHR,更新 AEHR 数据失败: 'dict' object has no attribute 'connect'
+AEI,更新 AEI 数据失败: 'dict' object has no attribute 'connect'
+AEI,更新 AEI 数据失败: 'dict' object has no attribute 'connect'
+AEIS,更新 AEIS 数据失败: 'dict' object has no attribute 'connect'
+AEIS,更新 AEIS 数据失败: 'dict' object has no attribute 'connect'
+AEM,更新 AEM 数据失败: 'dict' object has no attribute 'connect'
+AEM,更新 AEM 数据失败: 'dict' object has no attribute 'connect'
+AEMD,更新 AEMD 数据失败: 'dict' object has no attribute 'connect'
+AEMD,更新 AEMD 数据失败: 'dict' object has no attribute 'connect'
+AENT,更新 AENT 数据失败: 'dict' object has no attribute 'connect'
+AENTW,更新 AENTW 数据失败: 'dict' object has no attribute 'connect'
+AENT,更新 AENT 数据失败: 'dict' object has no attribute 'connect'
+AEO,更新 AEO 数据失败: 'dict' object has no attribute 'connect'
+AENTW,更新 AENTW 数据失败: 'dict' object has no attribute 'connect'
+AEON,更新 AEON 数据失败: 'dict' object has no attribute 'connect'
+AEO,更新 AEO 数据失败: 'dict' object has no attribute 'connect'
+AEP,更新 AEP 数据失败: 'dict' object has no attribute 'connect'
+AEON,更新 AEON 数据失败: 'dict' object has no attribute 'connect'
+AER,更新 AER 数据失败: 'dict' object has no attribute 'connect'
+AEP,更新 AEP 数据失败: 'dict' object has no attribute 'connect'
+AERT,更新 AERT 数据失败: 'dict' object has no attribute 'connect'
+AER,更新 AER 数据失败: 'dict' object has no attribute 'connect'
+AERTW,更新 AERTW 数据失败: 'dict' object has no attribute 'connect'
+AERT,更新 AERT 数据失败: 'dict' object has no attribute 'connect'
+AES,更新 AES 数据失败: 'dict' object has no attribute 'connect'
+AERTW,更新 AERTW 数据失败: 'dict' object has no attribute 'connect'
+AES,更新 AES 数据失败: 'dict' object has no attribute 'connect'
+AESI,更新 AESI 数据失败: 'dict' object has no attribute 'connect'
+AESI,更新 AESI 数据失败: 'dict' object has no attribute 'connect'
+AEVA,更新 AEVA 数据失败: 'dict' object has no attribute 'connect'
+AEVA,更新 AEVA 数据失败: 'dict' object has no attribute 'connect'
+AEYE,更新 AEYE 数据失败: 'dict' object has no attribute 'connect'
+AEYE,更新 AEYE 数据失败: 'dict' object has no attribute 'connect'
+AFB,更新 AFB 数据失败: 'dict' object has no attribute 'connect'
+AFBI,更新 AFBI 数据失败: 'dict' object has no attribute 'connect'
+AFB,更新 AFB 数据失败: 'dict' object has no attribute 'connect'
+AFCG,更新 AFCG 数据失败: 'dict' object has no attribute 'connect'
+AFBI,更新 AFBI 数据失败: 'dict' object has no attribute 'connect'
+AFG,更新 AFG 数据失败: 'dict' object has no attribute 'connect'
+AFCG,更新 AFCG 数据失败: 'dict' object has no attribute 'connect'
+AFGB,更新 AFGB 数据失败: 'dict' object has no attribute 'connect'
+AFG,更新 AFG 数据失败: 'dict' object has no attribute 'connect'
+AFGC,更新 AFGC 数据失败: 'dict' object has no attribute 'connect'
+ABR^D,"更新 ABR^D 数据失败: 创建表失败: (psycopg2.errors.SyntaxError) 错误:  语法错误 在 ""-"" 或附近的
+LINE 12:             CREATE INDEX IF NOT EXISTS idx_ABR-D_timestamp O...
+                                                       ^
+
+[SQL: 
+            CREATE TABLE IF NOT EXISTS ""ABR-D"" (
+                id SERIAL PRIMARY KEY,
+                timestamp TIMESTAMP NOT NULL UNIQUE,
+                open_price DECIMAL(18, 6),
+                high_price DECIMAL(18, 6),
+                low_price DECIMAL(18, 6),
+                close_price DECIMAL(18, 6),
+                volume BIGINT,
+                turnover DECIMAL(18, 6)
+            );
+            CREATE INDEX IF NOT EXISTS idx_ABR-D_timestamp ON ""ABR-D""(timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)"
+ABR^D,"更新 ABR^D 数据失败: 创建表失败: (psycopg2.errors.SyntaxError) 错误:  语法错误 在 ""-"" 或附近的
+LINE 12:             CREATE INDEX IF NOT EXISTS idx_ABR-D_timestamp O...
+                                                       ^
+
+[SQL: 
+            CREATE TABLE IF NOT EXISTS ""ABR-D"" (
+                id SERIAL PRIMARY KEY,
+                timestamp TIMESTAMP NOT NULL UNIQUE,
+                open_price DECIMAL(18, 6),
+                high_price DECIMAL(18, 6),
+                low_price DECIMAL(18, 6),
+                close_price DECIMAL(18, 6),
+                volume BIGINT,
+                turnover DECIMAL(18, 6)
+            );
+            CREATE INDEX IF NOT EXISTS idx_ABR-D_timestamp ON ""ABR-D""(timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)"
+ABR^E,"更新 ABR^E 数据失败: 创建表失败: (psycopg2.errors.SyntaxError) 错误:  语法错误 在 ""-"" 或附近的
+LINE 12:             CREATE INDEX IF NOT EXISTS idx_ABR-E_timestamp O...
+                                                       ^
+
+[SQL: 
+            CREATE TABLE IF NOT EXISTS ""ABR-E"" (
+                id SERIAL PRIMARY KEY,
+                timestamp TIMESTAMP NOT NULL UNIQUE,
+                open_price DECIMAL(18, 6),
+                high_price DECIMAL(18, 6),
+                low_price DECIMAL(18, 6),
+                close_price DECIMAL(18, 6),
+                volume BIGINT,
+                turnover DECIMAL(18, 6)
+            );
+            CREATE INDEX IF NOT EXISTS idx_ABR-E_timestamp ON ""ABR-E""(timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)"
+ABR^E,"更新 ABR^E 数据失败: 创建表失败: (psycopg2.errors.SyntaxError) 错误:  语法错误 在 ""-"" 或附近的
+LINE 12:             CREATE INDEX IF NOT EXISTS idx_ABR-E_timestamp O...
+                                                       ^
+
+[SQL: 
+            CREATE TABLE IF NOT EXISTS ""ABR-E"" (
+                id SERIAL PRIMARY KEY,
+                timestamp TIMESTAMP NOT NULL UNIQUE,
+                open_price DECIMAL(18, 6),
+                high_price DECIMAL(18, 6),
+                low_price DECIMAL(18, 6),
+                close_price DECIMAL(18, 6),
+                volume BIGINT,
+                turnover DECIMAL(18, 6)
+            );
+            CREATE INDEX IF NOT EXISTS idx_ABR-E_timestamp ON ""ABR-E""(timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)"
+ABR^F,"更新 ABR^F 数据失败: 创建表失败: (psycopg2.errors.SyntaxError) 错误:  语法错误 在 ""-"" 或附近的
+LINE 12:             CREATE INDEX IF NOT EXISTS idx_ABR-F_timestamp O...
+                                                       ^
+
+[SQL: 
+            CREATE TABLE IF NOT EXISTS ""ABR-F"" (
+                id SERIAL PRIMARY KEY,
+                timestamp TIMESTAMP NOT NULL UNIQUE,
+                open_price DECIMAL(18, 6),
+                high_price DECIMAL(18, 6),
+                low_price DECIMAL(18, 6),
+                close_price DECIMAL(18, 6),
+                volume BIGINT,
+                turnover DECIMAL(18, 6)
+            );
+            CREATE INDEX IF NOT EXISTS idx_ABR-F_timestamp ON ""ABR-F""(timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)"
+ABR^F,"更新 ABR^F 数据失败: 创建表失败: (psycopg2.errors.SyntaxError) 错误:  语法错误 在 ""-"" 或附近的
+LINE 12:             CREATE INDEX IF NOT EXISTS idx_ABR-F_timestamp O...
+                                                       ^
+
+[SQL: 
+            CREATE TABLE IF NOT EXISTS ""ABR-F"" (
+                id SERIAL PRIMARY KEY,
+                timestamp TIMESTAMP NOT NULL UNIQUE,
+                open_price DECIMAL(18, 6),
+                high_price DECIMAL(18, 6),
+                low_price DECIMAL(18, 6),
+                close_price DECIMAL(18, 6),
+                volume BIGINT,
+                turnover DECIMAL(18, 6)
+            );
+            CREATE INDEX IF NOT EXISTS idx_ABR-F_timestamp ON ""ABR-F""(timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)"
+ACP^A,"更新 ACP^A 数据失败: 创建表失败: (psycopg2.errors.SyntaxError) 错误:  语法错误 在 ""-"" 或附近的
+LINE 12:             CREATE INDEX IF NOT EXISTS idx_ACP-A_timestamp O...
+                                                       ^
+
+[SQL: 
+            CREATE TABLE IF NOT EXISTS ""ACP-A"" (
+                id SERIAL PRIMARY KEY,
+                timestamp TIMESTAMP NOT NULL UNIQUE,
+                open_price DECIMAL(18, 6),
+                high_price DECIMAL(18, 6),
+                low_price DECIMAL(18, 6),
+                close_price DECIMAL(18, 6),
+                volume BIGINT,
+                turnover DECIMAL(18, 6)
+            );
+            CREATE INDEX IF NOT EXISTS idx_ACP-A_timestamp ON ""ACP-A""(timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)"
+ACP^A,"更新 ACP^A 数据失败: 创建表失败: (psycopg2.errors.SyntaxError) 错误:  语法错误 在 ""-"" 或附近的
+LINE 12:             CREATE INDEX IF NOT EXISTS idx_ACP-A_timestamp O...
+                                                       ^
+
+[SQL: 
+            CREATE TABLE IF NOT EXISTS ""ACP-A"" (
+                id SERIAL PRIMARY KEY,
+                timestamp TIMESTAMP NOT NULL UNIQUE,
+                open_price DECIMAL(18, 6),
+                high_price DECIMAL(18, 6),
+                low_price DECIMAL(18, 6),
+                close_price DECIMAL(18, 6),
+                volume BIGINT,
+                turnover DECIMAL(18, 6)
+            );
+            CREATE INDEX IF NOT EXISTS idx_ACP-A_timestamp ON ""ACP-A""(timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)"
+ACR^C,"更新 ACR^C 数据失败: 创建表失败: (psycopg2.errors.SyntaxError) 错误:  语法错误 在 ""-"" 或附近的
+LINE 12:             CREATE INDEX IF NOT EXISTS idx_ACR-C_timestamp O...
+                                                       ^
+
+[SQL: 
+            CREATE TABLE IF NOT EXISTS ""ACR-C"" (
+                id SERIAL PRIMARY KEY,
+                timestamp TIMESTAMP NOT NULL UNIQUE,
+                open_price DECIMAL(18, 6),
+                high_price DECIMAL(18, 6),
+                low_price DECIMAL(18, 6),
+                close_price DECIMAL(18, 6),
+                volume BIGINT,
+                turnover DECIMAL(18, 6)
+            );
+            CREATE INDEX IF NOT EXISTS idx_ACR-C_timestamp ON ""ACR-C""(timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)"
+ACR^C,"更新 ACR^C 数据失败: 创建表失败: (psycopg2.errors.SyntaxError) 错误:  语法错误 在 ""-"" 或附近的
+LINE 12:             CREATE INDEX IF NOT EXISTS idx_ACR-C_timestamp O...
+                                                       ^
+
+[SQL: 
+            CREATE TABLE IF NOT EXISTS ""ACR-C"" (
+                id SERIAL PRIMARY KEY,
+                timestamp TIMESTAMP NOT NULL UNIQUE,
+                open_price DECIMAL(18, 6),
+                high_price DECIMAL(18, 6),
+                low_price DECIMAL(18, 6),
+                close_price DECIMAL(18, 6),
+                volume BIGINT,
+                turnover DECIMAL(18, 6)
+            );
+            CREATE INDEX IF NOT EXISTS idx_ACR-C_timestamp ON ""ACR-C""(timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)"
+ACR^D,"更新 ACR^D 数据失败: 创建表失败: (psycopg2.errors.SyntaxError) 错误:  语法错误 在 ""-"" 或附近的
+LINE 12:             CREATE INDEX IF NOT EXISTS idx_ACR-D_timestamp O...
+                                                       ^
+
+[SQL: 
+            CREATE TABLE IF NOT EXISTS ""ACR-D"" (
+                id SERIAL PRIMARY KEY,
+                timestamp TIMESTAMP NOT NULL UNIQUE,
+                open_price DECIMAL(18, 6),
+                high_price DECIMAL(18, 6),
+                low_price DECIMAL(18, 6),
+                close_price DECIMAL(18, 6),
+                volume BIGINT,
+                turnover DECIMAL(18, 6)
+            );
+            CREATE INDEX IF NOT EXISTS idx_ACR-D_timestamp ON ""ACR-D""(timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)"
+ACR^D,"更新 ACR^D 数据失败: 创建表失败: (psycopg2.errors.SyntaxError) 错误:  语法错误 在 ""-"" 或附近的
+LINE 12:             CREATE INDEX IF NOT EXISTS idx_ACR-D_timestamp O...
+                                                       ^
+
+[SQL: 
+            CREATE TABLE IF NOT EXISTS ""ACR-D"" (
+                id SERIAL PRIMARY KEY,
+                timestamp TIMESTAMP NOT NULL UNIQUE,
+                open_price DECIMAL(18, 6),
+                high_price DECIMAL(18, 6),
+                low_price DECIMAL(18, 6),
+                close_price DECIMAL(18, 6),
+                volume BIGINT,
+                turnover DECIMAL(18, 6)
+            );
+            CREATE INDEX IF NOT EXISTS idx_ACR-D_timestamp ON ""ACR-D""(timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)"
+ADC^A,"更新 ADC^A 数据失败: 创建表失败: (psycopg2.errors.SyntaxError) 错误:  语法错误 在 ""-"" 或附近的
+LINE 12:             CREATE INDEX IF NOT EXISTS idx_ADC-A_timestamp O...
+                                                       ^
+
+[SQL: 
+            CREATE TABLE IF NOT EXISTS ""ADC-A"" (
+                id SERIAL PRIMARY KEY,
+                timestamp TIMESTAMP NOT NULL UNIQUE,
+                open_price DECIMAL(18, 6),
+                high_price DECIMAL(18, 6),
+                low_price DECIMAL(18, 6),
+                close_price DECIMAL(18, 6),
+                volume BIGINT,
+                turnover DECIMAL(18, 6)
+            );
+            CREATE INDEX IF NOT EXISTS idx_ADC-A_timestamp ON ""ADC-A""(timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/f405)"
+AAON,"更新 AAON 数据失败: 创建表失败: (psycopg2.errors.UniqueViolation) 错误:  重复键违反唯一约束""pg_class_relname_nsp_index""
+DETAIL:  键值""(relname, relnamespace)=(idx_AAON_timestamp, 2200)"" 已经存在
+
+[SQL: 
+            CREATE TABLE IF NOT EXISTS ""AAON"" (
+                id SERIAL PRIMARY KEY,
+                timestamp TIMESTAMP NOT NULL UNIQUE,
+                open_price DECIMAL(18, 6),
+                high_price DECIMAL(18, 6),
+                low_price DECIMAL(18, 6),
+                close_price DECIMAL(18, 6),
+                volume BIGINT,
+                turnover DECIMAL(18, 6)
+            );
+            CREATE INDEX IF NOT EXISTS ""idx_AAON_timestamp"" ON ""AAON""(timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)"
+AB,"更新 AB 数据失败: 创建表失败: (psycopg2.errors.UniqueViolation) 错误:  重复键违反唯一约束""pg_class_relname_nsp_index""
+DETAIL:  键值""(relname, relnamespace)=(idx_AB_timestamp, 2200)"" 已经存在
+
+[SQL: 
+            CREATE TABLE IF NOT EXISTS ""AB"" (
+                id SERIAL PRIMARY KEY,
+                timestamp TIMESTAMP NOT NULL UNIQUE,
+                open_price DECIMAL(18, 6),
+                high_price DECIMAL(18, 6),
+                low_price DECIMAL(18, 6),
+                close_price DECIMAL(18, 6),
+                volume BIGINT,
+                turnover DECIMAL(18, 6)
+            );
+            CREATE INDEX IF NOT EXISTS ""idx_AB_timestamp"" ON ""AB""(timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)"
+ABL,"更新 ABL 数据失败: 创建表失败: (psycopg2.errors.UniqueViolation) 错误:  重复键违反唯一约束""pg_class_relname_nsp_index""
+DETAIL:  键值""(relname, relnamespace)=(idx_ABL_timestamp, 2200)"" 已经存在
+
+[SQL: 
+            CREATE TABLE IF NOT EXISTS ""ABL"" (
+                id SERIAL PRIMARY KEY,
+                timestamp TIMESTAMP NOT NULL UNIQUE,
+                open_price DECIMAL(18, 6),
+                high_price DECIMAL(18, 6),
+                low_price DECIMAL(18, 6),
+                close_price DECIMAL(18, 6),
+                volume BIGINT,
+                turnover DECIMAL(18, 6)
+            );
+            CREATE INDEX IF NOT EXISTS ""idx_ABL_timestamp"" ON ""ABL""(timestamp);
+        ]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)"
+ABM,"更新 ABM 数据失败: 创建表失败: (psycopg2.errors.UniqueViolation) 错误:  重复键违反唯一约束""pg_class_relname_nsp_index""
+DETAIL:  键值""(relname, relnamespace)=(idx_ABM_timestamp, 2200)"" 已经存在
+
+[SQL: 
+                    CREATE INDEX ""idx_ABM_timestamp"" ON ""ABM""(timestamp);
+                ]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)"
+ADIL,"更新 ADIL 数据失败: 创建表失败: (psycopg2.errors.UniqueViolation) 错误:  重复键违反唯一约束""pg_class_relname_nsp_index""
+DETAIL:  键值""(relname, relnamespace)=(idx_ADIL_timestamp, 2200)"" 已经存在
+
+[SQL: 
+                CREATE INDEX IF NOT EXISTS ""idx_ADIL_timestamp"" ON ""ADIL""(timestamp);
+            ]
+(Background on this error at: https://sqlalche.me/e/20/gkpj)"
+A,更新 A 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+A,更新 A 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+AA,更新 AA 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+AA,更新 AA 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+AACG,更新 AACG 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+AACT,更新 AACT 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+AACG,更新 AACG 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+AADI,更新 AADI 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+AACT,更新 AACT 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+AAL,更新 AAL 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+AADI,更新 AADI 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+AAM,更新 AAM 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+AAME,更新 AAME 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+AAL,更新 AAL 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+AAM,更新 AAM 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+AAOI,更新 AAOI 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+AAME,更新 AAME 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+AAON,更新 AAON 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+AAOI,更新 AAOI 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+AAP,更新 AAP 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+AAON,更新 AAON 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+AAPL,更新 AAPL 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+AAP,更新 AAP 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+AAPL,更新 AAPL 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+AAT,更新 AAT 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+AAT,更新 AAT 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+AB,更新 AB 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+ABAT,更新 ABAT 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+AB,更新 AB 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+ABBV,更新 ABBV 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+ABAT,更新 ABAT 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+ABCB,更新 ABCB 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+ABBV,更新 ABBV 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+ABCL,更新 ABCL 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+ABCB,更新 ABCB 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+ABEO,更新 ABEO 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+ABCL,更新 ABCL 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+ABEV,更新 ABEV 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+ABEO,更新 ABEO 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+ABG,更新 ABG 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+ABL,更新 ABL 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+ABEV,更新 ABEV 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+ABLLL,更新 ABLLL 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+ABG,更新 ABG 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+ABLLW,更新 ABLLW 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+ABL,更新 ABL 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+ABLV,更新 ABLV 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+ABLLL,更新 ABLLL 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+ABM,更新 ABM 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+ABLLW,更新 ABLLW 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+ABNB,更新 ABNB 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+ABLV,更新 ABLV 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+ABOS,更新 ABOS 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+ABM,更新 ABM 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+ABP,更新 ABP 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+ABNB,更新 ABNB 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+ABPWW,更新 ABPWW 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+ABOS,更新 ABOS 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+ABR,更新 ABR 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+ABP,更新 ABP 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+ABR^D,更新 ABR^D 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+ABPWW,更新 ABPWW 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+ABR^E,更新 ABR^E 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+ABR^F,更新 ABR^F 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+ABR,更新 ABR 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+ABSI,更新 ABSI 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+ABR^D,更新 ABR^D 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+ABT,更新 ABT 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+ABR^E,更新 ABR^E 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+ABTS,更新 ABTS 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+ABR^F,更新 ABR^F 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+ABUS,更新 ABUS 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+ABSI,更新 ABSI 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+ABVC,更新 ABVC 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+ABT,更新 ABT 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+ABVE,更新 ABVE 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+ABTS,更新 ABTS 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+ABVEW,更新 ABVEW 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+ABUS,更新 ABUS 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+ABVX,更新 ABVX 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+ABVC,更新 ABVC 数据失败: 创建表失败: This connection has already initialized a SQLAlchemy Transaction() object via begin() or autobegin; can't call begin() here unless rollback() or commit() is called first.
+APH,"更新 APH 数据失败: 数据库连接失败，重试3次后仍然无法连接。最后错误信息: (psycopg2.OperationalError) 
+(Background on this error at: https://sqlalche.me/e/20/e3q8)"
+APEI,"更新 APEI 数据失败: 数据库连接失败，重试3次后仍然无法连接。最后错误信息: (psycopg2.OperationalError) 
+(Background on this error at: https://sqlalche.me/e/20/e3q8)"
+API,"更新 API 数据失败: 数据库连接失败，重试3次后仍然无法连接。最后错误信息: (psycopg2.OperationalError) 
+(Background on this error at: https://sqlalche.me/e/20/e3q8)"
+APG,"更新 APG 数据失败: 数据库连接失败，重试3次后仍然无法连接。最后错误信息: (psycopg2.OperationalError) 
+(Background on this error at: https://sqlalche.me/e/20/e3q8)"
+APO^A,"更新 APO^A 数据失败: 数据库连接失败，重试3次后仍然无法连接。最后错误信息: (psycopg2.OperationalError) 
+(Background on this error at: https://sqlalche.me/e/20/e3q8)"
+APP,"更新 APP 数据失败: 数据库连接失败，重试3次后仍然无法连接。最后错误信息: (psycopg2.OperationalError) 
+(Background on this error at: https://sqlalche.me/e/20/e3q8)"
+APOG,"更新 APOG 数据失败: 数据库连接失败，重试3次后仍然无法连接。最后错误信息: (psycopg2.OperationalError) 
+(Background on this error at: https://sqlalche.me/e/20/e3q8)"
+APPF,"更新 APPF 数据失败: 数据库连接失败，重试3次后仍然无法连接。最后错误信息: (psycopg2.OperationalError) 
+(Background on this error at: https://sqlalche.me/e/20/e3q8)"
+APOS,"更新 APOS 数据失败: 数据库连接失败，重试3次后仍然无法连接。最后错误信息: (psycopg2.OperationalError) 
+(Background on this error at: https://sqlalche.me/e/20/e3q8)"
+APPN,"更新 APPN 数据失败: 数据库连接失败，重试3次后仍然无法连接。最后错误信息: (psycopg2.OperationalError) 
+(Background on this error at: https://sqlalche.me/e/20/e3q8)"
+APP,"更新 APP 数据失败: 数据库连接失败，重试3次后仍然无法连接。最后错误信息: (psycopg2.OperationalError) 
+(Background on this error at: https://sqlalche.me/e/20/e3q8)"
+APPS,"更新 APPS 数据失败: 数据库连接失败，重试3次后仍然无法连接。最后错误信息: (psycopg2.OperationalError) 
+(Background on this error at: https://sqlalche.me/e/20/e3q8)"
+AQMS,"更新 AQMS 数据失败: 数据库连接失败，重试3次后仍然无法连接。最后错误信息: (psycopg2.OperationalError) 
+(Background on this error at: https://sqlalche.me/e/20/e3q8)"
+AQMS,"更新 AQMS 数据失败: 数据库连接失败，重试3次后仍然无法连接。最后错误信息: (psycopg2.OperationalError) 
+(Background on this error at: https://sqlalche.me/e/20/e3q8)"
+AQN,"更新 AQN 数据失败: 数据库连接失败，重试3次后仍然无法连接。最后错误信息: (psycopg2.OperationalError) 
+(Background on this error at: https://sqlalche.me/e/20/e3q8)"
+AQN,"更新 AQN 数据失败: 数据库连接失败，重试3次后仍然无法连接。最后错误信息: (psycopg2.OperationalError) 
+(Background on this error at: https://sqlalche.me/e/20/e3q8)"
+AQNB,"更新 AQNB 数据失败: 数据库连接失败，重试3次后仍然无法连接。最后错误信息: (psycopg2.OperationalError) 
+(Background on this error at: https://sqlalche.me/e/20/e3q8)"
+AQNB,"更新 AQNB 数据失败: 数据库连接失败，重试3次后仍然无法连接。最后错误信息: (psycopg2.OperationalError) 
+(Background on this error at: https://sqlalche.me/e/20/e3q8)"
+AQST,"更新 AQST 数据失败: 数据库连接失败，重试3次后仍然无法连接。最后错误信息: (psycopg2.OperationalError) 
+(Background on this error at: https://sqlalche.me/e/20/e3q8)"
+AQST,"更新 AQST 数据失败: 数据库连接失败，重试3次后仍然无法连接。最后错误信息: (psycopg2.OperationalError) 
+(Background on this error at: https://sqlalche.me/e/20/e3q8)"
+AQU,"更新 AQU 数据失败: 数据库连接失败，重试3次后仍然无法连接。最后错误信息: (psycopg2.OperationalError) 
+(Background on this error at: https://sqlalche.me/e/20/e3q8)"
+AQU,"更新 AQU 数据失败: 数据库连接失败，重试3次后仍然无法连接。最后错误信息: (psycopg2.OperationalError) 
+(Background on this error at: https://sqlalche.me/e/20/e3q8)"
+ARBK,"更新 ARBK 数据失败: 数据库连接失败，重试3次后仍然无法连接。最后错误信息: (psycopg2.OperationalError) 
+(Background on this error at: https://sqlalche.me/e/20/e3q8)"
+ARCH,"更新 ARCH 数据失败: 数据库连接失败，重试3次后仍然无法连接。最后错误信息: (psycopg2.OperationalError) 
+(Background on this error at: https://sqlalche.me/e/20/e3q8)"
+ARBKL,"更新 ARBKL 数据失败: 数据库连接失败，重试3次后仍然无法连接。最后错误信息: (psycopg2.OperationalError) 
+(Background on this error at: https://sqlalche.me/e/20/e3q8)"
+ARCO,"更新 ARCO 数据失败: 数据库连接失败，重试3次后仍然无法连接。最后错误信息: (psycopg2.OperationalError) 
+(Background on this error at: https://sqlalche.me/e/20/e3q8)"
+nan,更新 nan 数据失败: 'float' object has no attribute 'replace'
+nan,更新 nan 数据失败: 'float' object has no attribute 'replace'
+nan,"OpenApiException: (code=301600, trace_id=) invalid symbol"
+nan,"OpenApiException: (code=301600, trace_id=) invalid symbol"
