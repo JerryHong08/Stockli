@@ -8,13 +8,8 @@ import logging
 from sqlalchemy.exc import SQLAlchemyError
 from database.db_connection import DatabaseConnectionError
 
-# At the top of the file, modify the logger initialization
-try:
-    logger = setup_logger("db_operations")
-except Exception as e:
-    print(f"Warning: Could not set up logger: {e}")
-    logger = logging.getLogger("db_operations")
-    logger.addHandler(logging.StreamHandler())
+# Initialize logger
+logger = setup_logger("db_operations")
 
 def fetch_data_from_db(table_name, engine, limit=None):
     """
@@ -110,10 +105,10 @@ def create_table_if_not_exists(engine, table_name):
                         conn.execute(text(f"""
                             CREATE INDEX "{index_name}" ON "{table_name}"(timestamp);
                         """))
+                        logger.debug(f"新创建表： '{table_name}' ")
                     
                     # 提交事务
                     conn.commit()
-                    logger.debug(f"表 '{table_name}' 已准备就绪")
                     return
                 except Exception as e:
                     # 回滚事务
@@ -158,15 +153,27 @@ def clean_duplicate_timestamps(table_name, engine):
             # 开始事务
             conn.execute(text("SET TRANSACTION ISOLATION LEVEL SERIALIZABLE"))
             try:
-                # 删除所有时间戳不是00:00:00的数据
-                conn.execute(text(f"""
-                    DELETE FROM "{cleaned_table_name}"
+                 # 先查询有多少条记录需要删除
+                result = conn.execute(text(f"""
+                    SELECT COUNT(*) 
+                    FROM "{cleaned_table_name}"
                     WHERE EXTRACT(HOUR FROM timestamp) != 0
                     OR EXTRACT(MINUTE FROM timestamp) != 0
                     OR EXTRACT(SECOND FROM timestamp) != 0;
                 """))
-                conn.commit()
-                logger.info(f"Cleaned duplicate timestamps in table '{table_name}'")
+                count = result.fetchone()[0]
+                
+                if count > 0:
+                    # 删除所有时间戳不是00:00:00的数据
+                    conn.execute(text(f"""
+                        DELETE FROM "{cleaned_table_name}"
+                        WHERE EXTRACT(HOUR FROM timestamp) != 0
+                        OR EXTRACT(MINUTE FROM timestamp) != 0
+                        OR EXTRACT(SECOND FROM timestamp) != 0;
+                    """))
+                    conn.commit()
+                    logger.info(f"Cleaned {count} duplicate timestamps in table '{table_name}'")
+                # 如果没有需要删除的记录，则不记录日志
             except Exception as e:
                 conn.rollback()
                 logger.error(f"Error cleaning timestamps: {e}")
