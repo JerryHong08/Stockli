@@ -20,6 +20,7 @@ class MainWindowLogic:
         self.ui = ui
         self.data_cache = {}
         self.all_stock_symbols = []
+        self.current_fetcher = None  # Track current fetcher instance
         # 初始化 SQLAlchemy 引擎
         try:
             self.engine = get_engine()
@@ -268,11 +269,16 @@ class MainWindowLogic:
         if not stock_symbol:
             QMessageBox.warning(self.ui, "错误", "请输入股票代码！")
             return
-
-        self.fetcher = DataFetcher(stock_symbol)
-        self.fetcher.fetch_complete.connect(self.on_fetch_complete)
-        self.fetcher.error_occurred.connect(self.show_error)
-        self.fetcher.start()
+            
+        # Clean up previous fetcher if exists
+        if self.current_fetcher and self.current_fetcher.isRunning():
+            self.current_fetcher.quit()
+            self.current_fetcher.wait()
+            
+        self.current_fetcher = DataFetcher(stock_symbol)
+        self.current_fetcher.fetch_complete.connect(self.on_fetch_complete)
+        self.current_fetcher.error_occurred.connect(self.show_error)
+        self.current_fetcher.start()
 
     def on_fetch_complete(self, table_name):
         """数据获取完成后的回调"""
