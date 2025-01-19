@@ -5,8 +5,9 @@ from typing import Dict, Any
 DB_CONFIG: Dict[str, Any] = {
     "dbname": os.getenv("DB_NAME", "Stock"),
     "user": os.getenv("DB_USER", "postgres"),
-    "password": os.getenv("DB_PASSWORD", "12138"),
-    "host": os.getenv("DB_HOST", "localhost"),
+    "password": "hgl084877",
+    # "password": os.getenv("DB_PASSWORD", "12138"),
+    "host": "120.55.182.153",  # 直接指定云服务器的公有 IP
     "port": os.getenv("DB_PORT", "5432")
 }
 
