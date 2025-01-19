@@ -65,6 +65,7 @@ def get_engine(max_retries: int = 5, retry_delay: float = 2.0) -> Optional[creat
                 raise OperationalError("Connection test failed", None, None)
                 
             logger.info("数据库连接成功")
+            print("数据库连接成功")
             return engine
             
         except (SQLAlchemyError, OperationalError) as e:
