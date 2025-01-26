@@ -38,6 +38,9 @@ class BatchDataFetcher(QThread):
                     writer = csv.writer(file)
                     writer.writerow(["Symbol", "Error"])
 
+            # 判断是否有新股票
+            self.check_new_stocks(ctx)
+            
             # 获取最新数据日期
             latest_date = self.get_latest_date_from_longport(ctx)
             if not latest_date:
@@ -51,7 +54,7 @@ class BatchDataFetcher(QThread):
             if not db_latest_date:
                 self.error_occurred.emit("无法从数据库获取最新数据日期")
                 return
-
+            
             # 判断是否需要增量更新
             if latest_date > db_latest_date:
                 self.progress_updated.emit({
@@ -61,14 +64,12 @@ class BatchDataFetcher(QThread):
                 self.incremental_update(ctx, latest_date, db_latest_date)
             else:
                 self.progress_updated.emit({
-                    'message': "数据库数据已是最新，检查是否有新股票...",
+                    'message': "数据库数据已是最新",
                     'start_time': self.start_time
                 })
-                self.check_new_stocks(ctx)
-
-            # 获取数据库中实际存在的表数量
-            table_count = self.get_table_count_from_db()
-            self.fetch_complete.emit(f"最新最全数据，当前有 {table_count} 个股票截至 {latest_date} 的数据")
+                # 获取数据库中实际存在的表数量
+                table_count = self.get_table_count_from_db()
+                self.fetch_complete.emit(f"最新最全数据，当前有 {table_count} 个股票截至 {latest_date} 的数据")
 
         except Exception as e:
             self.error_occurred.emit(f"批量获取数据失败: {e}")
