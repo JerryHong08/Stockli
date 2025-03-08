@@ -28,7 +28,7 @@ class MainWindowUI(QMainWindow):
     def load_stylesheet(self):
         """从外部文件加载样式表"""
         try:
-            with open("src/styles/main.qss", "r", encoding="utf-8") as f:
+            with open("C:/Users/Administrator/Documents/Code/stock_visualization_tool/src/styles/main.qss", "r", encoding="utf-8") as f:
                 self.setStyleSheet(f.read())
         except FileNotFoundError:
             print("样式表文件未找到，使用默认样式")
@@ -37,15 +37,6 @@ class MainWindowUI(QMainWindow):
 
     def connect_signals(self):
         """连接所有信号"""
-        # 连接数据获取选项卡信号
-        self.data_fetch_tab.fetch_button.clicked.connect(
-            lambda: self.logic.fetch_single_stock(
-                self.data_fetch_tab.stock_input.text()
-            )
-        )
-        self.data_fetch_tab.batch_fetch_button.clicked.connect(
-            self.logic.batch_fetch_stocks
-        )
         
         # 连接可视化选项卡信号
         self.visualization_tab.search_box.textChanged.connect(
@@ -66,6 +57,9 @@ class MainWindowUI(QMainWindow):
         self.random_stock_tab = RandomStockTab()
         self.settings_tab = SettingsTab()
 
+        # 添加选项卡
+        self.tabs.addTab(self.data_fetch_tab, "数据获取")
+        self.tabs.addTab(self.visualization_tab, "数据可视化")
         # 添加选项卡
         self.tabs.addTab(self.data_fetch_tab, "数据获取")
         self.tabs.addTab(self.visualization_tab, "数据可视化")
