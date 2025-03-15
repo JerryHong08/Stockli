@@ -28,7 +28,7 @@ class MainWindowUI(QMainWindow):
     def load_stylesheet(self):
         """从外部文件加载样式表"""
         try:
-            with open("C:/Users/Administrator/Documents/Code/stock_visualization_tool/src/styles/main.qss", "r", encoding="utf-8") as f:
+            with open("C:/Users/Administrator/Documents/Code/stock_visualization_tool/main_app/src/styles/main.qss", "r", encoding="utf-8") as f:
                 self.setStyleSheet(f.read())
         except FileNotFoundError:
             print("样式表文件未找到，使用默认样式")

@@ -1,3 +1,7 @@
+from datetime import datetime
+from pytz import timezone
+from PyQt5.QtCore import QTimer
+
 from PyQt5.QtWidgets import (
     QWidget, QGridLayout, QPushButton, QProgressBar, 
     QLabel, QLineEdit, QFrame
@@ -14,9 +18,20 @@ class DataFetchTab(QWidget):
         layout.setSpacing(15)  # 增加间距
         layout.setContentsMargins(20, 20, 20, 20)
 
-        # 任务倒计时
-        self.task_timer_label = QLabel("任务倒计时: 00:00")
+        # 实时更新ET时间
+        self.task_timer_label = QLabel()
         layout.addWidget(self.task_timer_label, 0, 0, 1, 2)
+
+        def update_et_time():
+            et_timezone = timezone('US/Eastern')
+            current_time = datetime.now(et_timezone)
+            formatted_time = current_time.strftime("%Y-%m-%d %H:%M:%S")
+            self.task_timer_label.setText(f"ET Time: {formatted_time}")
+
+        # 使用定时器每秒更新时间
+        timer = QTimer(self)
+        timer.timeout.connect(update_et_time)
+        timer.start(1000)
 
         # 添加分割线
         line1 = QFrame()
