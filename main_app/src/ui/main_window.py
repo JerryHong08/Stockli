@@ -6,6 +6,7 @@ from .components.visualization_tab import VisualizationTab
 from .components.settings_tab import SettingsTab
 from .components.random_stock_tab import RandomStockTab
 from .main_logic import MainWindowLogic
+import os
 
 class MainWindowUI(QMainWindow):
     def __init__(self):
@@ -28,7 +29,8 @@ class MainWindowUI(QMainWindow):
     def load_stylesheet(self):
         """从外部文件加载样式表"""
         try:
-            with open("C:/Users/Administrator/Documents/Code/stock_visualization_tool/main_app/src/styles/main.qss", "r", encoding="utf-8") as f:
+            stylesheet_path = os.path.join(os.path.dirname(__file__), '..', 'styles', 'main.qss')
+            with open(stylesheet_path, "r", encoding="utf-8") as f:
                 self.setStyleSheet(f.read())
         except FileNotFoundError:
             print("样式表文件未找到，使用默认样式")
