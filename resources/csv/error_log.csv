@@ -2034,3 +2034,759 @@ nan,"OpenApiException: (code=301600, trace_id=) invalid symbol"
 nan,"OpenApiException: (code=301600, trace_id=) invalid symbol"
 nan,"OpenApiException: (code=301600, trace_id=) invalid symbol"
 nan,更新 nan 数据失败: 'float' object has no attribute 'replace'
+ABR^D,OpenApiException: (code=301600, trace_id=) invalid symbol
+ABR^E,OpenApiException: (code=301600, trace_id=) invalid symbol
+ABR^F,OpenApiException: (code=301600, trace_id=) invalid symbol
+ACP^A,OpenApiException: (code=301600, trace_id=) invalid symbol
+ACR^C,OpenApiException: (code=301600, trace_id=) invalid symbol
+ACR^D,OpenApiException: (code=301600, trace_id=) invalid symbol
+ADC^A,OpenApiException: (code=301600, trace_id=) invalid symbol
+AGM^D,OpenApiException: (code=301600, trace_id=) invalid symbol
+AGM^E,OpenApiException: (code=301600, trace_id=) invalid symbol
+AGM^F,OpenApiException: (code=301600, trace_id=) invalid symbol
+AGM^G,OpenApiException: (code=301600, trace_id=) invalid symbol
+AHH^A,OpenApiException: (code=301600, trace_id=) invalid symbol
+AHL^C,OpenApiException: (code=301600, trace_id=) invalid symbol
+AHL^D,OpenApiException: (code=301600, trace_id=) invalid symbol
+AHL^E,OpenApiException: (code=301600, trace_id=) invalid symbol
+AHL^F,OpenApiException: (code=301600, trace_id=) invalid symbol
+AHT^D,OpenApiException: (code=301600, trace_id=) invalid symbol
+AHT^F,OpenApiException: (code=301600, trace_id=) invalid symbol
+AHT^G,OpenApiException: (code=301600, trace_id=) invalid symbol
+AHT^H,OpenApiException: (code=301600, trace_id=) invalid symbol
+AHT^I,OpenApiException: (code=301600, trace_id=) invalid symbol
+AKO/A,OpenApiException: (code=301600, trace_id=) invalid symbol
+AKO/B,OpenApiException: (code=301600, trace_id=) invalid symbol
+ALB^A,OpenApiException: (code=301600, trace_id=) invalid symbol
+ALL^B,OpenApiException: (code=301600, trace_id=) invalid symbol
+ALL^H,OpenApiException: (code=301600, trace_id=) invalid symbol
+ALL^I,OpenApiException: (code=301600, trace_id=) invalid symbol
+ALL^J,OpenApiException: (code=301600, trace_id=) invalid symbol
+ALTG^A,OpenApiException: (code=301600, trace_id=) invalid symbol
+AMH^G,OpenApiException: (code=301600, trace_id=) invalid symbol
+AMH^H,OpenApiException: (code=301600, trace_id=) invalid symbol
+ANG^A,OpenApiException: (code=301600, trace_id=) invalid symbol
+ANG^B,OpenApiException: (code=301600, trace_id=) invalid symbol
+APO^A,OpenApiException: (code=301600, trace_id=) invalid symbol
+ARES^B,OpenApiException: (code=301600, trace_id=) invalid symbol
+ARGO^A,OpenApiException: (code=301600, trace_id=) invalid symbol
+ARR^C,OpenApiException: (code=301600, trace_id=) invalid symbol
+ASB^E,OpenApiException: (code=301600, trace_id=) invalid symbol
+ASB^F,OpenApiException: (code=301600, trace_id=) invalid symbol
+ATCO^D,OpenApiException: (code=301600, trace_id=) invalid symbol
+ATCO^H,OpenApiException: (code=301600, trace_id=) invalid symbol
+ATH^A,OpenApiException: (code=301600, trace_id=) invalid symbol
+ATH^B,OpenApiException: (code=301600, trace_id=) invalid symbol
+ATH^C,OpenApiException: (code=301600, trace_id=) invalid symbol
+ATH^D,OpenApiException: (code=301600, trace_id=) invalid symbol
+ATH^E,OpenApiException: (code=301600, trace_id=) invalid symbol
+ABR^D,保存数据失败: (psycopg2.errors.InvalidColumnReference) 错误:  没有匹配ON CONFLICT说明的唯一或者排除约束
+
+[SQL: 
+                        INSERT INTO stock_daily 
+                        (ticker, timestamp, open, high, low, close, volume, turnover)
+                        VALUES (%(ticker)s, %(timestamp)s, %(open)s, %(high)s, %(low)s, %(close)s, %(volume)s, %(turnover)s)
+                        ON CONFLICT (ticker, timestamp) DO UPDATE SET
+                            open = EXCLUDED.open,
+                            high = EXCLUDED.high,
+                            low = EXCLUDED.low,
+                            close = EXCLUDED.close,
+                            volume = EXCLUDED.volume,
+                            turnover = EXCLUDED.turnover
+                    ]
+[parameters: [{'ticker': 'ABR^D', 'timestamp': datetime.datetime(2021, 6, 7, 0, 0), 'open': 20.42, 'high': 20.591, 'low': 20.35, 'close': 20.36, 'volume': 74928, 'turnover': 1918498.4}, {'ticker': 'ABR^D', 'timestamp': datetime.datetime(2021, 6, 8, 0, 0), 'open': 20.41, 'high': 20.41, 'low': 20.33, 'close': 20.34, 'volume': 107366, 'turnover': 2741374.558}, {'ticker': 'ABR^D', 'timestamp': datetime.datetime(2021, 6, 9, 0, 0), 'open': 20.37, 'high': 20.4, 'low': 20.32, 'close': 20.34, 'volume': 117926, 'turnover': 3010969.345}, {'ticker': 'ABR^D', 'timestamp': datetime.datetime(2021, 6, 10, 0, 0), 'open': 20.34, 'high': 20.39, 'low': 20.32, 'close': 20.39, 'volume': 140957, 'turnover': 3599515.579}, {'ticker': 'ABR^D', 'timestamp': datetime.datetime(2021, 6, 11, 0, 0), 'open': 20.42, 'high': 20.53, 'low': 20.38, 'close': 20.49, 'volume': 87988, 'turnover': 2253734.495}, {'ticker': 'ABR^D', 'timestamp': datetime.datetime(2021, 6, 14, 0, 0), 'open': 20.5, 'high': 20.52, 'low': 20.43, 'close': 20.5, 'volume': 89704, 'turnover': 2299901.463}, {'ticker': 'ABR^D', 'timestamp': datetime.datetime(2021, 6, 15, 0, 0), 'open': 20.5, 'high': 20.5, 'low': 20.34, 'close': 20.37, 'volume': 84768, 'turnover': 2168616.732}, {'ticker': 'ABR^D', 'timestamp': datetime.datetime(2021, 6, 16, 0, 0), 'open': 20.47, 'high': 20.47, 'low': 20.34, 'close': 20.41, 'volume': 79658, 'turnover': 2038899.733}  ... displaying 10 of 948 total bound parameter sets ...  {'ticker': 'ABR^D', 'timestamp': datetime.datetime(2025, 3, 13, 0, 0), 'open': 17.97, 'high': 17.97, 'low': 17.845, 'close': 17.85, 'volume': 16857, 'turnover': 301351.0}, {'ticker': 'ABR^D', 'timestamp': datetime.datetime(2025, 3, 14, 0, 0), 'open': 17.94, 'high': 18.065, 'low': 17.86, 'close': 17.86, 'volume': 23162, 'turnover': 415733.0}]]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+ABR^E,保存数据失败: (psycopg2.errors.InvalidColumnReference) 错误:  没有匹配ON CONFLICT说明的唯一或者排除约束
+
+[SQL: 
+                        INSERT INTO stock_daily 
+                        (ticker, timestamp, open, high, low, close, volume, turnover)
+                        VALUES (%(ticker)s, %(timestamp)s, %(open)s, %(high)s, %(low)s, %(close)s, %(volume)s, %(turnover)s)
+                        ON CONFLICT (ticker, timestamp) DO UPDATE SET
+                            open = EXCLUDED.open,
+                            high = EXCLUDED.high,
+                            low = EXCLUDED.low,
+                            close = EXCLUDED.close,
+                            volume = EXCLUDED.volume,
+                            turnover = EXCLUDED.turnover
+                    ]
+[parameters: [{'ticker': 'ABR^E', 'timestamp': datetime.datetime(2021, 8, 16, 0, 0), 'open': 19.912, 'high': 19.912, 'low': 19.822, 'close': 19.842, 'volume': 81151, 'turnover': 2024333.361}, {'ticker': 'ABR^E', 'timestamp': datetime.datetime(2021, 8, 17, 0, 0), 'open': 19.872, 'high': 19.922, 'low': 19.797, 'close': 19.842, 'volume': 150296, 'turnover': 3747856.974}, {'ticker': 'ABR^E', 'timestamp': datetime.datetime(2021, 8, 18, 0, 0), 'open': 19.862, 'high': 19.892, 'low': 19.792, 'close': 19.872, 'volume': 115507, 'turnover': 2877925.257}, {'ticker': 'ABR^E', 'timestamp': datetime.datetime(2021, 8, 19, 0, 0), 'open': 19.862, 'high': 19.872, 'low': 19.672, 'close': 19.682, 'volume': 65986, 'turnover': 1640805.993}, {'ticker': 'ABR^E', 'timestamp': datetime.datetime(2021, 8, 20, 0, 0), 'open': 19.822, 'high': 19.852, 'low': 19.722, 'close': 19.822, 'volume': 107098, 'turnover': 2665961.436}, {'ticker': 'ABR^E', 'timestamp': datetime.datetime(2021, 8, 23, 0, 0), 'open': 19.912, 'high': 19.912, 'low': 19.852, 'close': 19.892, 'volume': 74131, 'turnover': 1852250.753}, {'ticker': 'ABR^E', 'timestamp': datetime.datetime(2021, 8, 24, 0, 0), 'open': 19.952, 'high': 20.012, 'low': 19.802, 'close': 19.842, 'volume': 320869, 'turnover': 8020149.774}, {'ticker': 'ABR^E', 'timestamp': datetime.datetime(2021, 8, 25, 0, 0), 'open': 19.872, 'high': 19.902, 'low': 19.742, 'close': 19.882, 'volume': 217486, 'turnover': 5420706.261}  ... displaying 10 of 899 total bound parameter sets ...  {'ticker': 'ABR^E', 'timestamp': datetime.datetime(2025, 3, 13, 0, 0), 'open': 18.035, 'high': 18.035, 'low': 17.58, 'close': 17.65, 'volume': 10740, 'turnover': 189735.0}, {'ticker': 'ABR^E', 'timestamp': datetime.datetime(2025, 3, 14, 0, 0), 'open': 17.65, 'high': 17.83, 'low': 17.472, 'close': 17.5, 'volume': 13892, 'turnover': 244406.0}]]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+ABR^F,保存数据失败: (psycopg2.errors.InvalidColumnReference) 错误:  没有匹配ON CONFLICT说明的唯一或者排除约束
+
+[SQL: 
+                        INSERT INTO stock_daily 
+                        (ticker, timestamp, open, high, low, close, volume, turnover)
+                        VALUES (%(ticker)s, %(timestamp)s, %(open)s, %(high)s, %(low)s, %(close)s, %(volume)s, %(turnover)s)
+                        ON CONFLICT (ticker, timestamp) DO UPDATE SET
+                            open = EXCLUDED.open,
+                            high = EXCLUDED.high,
+                            low = EXCLUDED.low,
+                            close = EXCLUDED.close,
+                            volume = EXCLUDED.volume,
+                            turnover = EXCLUDED.turnover
+                    ]
+[parameters: [{'ticker': 'ABR^F', 'timestamp': datetime.datetime(2021, 10, 18, 0, 0), 'open': 20.084, 'high': 20.084, 'low': 19.944, 'close': 19.954, 'volume': 87172, 'turnover': 2190444.846}, {'ticker': 'ABR^F', 'timestamp': datetime.datetime(2021, 10, 19, 0, 0), 'open': 19.974, 'high': 20.014, 'low': 19.844, 'close': 19.904, 'volume': 75519, 'turnover': 1888566.34}, {'ticker': 'ABR^F', 'timestamp': datetime.datetime(2021, 10, 20, 0, 0), 'open': 19.944, 'high': 19.984, 'low': 19.844, 'close': 19.964, 'volume': 87141, 'turnover': 2188935.16}, {'ticker': 'ABR^F', 'timestamp': datetime.datetime(2021, 10, 21, 0, 0), 'open': 19.964, 'high': 19.984, 'low': 19.954, 'close': 19.964, 'volume': 22948, 'turnover': 576461.71}, {'ticker': 'ABR^F', 'timestamp': datetime.datetime(2021, 10, 22, 0, 0), 'open': 20.004, 'high': 20.094, 'low': 19.994, 'close': 20.034, 'volume': 61623, 'turnover': 1553772.451}, {'ticker': 'ABR^F', 'timestamp': datetime.datetime(2021, 10, 25, 0, 0), 'open': 20.084, 'high': 20.144, 'low': 20.034, 'close': 20.124, 'volume': 282913, 'turnover': 7137354.291}, {'ticker': 'ABR^F', 'timestamp': datetime.datetime(2021, 10, 26, 0, 0), 'open': 20.133, 'high': 20.144, 'low': 20.044, 'close': 20.084, 'volume': 268264, 'turnover': 6769533.078}, {'ticker': 'ABR^F', 'timestamp': datetime.datetime(2021, 10, 27, 0, 0), 'open': 20.104, 'high': 20.194, 'low': 19.994, 'close': 20.044, 'volume': 158329, 'turnover': 3995285.083}  ... displaying 10 of 855 total bound parameter sets ...  {'ticker': 'ABR^F', 'timestamp': datetime.datetime(2025, 3, 13, 0, 0), 'open': 22.17, 'high': 22.39, 'low': 22.0, 'close': 22.0, 'volume': 16764, 'turnover': 369387.0}, {'ticker': 'ABR^F', 'timestamp': datetime.datetime(2025, 3, 14, 0, 0), 'open': 22.01, 'high': 22.234, 'low': 21.9, 'close': 21.99, 'volume': 12407, 'turnover': 272522.0}]]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+ACP^A,保存数据失败: (psycopg2.errors.InvalidColumnReference) 错误:  没有匹配ON CONFLICT说明的唯一或者排除约束
+
+[SQL: 
+                        INSERT INTO stock_daily 
+                        (ticker, timestamp, open, high, low, close, volume, turnover)
+                        VALUES (%(ticker)s, %(timestamp)s, %(open)s, %(high)s, %(low)s, %(close)s, %(volume)s, %(turnover)s)
+                        ON CONFLICT (ticker, timestamp) DO UPDATE SET
+                            open = EXCLUDED.open,
+                            high = EXCLUDED.high,
+                            low = EXCLUDED.low,
+                            close = EXCLUDED.close,
+                            volume = EXCLUDED.volume,
+                            turnover = EXCLUDED.turnover
+                    ]
+[parameters: [{'ticker': 'ACP^A', 'timestamp': datetime.datetime(2021, 5, 17, 0, 0), 'open': 21.724, 'high': 21.724, 'low': 21.504, 'close': 21.534, 'volume': 43060, 'turnover': 1112185.4}, {'ticker': 'ACP^A', 'timestamp': datetime.datetime(2021, 5, 18, 0, 0), 'open': 21.544, 'high': 21.734, 'low': 21.484, 'close': 21.734, 'volume': 59016, 'turnover': 1525897.909}, {'ticker': 'ACP^A', 'timestamp': datetime.datetime(2021, 5, 19, 0, 0), 'open': 21.724, 'high': 21.774, 'low': 21.404, 'close': 21.774, 'volume': 54702, 'turnover': 1414422.139}, {'ticker': 'ACP^A', 'timestamp': datetime.datetime(2021, 5, 20, 0, 0), 'open': 21.754, 'high': 22.152, 'low': 21.634, 'close': 22.124, 'volume': 35206, 'turnover': 919978.998}, {'ticker': 'ACP^A', 'timestamp': datetime.datetime(2021, 5, 21, 0, 0), 'open': 21.927, 'high': 22.014, 'low': 21.784, 'close': 21.924, 'volume': 27240, 'turnover': 711989.0}, {'ticker': 'ACP^A', 'timestamp': datetime.datetime(2021, 5, 24, 0, 0), 'open': 21.914, 'high': 21.983, 'low': 21.774, 'close': 21.834, 'volume': 15762, 'turnover': 410913.819}, {'ticker': 'ACP^A', 'timestamp': datetime.datetime(2021, 5, 25, 0, 0), 'open': 21.804, 'high': 22.071, 'low': 21.686, 'close': 21.944, 'volume': 74250, 'turnover': 1940966.685}, {'ticker': 'ACP^A', 'timestamp': datetime.datetime(2021, 5, 26, 0, 0), 'open': 22.004, 'high': 22.064, 'low': 21.734, 'close': 21.784, 'volume': 53161, 'turnover': 1385124.912}  ... displaying 10 of 962 total bound parameter sets ...  {'ticker': 'ACP^A', 'timestamp': datetime.datetime(2025, 3, 13, 0, 0), 'open': 22.2, 'high': 22.2, 'low': 22.0, 'close': 22.0, 'volume': 890, 'turnover': 19665.0}, {'ticker': 'ACP^A', 'timestamp': datetime.datetime(2025, 3, 14, 0, 0), 'open': 22.243, 'high': 22.243, 'low': 22.14, 'close': 22.14, 'volume': 246, 'turnover': 5449.0}]]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+ACR^C,保存数据失败: (psycopg2.errors.InvalidColumnReference) 错误:  没有匹配ON CONFLICT说明的唯一或者排除约束
+
+[SQL: 
+                        INSERT INTO stock_daily 
+                        (ticker, timestamp, open, high, low, close, volume, turnover)
+                        VALUES (%(ticker)s, %(timestamp)s, %(open)s, %(high)s, %(low)s, %(close)s, %(volume)s, %(turnover)s)
+                        ON CONFLICT (ticker, timestamp) DO UPDATE SET
+                            open = EXCLUDED.open,
+                            high = EXCLUDED.high,
+                            low = EXCLUDED.low,
+                            close = EXCLUDED.close,
+                            volume = EXCLUDED.volume,
+                            turnover = EXCLUDED.turnover
+                    ]
+[parameters: [{'ticker': 'ACR^C', 'timestamp': datetime.datetime(2021, 3, 23, 0, 0), 'open': 16.746, 'high': 16.876, 'low': 16.746, 'close': 16.836, 'volume': 18865, 'turnover': 475585.399}, {'ticker': 'ACR^C', 'timestamp': datetime.datetime(2021, 3, 24, 0, 0), 'open': 16.846, 'high': 17.016, 'low': 16.836, 'close': 17.006, 'volume': 21276, 'turnover': 538272.38}, {'ticker': 'ACR^C', 'timestamp': datetime.datetime(2021, 3, 25, 0, 0), 'open': 16.946, 'high': 17.006, 'low': 16.851, 'close': 17.006, 'volume': 3940, 'turnover': 99730.246}, {'ticker': 'ACR^C', 'timestamp': datetime.datetime(2021, 3, 26, 0, 0), 'open': 17.036, 'high': 17.076, 'low': 16.856, 'close': 17.036, 'volume': 11333, 'turnover': 287884.001}, {'ticker': 'ACR^C', 'timestamp': datetime.datetime(2021, 3, 29, 0, 0), 'open': 17.026, 'high': 17.043, 'low': 16.886, 'close': 16.986, 'volume': 18416, 'turnover': 466370.25}, {'ticker': 'ACR^C', 'timestamp': datetime.datetime(2021, 3, 30, 0, 0), 'open': 16.866, 'high': 17.036, 'low': 16.836, 'close': 16.961, 'volume': 12005, 'turnover': 304233.079}, {'ticker': 'ACR^C', 'timestamp': datetime.datetime(2021, 3, 31, 0, 0), 'open': 17.075, 'high': 17.175, 'low': 16.885, 'close': 17.045, 'volume': 33789, 'turnover': 841506.107}, {'ticker': 'ACR^C', 'timestamp': datetime.datetime(2021, 4, 1, 0, 0), 'open': 17.035, 'high': 17.211, 'low': 16.91, 'close': 17.105, 'volume': 16108, 'turnover': 400534.297}  ... displaying 10 of 1000 total bound parameter sets ...  {'ticker': 'ACR^C', 'timestamp': datetime.datetime(2025, 3, 13, 0, 0), 'open': 25.26, 'high': 25.42, 'low': 25.26, 'close': 25.26, 'volume': 5956, 'turnover': 150885.0}, {'ticker': 'ACR^C', 'timestamp': datetime.datetime(2025, 3, 14, 0, 0), 'open': 25.21, 'high': 25.282, 'low': 25.21, 'close': 25.26, 'volume': 5183, 'turnover': 130937.0}]]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+ACR^D,保存数据失败: (psycopg2.errors.InvalidColumnReference) 错误:  没有匹配ON CONFLICT说明的唯一或者排除约束
+
+[SQL: 
+                        INSERT INTO stock_daily 
+                        (ticker, timestamp, open, high, low, close, volume, turnover)
+                        VALUES (%(ticker)s, %(timestamp)s, %(open)s, %(high)s, %(low)s, %(close)s, %(volume)s, %(turnover)s)
+                        ON CONFLICT (ticker, timestamp) DO UPDATE SET
+                            open = EXCLUDED.open,
+                            high = EXCLUDED.high,
+                            low = EXCLUDED.low,
+                            close = EXCLUDED.close,
+                            volume = EXCLUDED.volume,
+                            turnover = EXCLUDED.turnover
+                    ]
+[parameters: [{'ticker': 'ACR^D', 'timestamp': datetime.datetime(2021, 6, 1, 0, 0), 'open': 18.474, 'high': 18.474, 'low': 18.179, 'close': 18.184, 'volume': 28074, 'turnover': 702016.207}, {'ticker': 'ACR^D', 'timestamp': datetime.datetime(2021, 6, 2, 0, 0), 'open': 18.234, 'high': 18.234, 'low': 18.194, 'close': 18.214, 'volume': 43795, 'turnover': 1094492.31}, {'ticker': 'ACR^D', 'timestamp': datetime.datetime(2021, 6, 3, 0, 0), 'open': 18.204, 'high': 18.204, 'low': 18.124, 'close': 18.15, 'volume': 9734, 'turnover': 242527.317}, {'ticker': 'ACR^D', 'timestamp': datetime.datetime(2021, 6, 4, 0, 0), 'open': 18.214, 'high': 18.214, 'low': 18.144, 'close': 18.204, 'volume': 26870, 'turnover': 670681.392}, {'ticker': 'ACR^D', 'timestamp': datetime.datetime(2021, 6, 7, 0, 0), 'open': 18.194, 'high': 18.194, 'low': 18.074, 'close': 18.094, 'volume': 29499, 'turnover': 734304.298}, {'ticker': 'ACR^D', 'timestamp': datetime.datetime(2021, 6, 8, 0, 0), 'open': 18.154, 'high': 18.154, 'low': 18.054, 'close': 18.114, 'volume': 17820, 'turnover': 443422.589}, {'ticker': 'ACR^D', 'timestamp': datetime.datetime(2021, 6, 9, 0, 0), 'open': 18.174, 'high': 18.174, 'low': 18.104, 'close': 18.144, 'volume': 19542, 'turnover': 486700.306}, {'ticker': 'ACR^D', 'timestamp': datetime.datetime(2021, 6, 10, 0, 0), 'open': 18.174, 'high': 18.541, 'low': 18.124, 'close': 18.274, 'volume': 32754, 'turnover': 818918.039}  ... displaying 10 of 952 total bound parameter sets ...  {'ticker': 'ACR^D', 'timestamp': datetime.datetime(2025, 3, 13, 0, 0), 'open': 22.412, 'high': 22.49, 'low': 22.28, 'close': 22.408, 'volume': 23384, 'turnover': 524014.0}, {'ticker': 'ACR^D', 'timestamp': datetime.datetime(2025, 3, 14, 0, 0), 'open': 22.46, 'high': 22.46, 'low': 22.46, 'close': 22.46, 'volume': 445, 'turnover': 9989.0}]]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+ADC^A,保存数据失败: (psycopg2.errors.InvalidColumnReference) 错误:  没有匹配ON CONFLICT说明的唯一或者排除约束
+
+[SQL: 
+                        INSERT INTO stock_daily 
+                        (ticker, timestamp, open, high, low, close, volume, turnover)
+                        VALUES (%(ticker)s, %(timestamp)s, %(open)s, %(high)s, %(low)s, %(close)s, %(volume)s, %(turnover)s)
+                        ON CONFLICT (ticker, timestamp) DO UPDATE SET
+                            open = EXCLUDED.open,
+                            high = EXCLUDED.high,
+                            low = EXCLUDED.low,
+                            close = EXCLUDED.close,
+                            volume = EXCLUDED.volume,
+                            turnover = EXCLUDED.turnover
+                    ]
+[parameters: [{'ticker': 'ADC^A', 'timestamp': datetime.datetime(2021, 9, 21, 0, 0), 'open': 21.608, 'high': 21.648, 'low': 21.408, 'close': 21.518, 'volume': 66304, 'turnover': 1659508.31}, {'ticker': 'ADC^A', 'timestamp': datetime.datetime(2021, 9, 22, 0, 0), 'open': 21.528, 'high': 21.648, 'low': 21.458, 'close': 21.648, 'volume': 123282, 'turnover': 3091951.406}, {'ticker': 'ADC^A', 'timestamp': datetime.datetime(2021, 9, 23, 0, 0), 'open': 21.608, 'high': 21.758, 'low': 21.528, 'close': 21.688, 'volume': 326935, 'turnover': 8240594.73}, {'ticker': 'ADC^A', 'timestamp': datetime.datetime(2021, 9, 24, 0, 0), 'open': 21.648, 'high': 21.648, 'low': 21.538, 'close': 21.538, 'volume': 106304, 'turnover': 2666248.697}, {'ticker': 'ADC^A', 'timestamp': datetime.datetime(2021, 9, 27, 0, 0), 'open': 21.518, 'high': 21.758, 'low': 21.483, 'close': 21.758, 'volume': 237717, 'turnover': 5976892.347}, {'ticker': 'ADC^A', 'timestamp': datetime.datetime(2021, 9, 28, 0, 0), 'open': 21.708, 'high': 21.708, 'low': 21.558, 'close': 21.578, 'volume': 312940, 'turnover': 7880961.235}, {'ticker': 'ADC^A', 'timestamp': datetime.datetime(2021, 9, 29, 0, 0), 'open': 21.758, 'high': 21.758, 'low': 21.518, 'close': 21.688, 'volume': 43655, 'turnover': 1100890.52}, {'ticker': 'ADC^A', 'timestamp': datetime.datetime(2021, 9, 30, 0, 0), 'open': 21.758, 'high': 21.798, 'low': 21.578, 'close': 21.598, 'volume': 120879, 'turnover': 3050181.175}  ... displaying 10 of 874 total bound parameter sets ...  {'ticker': 'ADC^A', 'timestamp': datetime.datetime(2025, 3, 13, 0, 0), 'open': 17.93, 'high': 17.93, 'low': 17.69, 'close': 17.85, 'volume': 13865, 'turnover': 246399.0}, {'ticker': 'ADC^A', 'timestamp': datetime.datetime(2025, 3, 14, 0, 0), 'open': 17.95, 'high': 17.98, 'low': 17.85, 'close': 17.91, 'volume': 7382, 'turnover': 132038.0}]]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+AGM^D,保存数据失败: (psycopg2.errors.InvalidColumnReference) 错误:  没有匹配ON CONFLICT说明的唯一或者排除约束
+
+[SQL: 
+                        INSERT INTO stock_daily 
+                        (ticker, timestamp, open, high, low, close, volume, turnover)
+                        VALUES (%(ticker)s, %(timestamp)s, %(open)s, %(high)s, %(low)s, %(close)s, %(volume)s, %(turnover)s)
+                        ON CONFLICT (ticker, timestamp) DO UPDATE SET
+                            open = EXCLUDED.open,
+                            high = EXCLUDED.high,
+                            low = EXCLUDED.low,
+                            close = EXCLUDED.close,
+                            volume = EXCLUDED.volume,
+                            turnover = EXCLUDED.turnover
+                    ]
+[parameters: [{'ticker': 'AGM^D', 'timestamp': datetime.datetime(2021, 3, 23, 0, 0), 'open': 22.519, 'high': 22.519, 'low': 22.169, 'close': 22.312, 'volume': 11804, 'turnover': 317178.918}, {'ticker': 'AGM^D', 'timestamp': datetime.datetime(2021, 3, 24, 0, 0), 'open': 22.289, 'high': 22.359, 'low': 22.289, 'close': 22.339, 'volume': 5609, 'turnover': 151322.895}, {'ticker': 'AGM^D', 'timestamp': datetime.datetime(2021, 3, 25, 0, 0), 'open': 22.199, 'high': 22.379, 'low': 22.199, 'close': 22.259, 'volume': 3176, 'turnover': 85538.64}, {'ticker': 'AGM^D', 'timestamp': datetime.datetime(2021, 3, 26, 0, 0), 'open': 22.198, 'high': 22.219, 'low': 22.198, 'close': 22.219, 'volume': 1208, 'turnover': 32418.446}, {'ticker': 'AGM^D', 'timestamp': datetime.datetime(2021, 3, 29, 0, 0), 'open': 22.174, 'high': 22.174, 'low': 22.099, 'close': 22.129, 'volume': 1365, 'turnover': 36538.838}, {'ticker': 'AGM^D', 'timestamp': datetime.datetime(2021, 3, 30, 0, 0), 'open': 22.169, 'high': 22.256, 'low': 22.129, 'close': 22.129, 'volume': 2001, 'turnover': 53724.108}, {'ticker': 'AGM^D', 'timestamp': datetime.datetime(2021, 3, 31, 0, 0), 'open': 22.079, 'high': 22.209, 'low': 22.049, 'close': 22.209, 'volume': 5354, 'turnover': 143285.602}, {'ticker': 'AGM^D', 'timestamp': datetime.datetime(2021, 4, 1, 0, 0), 'open': 22.244, 'high': 22.279, 'low': 22.244, 'close': 22.279, 'volume': 1891, 'turnover': 50765.3}  ... displaying 10 of 1000 total bound parameter sets ...  {'ticker': 'AGM^D', 'timestamp': datetime.datetime(2025, 3, 13, 0, 0), 'open': 22.429, 'high': 22.429, 'low': 22.12, 'close': 22.426, 'volume': 2705, 'turnover': 60465.0}, {'ticker': 'AGM^D', 'timestamp': datetime.datetime(2025, 3, 14, 0, 0), 'open': 22.44, 'high': 22.62, 'low': 22.312, 'close': 22.59, 'volume': 4513, 'turnover': 101541.0}]]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+AGM^E,保存数据失败: (psycopg2.errors.InvalidColumnReference) 错误:  没有匹配ON CONFLICT说明的唯一或者排除约束
+
+[SQL: 
+                        INSERT INTO stock_daily 
+                        (ticker, timestamp, open, high, low, close, volume, turnover)
+                        VALUES (%(ticker)s, %(timestamp)s, %(open)s, %(high)s, %(low)s, %(close)s, %(volume)s, %(turnover)s)
+                        ON CONFLICT (ticker, timestamp) DO UPDATE SET
+                            open = EXCLUDED.open,
+                            high = EXCLUDED.high,
+                            low = EXCLUDED.low,
+                            close = EXCLUDED.close,
+                            volume = EXCLUDED.volume,
+                            turnover = EXCLUDED.turnover
+                    ]
+[parameters: [{'ticker': 'AGM^E', 'timestamp': datetime.datetime(2021, 3, 23, 0, 0), 'open': 22.586, 'high': 22.586, 'low': 22.508, 'close': 22.508, 'volume': 1183, 'turnover': 32188.78}, {'ticker': 'AGM^E', 'timestamp': datetime.datetime(2021, 3, 24, 0, 0), 'open': 22.368, 'high': 22.548, 'low': 22.308, 'close': 22.548, 'volume': 7578, 'turnover': 205600.23}, {'ticker': 'AGM^E', 'timestamp': datetime.datetime(2021, 3, 25, 0, 0), 'open': 22.338, 'high': 22.428, 'low': 22.308, 'close': 22.428, 'volume': 2639, 'turnover': 71412.7}, {'ticker': 'AGM^E', 'timestamp': datetime.datetime(2021, 3, 26, 0, 0), 'open': 22.238, 'high': 22.398, 'low': 22.188, 'close': 22.388, 'volume': 4225, 'turnover': 114040.163}, {'ticker': 'AGM^E', 'timestamp': datetime.datetime(2021, 3, 29, 0, 0), 'open': 22.388, 'high': 22.388, 'low': 22.388, 'close': 22.388, 'volume': 0, 'turnover': 0.0}, {'ticker': 'AGM^E', 'timestamp': datetime.datetime(2021, 3, 30, 0, 0), 'open': 22.328, 'high': 22.388, 'low': 22.328, 'close': 22.348, 'volume': 2143, 'turnover': 57981.36}, {'ticker': 'AGM^E', 'timestamp': datetime.datetime(2021, 3, 31, 0, 0), 'open': 22.258, 'high': 22.444, 'low': 22.258, 'close': 22.444, 'volume': 1700, 'turnover': 45877.8}, {'ticker': 'AGM^E', 'timestamp': datetime.datetime(2021, 4, 1, 0, 0), 'open': 22.258, 'high': 22.258, 'low': 22.258, 'close': 22.258, 'volume': 200, 'turnover': 5386.0}  ... displaying 10 of 1000 total bound parameter sets ...  {'ticker': 'AGM^E', 'timestamp': datetime.datetime(2025, 3, 13, 0, 0), 'open': 22.48, 'high': 22.48, 'low': 22.48, 'close': 22.48, 'volume': 161, 'turnover': 3614.0}, {'ticker': 'AGM^E', 'timestamp': datetime.datetime(2025, 3, 14, 0, 0), 'open': 22.5, 'high': 22.5, 'low': 22.32, 'close': 22.32, 'volume': 1716, 'turnover': 38517.0}]]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+AGM^F,保存数据失败: (psycopg2.errors.InvalidColumnReference) 错误:  没有匹配ON CONFLICT说明的唯一或者排除约束
+
+[SQL: 
+                        INSERT INTO stock_daily 
+                        (ticker, timestamp, open, high, low, close, volume, turnover)
+                        VALUES (%(ticker)s, %(timestamp)s, %(open)s, %(high)s, %(low)s, %(close)s, %(volume)s, %(turnover)s)
+                        ON CONFLICT (ticker, timestamp) DO UPDATE SET
+                            open = EXCLUDED.open,
+                            high = EXCLUDED.high,
+                            low = EXCLUDED.low,
+                            close = EXCLUDED.close,
+                            volume = EXCLUDED.volume,
+                            turnover = EXCLUDED.turnover
+                    ]
+[parameters: [{'ticker': 'AGM^F', 'timestamp': datetime.datetime(2021, 3, 23, 0, 0), 'open': 22.404, 'high': 22.524, 'low': 21.734, 'close': 22.009, 'volume': 26074, 'turnover': 688235.107}, {'ticker': 'AGM^F', 'timestamp': datetime.datetime(2021, 3, 24, 0, 0), 'open': 21.764, 'high': 22.174, 'low': 21.634, 'close': 21.704, 'volume': 37639, 'turnover': 980898.545}, {'ticker': 'AGM^F', 'timestamp': datetime.datetime(2021, 3, 25, 0, 0), 'open': 21.714, 'high': 21.744, 'low': 21.614, 'close': 21.704, 'volume': 23042, 'turnover': 598032.912}, {'ticker': 'AGM^F', 'timestamp': datetime.datetime(2021, 3, 26, 0, 0), 'open': 21.744, 'high': 21.939, 'low': 21.684, 'close': 21.729, 'volume': 7833, 'turnover': 204143.886}, {'ticker': 'AGM^F', 'timestamp': datetime.datetime(2021, 3, 29, 0, 0), 'open': 21.769, 'high': 21.834, 'low': 21.704, 'close': 21.724, 'volume': 7679, 'turnover': 200015.1}, {'ticker': 'AGM^F', 'timestamp': datetime.datetime(2021, 3, 30, 0, 0), 'open': 21.784, 'high': 22.004, 'low': 21.784, 'close': 21.964, 'volume': 5444, 'turnover': 142063.07}, {'ticker': 'AGM^F', 'timestamp': datetime.datetime(2021, 3, 31, 0, 0), 'open': 21.694, 'high': 21.974, 'low': 21.664, 'close': 21.974, 'volume': 11367, 'turnover': 295911.303}, {'ticker': 'AGM^F', 'timestamp': datetime.datetime(2021, 4, 1, 0, 0), 'open': 21.984, 'high': 22.084, 'low': 21.69, 'close': 21.894, 'volume': 9904, 'turnover': 259552.072}  ... displaying 10 of 1000 total bound parameter sets ...  {'ticker': 'AGM^F', 'timestamp': datetime.datetime(2025, 3, 13, 0, 0), 'open': 20.66, 'high': 21.02, 'low': 20.628, 'close': 20.98, 'volume': 14950, 'turnover': 312625.0}, {'ticker': 'AGM^F', 'timestamp': datetime.datetime(2025, 3, 14, 0, 0), 'open': 20.66, 'high': 21.0, 'low': 20.66, 'close': 20.95, 'volume': 4488, 'turnover': 93912.0}]]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+AGM^G,保存数据失败: (psycopg2.errors.InvalidColumnReference) 错误:  没有匹配ON CONFLICT说明的唯一或者排除约束
+
+[SQL: 
+                        INSERT INTO stock_daily 
+                        (ticker, timestamp, open, high, low, close, volume, turnover)
+                        VALUES (%(ticker)s, %(timestamp)s, %(open)s, %(high)s, %(low)s, %(close)s, %(volume)s, %(turnover)s)
+                        ON CONFLICT (ticker, timestamp) DO UPDATE SET
+                            open = EXCLUDED.open,
+                            high = EXCLUDED.high,
+                            low = EXCLUDED.low,
+                            close = EXCLUDED.close,
+                            volume = EXCLUDED.volume,
+                            turnover = EXCLUDED.turnover
+                    ]
+[parameters: [{'ticker': 'AGM^G', 'timestamp': datetime.datetime(2021, 6, 3, 0, 0), 'open': 21.779, 'high': 21.789, 'low': 21.539, 'close': 21.689, 'volume': 78303, 'turnover': 2008244.92}, {'ticker': 'AGM^G', 'timestamp': datetime.datetime(2021, 6, 4, 0, 0), 'open': 21.789, 'high': 21.849, 'low': 21.739, 'close': 21.839, 'volume': 24103, 'turnover': 621202.011}, {'ticker': 'AGM^G', 'timestamp': datetime.datetime(2021, 6, 7, 0, 0), 'open': 21.839, 'high': 21.839, 'low': 21.719, 'close': 21.749, 'volume': 45883, 'turnover': 1180195.515}, {'ticker': 'AGM^G', 'timestamp': datetime.datetime(2021, 6, 8, 0, 0), 'open': 21.759, 'high': 21.759, 'low': 21.689, 'close': 21.739, 'volume': 36969, 'turnover': 949943.262}, {'ticker': 'AGM^G', 'timestamp': datetime.datetime(2021, 6, 9, 0, 0), 'open': 21.779, 'high': 21.879, 'low': 21.758, 'close': 21.839, 'volume': 143055, 'turnover': 3687914.002}, {'ticker': 'AGM^G', 'timestamp': datetime.datetime(2021, 6, 10, 0, 0), 'open': 21.889, 'high': 21.929, 'low': 21.799, 'close': 21.929, 'volume': 44001, 'turnover': 1135808.5}, {'ticker': 'AGM^G', 'timestamp': datetime.datetime(2021, 6, 11, 0, 0), 'open': 21.859, 'high': 22.019, 'low': 21.859, 'close': 22.009, 'volume': 27133, 'turnover': 703186.865}, {'ticker': 'AGM^G', 'timestamp': datetime.datetime(2021, 6, 14, 0, 0), 'open': 22.009, 'high': 22.029, 'low': 21.929, 'close': 21.969, 'volume': 42119, 'turnover': 1092759.52}  ... displaying 10 of 950 total bound parameter sets ...  {'ticker': 'AGM^G', 'timestamp': datetime.datetime(2025, 3, 13, 0, 0), 'open': 19.14, 'high': 19.21, 'low': 19.12, 'close': 19.21, 'volume': 5892, 'turnover': 112923.0}, {'ticker': 'AGM^G', 'timestamp': datetime.datetime(2025, 3, 14, 0, 0), 'open': 19.26, 'high': 19.51, 'low': 19.07, 'close': 19.47, 'volume': 11096, 'turnover': 215046.0}]]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+AHH^A,保存数据失败: (psycopg2.errors.InvalidColumnReference) 错误:  没有匹配ON CONFLICT说明的唯一或者排除约束
+
+[SQL: 
+                        INSERT INTO stock_daily 
+                        (ticker, timestamp, open, high, low, close, volume, turnover)
+                        VALUES (%(ticker)s, %(timestamp)s, %(open)s, %(high)s, %(low)s, %(close)s, %(volume)s, %(turnover)s)
+                        ON CONFLICT (ticker, timestamp) DO UPDATE SET
+                            open = EXCLUDED.open,
+                            high = EXCLUDED.high,
+                            low = EXCLUDED.low,
+                            close = EXCLUDED.close,
+                            volume = EXCLUDED.volume,
+                            turnover = EXCLUDED.turnover
+                    ]
+[parameters: [{'ticker': 'AHH^A', 'timestamp': datetime.datetime(2021, 3, 23, 0, 0), 'open': 20.516, 'high': 20.516, 'low': 20.026, 'close': 20.316, 'volume': 1200, 'turnover': 30797.25}, {'ticker': 'AHH^A', 'timestamp': datetime.datetime(2021, 3, 24, 0, 0), 'open': 20.566, 'high': 20.916, 'low': 20.566, 'close': 20.906, 'volume': 3379, 'turnover': 88465.34}, {'ticker': 'AHH^A', 'timestamp': datetime.datetime(2021, 3, 25, 0, 0), 'open': 20.726, 'high': 20.726, 'low': 20.606, 'close': 20.606, 'volume': 1499, 'turnover': 39372.56}, {'ticker': 'AHH^A', 'timestamp': datetime.datetime(2021, 3, 26, 0, 0), 'open': 20.466, 'high': 20.466, 'low': 20.046, 'close': 20.086, 'volume': 5607, 'turnover': 144202.27}, {'ticker': 'AHH^A', 'timestamp': datetime.datetime(2021, 3, 29, 0, 0), 'open': 20.536, 'high': 20.896, 'low': 20.416, 'close': 20.706, 'volume': 4135, 'turnover': 107897.007}, {'ticker': 'AHH^A', 'timestamp': datetime.datetime(2021, 3, 30, 0, 0), 'open': 20.816, 'high': 21.376, 'low': 20.816, 'close': 21.166, 'volume': 5584, 'turnover': 148809.27}, {'ticker': 'AHH^A', 'timestamp': datetime.datetime(2021, 3, 31, 0, 0), 'open': 21.006, 'high': 21.016, 'low': 20.566, 'close': 21.016, 'volume': 4014, 'turnover': 105274.846}, {'ticker': 'AHH^A', 'timestamp': datetime.datetime(2021, 4, 1, 0, 0), 'open': 20.716, 'high': 21.486, 'low': 20.566, 'close': 21.146, 'volume': 14122, 'turnover': 373955.309}  ... displaying 10 of 1000 total bound parameter sets ...  {'ticker': 'AHH^A', 'timestamp': datetime.datetime(2025, 3, 13, 0, 0), 'open': 22.25, 'high': 22.336, 'low': 21.85, 'close': 22.02, 'volume': 12770, 'turnover': 281595.0}, {'ticker': 'AHH^A', 'timestamp': datetime.datetime(2025, 3, 14, 0, 0), 'open': 22.15, 'high': 22.15, 'low': 21.925, 'close': 22.047, 'volume': 9477, 'turnover': 208870.0}]]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+AHL^C,保存数据失败: (psycopg2.errors.InvalidColumnReference) 错误:  没有匹配ON CONFLICT说明的唯一或者排除约束
+
+[SQL: 
+                        INSERT INTO stock_daily 
+                        (ticker, timestamp, open, high, low, close, volume, turnover)
+                        VALUES (%(ticker)s, %(timestamp)s, %(open)s, %(high)s, %(low)s, %(close)s, %(volume)s, %(turnover)s)
+                        ON CONFLICT (ticker, timestamp) DO UPDATE SET
+                            open = EXCLUDED.open,
+                            high = EXCLUDED.high,
+                            low = EXCLUDED.low,
+                            close = EXCLUDED.close,
+                            volume = EXCLUDED.volume,
+                            turnover = EXCLUDED.turnover
+                    ]
+[parameters: [{'ticker': 'AHL^C', 'timestamp': datetime.datetime(2021, 1, 11, 0, 0), 'open': 19.724, 'high': 19.724, 'low': 19.456, 'close': 19.645, 'volume': 15969, 'turnover': 406443.673}, {'ticker': 'AHL^C', 'timestamp': datetime.datetime(2021, 1, 12, 0, 0), 'open': 19.625, 'high': 19.625, 'low': 19.143, 'close': 19.452, 'volume': 19340, 'turnover': 487270.114}, {'ticker': 'AHL^C', 'timestamp': datetime.datetime(2021, 1, 13, 0, 0), 'open': 19.586, 'high': 20.226, 'low': 19.556, 'close': 19.98, 'volume': 20160, 'turnover': 520780.737}, {'ticker': 'AHL^C', 'timestamp': datetime.datetime(2021, 1, 14, 0, 0), 'open': 19.97, 'high': 20.216, 'low': 19.645, 'close': 20.157, 'volume': 20160, 'turnover': 520780.737}, {'ticker': 'AHL^C', 'timestamp': datetime.datetime(2021, 1, 15, 0, 0), 'open': 19.813, 'high': 20.147, 'low': 19.813, 'close': 20.104, 'volume': 20160, 'turnover': 520780.737}, {'ticker': 'AHL^C', 'timestamp': datetime.datetime(2021, 1, 19, 0, 0), 'open': 20.177, 'high': 20.177, 'low': 19.813, 'close': 20.088, 'volume': 20160, 'turnover': 520780.737}, {'ticker': 'AHL^C', 'timestamp': datetime.datetime(2021, 1, 20, 0, 0), 'open': 20.128, 'high': 20.315, 'low': 20.128, 'close': 20.315, 'volume': 13324, 'turnover': 347879.644}, {'ticker': 'AHL^C', 'timestamp': datetime.datetime(2021, 1, 21, 0, 0), 'open': 20.128, 'high': 20.413, 'low': 20.004, 'close': 20.394, 'volume': 21377, 'turnover': 559010.407}  ... displaying 10 of 1000 total bound parameter sets ...  {'ticker': 'AHL^C', 'timestamp': datetime.datetime(2024, 12, 30, 0, 0), 'open': 24.97, 'high': 25.0, 'low': 24.97, 'close': 24.98, 'volume': 31505, 'turnover': 787248.0}, {'ticker': 'AHL^C', 'timestamp': datetime.datetime(2024, 12, 31, 0, 0), 'open': 24.98, 'high': 25.01, 'low': 24.98, 'close': 25.01, 'volume': 107060, 'turnover': 2675870.0}]]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+AHL^D,保存数据失败: (psycopg2.errors.InvalidColumnReference) 错误:  没有匹配ON CONFLICT说明的唯一或者排除约束
+
+[SQL: 
+                        INSERT INTO stock_daily 
+                        (ticker, timestamp, open, high, low, close, volume, turnover)
+                        VALUES (%(ticker)s, %(timestamp)s, %(open)s, %(high)s, %(low)s, %(close)s, %(volume)s, %(turnover)s)
+                        ON CONFLICT (ticker, timestamp) DO UPDATE SET
+                            open = EXCLUDED.open,
+                            high = EXCLUDED.high,
+                            low = EXCLUDED.low,
+                            close = EXCLUDED.close,
+                            volume = EXCLUDED.volume,
+                            turnover = EXCLUDED.turnover
+                    ]
+[parameters: [{'ticker': 'AHL^D', 'timestamp': datetime.datetime(2021, 3, 23, 0, 0), 'open': 21.288, 'high': 21.648, 'low': 21.288, 'close': 21.418, 'volume': 14578, 'turnover': 386249.311}, {'ticker': 'AHL^D', 'timestamp': datetime.datetime(2021, 3, 24, 0, 0), 'open': 21.548, 'high': 21.71, 'low': 21.428, 'close': 21.603, 'volume': 13109, 'turnover': 347934.53}, {'ticker': 'AHL^D', 'timestamp': datetime.datetime(2021, 3, 25, 0, 0), 'open': 21.359, 'high': 21.618, 'low': 21.359, 'close': 21.558, 'volume': 7290, 'turnover': 192629.834}, {'ticker': 'AHL^D', 'timestamp': datetime.datetime(2021, 3, 26, 0, 0), 'open': 21.618, 'high': 21.667, 'low': 21.538, 'close': 21.538, 'volume': 8406, 'turnover': 223053.004}, {'ticker': 'AHL^D', 'timestamp': datetime.datetime(2021, 3, 29, 0, 0), 'open': 21.558, 'high': 21.558, 'low': 21.308, 'close': 21.358, 'volume': 7705, 'turnover': 202876.612}, {'ticker': 'AHL^D', 'timestamp': datetime.datetime(2021, 3, 30, 0, 0), 'open': 21.408, 'high': 21.692, 'low': 21.358, 'close': 21.692, 'volume': 5714, 'turnover': 151049.209}, {'ticker': 'AHL^D', 'timestamp': datetime.datetime(2021, 3, 31, 0, 0), 'open': 21.558, 'high': 21.758, 'low': 21.51, 'close': 21.728, 'volume': 10611, 'turnover': 282183.586}, {'ticker': 'AHL^D', 'timestamp': datetime.datetime(2021, 4, 1, 0, 0), 'open': 21.923, 'high': 22.068, 'low': 21.843, 'close': 22.028, 'volume': 14991, 'turnover': 402869.784}  ... displaying 10 of 1000 total bound parameter sets ...  {'ticker': 'AHL^D', 'timestamp': datetime.datetime(2025, 3, 13, 0, 0), 'open': 19.588, 'high': 19.758, 'low': 19.588, 'close': 19.733, 'volume': 9799, 'turnover': 196426.0}, {'ticker': 'AHL^D', 'timestamp': datetime.datetime(2025, 3, 14, 0, 0), 'open': 19.93, 'high': 20.03, 'low': 19.81, 'close': 19.93, 'volume': 11953, 'turnover': 238253.0}]]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+AHL^E,保存数据失败: (psycopg2.errors.InvalidColumnReference) 错误:  没有匹配ON CONFLICT说明的唯一或者排除约束
+
+[SQL: 
+                        INSERT INTO stock_daily 
+                        (ticker, timestamp, open, high, low, close, volume, turnover)
+                        VALUES (%(ticker)s, %(timestamp)s, %(open)s, %(high)s, %(low)s, %(close)s, %(volume)s, %(turnover)s)
+                        ON CONFLICT (ticker, timestamp) DO UPDATE SET
+                            open = EXCLUDED.open,
+                            high = EXCLUDED.high,
+                            low = EXCLUDED.low,
+                            close = EXCLUDED.close,
+                            volume = EXCLUDED.volume,
+                            turnover = EXCLUDED.turnover
+                    ]
+[parameters: [{'ticker': 'AHL^E', 'timestamp': datetime.datetime(2021, 3, 23, 0, 0), 'open': 21.282, 'high': 21.331, 'low': 21.212, 'close': 21.243, 'volume': 8036, 'turnover': 207197.803}, {'ticker': 'AHL^E', 'timestamp': datetime.datetime(2021, 3, 24, 0, 0), 'open': 21.243, 'high': 21.429, 'low': 21.174, 'close': 21.371, 'volume': 20590, 'turnover': 532034.971}, {'ticker': 'AHL^E', 'timestamp': datetime.datetime(2021, 3, 25, 0, 0), 'open': 21.38, 'high': 21.38, 'low': 21.194, 'close': 21.233, 'volume': 8586, 'turnover': 221399.531}, {'ticker': 'AHL^E', 'timestamp': datetime.datetime(2021, 3, 26, 0, 0), 'open': 21.331, 'high': 21.331, 'low': 21.184, 'close': 21.194, 'volume': 9148, 'turnover': 235563.939}, {'ticker': 'AHL^E', 'timestamp': datetime.datetime(2021, 3, 29, 0, 0), 'open': 21.243, 'high': 21.243, 'low': 21.027, 'close': 21.037, 'volume': 6581, 'turnover': 168625.845}, {'ticker': 'AHL^E', 'timestamp': datetime.datetime(2021, 3, 30, 0, 0), 'open': 21.125, 'high': 21.145, 'low': 21.027, 'close': 21.145, 'volume': 7838, 'turnover': 201074.505}, {'ticker': 'AHL^E', 'timestamp': datetime.datetime(2021, 3, 31, 0, 0), 'open': 21.243, 'high': 21.351, 'low': 21.135, 'close': 21.194, 'volume': 18233, 'turnover': 468664.399}, {'ticker': 'AHL^E', 'timestamp': datetime.datetime(2021, 4, 1, 0, 0), 'open': 21.4, 'high': 21.577, 'low': 21.292, 'close': 21.577, 'volume': 16646, 'turnover': 432123.165}  ... displaying 10 of 1000 total bound parameter sets ...  {'ticker': 'AHL^E', 'timestamp': datetime.datetime(2025, 3, 13, 0, 0), 'open': 19.678, 'high': 19.966, 'low': 19.678, 'close': 19.928, 'volume': 12538, 'turnover': 252224.0}, {'ticker': 'AHL^E', 'timestamp': datetime.datetime(2025, 3, 14, 0, 0), 'open': 19.95, 'high': 20.24, 'low': 19.95, 'close': 20.04, 'volume': 15374, 'turnover': 308738.0}]]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+AHL^F,保存数据失败: (psycopg2.errors.InvalidColumnReference) 错误:  没有匹配ON CONFLICT说明的唯一或者排除约束
+
+[SQL: 
+                        INSERT INTO stock_daily 
+                        (ticker, timestamp, open, high, low, close, volume, turnover)
+                        VALUES (%(ticker)s, %(timestamp)s, %(open)s, %(high)s, %(low)s, %(close)s, %(volume)s, %(turnover)s)
+                        ON CONFLICT (ticker, timestamp) DO UPDATE SET
+                            open = EXCLUDED.open,
+                            high = EXCLUDED.high,
+                            low = EXCLUDED.low,
+                            close = EXCLUDED.close,
+                            volume = EXCLUDED.volume,
+                            turnover = EXCLUDED.turnover
+                    ]
+[parameters: [{'ticker': 'AHL^F', 'timestamp': datetime.datetime(2024, 12, 3, 0, 0), 'open': 24.338, 'high': 24.678, 'low': 24.338, 'close': 24.368, 'volume': 474555, 'turnover': 11883611.0}, {'ticker': 'AHL^F', 'timestamp': datetime.datetime(2024, 12, 4, 0, 0), 'open': 24.398, 'high': 24.528, 'low': 24.368, 'close': 24.518, 'volume': 214650, 'turnover': 5374829.0}, {'ticker': 'AHL^F', 'timestamp': datetime.datetime(2024, 12, 5, 0, 0), 'open': 24.518, 'high': 25.048, 'low': 24.518, 'close': 24.738, 'volume': 231233, 'turnover': 5840259.0}, {'ticker': 'AHL^F', 'timestamp': datetime.datetime(2024, 12, 6, 0, 0), 'open': 24.798, 'high': 24.828, 'low': 24.668, 'close': 24.738, 'volume': 67524, 'turnover': 1709107.0}, {'ticker': 'AHL^F', 'timestamp': datetime.datetime(2024, 12, 9, 0, 0), 'open': 24.828, 'high': 24.828, 'low': 24.748, 'close': 24.828, 'volume': 75685, 'turnover': 1921778.0}, {'ticker': 'AHL^F', 'timestamp': datetime.datetime(2024, 12, 10, 0, 0), 'open': 24.788, 'high': 24.878, 'low': 24.748, 'close': 24.868, 'volume': 36425, 'turnover': 925790.0}, {'ticker': 'AHL^F', 'timestamp': datetime.datetime(2024, 12, 11, 0, 0), 'open': 24.858, 'high': 25.068, 'low': 24.808, 'close': 24.988, 'volume': 134570, 'turnover': 3434156.0}, {'ticker': 'AHL^F', 'timestamp': datetime.datetime(2024, 12, 12, 0, 0), 'open': 24.818, 'high': 25.038, 'low': 24.808, 'close': 24.998, 'volume': 114242, 'turnover': 2924209.0}  ... displaying 10 of 69 total bound parameter sets ...  {'ticker': 'AHL^F', 'timestamp': datetime.datetime(2025, 3, 13, 0, 0), 'open': 25.078, 'high': 25.338, 'low': 24.978, 'close': 24.998, 'volume': 22994, 'turnover': 590612.0}, {'ticker': 'AHL^F', 'timestamp': datetime.datetime(2025, 3, 14, 0, 0), 'open': 25.19, 'high': 25.4, 'low': 25.0, 'close': 25.24, 'volume': 26002, 'turnover': 654940.0}]]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+AHT^D,保存数据失败: (psycopg2.errors.InvalidColumnReference) 错误:  没有匹配ON CONFLICT说明的唯一或者排除约束
+
+[SQL: 
+                        INSERT INTO stock_daily 
+                        (ticker, timestamp, open, high, low, close, volume, turnover)
+                        VALUES (%(ticker)s, %(timestamp)s, %(open)s, %(high)s, %(low)s, %(close)s, %(volume)s, %(turnover)s)
+                        ON CONFLICT (ticker, timestamp) DO UPDATE SET
+                            open = EXCLUDED.open,
+                            high = EXCLUDED.high,
+                            low = EXCLUDED.low,
+                            close = EXCLUDED.close,
+                            volume = EXCLUDED.volume,
+                            turnover = EXCLUDED.turnover
+                    ]
+[parameters: [{'ticker': 'AHT^D', 'timestamp': datetime.datetime(2021, 3, 23, 0, 0), 'open': 13.526, 'high': 13.526, 'low': 12.966, 'close': 12.966, 'volume': 4800, 'turnover': 110594.78}, {'ticker': 'AHT^D', 'timestamp': datetime.datetime(2021, 3, 24, 0, 0), 'open': 12.726, 'high': 13.186, 'low': 12.696, 'close': 12.976, 'volume': 9324, 'turnover': 214797.902}, {'ticker': 'AHT^D', 'timestamp': datetime.datetime(2021, 3, 25, 0, 0), 'open': 12.966, 'high': 13.366, 'low': 12.756, 'close': 13.036, 'volume': 11907, 'turnover': 275461.509}, {'ticker': 'AHT^D', 'timestamp': datetime.datetime(2021, 3, 26, 0, 0), 'open': 13.216, 'high': 13.616, 'low': 12.686, 'close': 13.356, 'volume': 12874, 'turnover': 299444.378}, {'ticker': 'AHT^D', 'timestamp': datetime.datetime(2021, 3, 29, 0, 0), 'open': 13.262, 'high': 13.366, 'low': 12.66, 'close': 13.236, 'volume': 15096, 'turnover': 347962.619}, {'ticker': 'AHT^D', 'timestamp': datetime.datetime(2021, 3, 30, 0, 0), 'open': 13.466, 'high': 13.976, 'low': 13.466, 'close': 13.796, 'volume': 11608, 'turnover': 276897.491}, {'ticker': 'AHT^D', 'timestamp': datetime.datetime(2021, 3, 31, 0, 0), 'open': 13.976, 'high': 14.292, 'low': 13.794, 'close': 13.976, 'volume': 15966, 'turnover': 386708.595}, {'ticker': 'AHT^D', 'timestamp': datetime.datetime(2021, 4, 1, 0, 0), 'open': 13.856, 'high': 14.076, 'low': 13.586, 'close': 13.966, 'volume': 7410, 'turnover': 177060.47}  ... displaying 10 of 1000 total bound parameter sets ...  {'ticker': 'AHT^D', 'timestamp': datetime.datetime(2025, 3, 13, 0, 0), 'open': 19.812, 'high': 19.812, 'low': 19.812, 'close': 19.812, 'volume': 650, 'turnover': 12845.0}, {'ticker': 'AHT^D', 'timestamp': datetime.datetime(2025, 3, 14, 0, 0), 'open': 19.5, 'high': 19.831, 'low': 19.5, 'close': 19.71, 'volume': 852, 'turnover': 16795.0}]]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+AHT^F,保存数据失败: (psycopg2.errors.InvalidColumnReference) 错误:  没有匹配ON CONFLICT说明的唯一或者排除约束
+
+[SQL: 
+                        INSERT INTO stock_daily 
+                        (ticker, timestamp, open, high, low, close, volume, turnover)
+                        VALUES (%(ticker)s, %(timestamp)s, %(open)s, %(high)s, %(low)s, %(close)s, %(volume)s, %(turnover)s)
+                        ON CONFLICT (ticker, timestamp) DO UPDATE SET
+                            open = EXCLUDED.open,
+                            high = EXCLUDED.high,
+                            low = EXCLUDED.low,
+                            close = EXCLUDED.close,
+                            volume = EXCLUDED.volume,
+                            turnover = EXCLUDED.turnover
+                    ]
+[parameters: [{'ticker': 'AHT^F', 'timestamp': datetime.datetime(2021, 3, 23, 0, 0), 'open': 13.782, 'high': 14.032, 'low': 13.782, 'close': 13.832, 'volume': 2481, 'turnover': 57283.111}, {'ticker': 'AHT^F', 'timestamp': datetime.datetime(2021, 3, 24, 0, 0), 'open': 12.852, 'high': 14.092, 'low': 12.852, 'close': 14.092, 'volume': 5008, 'turnover': 115646.605}, {'ticker': 'AHT^F', 'timestamp': datetime.datetime(2021, 3, 25, 0, 0), 'open': 14.012, 'high': 14.112, 'low': 13.642, 'close': 14.112, 'volume': 913, 'turnover': 21137.18}, {'ticker': 'AHT^F', 'timestamp': datetime.datetime(2021, 3, 26, 0, 0), 'open': 13.682, 'high': 14.132, 'low': 13.641, 'close': 13.831, 'volume': 4118, 'turnover': 94966.482}, {'ticker': 'AHT^F', 'timestamp': datetime.datetime(2021, 3, 29, 0, 0), 'open': 13.282, 'high': 14.482, 'low': 12.782, 'close': 14.482, 'volume': 3955, 'turnover': 91847.25}, {'ticker': 'AHT^F', 'timestamp': datetime.datetime(2021, 3, 30, 0, 0), 'open': 14.122, 'high': 14.682, 'low': 14.073, 'close': 14.582, 'volume': 1130, 'turnover': 26562.779}, {'ticker': 'AHT^F', 'timestamp': datetime.datetime(2021, 3, 31, 0, 0), 'open': 14.782, 'high': 15.012, 'low': 14.682, 'close': 14.697, 'volume': 3895, 'turnover': 93459.9}, {'ticker': 'AHT^F', 'timestamp': datetime.datetime(2021, 4, 1, 0, 0), 'open': 13.892, 'high': 14.472, 'low': 12.442, 'close': 14.332, 'volume': 3158, 'turnover': 72975.61}  ... displaying 10 of 1000 total bound parameter sets ...  {'ticker': 'AHT^F', 'timestamp': datetime.datetime(2025, 3, 13, 0, 0), 'open': 15.69, 'high': 15.69, 'low': 15.69, 'close': 15.69, 'volume': 100, 'turnover': 1569.0}, {'ticker': 'AHT^F', 'timestamp': datetime.datetime(2025, 3, 14, 0, 0), 'open': 15.74, 'high': 15.81, 'low': 15.31, 'close': 15.33, 'volume': 4665, 'turnover': 72403.0}]]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+AHT^G,保存数据失败: (psycopg2.errors.InvalidColumnReference) 错误:  没有匹配ON CONFLICT说明的唯一或者排除约束
+
+[SQL: 
+                        INSERT INTO stock_daily 
+                        (ticker, timestamp, open, high, low, close, volume, turnover)
+                        VALUES (%(ticker)s, %(timestamp)s, %(open)s, %(high)s, %(low)s, %(close)s, %(volume)s, %(turnover)s)
+                        ON CONFLICT (ticker, timestamp) DO UPDATE SET
+                            open = EXCLUDED.open,
+                            high = EXCLUDED.high,
+                            low = EXCLUDED.low,
+                            close = EXCLUDED.close,
+                            volume = EXCLUDED.volume,
+                            turnover = EXCLUDED.turnover
+                    ]
+[parameters: [{'ticker': 'AHT^G', 'timestamp': datetime.datetime(2021, 3, 23, 0, 0), 'open': 14.203, 'high': 14.326, 'low': 14.063, 'close': 14.163, 'volume': 12952, 'turnover': 297197.216}, {'ticker': 'AHT^G', 'timestamp': datetime.datetime(2021, 3, 24, 0, 0), 'open': 14.233, 'high': 14.433, 'low': 13.943, 'close': 14.413, 'volume': 17160, 'turnover': 391614.172}, {'ticker': 'AHT^G', 'timestamp': datetime.datetime(2021, 3, 25, 0, 0), 'open': 14.243, 'high': 14.633, 'low': 14.172, 'close': 14.563, 'volume': 41385, 'turnover': 955913.78}, {'ticker': 'AHT^G', 'timestamp': datetime.datetime(2021, 3, 26, 0, 0), 'open': 14.243, 'high': 14.393, 'low': 14.043, 'close': 14.393, 'volume': 27313, 'turnover': 628739.062}, {'ticker': 'AHT^G', 'timestamp': datetime.datetime(2021, 3, 29, 0, 0), 'open': 13.973, 'high': 14.683, 'low': 13.973, 'close': 14.543, 'volume': 24893, 'turnover': 577387.649}, {'ticker': 'AHT^G', 'timestamp': datetime.datetime(2021, 3, 30, 0, 0), 'open': 14.243, 'high': 15.013, 'low': 14.243, 'close': 14.643, 'volume': 98345, 'turnover': 2296740.629}, {'ticker': 'AHT^G', 'timestamp': datetime.datetime(2021, 3, 31, 0, 0), 'open': 14.633, 'high': 15.403, 'low': 14.533, 'close': 14.663, 'volume': 229980, 'turnover': 5435130.213}, {'ticker': 'AHT^G', 'timestamp': datetime.datetime(2021, 4, 1, 0, 0), 'open': 14.693, 'high': 15.013, 'low': 14.623, 'close': 14.743, 'volume': 55815, 'turnover': 1311445.54}  ... displaying 10 of 1000 total bound parameter sets ...  {'ticker': 'AHT^G', 'timestamp': datetime.datetime(2025, 3, 13, 0, 0), 'open': 15.74, 'high': 15.9, 'low': 15.74, 'close': 15.9, 'volume': 1089, 'turnover': 17312.0}, {'ticker': 'AHT^G', 'timestamp': datetime.datetime(2025, 3, 14, 0, 0), 'open': 15.94, 'high': 15.953, 'low': 15.8, 'close': 15.8, 'volume': 1281, 'turnover': 20282.0}]]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+AHT^H,保存数据失败: (psycopg2.errors.InvalidColumnReference) 错误:  没有匹配ON CONFLICT说明的唯一或者排除约束
+
+[SQL: 
+                        INSERT INTO stock_daily 
+                        (ticker, timestamp, open, high, low, close, volume, turnover)
+                        VALUES (%(ticker)s, %(timestamp)s, %(open)s, %(high)s, %(low)s, %(close)s, %(volume)s, %(turnover)s)
+                        ON CONFLICT (ticker, timestamp) DO UPDATE SET
+                            open = EXCLUDED.open,
+                            high = EXCLUDED.high,
+                            low = EXCLUDED.low,
+                            close = EXCLUDED.close,
+                            volume = EXCLUDED.volume,
+                            turnover = EXCLUDED.turnover
+                    ]
+[parameters: [{'ticker': 'AHT^H', 'timestamp': datetime.datetime(2021, 3, 23, 0, 0), 'open': 14.414, 'high': 14.414, 'low': 14.094, 'close': 14.244, 'volume': 12, 'turnover': 273.84}, {'ticker': 'AHT^H', 'timestamp': datetime.datetime(2021, 3, 24, 0, 0), 'open': 13.804, 'high': 14.234, 'low': 13.574, 'close': 14.224, 'volume': 5139, 'turnover': 117394.68}, {'ticker': 'AHT^H', 'timestamp': datetime.datetime(2021, 3, 25, 0, 0), 'open': 14.164, 'high': 14.464, 'low': 13.949, 'close': 14.304, 'volume': 13917, 'turnover': 321547.929}, {'ticker': 'AHT^H', 'timestamp': datetime.datetime(2021, 3, 26, 0, 0), 'open': 14.284, 'high': 14.284, 'low': 14.084, 'close': 14.194, 'volume': 4000, 'turnover': 92232.0}, {'ticker': 'AHT^H', 'timestamp': datetime.datetime(2021, 3, 29, 0, 0), 'open': 13.549, 'high': 14.634, 'low': 13.544, 'close': 14.434, 'volume': 8004, 'turnover': 186517.485}, {'ticker': 'AHT^H', 'timestamp': datetime.datetime(2021, 3, 30, 0, 0), 'open': 14.674, 'high': 14.984, 'low': 14.594, 'close': 14.614, 'volume': 7097, 'turnover': 168010.522}, {'ticker': 'AHT^H', 'timestamp': datetime.datetime(2021, 3, 31, 0, 0), 'open': 14.594, 'high': 15.224, 'low': 14.594, 'close': 14.694, 'volume': 15320, 'turnover': 365057.58}, {'ticker': 'AHT^H', 'timestamp': datetime.datetime(2021, 4, 1, 0, 0), 'open': 14.324, 'high': 14.794, 'low': 14.324, 'close': 14.794, 'volume': 10400, 'turnover': 246194.074}  ... displaying 10 of 1000 total bound parameter sets ...  {'ticker': 'AHT^H', 'timestamp': datetime.datetime(2025, 3, 13, 0, 0), 'open': 16.0, 'high': 16.0, 'low': 16.0, 'close': 16.0, 'volume': 2, 'turnover': 32.0}, {'ticker': 'AHT^H', 'timestamp': datetime.datetime(2025, 3, 14, 0, 0), 'open': 16.0, 'high': 16.4, 'low': 16.0, 'close': 16.0, 'volume': 4368, 'turnover': 70292.0}]]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+AHT^I,保存数据失败: (psycopg2.errors.InvalidColumnReference) 错误:  没有匹配ON CONFLICT说明的唯一或者排除约束
+
+[SQL: 
+                        INSERT INTO stock_daily 
+                        (ticker, timestamp, open, high, low, close, volume, turnover)
+                        VALUES (%(ticker)s, %(timestamp)s, %(open)s, %(high)s, %(low)s, %(close)s, %(volume)s, %(turnover)s)
+                        ON CONFLICT (ticker, timestamp) DO UPDATE SET
+                            open = EXCLUDED.open,
+                            high = EXCLUDED.high,
+                            low = EXCLUDED.low,
+                            close = EXCLUDED.close,
+                            volume = EXCLUDED.volume,
+                            turnover = EXCLUDED.turnover
+                    ]
+[parameters: [{'ticker': 'AHT^I', 'timestamp': datetime.datetime(2021, 3, 23, 0, 0), 'open': 14.094, 'high': 14.094, 'low': 14.024, 'close': 14.094, 'volume': 5200, 'turnover': 119348.5}, {'ticker': 'AHT^I', 'timestamp': datetime.datetime(2021, 3, 24, 0, 0), 'open': 14.074, 'high': 14.204, 'low': 14.024, 'close': 14.104, 'volume': 5394, 'turnover': 124260.91}, {'ticker': 'AHT^I', 'timestamp': datetime.datetime(2021, 3, 25, 0, 0), 'open': 14.094, 'high': 14.324, 'low': 13.939, 'close': 14.324, 'volume': 13494, 'turnover': 309342.925}, {'ticker': 'AHT^I', 'timestamp': datetime.datetime(2021, 3, 26, 0, 0), 'open': 14.094, 'high': 14.234, 'low': 14.094, 'close': 14.094, 'volume': 1720, 'turnover': 39694.4}, {'ticker': 'AHT^I', 'timestamp': datetime.datetime(2021, 3, 29, 0, 0), 'open': 13.744, 'high': 14.794, 'low': 13.674, 'close': 14.634, 'volume': 9804, 'turnover': 229570.567}, {'ticker': 'AHT^I', 'timestamp': datetime.datetime(2021, 3, 30, 0, 0), 'open': 14.334, 'high': 14.924, 'low': 14.334, 'close': 14.799, 'volume': 7562, 'turnover': 179179.705}, {'ticker': 'AHT^I', 'timestamp': datetime.datetime(2021, 3, 31, 0, 0), 'open': 14.744, 'high': 15.404, 'low': 14.704, 'close': 14.724, 'volume': 26316, 'turnover': 630254.809}, {'ticker': 'AHT^I', 'timestamp': datetime.datetime(2021, 4, 1, 0, 0), 'open': 15.044, 'high': 15.044, 'low': 14.574, 'close': 14.824, 'volume': 7288, 'turnover': 173088.8}  ... displaying 10 of 1000 total bound parameter sets ...  {'ticker': 'AHT^I', 'timestamp': datetime.datetime(2025, 3, 13, 0, 0), 'open': 16.02, 'high': 16.02, 'low': 16.01, 'close': 16.01, 'volume': 394, 'turnover': 6342.0}, {'ticker': 'AHT^I', 'timestamp': datetime.datetime(2025, 3, 14, 0, 0), 'open': 16.0, 'high': 16.13, 'low': 16.0, 'close': 16.13, 'volume': 272, 'turnover': 4375.0}]]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+AKO/A,保存数据失败: (psycopg2.errors.InvalidColumnReference) 错误:  没有匹配ON CONFLICT说明的唯一或者排除约束
+
+[SQL: 
+                        INSERT INTO stock_daily 
+                        (ticker, timestamp, open, high, low, close, volume, turnover)
+                        VALUES (%(ticker)s, %(timestamp)s, %(open)s, %(high)s, %(low)s, %(close)s, %(volume)s, %(turnover)s)
+                        ON CONFLICT (ticker, timestamp) DO UPDATE SET
+                            open = EXCLUDED.open,
+                            high = EXCLUDED.high,
+                            low = EXCLUDED.low,
+                            close = EXCLUDED.close,
+                            volume = EXCLUDED.volume,
+                            turnover = EXCLUDED.turnover
+                    ]
+[parameters: [{'ticker': 'AKO/A', 'timestamp': datetime.datetime(2021, 3, 23, 0, 0), 'open': 8.602, 'high': 8.602, 'low': 8.383, 'close': 8.383, 'volume': 461, 'turnover': 5530.9}, {'ticker': 'AKO/A', 'timestamp': datetime.datetime(2021, 3, 24, 0, 0), 'open': 8.645, 'high': 8.864, 'low': 8.645, 'close': 8.864, 'volume': 522, 'turnover': 6434.64}, {'ticker': 'AKO/A', 'timestamp': datetime.datetime(2021, 3, 25, 0, 0), 'open': 8.61, 'high': 8.829, 'low': 8.61, 'close': 8.811, 'volume': 468, 'turnover': 5389.105}, {'ticker': 'AKO/A', 'timestamp': datetime.datetime(2021, 3, 26, 0, 0), 'open': 7.894, 'high': 8.68, 'low': 7.894, 'close': 8.68, 'volume': 606, 'turnover': 6785.785}, {'ticker': 'AKO/A', 'timestamp': datetime.datetime(2021, 3, 29, 0, 0), 'open': 8.113, 'high': 8.113, 'low': 8.113, 'close': 8.113, 'volume': 370, 'turnover': 4211.163}, {'ticker': 'AKO/A', 'timestamp': datetime.datetime(2021, 3, 30, 0, 0), 'open': 9.004, 'high': 9.004, 'low': 8.506, 'close': 8.567, 'volume': 1526, 'turnover': 18363.641}, {'ticker': 'AKO/A', 'timestamp': datetime.datetime(2021, 3, 31, 0, 0), 'open': 8.471, 'high': 8.471, 'low': 8.471, 'close': 8.471, 'volume': 266, 'turnover': 3198.85}, {'ticker': 'AKO/A', 'timestamp': datetime.datetime(2021, 4, 1, 0, 0), 'open': 7.894, 'high': 8.357, 'low': 7.631, 'close': 8.34, 'volume': 5860, 'turnover': 66680.508}  ... displaying 10 of 1000 total bound parameter sets ...  {'ticker': 'AKO/A', 'timestamp': datetime.datetime(2025, 3, 13, 0, 0), 'open': 15.44, 'high': 15.44, 'low': 15.44, 'close': 15.44, 'volume': 379, 'turnover': 6012.0}, {'ticker': 'AKO/A', 'timestamp': datetime.datetime(2025, 3, 14, 0, 0), 'open': 15.44, 'high': 15.44, 'low': 15.44, 'close': 15.44, 'volume': 58, 'turnover': 942.0}]]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+AKO/B,保存数据失败: (psycopg2.errors.InvalidColumnReference) 错误:  没有匹配ON CONFLICT说明的唯一或者排除约束
+
+[SQL: 
+                        INSERT INTO stock_daily 
+                        (ticker, timestamp, open, high, low, close, volume, turnover)
+                        VALUES (%(ticker)s, %(timestamp)s, %(open)s, %(high)s, %(low)s, %(close)s, %(volume)s, %(turnover)s)
+                        ON CONFLICT (ticker, timestamp) DO UPDATE SET
+                            open = EXCLUDED.open,
+                            high = EXCLUDED.high,
+                            low = EXCLUDED.low,
+                            close = EXCLUDED.close,
+                            volume = EXCLUDED.volume,
+                            turnover = EXCLUDED.turnover
+                    ]
+[parameters: [{'ticker': 'AKO/B', 'timestamp': datetime.datetime(2021, 3, 23, 0, 0), 'open': 10.149, 'high': 10.193, 'low': 9.972, 'close': 9.972, 'volume': 2375, 'turnover': 32581.791}, {'ticker': 'AKO/B', 'timestamp': datetime.datetime(2021, 3, 24, 0, 0), 'open': 10.069, 'high': 10.414, 'low': 9.821, 'close': 10.414, 'volume': 5140, 'turnover': 71830.37}, {'ticker': 'AKO/B', 'timestamp': datetime.datetime(2021, 3, 25, 0, 0), 'open': 9.865, 'high': 9.941, 'low': 9.865, 'close': 9.941, 'volume': 1248, 'turnover': 16837.755}, {'ticker': 'AKO/B', 'timestamp': datetime.datetime(2021, 3, 26, 0, 0), 'open': 9.75, 'high': 10.281, 'low': 9.75, 'close': 9.856, 'volume': 1177, 'turnover': 15932.855}, {'ticker': 'AKO/B', 'timestamp': datetime.datetime(2021, 3, 29, 0, 0), 'open': 9.821, 'high': 10.033, 'low': 9.732, 'close': 9.732, 'volume': 2334, 'turnover': 31511.455}, {'ticker': 'AKO/B', 'timestamp': datetime.datetime(2021, 3, 30, 0, 0), 'open': 9.768, 'high': 10.321, 'low': 9.768, 'close': 10.149, 'volume': 13176, 'turnover': 181817.725}, {'ticker': 'AKO/B', 'timestamp': datetime.datetime(2021, 3, 31, 0, 0), 'open': 9.989, 'high': 10.485, 'low': 9.989, 'close': 10.326, 'volume': 3796, 'turnover': 52852.87}, {'ticker': 'AKO/B', 'timestamp': datetime.datetime(2021, 4, 1, 0, 0), 'open': 10.025, 'high': 10.636, 'low': 10.025, 'close': 10.636, 'volume': 4431, 'turnover': 61823.861}  ... displaying 10 of 1000 total bound parameter sets ...  {'ticker': 'AKO/B', 'timestamp': datetime.datetime(2025, 3, 13, 0, 0), 'open': 21.69, 'high': 22.078, 'low': 21.14, 'close': 22.078, 'volume': 11470, 'turnover': 251361.0}, {'ticker': 'AKO/B', 'timestamp': datetime.datetime(2025, 3, 14, 0, 0), 'open': 22.29, 'high': 22.727, 'low': 21.72, 'close': 21.83, 'volume': 13267, 'turnover': 294043.0}]]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+ALB^A,保存数据失败: (psycopg2.errors.InvalidColumnReference) 错误:  没有匹配ON CONFLICT说明的唯一或者排除约束
+
+[SQL: 
+                        INSERT INTO stock_daily 
+                        (ticker, timestamp, open, high, low, close, volume, turnover)
+                        VALUES (%(ticker)s, %(timestamp)s, %(open)s, %(high)s, %(low)s, %(close)s, %(volume)s, %(turnover)s)
+                        ON CONFLICT (ticker, timestamp) DO UPDATE SET
+                            open = EXCLUDED.open,
+                            high = EXCLUDED.high,
+                            low = EXCLUDED.low,
+                            close = EXCLUDED.close,
+                            volume = EXCLUDED.volume,
+                            turnover = EXCLUDED.turnover
+                    ]
+[parameters: [{'ticker': 'ALB^A', 'timestamp': datetime.datetime(2024, 3, 13, 0, 0), 'open': 52.625, 'high': 53.645, 'low': 52.625, 'close': 53.195, 'volume': 351734, 'turnover': 19917063.0}, {'ticker': 'ALB^A', 'timestamp': datetime.datetime(2024, 3, 14, 0, 0), 'open': 54.425, 'high': 54.425, 'low': 51.125, 'close': 51.125, 'volume': 677782, 'turnover': 37523166.0}, {'ticker': 'ALB^A', 'timestamp': datetime.datetime(2024, 3, 15, 0, 0), 'open': 50.765, 'high': 52.245, 'low': 50.405, 'close': 51.795, 'volume': 532014, 'turnover': 29135756.0}, {'ticker': 'ALB^A', 'timestamp': datetime.datetime(2024, 3, 18, 0, 0), 'open': 52.205, 'high': 53.065, 'low': 52.195, 'close': 52.815, 'volume': 12864, 'turnover': 725992.0}, {'ticker': 'ALB^A', 'timestamp': datetime.datetime(2024, 3, 19, 0, 0), 'open': 51.975, 'high': 52.675, 'low': 51.345, 'close': 51.423, 'volume': 1223772, 'turnover': 67321716.0}, {'ticker': 'ALB^A', 'timestamp': datetime.datetime(2024, 3, 20, 0, 0), 'open': 53.485, 'high': 53.575, 'low': 51.425, 'close': 52.805, 'volume': 322407, 'turnover': 18095614.0}, {'ticker': 'ALB^A', 'timestamp': datetime.datetime(2024, 3, 21, 0, 0), 'open': 54.239, 'high': 55.745, 'low': 52.745, 'close': 55.745, 'volume': 908286, 'turnover': 51652014.0}, {'ticker': 'ALB^A', 'timestamp': datetime.datetime(2024, 3, 22, 0, 0), 'open': 52.175, 'high': 52.625, 'low': 51.325, 'close': 51.325, 'volume': 1300259, 'turnover': 72062538.0}  ... displaying 10 of 252 total bound parameter sets ...  {'ticker': 'ALB^A', 'timestamp': datetime.datetime(2025, 3, 13, 0, 0), 'open': 36.2, 'high': 36.84, 'low': 35.21, 'close': 35.7, 'volume': 221001, 'turnover': 7962451.0}, {'ticker': 'ALB^A', 'timestamp': datetime.datetime(2025, 3, 14, 0, 0), 'open': 36.05, 'high': 37.3, 'low': 36.05, 'close': 37.05, 'volume': 2119351, 'turnover': 78567657.0}]]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+ALL^B,保存数据失败: (psycopg2.errors.InvalidColumnReference) 错误:  没有匹配ON CONFLICT说明的唯一或者排除约束
+
+[SQL: 
+                        INSERT INTO stock_daily 
+                        (ticker, timestamp, open, high, low, close, volume, turnover)
+                        VALUES (%(ticker)s, %(timestamp)s, %(open)s, %(high)s, %(low)s, %(close)s, %(volume)s, %(turnover)s)
+                        ON CONFLICT (ticker, timestamp) DO UPDATE SET
+                            open = EXCLUDED.open,
+                            high = EXCLUDED.high,
+                            low = EXCLUDED.low,
+                            close = EXCLUDED.close,
+                            volume = EXCLUDED.volume,
+                            turnover = EXCLUDED.turnover
+                    ]
+[parameters: [{'ticker': 'ALL^B', 'timestamp': datetime.datetime(2021, 3, 23, 0, 0), 'open': 20.573, 'high': 20.751, 'low': 20.563, 'close': 20.613, 'volume': 34701, 'turnover': 920637.84}, {'ticker': 'ALL^B', 'timestamp': datetime.datetime(2021, 3, 24, 0, 0), 'open': 20.653, 'high': 20.853, 'low': 20.583, 'close': 20.633, 'volume': 81667, 'turnover': 2174268.939}, {'ticker': 'ALL^B', 'timestamp': datetime.datetime(2021, 3, 25, 0, 0), 'open': 20.663, 'high': 20.663, 'low': 20.513, 'close': 20.523, 'volume': 21874, 'turnover': 580283.973}, {'ticker': 'ALL^B', 'timestamp': datetime.datetime(2021, 3, 26, 0, 0), 'open': 20.483, 'high': 20.633, 'low': 20.483, 'close': 20.543, 'volume': 15275, 'turnover': 404777.82}, {'ticker': 'ALL^B', 'timestamp': datetime.datetime(2021, 3, 29, 0, 0), 'open': 20.493, 'high': 20.543, 'low': 20.383, 'close': 20.443, 'volume': 21117, 'turnover': 557035.35}, {'ticker': 'ALL^B', 'timestamp': datetime.datetime(2021, 3, 30, 0, 0), 'open': 20.423, 'high': 20.523, 'low': 20.423, 'close': 20.503, 'volume': 22753, 'turnover': 600967.866}, {'ticker': 'ALL^B', 'timestamp': datetime.datetime(2021, 3, 31, 0, 0), 'open': 20.293, 'high': 20.453, 'low': 20.293, 'close': 20.323, 'volume': 42544, 'turnover': 1119265.985}, {'ticker': 'ALL^B', 'timestamp': datetime.datetime(2021, 4, 1, 0, 0), 'open': 20.353, 'high': 20.543, 'low': 20.353, 'close': 20.498, 'volume': 23345, 'turnover': 615444.639}  ... displaying 10 of 1000 total bound parameter sets ...  {'ticker': 'ALL^B', 'timestamp': datetime.datetime(2025, 3, 13, 0, 0), 'open': 26.07, 'high': 26.149, 'low': 26.01, 'close': 26.08, 'volume': 30339, 'turnover': 790563.0}, {'ticker': 'ALL^B', 'timestamp': datetime.datetime(2025, 3, 14, 0, 0), 'open': 26.14, 'high': 26.15, 'low': 26.04, 'close': 26.05, 'volume': 26239, 'turnover': 684609.0}]]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+ALL^H,保存数据失败: (psycopg2.errors.InvalidColumnReference) 错误:  没有匹配ON CONFLICT说明的唯一或者排除约束
+
+[SQL: 
+                        INSERT INTO stock_daily 
+                        (ticker, timestamp, open, high, low, close, volume, turnover)
+                        VALUES (%(ticker)s, %(timestamp)s, %(open)s, %(high)s, %(low)s, %(close)s, %(volume)s, %(turnover)s)
+                        ON CONFLICT (ticker, timestamp) DO UPDATE SET
+                            open = EXCLUDED.open,
+                            high = EXCLUDED.high,
+                            low = EXCLUDED.low,
+                            close = EXCLUDED.close,
+                            volume = EXCLUDED.volume,
+                            turnover = EXCLUDED.turnover
+                    ]
+[parameters: [{'ticker': 'ALL^H', 'timestamp': datetime.datetime(2021, 3, 23, 0, 0), 'open': 22.596, 'high': 22.766, 'low': 22.546, 'close': 22.756, 'volume': 83488, 'turnover': 2238849.825}, {'ticker': 'ALL^H', 'timestamp': datetime.datetime(2021, 3, 24, 0, 0), 'open': 22.826, 'high': 23.196, 'low': 22.666, 'close': 23.106, 'volume': 143180, 'turnover': 3891587.001}, {'ticker': 'ALL^H', 'timestamp': datetime.datetime(2021, 3, 25, 0, 0), 'open': 23.016, 'high': 23.116, 'low': 23.006, 'close': 23.106, 'volume': 66737, 'turnover': 1815869.193}, {'ticker': 'ALL^H', 'timestamp': datetime.datetime(2021, 3, 26, 0, 0), 'open': 23.066, 'high': 23.126, 'low': 23.006, 'close': 23.016, 'volume': 138911, 'turnover': 3780834.998}, {'ticker': 'ALL^H', 'timestamp': datetime.datetime(2021, 3, 29, 0, 0), 'open': 23.096, 'high': 23.116, 'low': 22.876, 'close': 22.886, 'volume': 66164, 'turnover': 1795653.548}, {'ticker': 'ALL^H', 'timestamp': datetime.datetime(2021, 3, 30, 0, 0), 'open': 22.606, 'high': 22.716, 'low': 22.466, 'close': 22.716, 'volume': 145709, 'turnover': 3887830.476}, {'ticker': 'ALL^H', 'timestamp': datetime.datetime(2021, 3, 31, 0, 0), 'open': 22.716, 'high': 22.936, 'low': 22.716, 'close': 22.866, 'volume': 98349, 'turnover': 2657736.143}, {'ticker': 'ALL^H', 'timestamp': datetime.datetime(2021, 4, 1, 0, 0), 'open': 23.016, 'high': 23.016, 'low': 22.856, 'close': 22.936, 'volume': 45527, 'turnover': 1233005.749}  ... displaying 10 of 1000 total bound parameter sets ...  {'ticker': 'ALL^H', 'timestamp': datetime.datetime(2025, 3, 13, 0, 0), 'open': 22.03, 'high': 22.12, 'low': 21.88, 'close': 22.04, 'volume': 43227, 'turnover': 952060.0}, {'ticker': 'ALL^H', 'timestamp': datetime.datetime(2025, 3, 14, 0, 0), 'open': 21.97, 'high': 22.17, 'low': 21.95, 'close': 22.14, 'volume': 101574, 'turnover': 2245080.0}]]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+ALL^I,保存数据失败: (psycopg2.errors.InvalidColumnReference) 错误:  没有匹配ON CONFLICT说明的唯一或者排除约束
+
+[SQL: 
+                        INSERT INTO stock_daily 
+                        (ticker, timestamp, open, high, low, close, volume, turnover)
+                        VALUES (%(ticker)s, %(timestamp)s, %(open)s, %(high)s, %(low)s, %(close)s, %(volume)s, %(turnover)s)
+                        ON CONFLICT (ticker, timestamp) DO UPDATE SET
+                            open = EXCLUDED.open,
+                            high = EXCLUDED.high,
+                            low = EXCLUDED.low,
+                            close = EXCLUDED.close,
+                            volume = EXCLUDED.volume,
+                            turnover = EXCLUDED.turnover
+                    ]
+[parameters: [{'ticker': 'ALL^I', 'timestamp': datetime.datetime(2021, 3, 23, 0, 0), 'open': 22.571, 'high': 22.631, 'low': 22.501, 'close': 22.631, 'volume': 18684, 'turnover': 494010.716}, {'ticker': 'ALL^I', 'timestamp': datetime.datetime(2021, 3, 24, 0, 0), 'open': 22.651, 'high': 22.961, 'low': 22.642, 'close': 22.891, 'volume': 30707, 'turnover': 820458.956}, {'ticker': 'ALL^I', 'timestamp': datetime.datetime(2021, 3, 25, 0, 0), 'open': 22.891, 'high': 22.891, 'low': 22.791, 'close': 22.801, 'volume': 14688, 'turnover': 392467.125}, {'ticker': 'ALL^I', 'timestamp': datetime.datetime(2021, 3, 26, 0, 0), 'open': 22.891, 'high': 22.891, 'low': 22.781, 'close': 22.781, 'volume': 5978, 'turnover': 159549.341}, {'ticker': 'ALL^I', 'timestamp': datetime.datetime(2021, 3, 29, 0, 0), 'open': 22.751, 'high': 22.781, 'low': 22.631, 'close': 22.641, 'volume': 20466, 'turnover': 543668.809}, {'ticker': 'ALL^I', 'timestamp': datetime.datetime(2021, 3, 30, 0, 0), 'open': 22.281, 'high': 22.581, 'low': 22.281, 'close': 22.581, 'volume': 17632, 'turnover': 464038.252}, {'ticker': 'ALL^I', 'timestamp': datetime.datetime(2021, 3, 31, 0, 0), 'open': 22.611, 'high': 22.701, 'low': 22.541, 'close': 22.651, 'volume': 22605, 'turnover': 599196.776}, {'ticker': 'ALL^I', 'timestamp': datetime.datetime(2021, 4, 1, 0, 0), 'open': 22.721, 'high': 22.831, 'low': 22.721, 'close': 22.791, 'volume': 14982, 'turnover': 399431.331}  ... displaying 10 of 1000 total bound parameter sets ...  {'ticker': 'ALL^I', 'timestamp': datetime.datetime(2025, 3, 13, 0, 0), 'open': 20.29, 'high': 20.32, 'low': 20.2, 'close': 20.29, 'volume': 20049, 'turnover': 406123.0}, {'ticker': 'ALL^I', 'timestamp': datetime.datetime(2025, 3, 14, 0, 0), 'open': 20.28, 'high': 20.38, 'low': 20.28, 'close': 20.36, 'volume': 13966, 'turnover': 284003.0}]]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+ALL^J,保存数据失败: (psycopg2.errors.InvalidColumnReference) 错误:  没有匹配ON CONFLICT说明的唯一或者排除约束
+
+[SQL: 
+                        INSERT INTO stock_daily 
+                        (ticker, timestamp, open, high, low, close, volume, turnover)
+                        VALUES (%(ticker)s, %(timestamp)s, %(open)s, %(high)s, %(low)s, %(close)s, %(volume)s, %(turnover)s)
+                        ON CONFLICT (ticker, timestamp) DO UPDATE SET
+                            open = EXCLUDED.open,
+                            high = EXCLUDED.high,
+                            low = EXCLUDED.low,
+                            close = EXCLUDED.close,
+                            volume = EXCLUDED.volume,
+                            turnover = EXCLUDED.turnover
+                    ]
+[parameters: [{'ticker': 'ALL^J', 'timestamp': datetime.datetime(2023, 5, 30, 0, 0), 'open': 23.112, 'high': 23.522, 'low': 23.112, 'close': 23.442, 'volume': 295002, 'turnover': 7576257.0}, {'ticker': 'ALL^J', 'timestamp': datetime.datetime(2023, 5, 31, 0, 0), 'open': 23.492, 'high': 23.492, 'low': 23.192, 'close': 23.372, 'volume': 164122, 'turnover': 4327890.0}, {'ticker': 'ALL^J', 'timestamp': datetime.datetime(2023, 6, 1, 0, 0), 'open': 23.332, 'high': 23.372, 'low': 23.302, 'close': 23.372, 'volume': 103882, 'turnover': 2743376.0}, {'ticker': 'ALL^J', 'timestamp': datetime.datetime(2023, 6, 2, 0, 0), 'open': 23.412, 'high': 23.432, 'low': 23.292, 'close': 23.422, 'volume': 186585, 'turnover': 4922699.0}, {'ticker': 'ALL^J', 'timestamp': datetime.datetime(2023, 6, 5, 0, 0), 'open': 23.412, 'high': 23.482, 'low': 23.342, 'close': 23.412, 'volume': 193447, 'turnover': 5117657.0}, {'ticker': 'ALL^J', 'timestamp': datetime.datetime(2023, 6, 6, 0, 0), 'open': 23.422, 'high': 23.532, 'low': 23.372, 'close': 23.472, 'volume': 195503, 'turnover': 5183872.0}, {'ticker': 'ALL^J', 'timestamp': datetime.datetime(2023, 6, 7, 0, 0), 'open': 23.502, 'high': 23.562, 'low': 23.392, 'close': 23.422, 'volume': 163792, 'turnover': 4341032.0}, {'ticker': 'ALL^J', 'timestamp': datetime.datetime(2023, 6, 8, 0, 0), 'open': 23.442, 'high': 23.472, 'low': 23.384, 'close': 23.432, 'volume': 158813, 'turnover': 4207682.0}  ... displaying 10 of 450 total bound parameter sets ...  {'ticker': 'ALL^J', 'timestamp': datetime.datetime(2025, 3, 13, 0, 0), 'open': 26.98, 'high': 27.09, 'low': 26.93, 'close': 27.02, 'volume': 21179, 'turnover': 572129.0}, {'ticker': 'ALL^J', 'timestamp': datetime.datetime(2025, 3, 14, 0, 0), 'open': 27.01, 'high': 27.158, 'low': 26.97, 'close': 27.09, 'volume': 28126, 'turnover': 760996.0}]]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+ALTG^A,保存数据失败: (psycopg2.errors.InvalidColumnReference) 错误:  没有匹配ON CONFLICT说明的唯一或者排除约束
+
+[SQL: 
+                        INSERT INTO stock_daily 
+                        (ticker, timestamp, open, high, low, close, volume, turnover)
+                        VALUES (%(ticker)s, %(timestamp)s, %(open)s, %(high)s, %(low)s, %(close)s, %(volume)s, %(turnover)s)
+                        ON CONFLICT (ticker, timestamp) DO UPDATE SET
+                            open = EXCLUDED.open,
+                            high = EXCLUDED.high,
+                            low = EXCLUDED.low,
+                            close = EXCLUDED.close,
+                            volume = EXCLUDED.volume,
+                            turnover = EXCLUDED.turnover
+                    ]
+[parameters: [{'ticker': 'ALTG^A', 'timestamp': datetime.datetime(2021, 3, 23, 0, 0), 'open': 19.375, 'high': 19.505, 'low': 19.055, 'close': 19.085, 'volume': 6448, 'turnover': 178000.683}, {'ticker': 'ALTG^A', 'timestamp': datetime.datetime(2021, 3, 24, 0, 0), 'open': 19.085, 'high': 19.175, 'low': 19.075, 'close': 19.075, 'volume': 1620, 'turnover': 44089.076}, {'ticker': 'ALTG^A', 'timestamp': datetime.datetime(2021, 3, 25, 0, 0), 'open': 19.085, 'high': 19.085, 'low': 18.625, 'close': 18.875, 'volume': 10893, 'turnover': 294795.414}, {'ticker': 'ALTG^A', 'timestamp': datetime.datetime(2021, 3, 26, 0, 0), 'open': 20.075, 'high': 20.075, 'low': 18.645, 'close': 19.112, 'volume': 3035, 'turnover': 82759.187}, {'ticker': 'ALTG^A', 'timestamp': datetime.datetime(2021, 3, 29, 0, 0), 'open': 18.775, 'high': 19.095, 'low': 18.275, 'close': 18.522, 'volume': 16220, 'turnover': 433367.834}, {'ticker': 'ALTG^A', 'timestamp': datetime.datetime(2021, 3, 30, 0, 0), 'open': 19.095, 'high': 19.835, 'low': 18.535, 'close': 19.1, 'volume': 3714, 'turnover': 99616.6}, {'ticker': 'ALTG^A', 'timestamp': datetime.datetime(2021, 3, 31, 0, 0), 'open': 18.875, 'high': 19.195, 'low': 18.813, 'close': 18.885, 'volume': 2354, 'turnover': 63593.195}, {'ticker': 'ALTG^A', 'timestamp': datetime.datetime(2021, 4, 1, 0, 0), 'open': 18.815, 'high': 19.065, 'low': 18.796, 'close': 18.975, 'volume': 2112, 'turnover': 57165.304}  ... displaying 10 of 1000 total bound parameter sets ...  {'ticker': 'ALTG^A', 'timestamp': datetime.datetime(2025, 3, 13, 0, 0), 'open': 25.595, 'high': 25.7, 'low': 25.46, 'close': 25.46, 'volume': 3769, 'turnover': 96385.0}, {'ticker': 'ALTG^A', 'timestamp': datetime.datetime(2025, 3, 14, 0, 0), 'open': 25.59, 'high': 25.59, 'low': 25.48, 'close': 25.49, 'volume': 508, 'turnover': 12966.0}]]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+AMH^G,保存数据失败: (psycopg2.errors.InvalidColumnReference) 错误:  没有匹配ON CONFLICT说明的唯一或者排除约束
+
+[SQL: 
+                        INSERT INTO stock_daily 
+                        (ticker, timestamp, open, high, low, close, volume, turnover)
+                        VALUES (%(ticker)s, %(timestamp)s, %(open)s, %(high)s, %(low)s, %(close)s, %(volume)s, %(turnover)s)
+                        ON CONFLICT (ticker, timestamp) DO UPDATE SET
+                            open = EXCLUDED.open,
+                            high = EXCLUDED.high,
+                            low = EXCLUDED.low,
+                            close = EXCLUDED.close,
+                            volume = EXCLUDED.volume,
+                            turnover = EXCLUDED.turnover
+                    ]
+[parameters: [{'ticker': 'AMH^G', 'timestamp': datetime.datetime(2021, 3, 23, 0, 0), 'open': 20.065, 'high': 20.065, 'low': 20.065, 'close': 20.065, 'volume': 0, 'turnover': 0.0}, {'ticker': 'AMH^G', 'timestamp': datetime.datetime(2021, 3, 24, 0, 0), 'open': 20.065, 'high': 20.125, 'low': 20.065, 'close': 20.065, 'volume': 4233, 'turnover': 109915.259}, {'ticker': 'AMH^G', 'timestamp': datetime.datetime(2021, 3, 25, 0, 0), 'open': 20.015, 'high': 20.015, 'low': 19.955, 'close': 19.985, 'volume': 2092, 'turnover': 54140.751}, {'ticker': 'AMH^G', 'timestamp': datetime.datetime(2021, 3, 26, 0, 0), 'open': 20.125, 'high': 20.125, 'low': 19.945, 'close': 19.945, 'volume': 3216, 'turnover': 83351.42}, {'ticker': 'AMH^G', 'timestamp': datetime.datetime(2021, 3, 29, 0, 0), 'open': 19.903, 'high': 20.125, 'low': 19.903, 'close': 20.115, 'volume': 5829, 'turnover': 151133.331}, {'ticker': 'AMH^G', 'timestamp': datetime.datetime(2021, 3, 30, 0, 0), 'open': 19.965, 'high': 20.105, 'low': 19.956, 'close': 20.085, 'volume': 1391, 'turnover': 36032.829}, {'ticker': 'AMH^G', 'timestamp': datetime.datetime(2021, 3, 31, 0, 0), 'open': 20.14, 'high': 20.14, 'low': 20.055, 'close': 20.105, 'volume': 2575, 'turnover': 66845.809}, {'ticker': 'AMH^G', 'timestamp': datetime.datetime(2021, 4, 1, 0, 0), 'open': 20.065, 'high': 20.105, 'low': 20.065, 'close': 20.105, 'volume': 4123, 'turnover': 107098.428}  ... displaying 10 of 1000 total bound parameter sets ...  {'ticker': 'AMH^G', 'timestamp': datetime.datetime(2025, 3, 13, 0, 0), 'open': 23.193, 'high': 23.193, 'low': 22.993, 'close': 23.193, 'volume': 7287, 'turnover': 170901.0}, {'ticker': 'AMH^G', 'timestamp': datetime.datetime(2025, 3, 14, 0, 0), 'open': 23.28, 'high': 23.32, 'low': 23.09, 'close': 23.09, 'volume': 3285, 'turnover': 76018.0}]]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+AMH^H,保存数据失败: (psycopg2.errors.InvalidColumnReference) 错误:  没有匹配ON CONFLICT说明的唯一或者排除约束
+
+[SQL: 
+                        INSERT INTO stock_daily 
+                        (ticker, timestamp, open, high, low, close, volume, turnover)
+                        VALUES (%(ticker)s, %(timestamp)s, %(open)s, %(high)s, %(low)s, %(close)s, %(volume)s, %(turnover)s)
+                        ON CONFLICT (ticker, timestamp) DO UPDATE SET
+                            open = EXCLUDED.open,
+                            high = EXCLUDED.high,
+                            low = EXCLUDED.low,
+                            close = EXCLUDED.close,
+                            volume = EXCLUDED.volume,
+                            turnover = EXCLUDED.turnover
+                    ]
+[parameters: [{'ticker': 'AMH^H', 'timestamp': datetime.datetime(2021, 3, 23, 0, 0), 'open': 20.46, 'high': 20.63, 'low': 20.46, 'close': 20.63, 'volume': 2800, 'turnover': 75139.574}, {'ticker': 'AMH^H', 'timestamp': datetime.datetime(2021, 3, 24, 0, 0), 'open': 20.7, 'high': 20.769, 'low': 20.66, 'close': 20.76, 'volume': 11955, 'turnover': 322497.99}, {'ticker': 'AMH^H', 'timestamp': datetime.datetime(2021, 3, 25, 0, 0), 'open': 20.777, 'high': 20.777, 'low': 20.65, 'close': 20.65, 'volume': 6550, 'turnover': 176341.416}, {'ticker': 'AMH^H', 'timestamp': datetime.datetime(2021, 3, 26, 0, 0), 'open': 20.72, 'high': 20.74, 'low': 20.66, 'close': 20.68, 'volume': 2999, 'turnover': 80813.384}, {'ticker': 'AMH^H', 'timestamp': datetime.datetime(2021, 3, 29, 0, 0), 'open': 20.65, 'high': 20.65, 'low': 20.47, 'close': 20.49, 'volume': 21288, 'turnover': 571775.918}, {'ticker': 'AMH^H', 'timestamp': datetime.datetime(2021, 3, 30, 0, 0), 'open': 20.537, 'high': 20.537, 'low': 20.43, 'close': 20.47, 'volume': 60491, 'turnover': 1617207.281}, {'ticker': 'AMH^H', 'timestamp': datetime.datetime(2021, 3, 31, 0, 0), 'open': 20.53, 'high': 20.65, 'low': 20.51, 'close': 20.65, 'volume': 14664, 'turnover': 393877.815}, {'ticker': 'AMH^H', 'timestamp': datetime.datetime(2021, 4, 1, 0, 0), 'open': 20.67, 'high': 20.68, 'low': 20.59, 'close': 20.64, 'volume': 5310, 'turnover': 142812.102}  ... displaying 10 of 1000 total bound parameter sets ...  {'ticker': 'AMH^H', 'timestamp': datetime.datetime(2025, 3, 13, 0, 0), 'open': 24.229, 'high': 24.564, 'low': 24.099, 'close': 24.209, 'volume': 18838, 'turnover': 463817.0}, {'ticker': 'AMH^H', 'timestamp': datetime.datetime(2025, 3, 14, 0, 0), 'open': 24.32, 'high': 24.39, 'low': 24.07, 'close': 24.39, 'volume': 7067, 'turnover': 171410.0}]]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+ANG^A,保存数据失败: (psycopg2.errors.InvalidColumnReference) 错误:  没有匹配ON CONFLICT说明的唯一或者排除约束
+
+[SQL: 
+                        INSERT INTO stock_daily 
+                        (ticker, timestamp, open, high, low, close, volume, turnover)
+                        VALUES (%(ticker)s, %(timestamp)s, %(open)s, %(high)s, %(low)s, %(close)s, %(volume)s, %(turnover)s)
+                        ON CONFLICT (ticker, timestamp) DO UPDATE SET
+                            open = EXCLUDED.open,
+                            high = EXCLUDED.high,
+                            low = EXCLUDED.low,
+                            close = EXCLUDED.close,
+                            volume = EXCLUDED.volume,
+                            turnover = EXCLUDED.turnover
+                    ]
+[parameters: [{'ticker': 'ANG^A', 'timestamp': datetime.datetime(2024, 5, 13, 0, 0), 'open': 23.539, 'high': 23.697, 'low': 23.283, 'close': 23.559, 'volume': 9247, 'turnover': 224487.0}, {'ticker': 'ANG^A', 'timestamp': datetime.datetime(2024, 5, 14, 0, 0), 'open': 23.44, 'high': 24.13, 'low': 23.428, 'close': 23.874, 'volume': 28552, 'turnover': 698716.0}, {'ticker': 'ANG^A', 'timestamp': datetime.datetime(2024, 5, 15, 0, 0), 'open': 23.716, 'high': 23.884, 'low': 23.59, 'close': 23.844, 'volume': 65297, 'turnover': 1600847.0}, {'ticker': 'ANG^A', 'timestamp': datetime.datetime(2024, 5, 16, 0, 0), 'open': 23.986, 'high': 24.156, 'low': 23.855, 'close': 24.086, 'volume': 38181, 'turnover': 944069.0}, {'ticker': 'ANG^A', 'timestamp': datetime.datetime(2024, 5, 17, 0, 0), 'open': 23.806, 'high': 24.111, 'low': 23.806, 'close': 24.046, 'volume': 35137, 'turnover': 869412.0}, {'ticker': 'ANG^A', 'timestamp': datetime.datetime(2024, 5, 20, 0, 0), 'open': 23.759, 'high': 24.056, 'low': 23.759, 'close': 24.046, 'volume': 9287, 'turnover': 229944.0}, {'ticker': 'ANG^A', 'timestamp': datetime.datetime(2024, 5, 21, 0, 0), 'open': 24.046, 'high': 24.096, 'low': 23.918, 'close': 23.956, 'volume': 33764, 'turnover': 836450.0}, {'ticker': 'ANG^A', 'timestamp': datetime.datetime(2024, 5, 22, 0, 0), 'open': 23.916, 'high': 24.086, 'low': 23.826, 'close': 23.966, 'volume': 32098, 'turnover': 793372.0}  ... displaying 10 of 195 total bound parameter sets ...  {'ticker': 'ANG^A', 'timestamp': datetime.datetime(2025, 2, 20, 0, 0), 'open': 25.47, 'high': 25.49, 'low': 25.47, 'close': 25.48, 'volume': 41933, 'turnover': 1068379.0}, {'ticker': 'ANG^A', 'timestamp': datetime.datetime(2025, 2, 21, 0, 0), 'open': 25.49, 'high': 25.5, 'low': 25.49, 'close': 25.499, 'volume': 4707, 'turnover': 119994.0}]]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+ANG^B,保存数据失败: (psycopg2.errors.InvalidColumnReference) 错误:  没有匹配ON CONFLICT说明的唯一或者排除约束
+
+[SQL: 
+                        INSERT INTO stock_daily 
+                        (ticker, timestamp, open, high, low, close, volume, turnover)
+                        VALUES (%(ticker)s, %(timestamp)s, %(open)s, %(high)s, %(low)s, %(close)s, %(volume)s, %(turnover)s)
+                        ON CONFLICT (ticker, timestamp) DO UPDATE SET
+                            open = EXCLUDED.open,
+                            high = EXCLUDED.high,
+                            low = EXCLUDED.low,
+                            close = EXCLUDED.close,
+                            volume = EXCLUDED.volume,
+                            turnover = EXCLUDED.turnover
+                    ]
+[parameters: [{'ticker': 'ANG^B', 'timestamp': datetime.datetime(2024, 5, 13, 0, 0), 'open': 23.83, 'high': 23.83, 'low': 23.259, 'close': 23.387, 'volume': 18595, 'turnover': 457800.0}, {'ticker': 'ANG^B', 'timestamp': datetime.datetime(2024, 5, 14, 0, 0), 'open': 23.348, 'high': 23.633, 'low': 23.151, 'close': 23.318, 'volume': 35723, 'turnover': 880317.0}, {'ticker': 'ANG^B', 'timestamp': datetime.datetime(2024, 5, 15, 0, 0), 'open': 23.367, 'high': 23.613, 'low': 23.367, 'close': 23.554, 'volume': 17441, 'turnover': 432156.0}, {'ticker': 'ANG^B', 'timestamp': datetime.datetime(2024, 5, 16, 0, 0), 'open': 23.678, 'high': 24.008, 'low': 23.513, 'close': 23.868, 'volume': 26182, 'turnover': 650812.0}, {'ticker': 'ANG^B', 'timestamp': datetime.datetime(2024, 5, 17, 0, 0), 'open': 23.728, 'high': 23.818, 'low': 23.574, 'close': 23.658, 'volume': 14202, 'turnover': 354378.0}, {'ticker': 'ANG^B', 'timestamp': datetime.datetime(2024, 5, 20, 0, 0), 'open': 23.728, 'high': 23.905, 'low': 23.498, 'close': 23.628, 'volume': 9118, 'turnover': 227275.0}, {'ticker': 'ANG^B', 'timestamp': datetime.datetime(2024, 5, 21, 0, 0), 'open': 23.705, 'high': 23.705, 'low': 23.618, 'close': 23.668, 'volume': 8933, 'turnover': 222405.0}, {'ticker': 'ANG^B', 'timestamp': datetime.datetime(2024, 5, 22, 0, 0), 'open': 23.548, 'high': 23.716, 'low': 23.528, 'close': 23.618, 'volume': 10195, 'turnover': 253441.0}  ... displaying 10 of 210 total bound parameter sets ...  {'ticker': 'ANG^B', 'timestamp': datetime.datetime(2025, 3, 13, 0, 0), 'open': 25.02, 'high': 25.07, 'low': 25.0, 'close': 25.02, 'volume': 59705, 'turnover': 1493730.0}, {'ticker': 'ANG^B', 'timestamp': datetime.datetime(2025, 3, 14, 0, 0), 'open': 25.01, 'high': 25.03, 'low': 25.01, 'close': 25.02, 'volume': 199483, 'turnover': 4991110.0}]]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+APO^A,保存数据失败: (psycopg2.errors.InvalidColumnReference) 错误:  没有匹配ON CONFLICT说明的唯一或者排除约束
+
+[SQL: 
+                        INSERT INTO stock_daily 
+                        (ticker, timestamp, open, high, low, close, volume, turnover)
+                        VALUES (%(ticker)s, %(timestamp)s, %(open)s, %(high)s, %(low)s, %(close)s, %(volume)s, %(turnover)s)
+                        ON CONFLICT (ticker, timestamp) DO UPDATE SET
+                            open = EXCLUDED.open,
+                            high = EXCLUDED.high,
+                            low = EXCLUDED.low,
+                            close = EXCLUDED.close,
+                            volume = EXCLUDED.volume,
+                            turnover = EXCLUDED.turnover
+                    ]
+[parameters: [{'ticker': 'APO^A', 'timestamp': datetime.datetime(2023, 8, 16, 0, 0), 'open': 45.521, 'high': 45.531, 'low': 45.231, 'close': 45.231, 'volume': 109575, 'turnover': 5515541.0}, {'ticker': 'APO^A', 'timestamp': datetime.datetime(2023, 8, 17, 0, 0), 'open': 45.201, 'high': 45.231, 'low': 44.671, 'close': 44.831, 'volume': 294752, 'turnover': 14710520.0}, {'ticker': 'APO^A', 'timestamp': datetime.datetime(2023, 8, 18, 0, 0), 'open': 44.891, 'high': 45.811, 'low': 44.871, 'close': 45.791, 'volume': 27521, 'turnover': 1381524.0}, {'ticker': 'APO^A', 'timestamp': datetime.datetime(2023, 8, 21, 0, 0), 'open': 45.741, 'high': 46.121, 'low': 45.511, 'close': 45.831, 'volume': 230001, 'turnover': 11664563.0}, {'ticker': 'APO^A', 'timestamp': datetime.datetime(2023, 8, 22, 0, 0), 'open': 45.831, 'high': 47.856, 'low': 45.831, 'close': 46.061, 'volume': 225078, 'turnover': 11500319.0}, {'ticker': 'APO^A', 'timestamp': datetime.datetime(2023, 8, 23, 0, 0), 'open': 46.041, 'high': 47.501, 'low': 46.041, 'close': 47.011, 'volume': 950166, 'turnover': 49134035.0}, {'ticker': 'APO^A', 'timestamp': datetime.datetime(2023, 8, 24, 0, 0), 'open': 47.251, 'high': 49.021, 'low': 46.681, 'close': 46.751, 'volume': 362100, 'turnover': 18819459.0}, {'ticker': 'APO^A', 'timestamp': datetime.datetime(2023, 8, 25, 0, 0), 'open': 47.111, 'high': 47.881, 'low': 46.691, 'close': 47.031, 'volume': 265645, 'turnover': 13760623.0}  ... displaying 10 of 396 total bound parameter sets ...  {'ticker': 'APO^A', 'timestamp': datetime.datetime(2025, 3, 13, 0, 0), 'open': 70.22, 'high': 70.56, 'low': 69.83, 'close': 70.15, 'volume': 334354, 'turnover': 23470500.0}, {'ticker': 'APO^A', 'timestamp': datetime.datetime(2025, 3, 14, 0, 0), 'open': 71.09, 'high': 71.97, 'low': 71.08, 'close': 71.97, 'volume': 12126, 'turnover': 868452.0}]]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+ARES^B,保存数据失败: (psycopg2.errors.InvalidColumnReference) 错误:  没有匹配ON CONFLICT说明的唯一或者排除约束
+
+[SQL: 
+                        INSERT INTO stock_daily 
+                        (ticker, timestamp, open, high, low, close, volume, turnover)
+                        VALUES (%(ticker)s, %(timestamp)s, %(open)s, %(high)s, %(low)s, %(close)s, %(volume)s, %(turnover)s)
+                        ON CONFLICT (ticker, timestamp) DO UPDATE SET
+                            open = EXCLUDED.open,
+                            high = EXCLUDED.high,
+                            low = EXCLUDED.low,
+                            close = EXCLUDED.close,
+                            volume = EXCLUDED.volume,
+                            turnover = EXCLUDED.turnover
+                    ]
+[parameters: [{'ticker': 'ARES^B', 'timestamp': datetime.datetime(2024, 10, 16, 0, 0), 'open': 51.367, 'high': 51.497, 'low': 51.025, 'close': 51.277, 'volume': 583459, 'turnover': 30809001.0}, {'ticker': 'ARES^B', 'timestamp': datetime.datetime(2024, 10, 17, 0, 0), 'open': 52.897, 'high': 52.897, 'low': 51.351, 'close': 52.607, 'volume': 647802, 'turnover': 35014043.0}, {'ticker': 'ARES^B', 'timestamp': datetime.datetime(2024, 10, 18, 0, 0), 'open': 53.787, 'high': 53.787, 'low': 52.367, 'close': 52.737, 'volume': 175727, 'turnover': 9537659.0}, {'ticker': 'ARES^B', 'timestamp': datetime.datetime(2024, 10, 21, 0, 0), 'open': 52.647, 'high': 53.127, 'low': 52.177, 'close': 52.397, 'volume': 1089498, 'turnover': 58898991.0}, {'ticker': 'ARES^B', 'timestamp': datetime.datetime(2024, 10, 22, 0, 0), 'open': 52.267, 'high': 52.367, 'low': 51.937, 'close': 52.177, 'volume': 445098, 'turnover': 23930051.0}, {'ticker': 'ARES^B', 'timestamp': datetime.datetime(2024, 10, 23, 0, 0), 'open': 52.397, 'high': 52.707, 'low': 51.847, 'close': 52.087, 'volume': 911140, 'turnover': 48859202.0}, {'ticker': 'ARES^B', 'timestamp': datetime.datetime(2024, 10, 24, 0, 0), 'open': 52.333, 'high': 54.077, 'low': 52.147, 'close': 52.987, 'volume': 669081, 'turnover': 36327450.0}, {'ticker': 'ARES^B', 'timestamp': datetime.datetime(2024, 10, 25, 0, 0), 'open': 52.977, 'high': 53.747, 'low': 52.397, 'close': 52.667, 'volume': 216836, 'turnover': 11745970.0}  ... displaying 10 of 102 total bound parameter sets ...  {'ticker': 'ARES^B', 'timestamp': datetime.datetime(2025, 3, 13, 0, 0), 'open': 46.742, 'high': 46.742, 'low': 45.006, 'close': 45.156, 'volume': 605480, 'turnover': 27909266.0}, {'ticker': 'ARES^B', 'timestamp': datetime.datetime(2025, 3, 14, 0, 0), 'open': 45.85, 'high': 46.79, 'low': 45.85, 'close': 46.47, 'volume': 69188, 'turnover': 3193718.0}]]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+ARGO^A,保存数据失败: (psycopg2.errors.InvalidColumnReference) 错误:  没有匹配ON CONFLICT说明的唯一或者排除约束
+
+[SQL: 
+                        INSERT INTO stock_daily 
+                        (ticker, timestamp, open, high, low, close, volume, turnover)
+                        VALUES (%(ticker)s, %(timestamp)s, %(open)s, %(high)s, %(low)s, %(close)s, %(volume)s, %(turnover)s)
+                        ON CONFLICT (ticker, timestamp) DO UPDATE SET
+                            open = EXCLUDED.open,
+                            high = EXCLUDED.high,
+                            low = EXCLUDED.low,
+                            close = EXCLUDED.close,
+                            volume = EXCLUDED.volume,
+                            turnover = EXCLUDED.turnover
+                    ]
+[parameters: [{'ticker': 'ARGO^A', 'timestamp': datetime.datetime(2021, 3, 23, 0, 0), 'open': 20.735, 'high': 20.825, 'low': 20.695, 'close': 20.815, 'volume': 21362, 'turnover': 574692.488}, {'ticker': 'ARGO^A', 'timestamp': datetime.datetime(2021, 3, 24, 0, 0), 'open': 20.815, 'high': 20.845, 'low': 20.675, 'close': 20.845, 'volume': 12908, 'turnover': 347639.775}, {'ticker': 'ARGO^A', 'timestamp': datetime.datetime(2021, 3, 25, 0, 0), 'open': 20.675, 'high': 20.875, 'low': 20.675, 'close': 20.815, 'volume': 10625, 'turnover': 286380.39}, {'ticker': 'ARGO^A', 'timestamp': datetime.datetime(2021, 3, 26, 0, 0), 'open': 20.845, 'high': 20.845, 'low': 20.6, 'close': 20.805, 'volume': 13473, 'turnover': 362125.7}, {'ticker': 'ARGO^A', 'timestamp': datetime.datetime(2021, 3, 29, 0, 0), 'open': 20.805, 'high': 20.825, 'low': 20.695, 'close': 20.765, 'volume': 5379, 'turnover': 144729.215}, {'ticker': 'ARGO^A', 'timestamp': datetime.datetime(2021, 3, 30, 0, 0), 'open': 20.755, 'high': 20.815, 'low': 20.727, 'close': 20.815, 'volume': 18080, 'turnover': 485924.254}, {'ticker': 'ARGO^A', 'timestamp': datetime.datetime(2021, 3, 31, 0, 0), 'open': 20.815, 'high': 21.005, 'low': 20.815, 'close': 20.985, 'volume': 21331, 'turnover': 575444.782}, {'ticker': 'ARGO^A', 'timestamp': datetime.datetime(2021, 4, 1, 0, 0), 'open': 21.0, 'high': 21.165, 'low': 20.975, 'close': 21.115, 'volume': 10286, 'turnover': 279660.228}  ... displaying 10 of 1000 total bound parameter sets ...  {'ticker': 'ARGO^A', 'timestamp': datetime.datetime(2025, 3, 13, 0, 0), 'open': 25.0, 'high': 25.04, 'low': 24.99, 'close': 25.04, 'volume': 9848, 'turnover': 246193.0}, {'ticker': 'ARGO^A', 'timestamp': datetime.datetime(2025, 3, 14, 0, 0), 'open': 25.04, 'high': 25.04, 'low': 25.0, 'close': 25.0, 'volume': 4321, 'turnover': 108054.0}]]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+ARR^C,保存数据失败: (psycopg2.errors.InvalidColumnReference) 错误:  没有匹配ON CONFLICT说明的唯一或者排除约束
+
+[SQL: 
+                        INSERT INTO stock_daily 
+                        (ticker, timestamp, open, high, low, close, volume, turnover)
+                        VALUES (%(ticker)s, %(timestamp)s, %(open)s, %(high)s, %(low)s, %(close)s, %(volume)s, %(turnover)s)
+                        ON CONFLICT (ticker, timestamp) DO UPDATE SET
+                            open = EXCLUDED.open,
+                            high = EXCLUDED.high,
+                            low = EXCLUDED.low,
+                            close = EXCLUDED.close,
+                            volume = EXCLUDED.volume,
+                            turnover = EXCLUDED.turnover
+                    ]
+[parameters: [{'ticker': 'ARR^C', 'timestamp': datetime.datetime(2021, 3, 23, 0, 0), 'open': 18.867, 'high': 18.937, 'low': 18.866, 'close': 18.877, 'volume': 60354, 'turnover': 1492226.382}, {'ticker': 'ARR^C', 'timestamp': datetime.datetime(2021, 3, 24, 0, 0), 'open': 18.917, 'high': 18.917, 'low': 18.867, 'close': 18.887, 'volume': 40048, 'turnover': 990582.612}, {'ticker': 'ARR^C', 'timestamp': datetime.datetime(2021, 3, 25, 0, 0), 'open': 18.837, 'high': 18.887, 'low': 18.807, 'close': 18.817, 'volume': 55887, 'turnover': 1378472.623}, {'ticker': 'ARR^C', 'timestamp': datetime.datetime(2021, 3, 26, 0, 0), 'open': 18.837, 'high': 18.907, 'low': 18.817, 'close': 18.817, 'volume': 86151, 'turnover': 2127507.534}, {'ticker': 'ARR^C', 'timestamp': datetime.datetime(2021, 3, 29, 0, 0), 'open': 18.867, 'high': 18.957, 'low': 18.777, 'close': 18.777, 'volume': 61315, 'turnover': 1510979.816}, {'ticker': 'ARR^C', 'timestamp': datetime.datetime(2021, 3, 30, 0, 0), 'open': 18.857, 'high': 18.857, 'low': 18.787, 'close': 18.787, 'volume': 47216, 'turnover': 1163879.621}, {'ticker': 'ARR^C', 'timestamp': datetime.datetime(2021, 3, 31, 0, 0), 'open': 18.797, 'high': 18.817, 'low': 18.717, 'close': 18.717, 'volume': 79092, 'turnover': 1947684.455}, {'ticker': 'ARR^C', 'timestamp': datetime.datetime(2021, 4, 1, 0, 0), 'open': 18.827, 'high': 18.857, 'low': 18.757, 'close': 18.817, 'volume': 83403, 'turnover': 2055862.556}  ... displaying 10 of 1000 total bound parameter sets ...  {'ticker': 'ARR^C', 'timestamp': datetime.datetime(2025, 3, 13, 0, 0), 'open': 21.724, 'high': 21.734, 'low': 21.634, 'close': 21.714, 'volume': 22875, 'turnover': 499354.0}, {'ticker': 'ARR^C', 'timestamp': datetime.datetime(2025, 3, 14, 0, 0), 'open': 21.84, 'high': 21.88, 'low': 21.73, 'close': 21.73, 'volume': 15940, 'turnover': 347892.0}]]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+ASB^E,保存数据失败: (psycopg2.errors.InvalidColumnReference) 错误:  没有匹配ON CONFLICT说明的唯一或者排除约束
+
+[SQL: 
+                        INSERT INTO stock_daily 
+                        (ticker, timestamp, open, high, low, close, volume, turnover)
+                        VALUES (%(ticker)s, %(timestamp)s, %(open)s, %(high)s, %(low)s, %(close)s, %(volume)s, %(turnover)s)
+                        ON CONFLICT (ticker, timestamp) DO UPDATE SET
+                            open = EXCLUDED.open,
+                            high = EXCLUDED.high,
+                            low = EXCLUDED.low,
+                            close = EXCLUDED.close,
+                            volume = EXCLUDED.volume,
+                            turnover = EXCLUDED.turnover
+                    ]
+[parameters: [{'ticker': 'ASB^E', 'timestamp': datetime.datetime(2021, 3, 23, 0, 0), 'open': 21.919, 'high': 22.259, 'low': 21.919, 'close': 22.239, 'volume': 1150, 'turnover': 31495.576}, {'ticker': 'ASB^E', 'timestamp': datetime.datetime(2021, 3, 24, 0, 0), 'open': 22.159, 'high': 22.379, 'low': 22.149, 'close': 22.299, 'volume': 4324, 'turnover': 118558.975}, {'ticker': 'ASB^E', 'timestamp': datetime.datetime(2021, 3, 25, 0, 0), 'open': 22.032, 'high': 22.309, 'low': 22.032, 'close': 22.309, 'volume': 3065, 'turnover': 83689.774}, {'ticker': 'ASB^E', 'timestamp': datetime.datetime(2021, 3, 26, 0, 0), 'open': 22.309, 'high': 22.309, 'low': 22.099, 'close': 22.234, 'volume': 1780, 'turnover': 48730.822}, {'ticker': 'ASB^E', 'timestamp': datetime.datetime(2021, 3, 29, 0, 0), 'open': 22.129, 'high': 22.159, 'low': 22.059, 'close': 22.059, 'volume': 4118, 'turnover': 112595.079}, {'ticker': 'ASB^E', 'timestamp': datetime.datetime(2021, 3, 30, 0, 0), 'open': 22.169, 'high': 22.439, 'low': 22.049, 'close': 22.439, 'volume': 2523, 'turnover': 69297.422}, {'ticker': 'ASB^E', 'timestamp': datetime.datetime(2021, 3, 31, 0, 0), 'open': 22.479, 'high': 22.529, 'low': 22.439, 'close': 22.529, 'volume': 2268, 'turnover': 62590.176}, {'ticker': 'ASB^E', 'timestamp': datetime.datetime(2021, 4, 1, 0, 0), 'open': 22.659, 'high': 22.77, 'low': 22.639, 'close': 22.639, 'volume': 3131, 'turnover': 87177.188}  ... displaying 10 of 1000 total bound parameter sets ...  {'ticker': 'ASB^E', 'timestamp': datetime.datetime(2025, 3, 13, 0, 0), 'open': 21.11, 'high': 21.13, 'low': 20.75, 'close': 21.0, 'volume': 6272, 'turnover': 131351.0}, {'ticker': 'ASB^E', 'timestamp': datetime.datetime(2025, 3, 14, 0, 0), 'open': 21.11, 'high': 21.18, 'low': 20.96, 'close': 21.18, 'volume': 3912, 'turnover': 82679.0}]]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+ASB^F,保存数据失败: (psycopg2.errors.InvalidColumnReference) 错误:  没有匹配ON CONFLICT说明的唯一或者排除约束
+
+[SQL: 
+                        INSERT INTO stock_daily 
+                        (ticker, timestamp, open, high, low, close, volume, turnover)
+                        VALUES (%(ticker)s, %(timestamp)s, %(open)s, %(high)s, %(low)s, %(close)s, %(volume)s, %(turnover)s)
+                        ON CONFLICT (ticker, timestamp) DO UPDATE SET
+                            open = EXCLUDED.open,
+                            high = EXCLUDED.high,
+                            low = EXCLUDED.low,
+                            close = EXCLUDED.close,
+                            volume = EXCLUDED.volume,
+                            turnover = EXCLUDED.turnover
+                    ]
+[parameters: [{'ticker': 'ASB^F', 'timestamp': datetime.datetime(2021, 3, 23, 0, 0), 'open': 22.798, 'high': 22.965, 'low': 22.778, 'close': 22.878, 'volume': 4942, 'turnover': 137174.857}, {'ticker': 'ASB^F', 'timestamp': datetime.datetime(2021, 3, 24, 0, 0), 'open': 22.868, 'high': 22.918, 'low': 22.848, 'close': 22.918, 'volume': 2863, 'turnover': 79575.223}, {'ticker': 'ASB^F', 'timestamp': datetime.datetime(2021, 3, 25, 0, 0), 'open': 22.848, 'high': 23.158, 'low': 22.778, 'close': 23.158, 'volume': 12722, 'turnover': 354051.546}, {'ticker': 'ASB^F', 'timestamp': datetime.datetime(2021, 3, 26, 0, 0), 'open': 23.158, 'high': 23.158, 'low': 22.887, 'close': 23.008, 'volume': 4625, 'turnover': 129128.973}, {'ticker': 'ASB^F', 'timestamp': datetime.datetime(2021, 3, 29, 0, 0), 'open': 22.938, 'high': 23.098, 'low': 22.918, 'close': 23.078, 'volume': 3265, 'turnover': 91095.523}, {'ticker': 'ASB^F', 'timestamp': datetime.datetime(2021, 3, 30, 0, 0), 'open': 22.948, 'high': 23.178, 'low': 22.948, 'close': 23.108, 'volume': 3819, 'turnover': 106913.767}, {'ticker': 'ASB^F', 'timestamp': datetime.datetime(2021, 3, 31, 0, 0), 'open': 23.288, 'high': 23.308, 'low': 23.233, 'close': 23.258, 'volume': 4529, 'turnover': 127546.188}, {'ticker': 'ASB^F', 'timestamp': datetime.datetime(2021, 4, 1, 0, 0), 'open': 23.318, 'high': 23.418, 'low': 23.298, 'close': 23.308, 'volume': 6133, 'turnover': 173222.294}  ... displaying 10 of 1000 total bound parameter sets ...  {'ticker': 'ASB^F', 'timestamp': datetime.datetime(2025, 3, 13, 0, 0), 'open': 20.06, 'high': 20.254, 'low': 20.05, 'close': 20.254, 'volume': 8092, 'turnover': 163136.0}, {'ticker': 'ASB^F', 'timestamp': datetime.datetime(2025, 3, 14, 0, 0), 'open': 20.23, 'high': 20.23, 'low': 20.14, 'close': 20.14, 'volume': 1435, 'turnover': 28963.0}]]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+ATCO^D,保存数据失败: (psycopg2.errors.InvalidColumnReference) 错误:  没有匹配ON CONFLICT说明的唯一或者排除约束
+
+[SQL: 
+                        INSERT INTO stock_daily 
+                        (ticker, timestamp, open, high, low, close, volume, turnover)
+                        VALUES (%(ticker)s, %(timestamp)s, %(open)s, %(high)s, %(low)s, %(close)s, %(volume)s, %(turnover)s)
+                        ON CONFLICT (ticker, timestamp) DO UPDATE SET
+                            open = EXCLUDED.open,
+                            high = EXCLUDED.high,
+                            low = EXCLUDED.low,
+                            close = EXCLUDED.close,
+                            volume = EXCLUDED.volume,
+                            turnover = EXCLUDED.turnover
+                    ]
+[parameters: [{'ticker': 'ATCO^D', 'timestamp': datetime.datetime(2021, 3, 23, 0, 0), 'open': 19.141, 'high': 19.271, 'low': 19.101, 'close': 19.216, 'volume': 5783, 'turnover': 148100.425}, {'ticker': 'ATCO^D', 'timestamp': datetime.datetime(2021, 3, 24, 0, 0), 'open': 19.291, 'high': 19.421, 'low': 19.261, 'close': 19.281, 'volume': 4513, 'turnover': 116276.55}, {'ticker': 'ATCO^D', 'timestamp': datetime.datetime(2021, 3, 25, 0, 0), 'open': 19.281, 'high': 19.331, 'low': 19.211, 'close': 19.331, 'volume': 1311, 'turnover': 33695.87}, {'ticker': 'ATCO^D', 'timestamp': datetime.datetime(2021, 3, 26, 0, 0), 'open': 19.216, 'high': 19.303, 'low': 19.101, 'close': 19.271, 'volume': 7845, 'turnover': 201445.829}, {'ticker': 'ATCO^D', 'timestamp': datetime.datetime(2021, 3, 29, 0, 0), 'open': 19.171, 'high': 19.171, 'low': 19.171, 'close': 19.271, 'volume': 85, 'turnover': 2182.792}, {'ticker': 'ATCO^D', 'timestamp': datetime.datetime(2021, 3, 30, 0, 0), 'open': 19.322, 'high': 19.403, 'low': 19.322, 'close': 19.326, 'volume': 2084, 'turnover': 53829.782}, {'ticker': 'ATCO^D', 'timestamp': datetime.datetime(2021, 3, 31, 0, 0), 'open': 19.361, 'high': 19.511, 'low': 19.311, 'close': 19.391, 'volume': 6747, 'turnover': 174683.986}, {'ticker': 'ATCO^D', 'timestamp': datetime.datetime(2021, 4, 1, 0, 0), 'open': 19.361, 'high': 19.521, 'low': 19.281, 'close': 19.471, 'volume': 2136, 'turnover': 55158.317}  ... displaying 10 of 1000 total bound parameter sets ...  {'ticker': 'ATCO^D', 'timestamp': datetime.datetime(2025, 3, 13, 0, 0), 'open': 25.25, 'high': 25.25, 'low': 25.25, 'close': 25.25, 'volume': 303, 'turnover': 7639.0}, {'ticker': 'ATCO^D', 'timestamp': datetime.datetime(2025, 3, 14, 0, 0), 'open': 25.07, 'high': 25.25, 'low': 24.99, 'close': 25.0, 'volume': 9901, 'turnover': 247973.0}]]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+ATCO^H,保存数据失败: (psycopg2.errors.InvalidColumnReference) 错误:  没有匹配ON CONFLICT说明的唯一或者排除约束
+
+[SQL: 
+                        INSERT INTO stock_daily 
+                        (ticker, timestamp, open, high, low, close, volume, turnover)
+                        VALUES (%(ticker)s, %(timestamp)s, %(open)s, %(high)s, %(low)s, %(close)s, %(volume)s, %(turnover)s)
+                        ON CONFLICT (ticker, timestamp) DO UPDATE SET
+                            open = EXCLUDED.open,
+                            high = EXCLUDED.high,
+                            low = EXCLUDED.low,
+                            close = EXCLUDED.close,
+                            volume = EXCLUDED.volume,
+                            turnover = EXCLUDED.turnover
+                    ]
+[parameters: [{'ticker': 'ATCO^H', 'timestamp': datetime.datetime(2021, 3, 23, 0, 0), 'open': 19.192, 'high': 19.347, 'low': 19.192, 'close': 19.252, 'volume': 6278, 'turnover': 161196.015}, {'ticker': 'ATCO^H', 'timestamp': datetime.datetime(2021, 3, 24, 0, 0), 'open': 19.229, 'high': 19.402, 'low': 19.229, 'close': 19.402, 'volume': 14573, 'turnover': 374492.502}, {'ticker': 'ATCO^H', 'timestamp': datetime.datetime(2021, 3, 25, 0, 0), 'open': 19.392, 'high': 19.392, 'low': 19.319, 'close': 19.362, 'volume': 6156, 'turnover': 158517.861}, {'ticker': 'ATCO^H', 'timestamp': datetime.datetime(2021, 3, 26, 0, 0), 'open': 19.402, 'high': 19.402, 'low': 19.302, 'close': 19.342, 'volume': 7794, 'turnover': 200483.45}, {'ticker': 'ATCO^H', 'timestamp': datetime.datetime(2021, 3, 29, 0, 0), 'open': 19.352, 'high': 19.411, 'low': 19.342, 'close': 19.402, 'volume': 5072, 'turnover': 130830.285}, {'ticker': 'ATCO^H', 'timestamp': datetime.datetime(2021, 3, 30, 0, 0), 'open': 19.302, 'high': 19.552, 'low': 19.302, 'close': 19.432, 'volume': 13196, 'turnover': 341082.252}, {'ticker': 'ATCO^H', 'timestamp': datetime.datetime(2021, 3, 31, 0, 0), 'open': 19.542, 'high': 19.552, 'low': 19.264, 'close': 19.552, 'volume': 13977, 'turnover': 360817.63}, {'ticker': 'ATCO^H', 'timestamp': datetime.datetime(2021, 4, 1, 0, 0), 'open': 19.492, 'high': 19.552, 'low': 19.312, 'close': 19.542, 'volume': 24266, 'turnover': 627960.453}  ... displaying 10 of 1000 total bound parameter sets ...  {'ticker': 'ATCO^H', 'timestamp': datetime.datetime(2025, 3, 13, 0, 0), 'open': 25.0, 'high': 25.04, 'low': 25.0, 'close': 25.0, 'volume': 3723, 'turnover': 93094.0}, {'ticker': 'ATCO^H', 'timestamp': datetime.datetime(2025, 3, 14, 0, 0), 'open': 24.9, 'high': 25.0, 'low': 24.85, 'close': 24.9, 'volume': 7702, 'turnover': 192042.0}]]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+ATH^A,保存数据失败: (psycopg2.errors.InvalidColumnReference) 错误:  没有匹配ON CONFLICT说明的唯一或者排除约束
+
+[SQL: 
+                        INSERT INTO stock_daily 
+                        (ticker, timestamp, open, high, low, close, volume, turnover)
+                        VALUES (%(ticker)s, %(timestamp)s, %(open)s, %(high)s, %(low)s, %(close)s, %(volume)s, %(turnover)s)
+                        ON CONFLICT (ticker, timestamp) DO UPDATE SET
+                            open = EXCLUDED.open,
+                            high = EXCLUDED.high,
+                            low = EXCLUDED.low,
+                            close = EXCLUDED.close,
+                            volume = EXCLUDED.volume,
+                            turnover = EXCLUDED.turnover
+                    ]
+[parameters: [{'ticker': 'ATH^A', 'timestamp': datetime.datetime(2021, 3, 23, 0, 0), 'open': 22.634, 'high': 22.644, 'low': 22.484, 'close': 22.484, 'volume': 59308, 'turnover': 1666942.565}, {'ticker': 'ATH^A', 'timestamp': datetime.datetime(2021, 3, 24, 0, 0), 'open': 22.634, 'high': 22.954, 'low': 22.632, 'close': 22.904, 'volume': 45835, 'turnover': 1301240.703}, {'ticker': 'ATH^A', 'timestamp': datetime.datetime(2021, 3, 25, 0, 0), 'open': 22.904, 'high': 23.144, 'low': 22.824, 'close': 23.004, 'volume': 75286, 'turnover': 2153515.961}, {'ticker': 'ATH^A', 'timestamp': datetime.datetime(2021, 3, 26, 0, 0), 'open': 23.094, 'high': 23.133, 'low': 22.984, 'close': 23.044, 'volume': 20065, 'turnover': 574629.376}, {'ticker': 'ATH^A', 'timestamp': datetime.datetime(2021, 3, 29, 0, 0), 'open': 23.124, 'high': 23.124, 'low': 22.784, 'close': 22.824, 'volume': 63384, 'turnover': 1803609.284}, {'ticker': 'ATH^A', 'timestamp': datetime.datetime(2021, 3, 30, 0, 0), 'open': 22.824, 'high': 23.024, 'low': 22.7, 'close': 23.024, 'volume': 35719, 'turnover': 1015979.881}, {'ticker': 'ATH^A', 'timestamp': datetime.datetime(2021, 3, 31, 0, 0), 'open': 23.044, 'high': 23.244, 'low': 23.044, 'close': 23.144, 'volume': 42127, 'turnover': 1210302.156}, {'ticker': 'ATH^A', 'timestamp': datetime.datetime(2021, 4, 1, 0, 0), 'open': 23.264, 'high': 23.294, 'low': 23.164, 'close': 23.254, 'volume': 142701, 'turnover': 4105041.733}  ... displaying 10 of 1000 total bound parameter sets ...  {'ticker': 'ATH^A', 'timestamp': datetime.datetime(2025, 3, 13, 0, 0), 'open': 24.453, 'high': 24.623, 'low': 24.263, 'close': 24.623, 'volume': 32987, 'turnover': 820077.0}, {'ticker': 'ATH^A', 'timestamp': datetime.datetime(2025, 3, 14, 0, 0), 'open': 24.61, 'high': 24.76, 'low': 24.52, 'close': 24.71, 'volume': 23682, 'turnover': 583846.0}]]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+ATH^B,保存数据失败: (psycopg2.errors.InvalidColumnReference) 错误:  没有匹配ON CONFLICT说明的唯一或者排除约束
+
+[SQL: 
+                        INSERT INTO stock_daily 
+                        (ticker, timestamp, open, high, low, close, volume, turnover)
+                        VALUES (%(ticker)s, %(timestamp)s, %(open)s, %(high)s, %(low)s, %(close)s, %(volume)s, %(turnover)s)
+                        ON CONFLICT (ticker, timestamp) DO UPDATE SET
+                            open = EXCLUDED.open,
+                            high = EXCLUDED.high,
+                            low = EXCLUDED.low,
+                            close = EXCLUDED.close,
+                            volume = EXCLUDED.volume,
+                            turnover = EXCLUDED.turnover
+                    ]
+[parameters: [{'ticker': 'ATH^B', 'timestamp': datetime.datetime(2021, 3, 23, 0, 0), 'open': 21.078, 'high': 21.158, 'low': 20.998, 'close': 21.028, 'volume': 30847, 'turnover': 802041.366}, {'ticker': 'ATH^B', 'timestamp': datetime.datetime(2021, 3, 24, 0, 0), 'open': 21.078, 'high': 21.288, 'low': 21.078, 'close': 21.178, 'volume': 37452, 'turnover': 977243.833}, {'ticker': 'ATH^B', 'timestamp': datetime.datetime(2021, 3, 25, 0, 0), 'open': 21.208, 'high': 21.248, 'low': 21.138, 'close': 21.148, 'volume': 21736, 'turnover': 567616.888}, {'ticker': 'ATH^B', 'timestamp': datetime.datetime(2021, 3, 26, 0, 0), 'open': 21.208, 'high': 21.228, 'low': 21.188, 'close': 21.218, 'volume': 13323, 'turnover': 348080.274}, {'ticker': 'ATH^B', 'timestamp': datetime.datetime(2021, 3, 29, 0, 0), 'open': 21.238, 'high': 21.328, 'low': 21.108, 'close': 21.228, 'volume': 47229, 'turnover': 1235432.077}, {'ticker': 'ATH^B', 'timestamp': datetime.datetime(2021, 3, 30, 0, 0), 'open': 21.178, 'high': 21.328, 'low': 21.178, 'close': 21.308, 'volume': 21532, 'turnover': 563727.322}, {'ticker': 'ATH^B', 'timestamp': datetime.datetime(2021, 3, 31, 0, 0), 'open': 21.398, 'high': 21.578, 'low': 21.358, 'close': 21.358, 'volume': 10983, 'turnover': 289977.782}, {'ticker': 'ATH^B', 'timestamp': datetime.datetime(2021, 4, 1, 0, 0), 'open': 21.428, 'high': 21.688, 'low': 21.428, 'close': 21.688, 'volume': 19140, 'turnover': 508034.107}  ... displaying 10 of 1000 total bound parameter sets ...  {'ticker': 'ATH^B', 'timestamp': datetime.datetime(2025, 3, 13, 0, 0), 'open': 20.178, 'high': 20.278, 'low': 20.018, 'close': 20.228, 'volume': 24301, 'turnover': 498520.0}, {'ticker': 'ATH^B', 'timestamp': datetime.datetime(2025, 3, 14, 0, 0), 'open': 20.33, 'high': 20.43, 'low': 20.25, 'close': 20.29, 'volume': 19586, 'turnover': 398248.0}]]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+ATH^C,保存数据失败: (psycopg2.errors.InvalidColumnReference) 错误:  没有匹配ON CONFLICT说明的唯一或者排除约束
+
+[SQL: 
+                        INSERT INTO stock_daily 
+                        (ticker, timestamp, open, high, low, close, volume, turnover)
+                        VALUES (%(ticker)s, %(timestamp)s, %(open)s, %(high)s, %(low)s, %(close)s, %(volume)s, %(turnover)s)
+                        ON CONFLICT (ticker, timestamp) DO UPDATE SET
+                            open = EXCLUDED.open,
+                            high = EXCLUDED.high,
+                            low = EXCLUDED.low,
+                            close = EXCLUDED.close,
+                            volume = EXCLUDED.volume,
+                            turnover = EXCLUDED.turnover
+                    ]
+[parameters: [{'ticker': 'ATH^C', 'timestamp': datetime.datetime(2021, 3, 23, 0, 0), 'open': 22.302, 'high': 22.302, 'low': 22.132, 'close': 22.132, 'volume': 25821, 'turnover': 717382.247}, {'ticker': 'ATH^C', 'timestamp': datetime.datetime(2021, 3, 24, 0, 0), 'open': 22.222, 'high': 22.502, 'low': 22.202, 'close': 22.352, 'volume': 39243, 'turnover': 1097033.663}, {'ticker': 'ATH^C', 'timestamp': datetime.datetime(2021, 3, 25, 0, 0), 'open': 22.442, 'high': 22.572, 'low': 22.362, 'close': 22.432, 'volume': 62015, 'turnover': 1738747.225}, {'ticker': 'ATH^C', 'timestamp': datetime.datetime(2021, 3, 26, 0, 0), 'open': 22.462, 'high': 22.572, 'low': 22.412, 'close': 22.482, 'volume': 10540, 'turnover': 295601.15}, {'ticker': 'ATH^C', 'timestamp': datetime.datetime(2021, 3, 29, 0, 0), 'open': 22.552, 'high': 22.552, 'low': 22.272, 'close': 22.332, 'volume': 22720, 'turnover': 634475.635}, {'ticker': 'ATH^C', 'timestamp': datetime.datetime(2021, 3, 30, 0, 0), 'open': 22.422, 'high': 22.542, 'low': 22.362, 'close': 22.542, 'volume': 22439, 'turnover': 629215.153}, {'ticker': 'ATH^C', 'timestamp': datetime.datetime(2021, 3, 31, 0, 0), 'open': 22.542, 'high': 22.762, 'low': 22.482, 'close': 22.522, 'volume': 63589, 'turnover': 1791981.892}, {'ticker': 'ATH^C', 'timestamp': datetime.datetime(2021, 4, 1, 0, 0), 'open': 22.642, 'high': 22.892, 'low': 22.532, 'close': 22.792, 'volume': 48854, 'turnover': 1382662.061}  ... displaying 10 of 1000 total bound parameter sets ...  {'ticker': 'ATH^C', 'timestamp': datetime.datetime(2025, 3, 13, 0, 0), 'open': 24.902, 'high': 24.902, 'low': 24.852, 'close': 24.902, 'volume': 90704, 'turnover': 2292267.0}, {'ticker': 'ATH^C', 'timestamp': datetime.datetime(2025, 3, 14, 0, 0), 'open': 24.91, 'high': 24.98, 'low': 24.91, 'close': 24.98, 'volume': 112990, 'turnover': 2815738.0}]]
+(Background on this error at: https://sqlalche.me/e/20/f405)
+nan,OpenApiException: (code=301600, trace_id=) invalid symbol
+nan,OpenApiException: (code=301600, trace_id=) invalid symbol
+SLG^I,OpenApiException: request timeout
+nan,OpenApiException: (code=301600, trace_id=) invalid symbol
+nan,更新 nan 数据失败: 'float' object has no attribute 'strip'
+nan,OpenApiException: (code=301600, trace_id=) invalid symbol

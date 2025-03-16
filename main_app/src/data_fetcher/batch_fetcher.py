@@ -3,7 +3,7 @@ from longport.openapi import QuoteContext, Config, Period, AdjustType
 import os
 import time
 from datetime import datetime
-from database.db_operations import save_to_table, fetch_table_names
+from database.db_operations import save_to_table, fetch_table_names, clean_symbol_for_postgres
 from utils.logger import setup_logger
 from config.paths import ERRORstock_PATH
 from database.db_connection import get_engine
@@ -65,19 +65,22 @@ class BatchDataFetcher(QThread):
 
         for i, symbol in enumerate(self.stock_symbols, 1):
             try:
+                cleaned_symbol = clean_symbol_for_postgres(symbol)
                 self.progress_updated.emit({
                     'current': i,
                     'total': total,
                     'start_time': self.start_time,
                     'message': f"正在更新 {symbol} 的增量数据..."
                 })
-                stock_symbol_with_suffix = f"{symbol}.US"
+                stock_symbol_with_suffix = f"{cleaned_symbol}.US"
+                logger.debug(f"Fetching data for {stock_symbol_with_suffix} with delta_days={delta_days}")
                 resp = ctx.candlesticks(stock_symbol_with_suffix, Period.Day, delta_days, AdjustType.ForwardAdjust)
                 if not resp:
+                    logger.warning(f"No data returned for {stock_symbol_with_suffix}")
                     continue
 
                 engine = get_engine()
-                save_to_table(resp, symbol, engine)
+                save_to_table(resp, cleaned_symbol, engine)
             except Exception as e:
                 self.error_count += 1
                 error_message = f"更新 {symbol} 数据失败: {str(e)}"
@@ -89,13 +92,14 @@ class BatchDataFetcher(QThread):
 
     def check_new_stocks(self, ctx):
         engine = get_engine()
-        db_tickers = set(fetch_table_names(engine))  # 获取已有 ticker
+        db_tickers = set(clean_symbol_for_postgres(ticker) for ticker in fetch_table_names(engine))  # 清洗已有 ticker
         total = len(self.stock_symbols)
         new_stocks_found = False
 
         for i, symbol in enumerate(self.stock_symbols, 1):
             symbol = str(symbol).strip()
-            if symbol not in db_tickers:
+            cleaned_symbol = clean_symbol_for_postgres(symbol)
+            if cleaned_symbol not in db_tickers:
                 new_stocks_found = True
                 try:
                     self.progress_updated.emit({
@@ -104,12 +108,14 @@ class BatchDataFetcher(QThread):
                         'start_time': self.start_time,
                         'message': f"检测到新股票 {symbol}，正在获取数据..."
                     })
-                    stock_symbol_with_suffix = f"{symbol}.US"
+                    stock_symbol_with_suffix = f"{cleaned_symbol}.US"
+                    logger.debug(f"Fetching data for {stock_symbol_with_suffix} with 1000 days")
                     resp = ctx.candlesticks(stock_symbol_with_suffix, Period.Day, 1000, AdjustType.ForwardAdjust)
                     if not resp:
+                        logger.warning(f"No data returned for {stock_symbol_with_suffix}")
                         continue
                     engine = get_engine()
-                    save_to_table(resp, symbol, engine)
+                    save_to_table(resp, cleaned_symbol, engine)
                     logger.info(f"成功获取新股票 {symbol} 的数据并保存")
                 except Exception as e:
                     error_message = str(e)
@@ -124,10 +130,14 @@ class BatchDataFetcher(QThread):
             })
 
     def get_latest_date_from_longport(self, ctx):
-        resp = ctx.candlesticks("NVDA.US", Period.Day, 1, AdjustType.ForwardAdjust)
-        if not resp:
+        try:
+            resp = ctx.candlesticks("NVDA.US", Period.Day, 1, AdjustType.ForwardAdjust)
+            if not resp:
+                return None
+            return datetime.combine(resp[0].timestamp.date(), datetime.min.time())
+        except Exception as e:
+            logger.error(f"获取 Longport 最新日期失败: {e}")
             return None
-        return datetime.combine(resp[0].timestamp.date(), datetime.min.time())
 
     def get_latest_date_from_db(self):
         try:
@@ -136,7 +146,7 @@ class BatchDataFetcher(QThread):
                 result = conn.execute(text("SELECT MAX(timestamp) FROM stock_daily"))
                 return result.fetchone()[0]
         except Exception as e:
-            print(f"获取数据库最新日期失败: {e}")
+            logger.error(f"获取数据库最新日期失败: {e}")
             return None
 
     def get_table_count_from_db(self):
@@ -146,10 +156,5 @@ class BatchDataFetcher(QThread):
                 result = conn.execute(text("SELECT COUNT(DISTINCT ticker) FROM stock_daily"))
                 return result.fetchone()[0]
         except Exception as e:
-            print(f"获取数据库 ticker 数量失败: {e}")
+            logger.error(f"获取数据库 ticker 数量失败: {e}")
             return 0
-    def clean_symbol_for_api(self, symbol):
-        """清洗股票代码中的特殊符号，用于 Longport API"""
-        cleaned_symbol = symbol.replace(" ", "")
-        cleaned_symbol = cleaned_symbol.replace("^", "-").replace("/", ".")
-        return cleaned_symbol

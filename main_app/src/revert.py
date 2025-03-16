@@ -1,3 +1,11 @@
+## 1.psql -U postgres -d "Stock" -f D:\stock_backup_full.sql 
+## 2.(stock_tool) PS D:\CODE\LongPort\stock_visualization_tool> psql -U postgres -d "Stock"
+# Password for user postgres:
+# psql (17.2)
+# Type "help" for help.
+
+# Stock=# ALTER TABLE stock_daily ADD CONSTRAINT unique_ticker_timestamp UNIQUE (ticker, timestamp);
+
 import psycopg2
 from config.db_config import DB_CONFIG
 

@@ -8,10 +8,20 @@ import pytz
 logger = setup_logger("db_operations")
 ny_tz = pytz.timezone('America/New_York')
 
+def clean_symbol_for_postgres(symbol):
+    """规范化ticker name"""
+    if not symbol:
+        raise ValueError("股票代码不能为空")
+    cleaned_symbol = symbol.strip()
+    cleaned_symbol = cleaned_symbol.replace(" ", "")
+    cleaned_symbol = cleaned_symbol.replace("^", "-").replace("/", ".")
+    if not cleaned_symbol:
+        raise ValueError(f"清洗后的表名为空: {symbol}")
+    return cleaned_symbol
+
 def fetch_data_from_db(ticker, engine, limit=None):
-    """
-    从 stock_daily 表读取指定 ticker 的数据，返回 DataFrame。
-    """
+    """从 stock_daily 表读取指定 ticker 的数据，返回 DataFrame"""
+    ticker = clean_symbol_for_postgres(ticker)
     try:
         query = """
         SELECT timestamp, open, high, low, close, volume
@@ -49,9 +59,7 @@ def fetch_data_from_db(ticker, engine, limit=None):
         return pd.DataFrame()
 
 def fetch_table_names(engine):
-    """
-    获取 stock_daily 中的所有 ticker（不再需要表名列表）。
-    """
+    """获取 stock_daily 中的所有 ticker"""
     try:
         with engine.connect() as conn:
             result = conn.execute(text("""
@@ -65,6 +73,7 @@ def fetch_table_names(engine):
 
 def get_latest_timestamp(ticker, engine):
     """获取 stock_daily 中指定 ticker 的最新时间戳"""
+    ticker = clean_symbol_for_postgres(ticker)
     try:
         with engine.connect() as conn:
             result = conn.execute(text("""
@@ -82,6 +91,7 @@ def get_latest_timestamp(ticker, engine):
 
 def should_skip_save(api_data, ticker, engine):
     """判断是否需要跳过保存"""
+    ticker = clean_symbol_for_postgres(ticker)
     if not api_data:
         return True
     
@@ -96,9 +106,8 @@ def should_skip_save(api_data, ticker, engine):
     return api_latest_ny.date() == db_latest_ny.date()
 
 def save_to_table(data, ticker, engine, batch_size=1000):
-    """
-    将数据保存到 stock_daily，按 ticker 和 timestamp 处理。
-    """
+    """将数据保存到 stock_daily，按 ticker 和 timestamp 处理"""
+    ticker = clean_symbol_for_postgres(ticker)
     if should_skip_save(data, ticker, engine):
         logger.info(f"跳过保存 {ticker}，数据已是最新")
         return
@@ -143,10 +152,6 @@ def save_to_table(data, ticker, engine, batch_size=1000):
                 conn.commit()
                 total_inserted += len(batch)
                 logger.info(f"Inserted/Updated {len(batch)} records for {ticker} (total: {total_inserted})")
-
     except SQLAlchemyError as e:
         logger.error(f"保存数据失败 (ticker: {ticker}): {e}")
         raise DatabaseConnectionError(f"保存数据失败: {e}")
-
-# 删除不再需要的函数
-# create_table_if_not_exists 和 clean_duplicate_timestamps 已无用
