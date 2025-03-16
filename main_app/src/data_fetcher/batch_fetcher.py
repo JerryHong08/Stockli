@@ -5,6 +5,8 @@ import psycopg2
 import csv
 import os
 import time
+import pytz
+from pytz import timezone
 from datetime import datetime
 from database.db_operations import save_to_table, fetch_table_names
 from utils.logger import setup_logger
@@ -39,8 +41,22 @@ class BatchDataFetcher(QThread):
                     writer.writerow(["Symbol", "Error"])
 
             # 判断是否有新股票
-            self.check_new_stocks(ctx)
+            # self.check_new_stocks(ctx)
             
+            # 判断是否是盘中交易时间
+            current_time = datetime.now()
+            current_time_et = current_time.astimezone(pytz.timezone('America/New_York'))
+            if current_time_et.hour < 9 or current_time_et.hour >= 16 or (current_time_et.hour == 9 and current_time_et.minute < 30):
+                # 继续执行获取数据
+                print(f"{current_time_et.hour}:{current_time_et.minute}现在不在盘中交易时间，可以执行获取数据")
+                self.progress_updated.emit({
+                    'message': "现在不在盘中交易时间，可以执行获取数据",
+                    'start_time': self.start_time
+                })
+            else:    
+                self.error_occurred.emit("正处于盘中交易时间，无法获取数据")
+                return
+
             # 获取最新数据日期
             latest_date = self.get_latest_date_from_longport(ctx)
             if not latest_date:
