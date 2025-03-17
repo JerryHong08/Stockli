@@ -7,6 +7,7 @@ DB_CONFIG: Dict[str, Any] = {
     "user": os.getenv("DB_USER", "postgres"),
     "password": "hgl084877",
     "host": "localhost",
+    # "host": "120.55.182.153",
     "port": os.getenv("DB_PORT", "5432")
 }
 
