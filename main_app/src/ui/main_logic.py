@@ -13,6 +13,25 @@ from data_visualization.candlestick_plot import plot_candlestick
 from database.db_connection import get_engine, check_connection, DatabaseConnectionError
 from config.db_config import DB_CONFIG
 import yfinance as yf
+import psycopg2
+import csv
+from config.paths import ERRORstock_PATH  # 错误日志路径
+
+# 数据库连接函数
+def get_db_connection():
+    return psycopg2.connect(**DB_CONFIG)
+
+
+# 从数据库获取所有 ticker
+def fetch_tickers_from_db():
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT ticker FROM tickers_fundamental WHERE active = true")
+    tickers = [row[0] for row in cursor.fetchall()]
+    cursor.close()
+    conn.close()
+    print(f"Fetched {len(tickers)} tickers from database")
+    return tickers
 
 class MainWindowLogic:
     def __init__(self, ui):
@@ -157,19 +176,41 @@ class MainWindowLogic:
             QToolTip.hideText()
         if hasattr(self, 'current_df'):
             self.update_plot(self.current_df)
-
+            
     def batch_fetch_stocks(self):
         try:
-            if not os.path.exists(STOCK_LIST_PATH):
-                QMessageBox.warning(self.ui, "错误", f"未找到文件: {STOCK_LIST_PATH}")
-                return
-            df = pd.read_csv(STOCK_LIST_PATH)
-            if "Symbol" not in df.columns:
-                QMessageBox.warning(self.ui, "错误", "CSV 文件中缺少 'Symbol' 列")
-                return
-            stock_symbols = df["Symbol"].tolist()
+            # 从数据库获取 ticker 列表
+            stock_symbols = fetch_tickers_from_db()
             if not stock_symbols:
-                QMessageBox.warning(self.ui, "错误", "CSV 文件中没有股票代码")
+                QMessageBox.warning(self.ui, "错误", "数据库中没有找到有效的股票代码")
+                return
+
+            # 读取 error_log_enriched_errorout.csv 中的错误 ticker
+            error_log_path = ERRORstock_PATH.replace('error_log.csv', 'error_log_enriched_errorout.csv')
+            error_tickers = set()
+            try:
+                with open(error_log_path, mode='r', newline='', encoding='utf-8') as f:
+                    reader = csv.DictReader(f)
+                    # 确保文件有 'Original Ticker' 列
+                    if 'Original Ticker' not in reader.fieldnames:
+                        print(f"警告: {error_log_path} 中缺少 'Original Ticker' 列，跳过错误 ticker 过滤")
+                    else:
+                        error_tickers = {row['Original Ticker'] for row in reader}
+                        print(f"Loaded {len(error_tickers)} error tickers from {error_log_path}")
+            except FileNotFoundError:
+                print(f"错误日志文件 {error_log_path} 不存在，跳过错误 ticker 过滤")
+            except Exception as e:
+                print(f"读取错误日志文件失败: {e}")
+
+            # 从 stock_symbols 中去除错误 ticker
+            original_count = len(stock_symbols)
+            stock_symbols = [symbol for symbol in stock_symbols if symbol not in error_tickers]
+            filtered_count = len(stock_symbols)
+            print(f"Filtered out {original_count - filtered_count} error tickers, remaining: {filtered_count}")
+
+            # 检查过滤后的列表是否为空
+            if not stock_symbols:
+                QMessageBox.warning(self.ui, "错误", "过滤掉错误 ticker 后没有剩余的股票代码")
                 return
             self.ui.data_fetch_tab.batch_fetch_button.setEnabled(False)
             self.batch_fetcher = BatchDataFetcher(stock_symbols)
@@ -178,7 +219,8 @@ class MainWindowLogic:
             self.batch_fetcher.error_occurred.connect(self.show_error)
             self.batch_fetcher.start()
         except Exception as e:
-            self.show_error(f"读取 CSV 文件失败: {e}")
+            self.show_error(f"从数据库获取股票代码失败: {e}")
+            print(e)
 
     def update_progress(self, progress_data):
         current = progress_data.get('current', 0)

@@ -150,7 +150,7 @@ def process_tickers():
     
     # 写入测试失败的 ticker
     if failed_tickers:
-        error_output_path = ERRORstock_PATH.replace('error_log.csv', 'error_log_enriched_errorout1.csv')
+        error_output_path = ERRORstock_PATH.replace('error_log.csv', 'error_log_enriched_errorout.csv')
         with open(error_output_path, mode='w', newline='', encoding='utf-8') as f:
             fieldnames = ['Original Ticker', 'Cleaned Ticker', 'Type', 'Primary Exchange', 'Error Message', 'Timestamp']
             writer = csv.DictWriter(f, fieldnames=fieldnames)
