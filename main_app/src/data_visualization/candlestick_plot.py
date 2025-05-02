@@ -70,7 +70,7 @@ def plot_candlestick(main_plot, volume_plot, df, enable_hover):
                     open_price = df["Open"].iloc[index]
                     close_price = df["Close"].iloc[index]
                     high = df["High"].iloc[index]
-                    low = df["High"].iloc[index]
+                    low = df["Low"].iloc[index]
                     volume = df["Volume"].iloc[index]
                     
                     # 在图表标题中显示信息

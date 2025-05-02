@@ -62,16 +62,18 @@ class MainWindowLogic:
         self.ui.random_stock_tab.random_stock.clicked.connect(self.generate_random_stock)
         self.ui.settings_tab.save_db_config_button.clicked.connect(self.save_db_config)
 
+    # 数据规范化
     def format_value(self, value):
-        if isinstance(value, (int, float)):
-            if abs(value) >= 1_000_000_000:
-                return f"{value/1_000_000_000:.2f}B"
-            elif abs(value) >= 1_000_000:
-                return f"{value/1_000_000:.2f}M"
-            elif abs(value) >= 1_000:
-                return f"{value/1_000:.2f}K"
-        return str(value)
-
+        if isinstance(value, (int, float)):  # 检查输入是否为整数或浮点数
+            if abs(value) >= 1_000_000_000:  # 如果绝对值大于等于十亿
+                return f"{value/1_000_000_000:.2f}B"  # 格式化为以“B”为单位的字符串，保留两位小数
+            elif abs(value) >= 1_000_000:  # 如果绝对值大于等于一百万
+                return f"{value/1_000_000:.2f}M"  # 格式化为以“M”为单位的字符串，保留两位小数
+            elif abs(value) >= 1_000:  # 如果绝对值大于等于一千
+                return f"{value/1_000:.2f}K"  # 格式化为以“K”为单位的字符串，保留两位小数
+        return str(value)  # 如果不是数字类型或不满足上述条件，直接返回字符串形式
+    
+    # Random Stock 生成随机股票
     def generate_random_stock(self):
         try:
             tickers = fetch_table_names(self.engine)
@@ -136,6 +138,7 @@ class MainWindowLogic:
         except Exception as e:
             QMessageBox.warning(self.ui, "错误", f"获取股票信息失败: {str(e)}")
 
+    # 如果搜索框内容有改变，过滤股票选择器下拉框里的股票代码
     def filter_stock_selector(self):
         search_text = self.ui.visualization_tab.search_box.text().strip().lower()
         if not search_text:
@@ -146,6 +149,7 @@ class MainWindowLogic:
         self.ui.visualization_tab.stock_selector.clear()
         self.ui.visualization_tab.stock_selector.addItems(filtered_symbols)
 
+    # 更新股票选择器下拉框里的股票代码
     def update_stock_selector(self):
         self.all_stock_symbols = fetch_table_names(self.engine)
         self.ui.visualization_tab.stock_selector.clear()
@@ -153,7 +157,8 @@ class MainWindowLogic:
         model = QStringListModel()
         model.setStringList(self.all_stock_symbols)
         self.ui.visualization_tab.completer.setModel(model)
-
+    
+    # 蜡烛图页面，搜索按钮点击后，确认搜索
     def confirm_search(self):
         search_text = self.ui.visualization_tab.search_box.text().strip().upper()
         if search_text:
@@ -167,6 +172,7 @@ class MainWindowLogic:
             else:
                 QMessageBox.warning(self.ui, "未找到", f"未找到匹配的股票代码: {search_text}")
 
+    # 鼠标悬浮提示
     def toggle_hover_display(self):
         if self.ui.visualization_tab.hover_toggle.isChecked():
             self.enable_hover = True
