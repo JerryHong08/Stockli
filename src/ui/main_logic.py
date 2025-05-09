@@ -21,7 +21,6 @@ from config.paths import ERRORstock_PATH  # 错误日志路径
 def get_db_connection():
     return psycopg2.connect(**DB_CONFIG)
 
-
 # 从数据库获取所有 ticker
 def fetch_tickers_from_db():
     conn = get_db_connection()
@@ -51,17 +50,12 @@ class MainWindowLogic:
         self.update_stock_selector()
 
     def connect_signals(self):
-        self.ui.data_fetch_tab.fetch_button.clicked.connect(
-            lambda: self.fetch_single_stock(self.ui.data_fetch_tab.stock_input.text())
-        )
         self.ui.data_fetch_tab.batch_fetch_button.clicked.connect(self.batch_fetch_stocks)
         self.ui.visualization_tab.search_button.clicked.connect(self.confirm_search)
         self.ui.visualization_tab.load_button.clicked.connect(self.load_stock_data)
         self.ui.visualization_tab.hover_toggle.stateChanged.connect(self.toggle_hover_display)
         self.ui.visualization_tab.search_box.textChanged.connect(self.filter_stock_selector)
-        self.ui.random_stock_tab.random_stock.clicked.connect(self.generate_random_stock)
-        self.ui.settings_tab.save_db_config_button.clicked.connect(self.save_db_config)
-
+        
     # 数据规范化
     def format_value(self, value):
         if isinstance(value, (int, float)):  # 检查输入是否为整数或浮点数
@@ -73,71 +67,6 @@ class MainWindowLogic:
                 return f"{value/1_000:.2f}K"  # 格式化为以“K”为单位的字符串，保留两位小数
         return str(value)  # 如果不是数字类型或不满足上述条件，直接返回字符串形式
     
-    # Random Stock 生成随机股票
-    def generate_random_stock(self):
-        try:
-            tickers = fetch_table_names(self.engine)
-            if not tickers:
-                QMessageBox.warning(self.ui, "错误", "数据库中没有股票数据")
-                return
-            
-            import random
-            random_ticker = random.choice(tickers)
-            ticker = yf.Ticker(random_ticker)
-            info = ticker.get_info()
-            
-            for i in reversed(range(self.ui.random_stock_tab.stock_info_layout.count())): 
-                self.ui.random_stock_tab.stock_info_layout.itemAt(i).widget().setParent(None)
-            
-            def add_info_row(label, value):
-                row = QWidget()
-                row_layout = QHBoxLayout()
-                row_layout.setContentsMargins(0, 5, 0, 5)
-                label_widget = QLabel(f"<b>{label}:</b>")
-                label_widget.setStyleSheet("font-size: 14px; color: #333;")
-                value_widget = QLabel(str(value))
-                value_widget.setStyleSheet("font-size: 14px; color: #555;")
-                value_widget.setWordWrap(True)
-                row_layout.addWidget(label_widget)
-                row_layout.addWidget(value_widget)
-                row.setLayout(row_layout)
-                self.ui.random_stock_tab.stock_info_layout.addWidget(row)
-            
-            add_info_row("股票代码", random_ticker)
-            add_info_row("公司名称", info.get('longName', 'N/A'))
-            add_info_row("当前价格", f"${self.format_value(info.get('currentPrice', 'N/A'))}")
-            add_info_row("市值", f"${self.format_value(info.get('marketCap', 'N/A'))}")
-            add_info_row("行业", info.get('industry', 'N/A'))
-            add_info_row("52周最高", f"${self.format_value(info.get('fiftyTwoWeekHigh', 'N/A'))}")
-            add_info_row("52周最低", f"${self.format_value(info.get('fiftyTwoWeekLow', 'N/A'))}")
-            add_info_row("市盈率", info.get('trailingPE', 'N/A'))
-            add_info_row("股息率", f"{float(info.get('dividendYield', 0))*100:.2f}%" if info.get('dividendYield') else 'N/A')
-            
-            website = info.get('website', 'N/A')
-            if website != 'N/A':
-                website_link = QLabel(f'<a href="{website}">{website}</a>')
-                website_link.setOpenExternalLinks(True)
-                website_link.setStyleSheet("font-size: 14px; color: #1a73e8;")
-                self.ui.random_stock_tab.stock_info_layout.addWidget(QLabel("<b>官网:</b>"))
-                self.ui.random_stock_tab.stock_info_layout.addWidget(website_link)
-            
-            summary = info.get('longBusinessSummary', 'N/A')
-            if summary != 'N/A':
-                summary_label = QLabel("<b>公司简介:</b>")
-                summary_label.setStyleSheet("font-size: 14px; color: #333; margin-top: 15px;")
-                self.ui.random_stock_tab.stock_info_layout.addWidget(summary_label)
-                summary_text = QLabel(summary)
-                summary_text.setStyleSheet("font-size: 14px; color: #555;")
-                summary_text.setWordWrap(True)
-                self.ui.random_stock_tab.stock_info_layout.addWidget(summary_text)
-            
-            self.ui.visualization_tab.search_box.clear()
-            self.ui.visualization_tab.stock_selector.setCurrentText(random_ticker)
-            self.load_stock_data()
-            
-        except Exception as e:
-            QMessageBox.warning(self.ui, "错误", f"获取股票信息失败: {str(e)}")
-
     # 如果搜索框内容有改变，过滤股票选择器下拉框里的股票代码
     def filter_stock_selector(self):
         search_text = self.ui.visualization_tab.search_box.text().strip().lower()
@@ -183,6 +112,7 @@ class MainWindowLogic:
         if hasattr(self, 'current_df'):
             self.update_plot(self.current_df)
             
+    # 批量获取股票数据        
     def batch_fetch_stocks(self):
         try:
             # 从数据库获取 ticker 列表
@@ -228,6 +158,7 @@ class MainWindowLogic:
             self.show_error(f"从数据库获取股票代码失败: {e}")
             print(e)
 
+    # 更新进度条
     def update_progress(self, progress_data):
         current = progress_data.get('current', 0)
         total = progress_data.get('total', 1)
@@ -244,23 +175,13 @@ class MainWindowLogic:
                 f"已用: {elapsed_str} | 剩余: {remaining_str}"
             )
 
+    # 批量获取完成
     def on_batch_fetch_complete(self, message):
         self.ui.data_fetch_tab.batch_fetch_button.setEnabled(True)
         QMessageBox.information(self.ui, "完成", message)
         self.update_stock_selector()
 
-    def fetch_single_stock(self, ticker):
-        if not ticker:
-            QMessageBox.warning(self.ui, "错误", "请输入股票代码！")
-            return
-        if self.current_fetcher and self.current_fetcher.isRunning():
-            self.current_fetcher.quit()
-            self.current_fetcher.wait()
-        self.current_fetcher = DataFetcher(ticker)
-        self.current_fetcher.fetch_complete.connect(self.on_fetch_complete)
-        self.current_fetcher.error_occurred.connect(self.show_error)
-        self.current_fetcher.start()
-
+    # 数据获取完成
     def on_fetch_complete(self, ticker):
         QMessageBox.information(self.ui, "成功", f"股票 {ticker} 的数据已更新。")
         self.update_stock_selector()

@@ -21,7 +21,7 @@ class DataFetchTab(QWidget):
         # 实时更新ET时间
         self.task_timer_label = QLabel()
         layout.addWidget(self.task_timer_label, 0, 0, 1, 2)
-
+        
         def update_et_time():
             et_timezone = timezone('US/Eastern')
             current_time = datetime.now(et_timezone)
@@ -32,12 +32,6 @@ class DataFetchTab(QWidget):
         timer = QTimer(self)
         timer.timeout.connect(update_et_time)
         timer.start(1000)
-
-        # 添加分割线
-        line1 = QFrame()
-        line1.setFrameShape(QFrame.HLine)
-        line1.setFrameShadow(QFrame.Sunken)
-        layout.addWidget(line1, 1, 0, 1, 2)
 
         # 批量获取数据按钮
         self.batch_fetch_button = QPushButton("一次性获取列表中的股票数据")
@@ -54,23 +48,5 @@ class DataFetchTab(QWidget):
         self.progress_info = QLabel("准备中...")
         layout.addWidget(self.progress_info, 4, 0, 1, 2)
 
-        # 添加分割线
-        line2 = QFrame()
-        line2.setFrameShape(QFrame.HLine)
-        line2.setFrameShadow(QFrame.Sunken)
-        layout.addWidget(line2, 5, 0, 1, 2)
-
-        # 输入股票代码部分
-        self.input_label = QLabel("输入股票代码（如 SMCI):")
-        layout.addWidget(self.input_label, 6, 0)
-        
-        self.stock_input = QLineEdit()
-        self.stock_input.setPlaceholderText("请输入股票代码...")
-        layout.addWidget(self.stock_input, 6, 1)
-
-        # 获取数据按钮
-        self.fetch_button = QPushButton("获取数据并存储到数据库")
-        self.fetch_button.setFixedHeight(40)
-        layout.addWidget(self.fetch_button, 7, 0, 1, 2)
-
         self.setLayout(layout)
+    

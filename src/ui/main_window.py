@@ -3,8 +3,6 @@ from PyQt5.QtGui import QIcon
 from PyQt5.QtCore import Qt
 from .components.data_fetch_tab import DataFetchTab
 from .components.visualization_tab import VisualizationTab
-from .components.settings_tab import SettingsTab
-from .components.random_stock_tab import RandomStockTab
 from .main_logic import MainWindowLogic
 import os
 
@@ -59,14 +57,10 @@ class MainWindowUI(QMainWindow):
         # 初始化各个选项卡
         self.data_fetch_tab = DataFetchTab()
         self.visualization_tab = VisualizationTab()
-        self.random_stock_tab = RandomStockTab()
-        self.settings_tab = SettingsTab()
 
         # 添加选项卡
-        self.tabs.addTab(self.data_fetch_tab, "数据获取")
         self.tabs.addTab(self.visualization_tab, "数据可视化")
-        self.tabs.addTab(self.random_stock_tab, "随机股票生成")
-        self.tabs.addTab(self.settings_tab, "设置")
+        self.tabs.addTab(self.data_fetch_tab, "数据获取")
 
         # 设置主窗口的中心部件
         container = QWidget()
