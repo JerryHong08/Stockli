@@ -15,13 +15,16 @@ def get_latest_date_from_longport():
         return None
     current_time = datetime.now(timezone('US/Eastern'))
     print(f"ET Time: {current_time}")
+    print(f"Latest date from Longport: {resp[0].timestamp}")
+    print(f"the last second date from Longport: {resp[1].timestamp}")
     # 检查当前时间是否在交易时间内
     if current_time.hour >= 9 and current_time.hour < 16 and current_time.day == resp[0].timestamp.day:
+        print("the last second one is {resp[1].timestamp}")
         # 如果当前时间日子与longport api日子相同且正处于交易时间内，返回前一交易日日期
-        return datetime.combine(resp[1].timestamp.date(), datetime.min.time())
+        return datetime.combine(resp[0].timestamp.date(), datetime.min.time())
     else:
         # 如果不在交易时间内，返回最新的日期
-        return datetime.combine(resp[0].timestamp.date(), datetime.min.time())
+        return datetime.combine(resp[1].timestamp.date(), datetime.min.time())
 
 
 print(get_latest_date_from_longport())

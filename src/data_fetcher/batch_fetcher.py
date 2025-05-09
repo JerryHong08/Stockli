@@ -223,10 +223,10 @@ class BatchDataFetcher(QThread):
                 current_time.day == resp[0].timestamp.day and 
                 current_time.hour >= 9 and current_time.hour < 16):
                 # 如果当前时间年月日与longport api相同且正处于交易时间内，返回前一交易日日期
-                return datetime.combine(resp[1].timestamp.date(), datetime.min.time())
+                return datetime.combine(resp[0].timestamp.date(), datetime.min.time())
             else:
                 # 如果不在交易时间内，返回最新的日期
-                return datetime.combine(resp[0].timestamp.date(), datetime.min.time())
+                return datetime.combine(resp[1].timestamp.date(), datetime.min.time())
         except Exception as e:
             logger.error(f"获取 Longport 最新日期失败: {e}")
             return None

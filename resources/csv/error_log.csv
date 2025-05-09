@@ -694,3 +694,12 @@ SVA,更新 SVA 数据失败: OpenApiException: (code=301607, trace_id=) request 
 ALUR.WS,更新 ALUR.WS 数据失败: OpenApiException: (code=301607, trace_id=) request too many klines
 PSQH.WS,更新 PSQH.WS 数据失败: OpenApiException: (code=301607, trace_id=) request too many klines
 SVA,更新 SVA 数据失败: OpenApiException: (code=301607, trace_id=) request too many klines
+ALUR.WS,更新 ALUR.WS 数据失败: OpenApiException: (code=301607, trace_id=) request too many klines
+PSQH.WS,更新 PSQH.WS 数据失败: OpenApiException: (code=301607, trace_id=) request too many klines
+SVA,更新 SVA 数据失败: OpenApiException: (code=301607, trace_id=) request too many klines
+ALUR.WS,更新 ALUR.WS 数据失败: OpenApiException: (code=301607, trace_id=) request too many klines
+PSQH.WS,更新 PSQH.WS 数据失败: OpenApiException: (code=301607, trace_id=) request too many klines
+SVA,更新 SVA 数据失败: OpenApiException: (code=301607, trace_id=) request too many klines
+ALUR.WS,更新 ALUR.WS 数据失败: OpenApiException: (code=301607, trace_id=) request too many klines
+PSQH.WS,更新 PSQH.WS 数据失败: OpenApiException: (code=301607, trace_id=) request too many klines
+SVA,更新 SVA 数据失败: OpenApiException: (code=301607, trace_id=) request too many klines
