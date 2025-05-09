@@ -48,21 +48,31 @@ def main():
                     print("Disconnected visualization_tab.search_box.textChanged")
                 except Exception as e:
                     print(f"Error disconnecting signals: {e}")
-                # 触发窗口关闭（依赖 VisualizationTab.closeEvent 清理 pyqtgraph）
-                run_app.window.close()
-                # 多次处理事件
+                # 清理 logic 资源（包括线程）
+                try:
+                    run_app.window.logic.cleanup()
+                    print("Cleaned up MainWindowLogic resources")
+                except Exception as e:
+                    print(f"Error cleaning up MainWindowLogic: {e}")
+                try:
+                    run_app.window.hide()
+                    print("Window hidden")
+                    run_app.window.centralWidget().deleteLater()
+                    print("Central widget deleted")
+                except Exception as e:
+                    print(f"Error deleting GUI resources: {e}")
+            if hasattr(run_app, 'app') and run_app.app:
+                print("Attempting to quit application...")
+                # run_app.app.processEvents()
+                # run_app.app.quit()
+                print("Application quit")
                 for _ in range(5):
                     run_app.app.processEvents()
                     time.sleep(0.05)
                 print("Window closed")
-            if hasattr(run_app, 'app') and run_app.app:
-                print("Attempting to quit application...")
-                run_app.app.processEvents()
-                run_app.app.quit()
-                print("Application quit")
         except Exception as e:
             print(f"Error during cleanup: {e}")
-        # 直接启动新进程
+        # 启动新进程
         try:
             subprocess.Popen([sys.executable, __file__])
             print("New process started")

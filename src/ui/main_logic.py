@@ -38,6 +38,8 @@ class MainWindowLogic:
         self.data_cache = {}
         self.all_stock_symbols = []
         self.current_fetcher = None
+        self.batch_fetcher = None
+        self.loader = None
         try:
             self.engine = get_engine()
             if not check_connection(self.engine):
@@ -56,18 +58,37 @@ class MainWindowLogic:
         self.ui.visualization_tab.hover_toggle.stateChanged.connect(self.toggle_hover_display)
         self.ui.visualization_tab.search_box.textChanged.connect(self.filter_stock_selector)
         
+    def cleanup(self):
+        """清理线程和资源"""
+        print("Cleaning up MainWindowLogic...")
+        # 终止 batch_fetcher
+        if self.batch_fetcher and self.batch_fetcher.isRunning():
+            print("Terminating batch_fetcher thread...")
+            self.batch_fetcher.terminate()
+            self.batch_fetcher.wait(1000)  # 等待最多1秒
+            self.batch_fetcher = None
+        # 终止 loader
+        if self.loader and self.loader.isRunning():
+            print("Terminating loader thread...")
+            self.loader.terminate()
+            self.loader.wait(1000)
+            self.loader = None
+        # 清理数据库连接
+        if hasattr(self, 'engine'):
+            self.engine.dispose()
+            print("Database engine disposed")
+
     # 数据规范化
     def format_value(self, value):
-        if isinstance(value, (int, float)):  # 检查输入是否为整数或浮点数
-            if abs(value) >= 1_000_000_000:  # 如果绝对值大于等于十亿
-                return f"{value/1_000_000_000:.2f}B"  # 格式化为以“B”为单位的字符串，保留两位小数
-            elif abs(value) >= 1_000_000:  # 如果绝对值大于等于一百万
-                return f"{value/1_000_000:.2f}M"  # 格式化为以“M”为单位的字符串，保留两位小数
-            elif abs(value) >= 1_000:  # 如果绝对值大于等于一千
-                return f"{value/1_000:.2f}K"  # 格式化为以“K”为单位的字符串，保留两位小数
-        return str(value)  # 如果不是数字类型或不满足上述条件，直接返回字符串形式
+        if isinstance(value, (int, float)):
+            if abs(value) >= 1_000_000_000:
+                return f"{value/1_000_000_000:.2f}B"
+            elif abs(value) >= 1_000_000:
+                return f"{value/1_000_000:.2f}M"
+            elif abs(value) >= 1_000:
+                return f"{value/1_000:.2f}K"
+        return str(value)
     
-    # 如果搜索框内容有改变，过滤股票选择器下拉框里的股票代码
     def filter_stock_selector(self):
         search_text = self.ui.visualization_tab.search_box.text().strip().lower()
         if not search_text:
@@ -78,7 +99,6 @@ class MainWindowLogic:
         self.ui.visualization_tab.stock_selector.clear()
         self.ui.visualization_tab.stock_selector.addItems(filtered_symbols)
 
-    # 更新股票选择器下拉框里的股票代码
     def update_stock_selector(self):
         self.all_stock_symbols = fetch_table_names(self.engine)
         self.ui.visualization_tab.stock_selector.clear()
@@ -87,7 +107,6 @@ class MainWindowLogic:
         model.setStringList(self.all_stock_symbols)
         self.ui.visualization_tab.completer.setModel(model)
     
-    # 蜡烛图页面，搜索按钮点击后，确认搜索
     def confirm_search(self):
         search_text = self.ui.visualization_tab.search_box.text().strip().upper()
         if search_text:
@@ -101,7 +120,6 @@ class MainWindowLogic:
             else:
                 QMessageBox.warning(self.ui, "未找到", f"未找到匹配的股票代码: {search_text}")
 
-    # 鼠标悬浮提示
     def toggle_hover_display(self):
         if self.ui.visualization_tab.hover_toggle.isChecked():
             self.enable_hover = True
@@ -112,22 +130,18 @@ class MainWindowLogic:
         if hasattr(self, 'current_df'):
             self.update_plot(self.current_df)
             
-    # 批量获取股票数据        
     def batch_fetch_stocks(self):
         try:
-            # 从数据库获取 ticker 列表
             stock_symbols = fetch_tickers_from_db()
             if not stock_symbols:
                 QMessageBox.warning(self.ui, "错误", "数据库中没有找到有效的股票代码")
                 return
 
-            # 读取 error_log_enriched_errorout.csv 中的错误 ticker
             error_log_path = ERRORstock_PATH.replace('error_log.csv', 'error_log_enriched_errorout.csv')
             error_tickers = set()
             try:
                 with open(error_log_path, mode='r', newline='', encoding='utf-8') as f:
                     reader = csv.DictReader(f)
-                    # 确保文件有 'Original Ticker' 列
                     if 'Original Ticker' not in reader.fieldnames:
                         print(f"警告: {error_log_path} 中缺少 'Original Ticker' 列，跳过错误 ticker 过滤")
                     else:
@@ -138,13 +152,11 @@ class MainWindowLogic:
             except Exception as e:
                 print(f"读取错误日志文件失败: {e}")
 
-            # 从 stock_symbols 中去除错误 ticker
             original_count = len(stock_symbols)
             stock_symbols = [symbol for symbol in stock_symbols if symbol not in error_tickers]
             filtered_count = len(stock_symbols)
             print(f"Filtered out {original_count - filtered_count} error tickers, remaining: {filtered_count}")
 
-            # 检查过滤后的列表是否为空
             if not stock_symbols:
                 QMessageBox.warning(self.ui, "错误", "过滤掉错误 ticker 后没有剩余的股票代码")
                 return
@@ -158,7 +170,6 @@ class MainWindowLogic:
             self.show_error(f"从数据库获取股票代码失败: {e}")
             print(e)
 
-    # 更新进度条
     def update_progress(self, progress_data):
         current = progress_data.get('current', 0)
         total = progress_data.get('total', 1)
@@ -175,13 +186,11 @@ class MainWindowLogic:
                 f"已用: {elapsed_str} | 剩余: {remaining_str}"
             )
 
-    # 批量获取完成
     def on_batch_fetch_complete(self, message):
         self.ui.data_fetch_tab.batch_fetch_button.setEnabled(True)
         QMessageBox.information(self.ui, "完成", message)
         self.update_stock_selector()
 
-    # 数据获取完成
     def on_fetch_complete(self, ticker):
         QMessageBox.information(self.ui, "成功", f"股票 {ticker} 的数据已更新。")
         self.update_stock_selector()

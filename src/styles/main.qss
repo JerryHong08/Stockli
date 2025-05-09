@@ -1,37 +1,56 @@
 /* 全局样式 */
 QMainWindow {
-    background-color: #f5f5f5;
+    background-color: #f0f0f0; /* Slightly darker to avoid Windows 11 dark border */
 }
 
 /* 按钮样式 */
 QPushButton {
-    background-color: #C0C0C0;
+    background-color: #46807f; /* Darker shade of #579190 for better text contrast */
     color: white;
     font-size: 14px;
+    font-weight: bold; /* Enhance text visibility */
     padding: 10px;
     border-radius: 5px;
 }
 
 QPushButton:hover {
-    background-color: #808080;
+    background-color: #3a6b6a; /* Even darker for hover */
 }
 
 /* 标签样式 */
 QLabel {
     font-size: 14px;
-    color: #333;
+    color: #222; /* Higher contrast */
 }
 
-/* 输入框样式 */
+/* 输入框和下拉框样式 */
 QLineEdit, QComboBox {
     padding: 8px;
     font-size: 14px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    background-color: #ffffff;
 }
 
 QLineEdit:focus, QComboBox:focus {
-    border: 1px solid #4CAF50;
+    border: 1px solid #579190;
+}
+
+/* QCompleter 弹出菜单样式 */
+QCompleter::popup {
+    background-color: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+QCompleter::item {
+    padding: 5px;
+    color: #222;
+}
+
+QCompleter::item:selected {
+    background-color: #579190;
+    color: white;
 }
 
 /* 框架样式 */
@@ -43,6 +62,7 @@ QFrame {
 QTabWidget::pane {
     border: 1px solid #ccc;
     padding: 10px;
+    background-color: #ffffff;
 }
 
 QTabBar::tab {
@@ -55,8 +75,26 @@ QTabBar::tab {
 }
 
 QTabBar::tab:selected {
-    background: #fff;
+    background: #ffffff;
     border-bottom: 2px solid #579190;
+}
+
+/* 分割器样式 */
+QSplitter::handle:vertical {
+    background: #ccc;
+    height: 6px;
+    border-radius: 3px;
+}
+
+QSplitter::handle:vertical:hover {
+    background: #579190;
+}
+
+/* pyqtgraph 图形样式 */
+PlotWidget {
+    background: #ffffff;
+    border: 1px solid #ccc;
+    border-radius: 5px;
 }
 
 /* 进度条样式 */
@@ -64,6 +102,8 @@ QProgressBar {
     border: 1px solid #ccc;
     border-radius: 5px;
     text-align: center;
+    font-size: 14px;
+    color: #222;
 }
 
 QProgressBar::chunk {

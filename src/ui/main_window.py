@@ -41,8 +41,6 @@ class MainWindowUI(QMainWindow):
 
     def connect_signals(self):
         """连接所有信号"""
-        
-        # 连接可视化选项卡信号
         self.visualization_tab.search_box.textChanged.connect(
             self.logic.filter_stock_selector
         )
@@ -67,3 +65,13 @@ class MainWindowUI(QMainWindow):
         container = QWidget()
         container.setLayout(self.layout)
         self.setCentralWidget(container)
+
+    def closeEvent(self, event):
+        """调试关闭事件并清理资源"""
+        print("MainWindowUI closeEvent triggered")
+        try:
+            self.logic.cleanup()
+            print("MainWindowLogic cleanup called")
+        except Exception as e:
+            print(f"Error in MainWindowLogic cleanup: {e}")
+        event.accept()

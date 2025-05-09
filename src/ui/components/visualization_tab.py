@@ -32,30 +32,30 @@ class VisualizationTab(QWidget):
         # 搜索框和确认按钮
         self.search_box = QLineEdit()
         self.search_box.setPlaceholderText("搜索股票...")
-        self.search_box.setFixedHeight(30)
+        self.search_box.setFixedHeight(40)
         control_layout.addWidget(self.search_box, 0, 0, 1, 2)
 
         self.search_button = QPushButton("搜索")
-        self.search_button.setFixedHeight(30)
+        self.search_button.setFixedHeight(40)
         control_layout.addWidget(self.search_button, 0, 2)
         
         # 股票代码选择器
         self.stock_selector = QComboBox()
-        self.stock_selector.setFixedHeight(30)
+        self.stock_selector.setFixedHeight(40)
         control_layout.addWidget(self.stock_selector, 1, 0, 1, 2)
 
         # 周期选择器和加载按钮
         self.period_label = QLabel("周期:")
-        self.period_label.setFixedHeight(30)
+        self.period_label.setFixedHeight(40)
         control_layout.addWidget(self.period_label, 1, 2)
 
         self.period_selector = QComboBox()
         self.period_selector.addItems(["50", "200", "500", "1000"])
-        self.period_selector.setFixedHeight(30)
+        self.period_selector.setFixedHeight(40)
         control_layout.addWidget(self.period_selector, 1, 3)
 
         self.load_button = QPushButton("加载")
-        self.load_button.setFixedHeight(30)
+        self.load_button.setFixedHeight(40)
         control_layout.addWidget(self.load_button, 1, 4)
 
         control_container.setLayout(control_layout)
@@ -96,7 +96,7 @@ class VisualizationTab(QWidget):
         """清理 pyqtgraph 资源"""
         print("VisualizationTab closeEvent triggered")
         if self.main_plot:
-            self.main_plot.clear()  # 清除绘图数据
+            self.main_plot.clear()
             self.main_plot.close()
             self.main_plot = None
         if self.volume_plot:
@@ -104,5 +104,3 @@ class VisualizationTab(QWidget):
             self.volume_plot.close()
             self.volume_plot = None
         event.accept()
-        
-        
