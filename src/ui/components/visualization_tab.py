@@ -1,14 +1,20 @@
-from PyQt5.QtWidgets import (
+from PyQt6.QtWidgets import (
     QWidget, QGridLayout, QLabel, QLineEdit, 
     QPushButton, QComboBox, QCheckBox, QFrame,
     QSplitter, QCompleter
 )
-from PyQt5.QtCore import Qt
+from PyQt6.QtCore import Qt
 import pyqtgraph as pg
+
+# 禁用 pyqtgraph 的 OpenGL 和多线程
+pg.setConfigOption('useOpenGL', False)
+pg.setConfigOption('enableExperimental', False)
 
 class VisualizationTab(QWidget):
     def __init__(self, parent=None):
         super().__init__(parent)
+        self.main_plot = None
+        self.volume_plot = None
         self.init_ui()
 
     def init_ui(self):
@@ -60,7 +66,7 @@ class VisualizationTab(QWidget):
         layout.addWidget(self.hover_toggle, 4, 0, 1, 2)
 
         # 使用 QSplitter 分割主图和成交量图
-        self.splitter = QSplitter(Qt.Vertical)
+        self.splitter = QSplitter(Qt.Orientation.Vertical)
         self.main_plot = pg.PlotWidget()
         self.volume_plot = pg.PlotWidget()
         
@@ -74,7 +80,7 @@ class VisualizationTab(QWidget):
 
         # 初始化自动补全
         self.completer = QCompleter([])
-        self.completer.setCaseSensitivity(False)
+        self.completer.setCaseSensitivity(Qt.CaseSensitivity.CaseInsensitive)
         self.search_box.setCompleter(self.completer)
 
         self.setLayout(layout)
@@ -85,3 +91,18 @@ class VisualizationTab(QWidget):
         plot_widget.showGrid(x=True, y=True, alpha=0.3)
         plot_widget.setLabel("left", "Price" if plot_widget == self.main_plot else "Volume")
         plot_widget.setLabel("bottom", "Date")
+
+    def closeEvent(self, event):
+        """清理 pyqtgraph 资源"""
+        print("VisualizationTab closeEvent triggered")
+        if self.main_plot:
+            self.main_plot.clear()  # 清除绘图数据
+            self.main_plot.close()
+            self.main_plot = None
+        if self.volume_plot:
+            self.volume_plot.clear()
+            self.volume_plot.close()
+            self.volume_plot = None
+        event.accept()
+        
+        

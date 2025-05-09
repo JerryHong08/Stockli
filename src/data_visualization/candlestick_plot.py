@@ -1,7 +1,7 @@
 import pyqtgraph as pg
 import numpy as np
-from PyQt5.QtWidgets import QGraphicsRectItem, QToolTip
-from PyQt5.QtCore import Qt
+from PyQt6.QtWidgets import QGraphicsRectItem, QToolTip
+from PyQt6.QtCore import Qt
 from pyqtgraph.Qt import QtCore
 from pyqtgraph import SignalProxy
 

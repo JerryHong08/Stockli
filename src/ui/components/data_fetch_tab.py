@@ -1,8 +1,8 @@
 from datetime import datetime
 from pytz import timezone
-from PyQt5.QtCore import QTimer
+from PyQt6.QtCore import QTimer
 
-from PyQt5.QtWidgets import (
+from PyQt6.QtWidgets import (
     QWidget, QGridLayout, QPushButton, QProgressBar, 
     QLabel, QLineEdit, QFrame
 )
@@ -40,7 +40,7 @@ class DataFetchTab(QWidget):
 
         # 进度条
         self.progress_bar = QProgressBar()
-        self.progress_bar.setFixedHeight(20)
+        self.progress_bar.setFixedHeight(30)
         self.progress_bar.setTextVisible(True)
         layout.addWidget(self.progress_bar, 3, 0, 1, 2)
 
@@ -49,4 +49,3 @@ class DataFetchTab(QWidget):
         layout.addWidget(self.progress_info, 4, 0, 1, 2)
 
         self.setLayout(layout)
-    

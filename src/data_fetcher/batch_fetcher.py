@@ -1,6 +1,6 @@
 # 执行获取股票数据
-from PyQt5.QtCore import QThread, pyqtSignal
-from PyQt5.QtCore import QThread, pyqtSignal
+from PyQt6.QtCore import QThread, pyqtSignal
+from PyQt6.QtCore import QThread, pyqtSignal
 from longport.openapi import QuoteContext, Config, Period, AdjustType, OpenApiException
 import os
 import time

@@ -1,6 +1,6 @@
 import time
-from PyQt5.QtCore import QThread, pyqtSignal, QStringListModel
-from PyQt5.QtWidgets import QMessageBox, QToolTip, QWidget, QLabel, QHBoxLayout
+from PyQt6.QtCore import QThread, pyqtSignal, QStringListModel
+from PyQt6.QtWidgets import QMessageBox, QToolTip, QWidget, QLabel, QHBoxLayout
 import pandas as pd
 import os
 import sys

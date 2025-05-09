@@ -1,6 +1,6 @@
-from PyQt5.QtWidgets import QMainWindow, QVBoxLayout, QWidget, QTabWidget
-from PyQt5.QtGui import QIcon
-from PyQt5.QtCore import Qt
+from PyQt6.QtWidgets import QMainWindow, QVBoxLayout, QWidget, QTabWidget
+from PyQt6.QtGui import QIcon
+from PyQt6.QtCore import Qt
 from .components.data_fetch_tab import DataFetchTab
 from .components.visualization_tab import VisualizationTab
 from .main_logic import MainWindowLogic
@@ -33,6 +33,7 @@ class MainWindowUI(QMainWindow):
             stylesheet_path = os.path.join(os.path.dirname(__file__), '..', 'styles', 'main.qss')
             with open(stylesheet_path, "r", encoding="utf-8") as f:
                 self.setStyleSheet(f.read())
+                print("样式表加载成功")
         except FileNotFoundError:
             print("样式表文件未找到，使用默认样式")
         except Exception as e:

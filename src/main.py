@@ -1,13 +1,13 @@
 import sys
 import os
 import time
+import subprocess
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
-from PyQt5.QtWidgets import QApplication
-from PyQt5.QtGui import QIcon
-from PyQt5.QtCore import Qt
+from PyQt6.QtWidgets import QApplication
+from PyQt6.QtGui import QIcon
+from PyQt6.QtCore import Qt
 from ui.main_window import MainWindowUI
-import subprocess
 
 # 图标路径
 icon_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'resources', 'icons', 'refresh_icon.png'))
@@ -15,37 +15,61 @@ icon_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 
 class FileChangeHandler(FileSystemEventHandler):
     def __init__(self, restart_func):
         self.restart_func = restart_func
+        self.last_modified = 0
+        self.debounce_interval = 1.0  # 防抖间隔1秒
 
     def on_modified(self, event):
         if not event.is_directory and event.src_path.endswith('.py'):
-            print(f"Detected change in {event.src_path}, restarting...")
-            self.restart_func()
+            current_time = time.time()
+            if current_time - self.last_modified > self.debounce_interval:
+                print(f"Detected change in {event.src_path}, restarting...")
+                self.last_modified = current_time
+                self.restart_func()
 
 def run_app():
-    """运行 PyQt5 应用程序"""
+    """运行 PyQt6 应用程序"""
     app = QApplication(sys.argv)
     app.setWindowIcon(QIcon(icon_path))
     window = MainWindowUI()
-    window.show()
-    # Store app and window globally for cleanup
+    window.showMaximized()
     run_app.app = app
     run_app.window = window
-    sys.exit(app.exec_())
+    sys.exit(app.exec())
 
 def main():
-    QApplication.setAttribute(Qt.AA_EnableHighDpiScaling)
-    QApplication.setAttribute(Qt.AA_UseHighDpiPixmaps)
-
     def restart():
         """重启程序，确保关闭旧窗口"""
-        # Close the existing window and quit the application
-        if hasattr(run_app, 'window') and run_app.window:
-            run_app.window.close()  # Close the MainWindow
-        if hasattr(run_app, 'app') and run_app.app:
-            run_app.app.quit()  # Quit the QApplication
-        # Start a new process
-        subprocess.Popen([sys.executable, __file__])
-        sys.exit(0)
+        try:
+            if hasattr(run_app, 'window') and run_app.window:
+                print("Attempting to close window...")
+                # 断开信号
+                try:
+                    run_app.window.visualization_tab.search_box.textChanged.disconnect()
+                    print("Disconnected visualization_tab.search_box.textChanged")
+                except Exception as e:
+                    print(f"Error disconnecting signals: {e}")
+                # 触发窗口关闭（依赖 VisualizationTab.closeEvent 清理 pyqtgraph）
+                run_app.window.close()
+                # 多次处理事件
+                for _ in range(5):
+                    run_app.app.processEvents()
+                    time.sleep(0.05)
+                print("Window closed")
+            if hasattr(run_app, 'app') and run_app.app:
+                print("Attempting to quit application...")
+                run_app.app.processEvents()
+                run_app.app.quit()
+                print("Application quit")
+        except Exception as e:
+            print(f"Error during cleanup: {e}")
+        # 直接启动新进程
+        try:
+            subprocess.Popen([sys.executable, __file__])
+            print("New process started")
+        except Exception as e:
+            print(f"Error starting new process: {e}")
+        # 强制退出
+        os._exit(0)
 
     # 监控文件变化
     event_handler = FileChangeHandler(restart)
@@ -55,6 +79,8 @@ def main():
 
     try:
         run_app()
+    except Exception as e:
+        print(f"Error in run_app: {e}")
     finally:
         observer.stop()
         observer.join()

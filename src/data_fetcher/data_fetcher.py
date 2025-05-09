@@ -1,4 +1,4 @@
-from PyQt5.QtCore import QThread, pyqtSignal
+from PyQt6.QtCore import QThread, pyqtSignal
 from longport.openapi import QuoteContext, Config, Period, AdjustType
 from database.db_operations import save_to_table
 from database.db_connection import get_engine
