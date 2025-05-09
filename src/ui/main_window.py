@@ -11,7 +11,7 @@ import os
 class MainWindowUI(QMainWindow):
     def __init__(self):
         super().__init__()
-        self.setWindowTitle("股票数据可视化")
+        self.setWindowTitle("股票数据可视化工具")
         self.setGeometry(100, 100, 800, 600)
         
         # 初始化UI
@@ -25,6 +25,9 @@ class MainWindowUI(QMainWindow):
         
         # 连接信号
         self.connect_signals()
+        
+        # 默认最大化显示
+        self.showMaximized()
 
     def load_stylesheet(self):
         """从外部文件加载样式表"""
