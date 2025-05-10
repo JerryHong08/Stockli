@@ -1,11 +1,11 @@
-from PyQt6.QtCore import QThread, pyqtSignal
+from PySide6.QtCore import QThread, Signal
 from longport.openapi import QuoteContext, Config, Period, AdjustType
 from database.db_operations import save_to_table
 from database.db_connection import get_engine
 
 class DataFetcher(QThread):
-    fetch_complete = pyqtSignal(str)
-    error_occurred = pyqtSignal(str)
+    fetch_complete = Signal(str)
+    error_occurred = Signal(str)
 
     def __init__(self, stock_symbol):
         super().__init__()

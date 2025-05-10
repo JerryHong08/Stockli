@@ -1,14 +1,14 @@
-from PyQt6.QtWidgets import (
+from PySide6.QtWidgets import (
     QWidget, QGridLayout, QLabel, QLineEdit, 
     QPushButton, QComboBox, QCheckBox, QFrame,
     QSplitter, QCompleter
 )
-from PyQt6.QtCore import Qt
+from PySide6.QtCore import Qt
 import pyqtgraph as pg
 
-# 禁用 pyqtgraph 的 OpenGL 和多线程
-pg.setConfigOption('useOpenGL', False)
-pg.setConfigOption('enableExperimental', False)
+# # 禁用 pyqtgraph 的 OpenGL 和多线程
+# pg.setConfigOption('useOpenGL', False)
+# pg.setConfigOption('enableExperimental', False)
 
 class VisualizationTab(QWidget):
     def __init__(self, parent=None):
@@ -27,11 +27,11 @@ class VisualizationTab(QWidget):
         control_container = QWidget()
         control_layout = QGridLayout()
         control_layout.setSpacing(5)
-        control_layout.setContentsMargins(0, 0, 0, 0)
+        control_layout.setContentsMargins(0, 0, 0, 0) 
         
         # 搜索框和确认按钮
         self.search_box = QLineEdit()
-        self.search_box.setPlaceholderText("搜索股票...")
+        self.search_box.setPlaceholderText("搜索股票...") 
         self.search_box.setFixedHeight(40)
         control_layout.addWidget(self.search_box, 0, 0, 1, 2)
 
@@ -82,7 +82,7 @@ class VisualizationTab(QWidget):
         self.completer = QCompleter([])
         self.completer.setCaseSensitivity(Qt.CaseSensitivity.CaseInsensitive)
         self.search_box.setCompleter(self.completer)
-
+        
         self.setLayout(layout)
 
     def set_plot_style(self, plot_widget):
@@ -91,16 +91,3 @@ class VisualizationTab(QWidget):
         plot_widget.showGrid(x=True, y=True, alpha=0.3)
         plot_widget.setLabel("left", "Price" if plot_widget == self.main_plot else "Volume")
         plot_widget.setLabel("bottom", "Date")
-
-    def closeEvent(self, event):
-        """清理 pyqtgraph 资源"""
-        print("VisualizationTab closeEvent triggered")
-        if self.main_plot:
-            self.main_plot.clear()
-            self.main_plot.close()
-            self.main_plot = None
-        if self.volume_plot:
-            self.volume_plot.clear()
-            self.volume_plot.close()
-            self.volume_plot = None
-        event.accept()

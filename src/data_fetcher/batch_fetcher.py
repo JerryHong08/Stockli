@@ -1,6 +1,5 @@
 # 执行获取股票数据
-from PyQt6.QtCore import QThread, pyqtSignal
-from PyQt6.QtCore import QThread, pyqtSignal
+from PySide6.QtCore import QThread, Signal
 from longport.openapi import QuoteContext, Config, Period, AdjustType, OpenApiException
 import os
 import time
@@ -21,9 +20,9 @@ def get_db_connection():
     return psycopg2.connect(**DB_CONFIG)
 
 class BatchDataFetcher(QThread):
-    progress_updated = pyqtSignal(dict)
-    fetch_complete = pyqtSignal(str)
-    error_occurred = pyqtSignal(str)
+    progress_updated = Signal(dict)
+    fetch_complete = Signal(str)
+    error_occurred = Signal(str)
 
     def __init__(self, stock_symbols):
         super().__init__()

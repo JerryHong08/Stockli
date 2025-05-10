@@ -1,6 +1,6 @@
 import time
-from PyQt6.QtCore import QThread, pyqtSignal, QStringListModel
-from PyQt6.QtWidgets import QMessageBox, QToolTip, QWidget, QLabel, QHBoxLayout
+from PySide6.QtCore import QThread, QStringListModel
+from PySide6.QtWidgets import QMessageBox, QToolTip, QWidget, QLabel, QHBoxLayout
 import pandas as pd
 import os
 import sys
@@ -51,13 +51,15 @@ class MainWindowLogic:
         self.connect_signals()
         self.update_stock_selector()
 
+    # 连接信号和槽
     def connect_signals(self):
         self.ui.data_fetch_tab.batch_fetch_button.clicked.connect(self.batch_fetch_stocks)
         self.ui.visualization_tab.search_button.clicked.connect(self.confirm_search)
         self.ui.visualization_tab.load_button.clicked.connect(self.load_stock_data)
         self.ui.visualization_tab.hover_toggle.stateChanged.connect(self.toggle_hover_display)
         self.ui.visualization_tab.search_box.textChanged.connect(self.filter_stock_selector)
-        
+    
+    # 关闭窗口时清理资源
     def cleanup(self):
         """清理线程和资源"""
         print("Cleaning up MainWindowLogic...")
@@ -89,6 +91,7 @@ class MainWindowLogic:
                 return f"{value/1_000:.2f}K"
         return str(value)
     
+    # 清理股票选择器
     def filter_stock_selector(self):
         search_text = self.ui.visualization_tab.search_box.text().strip().lower()
         if not search_text:
@@ -98,7 +101,8 @@ class MainWindowLogic:
         filtered_symbols = [symbol for symbol in self.all_stock_symbols if search_text in symbol.lower()]
         self.ui.visualization_tab.stock_selector.clear()
         self.ui.visualization_tab.stock_selector.addItems(filtered_symbols)
-
+    
+    # 更新股票选择器
     def update_stock_selector(self):
         self.all_stock_symbols = fetch_table_names(self.engine)
         self.ui.visualization_tab.stock_selector.clear()
@@ -106,7 +110,20 @@ class MainWindowLogic:
         model = QStringListModel()
         model.setStringList(self.all_stock_symbols)
         self.ui.visualization_tab.completer.setModel(model)
-    
+        # 手动设置 QCompleter 的 popup 样式
+        popup = self.ui.visualization_tab.completer.popup()
+        popup.setStyleSheet("""
+            QAbstractItemView {
+                background-color: #ffffff;
+                border: 1px solid #ccc;
+                border-radius: 5px;
+                color: #222;
+                selection-background-color: #579190;
+                selection-color: white;
+            }
+        """)
+        
+    # 搜索文字框
     def confirm_search(self):
         search_text = self.ui.visualization_tab.search_box.text().strip().upper()
         if search_text:
@@ -120,6 +137,7 @@ class MainWindowLogic:
             else:
                 QMessageBox.warning(self.ui, "未找到", f"未找到匹配的股票代码: {search_text}")
 
+    # 切换鼠标悬停显示
     def toggle_hover_display(self):
         if self.ui.visualization_tab.hover_toggle.isChecked():
             self.enable_hover = True
@@ -129,7 +147,8 @@ class MainWindowLogic:
             QToolTip.hideText()
         if hasattr(self, 'current_df'):
             self.update_plot(self.current_df)
-            
+    
+    # 批量获取股票数据
     def batch_fetch_stocks(self):
         try:
             stock_symbols = fetch_tickers_from_db()
@@ -170,6 +189,7 @@ class MainWindowLogic:
             self.show_error(f"从数据库获取股票代码失败: {e}")
             print(e)
 
+    # 更新进度条
     def update_progress(self, progress_data):
         current = progress_data.get('current', 0)
         total = progress_data.get('total', 1)
@@ -186,15 +206,13 @@ class MainWindowLogic:
                 f"已用: {elapsed_str} | 剩余: {remaining_str}"
             )
 
+    # 批量获取完成
     def on_batch_fetch_complete(self, message):
         self.ui.data_fetch_tab.batch_fetch_button.setEnabled(True)
         QMessageBox.information(self.ui, "完成", message)
         self.update_stock_selector()
 
-    def on_fetch_complete(self, ticker):
-        QMessageBox.information(self.ui, "成功", f"股票 {ticker} 的数据已更新。")
-        self.update_stock_selector()
-
+    # 加载图表按钮    
     def load_stock_data(self):
         ticker = self.ui.visualization_tab.stock_selector.currentText()
         period = int(self.ui.visualization_tab.period_selector.currentText())
@@ -210,6 +228,7 @@ class MainWindowLogic:
         self.loader.error_occurred.connect(self.show_error)
         self.loader.start()
 
+    # 图表加载
     def on_data_loaded(self, df):
         ticker = self.ui.visualization_tab.stock_selector.currentText()
         self.data_cache[ticker] = df
@@ -218,6 +237,7 @@ class MainWindowLogic:
             df = df.tail(period)
         self.update_plot(df)
 
+    # 更新图表
     def update_plot(self, df):
         self.ui.visualization_tab.main_plot.clear()
         self.ui.visualization_tab.volume_plot.clear()
@@ -230,23 +250,6 @@ class MainWindowLogic:
             enable_hover
         )
 
+    # 显示错误消息
     def show_error(self, message):
         QMessageBox.warning(self.ui, "错误", message)
-
-    def save_db_config(self):
-        db_config = {
-            "host": self.ui.settings_tab.db_host_input.text(),
-            "port": self.ui.settings_tab.db_port_input.text(),
-            "user": self.ui.settings_tab.db_user_input.text(),
-            "password": self.ui.settings_tab.db_password_input.text(),
-            "dbname": self.ui.settings_tab.db_name_input.text(),
-        }
-        if not all(db_config.values()):
-            QMessageBox.warning(self.ui, "错误", "请填写所有数据库配置项")
-            return
-        try:
-            global DB_CONFIG
-            DB_CONFIG.update(db_config)
-            QMessageBox.information(self.ui, "成功", "数据库配置已保存")
-        except Exception as e:
-            QMessageBox.warning(self.ui, "错误", f"保存配置失败: {str(e)}")

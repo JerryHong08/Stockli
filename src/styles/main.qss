@@ -1,4 +1,10 @@
 /* 全局样式 */
+QWidget {
+        color: #333333; /* 字体颜色 */
+        background-color: #FFFFFF; /* 背景色 */
+        font-family: Arial;
+}
+
 QMainWindow {
     background-color: #f0f0f0; /* Slightly darker to avoid Windows 11 dark border */
 }
@@ -37,18 +43,18 @@ QLineEdit:focus, QComboBox:focus {
 }
 
 /* QCompleter 弹出菜单样式 */
-QCompleter::popup {
+QCompleter::popup, QAbstractItemView {
     background-color: #ffffff;
     border: 1px solid #ccc;
     border-radius: 5px;
 }
 
-QCompleter::item {
+QCompleter::item, QAbstractItemView::item {
     padding: 5px;
     color: #222;
 }
 
-QCompleter::item:selected {
+QCompleter::item:selected, QAbstractItemView::item:selected {
     background-color: #579190;
     color: white;
 }

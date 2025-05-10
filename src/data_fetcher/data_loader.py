@@ -1,10 +1,10 @@
-from PyQt6.QtCore import QThread, pyqtSignal
+from PySide6.QtCore import QThread, Signal
 import pandas as pd
 from database.db_operations import fetch_data_from_db
 
 class DataLoader(QThread):
-    data_loaded = pyqtSignal(pd.DataFrame)
-    error_occurred = pyqtSignal(str)
+    data_loaded = Signal(pd.DataFrame)
+    error_occurred = Signal(str)
 
     def __init__(self, ticker, engine, limit=None):
         super().__init__()

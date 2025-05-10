@@ -11,17 +11,6 @@ from longport.openapi import QuoteContext, Config, Period, AdjustType, OpenApiEx
 logger = setup_logger("db_operations")
 ny_tz = pytz.timezone('America/New_York')
 
-# def clean_symbol_for_postgres(symbol):
-#     """规范化ticker name"""
-#     if not symbol:
-#         raise ValueError("股票代码不能为空")
-#     cleaned_symbol = symbol.strip()
-#     cleaned_symbol = cleaned_symbol.replace(" ", "")
-#     cleaned_symbol = cleaned_symbol.replace("^", "-").replace("/", ".")
-#     if not cleaned_symbol:
-#         raise ValueError(f"清洗后的表名为空: {symbol}")
-#     return cleaned_symbol
-
 # LongPort API 配置
 config = Config.from_env()  # 从环境变量加载 LongPort 配置
 ctx = QuoteContext(config)
@@ -50,6 +39,7 @@ def check_ticker_exists(ticker):
     conn.close()
     return count > 0
 
+# 清洗 ticker 名称以适应 PostgreSQL和 LongPort API
 def clean_symbol_for_postgres(ticker, ticker_type, primary_exchange):
     cleaned_ticker = ticker
     
@@ -89,6 +79,7 @@ def clean_symbol_for_postgres(ticker, ticker_type, primary_exchange):
     
     return cleaned_ticker
 
+# 从 stock_daily 表读取指定 ticker 的数据
 def fetch_data_from_db(ticker, engine, limit=None):
     """从 stock_daily 表读取指定 ticker 的数据，返回 DataFrame"""
     try:
@@ -127,6 +118,7 @@ def fetch_data_from_db(ticker, engine, limit=None):
         print(f"Error fetching data: {e}")
         return pd.DataFrame()
 
+# 获取 stock_daily 中的所有 ticker
 def fetch_table_names(engine):
     """获取 stock_daily 中的所有 ticker"""
     try:
@@ -140,6 +132,7 @@ def fetch_table_names(engine):
         logger.error(f"Error fetching tickers: {e}")
         return []
 
+# 获取 stock_daily 中指定 ticker 的最新时间戳
 def get_latest_timestamp(ticker, engine):
     """获取 stock_daily 中指定 ticker 的最新时间戳"""
     try:
@@ -157,6 +150,7 @@ def get_latest_timestamp(ticker, engine):
         logger.error(f"获取 {ticker} 最新日期失败: {e}")
         return None
 
+# 判断是否需要跳过保存
 def should_skip_save(api_data, ticker, engine):
     """判断是否需要跳过保存"""
     if not api_data:
@@ -172,6 +166,7 @@ def should_skip_save(api_data, ticker, engine):
     db_latest_ny = db_latest.astimezone(ny_tz).replace(hour=0, minute=0, second=0, microsecond=0)
     return api_latest_ny.date() == db_latest_ny.date()
 
+# 保存数据到 stock_daily 表 
 def save_to_table(data, ticker, engine, batch_size=1000):
     """将数据保存到 stock_daily，按 ticker 和 timestamp 处理"""
     if should_skip_save(data, ticker, engine):

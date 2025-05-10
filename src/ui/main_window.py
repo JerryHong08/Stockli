@@ -1,6 +1,6 @@
-from PyQt6.QtWidgets import QMainWindow, QVBoxLayout, QWidget, QTabWidget
-from PyQt6.QtGui import QIcon
-from PyQt6.QtCore import Qt
+from PySide6.QtWidgets import QMainWindow, QVBoxLayout, QWidget, QTabWidget
+from PySide6.QtGui import QIcon
+from PySide6.QtCore import Qt
 from .components.data_fetch_tab import DataFetchTab
 from .components.visualization_tab import VisualizationTab
 from .main_logic import MainWindowLogic
@@ -27,6 +27,7 @@ class MainWindowUI(QMainWindow):
         # 默认最大化显示
         self.showMaximized()
 
+    # 加载样式表
     def load_stylesheet(self):
         """从外部文件加载样式表"""
         try:
@@ -65,13 +66,3 @@ class MainWindowUI(QMainWindow):
         container = QWidget()
         container.setLayout(self.layout)
         self.setCentralWidget(container)
-
-    def closeEvent(self, event):
-        """调试关闭事件并清理资源"""
-        print("MainWindowUI closeEvent triggered")
-        try:
-            self.logic.cleanup()
-            print("MainWindowLogic cleanup called")
-        except Exception as e:
-            print(f"Error in MainWindowLogic cleanup: {e}")
-        event.accept()

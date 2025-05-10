@@ -1,7 +1,7 @@
 import pyqtgraph as pg
 import numpy as np
-from PyQt6.QtWidgets import QGraphicsRectItem, QToolTip
-from PyQt6.QtCore import Qt
+from PySide6.QtWidgets import QGraphicsRectItem, QToolTip
+from PySide6.QtCore import Qt
 from pyqtgraph.Qt import QtCore
 from pyqtgraph import SignalProxy
 
@@ -50,13 +50,17 @@ def plot_candlestick(main_plot, volume_plot, df, enable_hover):
     # X轴同步
     volume_plot.setXLink(main_plot)
     
-    # 强制初始化视图范围
-    main_plot.getPlotItem().vb.sigResized.emit(main_plot.getPlotItem().vb)
-    volume_plot.getPlotItem().vb.sigResized.emit(volume_plot.getPlotItem().vb)
+    # # 强制初始化视图范围
+    # main_plot.getPlotItem().vb.sigResized.emit(main_plot.getPlotItem().vb)
+    # volume_plot.getPlotItem().vb.sigResized.emit(volume_plot.getPlotItem().vb)
+    
+    # 自动调整视图范围
+    main_plot.getPlotItem().vb.autoRange()
+    volume_plot.getPlotItem().vb.autoRange()
 
     # 设置横坐标刻度为日期
     ticks = [(x[i], df["Date"].iloc[i].strftime('%Y%m%d')) for i in range(0, len(df), 5)]
-    axis.setTicks([ticks])
+    axis.setTicks([ticks]) 
     
     if enable_hover:
         print(enable_hover)

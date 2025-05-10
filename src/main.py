@@ -4,9 +4,9 @@ import time
 import subprocess
 from watchdog.observers import Observer
 from watchdog.events import FileSystemEventHandler
-from PyQt6.QtWidgets import QApplication
-from PyQt6.QtGui import QIcon
-from PyQt6.QtCore import Qt
+from PySide6.QtWidgets import QApplication
+from PySide6.QtGui import QIcon
+from PySide6.QtCore import Qt
 from ui.main_window import MainWindowUI
 
 # 图标路径
@@ -27,7 +27,7 @@ class FileChangeHandler(FileSystemEventHandler):
                 self.restart_func()
 
 def run_app():
-    """运行 PyQt6 应用程序"""
+    """运行 PySide6 应用程序"""
     app = QApplication(sys.argv)
     app.setWindowIcon(QIcon(icon_path))
     window = MainWindowUI()
