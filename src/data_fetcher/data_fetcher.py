@@ -1,3 +1,4 @@
+# 获取单个股票的数据存入数据库
 from PySide6.QtCore import QThread, Signal
 from longport.openapi import QuoteContext, Config, Period, AdjustType
 from database.db_operations import save_to_table

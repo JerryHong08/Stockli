@@ -82,18 +82,18 @@ def main():
         os._exit(0)
 
     # 监控文件变化
-    event_handler = FileChangeHandler(restart)
-    observer = Observer()
-    observer.schedule(event_handler, path='.', recursive=True)
-    observer.start()
+    # event_handler = FileChangeHandler(restart)
+    # observer = Observer()
+    # observer.schedule(event_handler, path='.', recursive=True)
+    # observer.start()
 
     try:
         run_app()
     except Exception as e:
         print(f"Error in run_app: {e}")
-    finally:
-        observer.stop()
-        observer.join()
+    # finally:
+        # observer.stop()
+        # observer.join()
 
 if __name__ == "__main__":
     main()

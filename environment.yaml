@@ -87,16 +87,17 @@ dependencies:
       - pyperclip==1.9.0
       - pyqt5-qt5==5.15.2
       - pyqt5-sip==12.16.1
-      - pyqt6==6.4.2
       - pyqt6-plugins==6.4.2.2.3
       - pyqt6-qt6==6.4.3
       - pyqt6-sip==13.10.0
-      - pyqt6-tools==6.4.2.3.3
-      - pyqtgraph==0.13.3
+      - pyqtgraph==0.13.7
       - pyqtwebengine==5.15.7
       - pyqtwebengine-qt5==5.15.2
       - pyrect==0.2.0
       - pyscreeze==1.0.1
+      - pyside6==6.9.0
+      - pyside6-addons==6.9.0
+      - pyside6-essentials==6.9.0
       - python-dateutil==2.9.0.post0
       - python-dotenv==1.0.1
       - python-jose==3.3.0
@@ -104,6 +105,7 @@ dependencies:
       - pytweening==1.2.0
       - pytz==2024.2
       - pyyaml==6.0.2
+      - qt-material==2.17
       - qt6-applications==6.4.3.2.3
       - qt6-tools==6.4.3.1.3
       - requests==2.32.3
@@ -112,6 +114,7 @@ dependencies:
       - rsa==4.9
       - scipy==1.15.2
       - shellingham==1.5.4
+      - shiboken6==6.9.0
       - sip==6.9.1
       - six==1.17.0
       - sniffio==1.3.1

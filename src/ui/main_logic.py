@@ -5,7 +5,6 @@ import pandas as pd
 import os
 import sys
 from database.db_operations import fetch_table_names
-from data_fetcher.data_fetcher import DataFetcher
 from data_fetcher.batch_fetcher import BatchDataFetcher
 from data_fetcher.data_loader import DataLoader
 from config.paths import STOCK_LIST_PATH
@@ -146,7 +145,7 @@ class MainWindowLogic:
             self.ui.visualization_tab.main_plot.setTitle("")
             QToolTip.hideText()
         if hasattr(self, 'current_df'):
-            self.update_plot(self.current_df)
+            self.update_plot(self.current_df, auto_range=False)
     
     # 批量获取股票数据
     def batch_fetch_stocks(self):
@@ -221,7 +220,7 @@ class MainWindowLogic:
             cached_data = self.data_cache[ticker]
             if limit is None or len(cached_data) >= limit:
                 df = cached_data.tail(limit) if limit is not None else cached_data
-                self.update_plot(df)
+                self.update_plot(df, auto_range=True)
                 return
         self.loader = DataLoader(ticker, self.engine, limit)
         self.loader.data_loaded.connect(self.on_data_loaded)
@@ -235,10 +234,10 @@ class MainWindowLogic:
         period = int(self.ui.visualization_tab.period_selector.currentText())
         if period != 0:
             df = df.tail(period)
-        self.update_plot(df)
+        self.update_plot(df,auto_range=True)
 
     # 更新图表
-    def update_plot(self, df):
+    def update_plot(self, df, auto_range=True):
         self.ui.visualization_tab.main_plot.clear()
         self.ui.visualization_tab.volume_plot.clear()
         self.current_df = df
@@ -247,7 +246,8 @@ class MainWindowLogic:
             self.ui.visualization_tab.main_plot,
             self.ui.visualization_tab.volume_plot,
             df,
-            enable_hover
+            enable_hover,
+            auto_range=auto_range,
         )
 
     # 显示错误消息

@@ -65,16 +65,17 @@ pyparsing==3.2.3
 pyperclip==1.9.0
 PyQt5-Qt5==5.15.2
 PyQt5_sip==12.16.1
-PyQt6==6.4.2
 pyqt6-plugins==6.4.2.2.3
 PyQt6-Qt6==6.4.3
-pyqt6-tools==6.4.2.3.3
 PyQt6_sip==13.10.0
-pyqtgraph==0.13.3
+pyqtgraph==0.13.7
 PyQtWebEngine==5.15.7
 PyQtWebEngine-Qt5==5.15.2
 PyRect==0.2.0
 PyScreeze==1.0.1
+PySide6==6.9.0
+PySide6_Addons==6.9.0
+PySide6_Essentials==6.9.0
 python-dateutil==2.9.0.post0
 python-dotenv==1.0.1
 python-jose==3.3.0
@@ -82,6 +83,7 @@ python-multipart==0.0.6
 pytweening==1.2.0
 pytz==2024.2
 PyYAML==6.0.2
+qt-material==2.17
 qt6-applications==6.4.3.2.3
 qt6-tools==6.4.3.1.3
 requests==2.32.3
@@ -90,6 +92,7 @@ rich-toolkit==0.13.2
 rsa==4.9
 scipy==1.15.2
 shellingham==1.5.4
+shiboken6==6.9.0
 sip==6.9.1
 six==1.17.0
 sniffio==1.3.1
