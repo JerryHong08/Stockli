@@ -8,12 +8,14 @@ from database.db_operations import fetch_table_names
 from data_fetcher.batch_fetcher import BatchDataFetcher
 from data_fetcher.data_loader import DataLoader
 from config.paths import STOCK_LIST_PATH
-from data_visualization.candlestick_plot import plot_candlestick
+from data_visualization.candlestick_plot import plot_candlestick, plot_volume, plot_obv
 from database.db_connection import get_engine, check_connection, DatabaseConnectionError
 from config.db_config import DB_CONFIG
 import yfinance as yf
 import psycopg2
 import csv
+import pyqtgraph as pg
+import numpy as np
 from config.paths import ERRORstock_PATH  # 错误日志路径
 
 # 数据库连接函数
@@ -53,6 +55,7 @@ class MainWindowLogic:
     # 连接信号和槽
     def connect_signals(self):
         self.ui.data_fetch_tab.batch_fetch_button.clicked.connect(self.batch_fetch_stocks)
+        self.ui.visualization_tab.subplot_selector.itemSelectionChanged.connect(self.on_subplot_selection_changed)
         self.ui.visualization_tab.search_button.clicked.connect(self.confirm_search)
         self.ui.visualization_tab.load_button.clicked.connect(self.load_stock_data)
         self.ui.visualization_tab.hover_toggle.stateChanged.connect(self.toggle_hover_display)
@@ -144,8 +147,8 @@ class MainWindowLogic:
             self.enable_hover = False
             self.ui.visualization_tab.main_plot.setTitle("")
             QToolTip.hideText()
-        if hasattr(self, 'current_df'):
-            self.update_plot(self.current_df, auto_range=False)
+        if hasattr(self, 'current_df') and self.current_df is not None:
+            self.plot_main_chart(self.current_df, auto_range=False)
     
     # 批量获取股票数据
     def batch_fetch_stocks(self):
@@ -220,7 +223,8 @@ class MainWindowLogic:
             cached_data = self.data_cache[ticker]
             if limit is None or len(cached_data) >= limit:
                 df = cached_data.tail(limit) if limit is not None else cached_data
-                self.update_plot(df, auto_range=True)
+                self.plot_main_chart(df)
+                self.plot_subplots(df)
                 return
         self.loader = DataLoader(ticker, self.engine, limit)
         self.loader.data_loaded.connect(self.on_data_loaded)
@@ -234,21 +238,45 @@ class MainWindowLogic:
         period = int(self.ui.visualization_tab.period_selector.currentText())
         if period != 0:
             df = df.tail(period)
-        self.update_plot(df,auto_range=True)
+        self.plot_main_chart(df)
+        self.plot_subplots(df)
+        
 
-    # 更新图表
-    def update_plot(self, df, auto_range=True):
+    
+    def plot_main_chart(self, df, auto_range=True):
         self.ui.visualization_tab.main_plot.clear()
-        self.ui.visualization_tab.volume_plot.clear()
         self.current_df = df
         enable_hover = self.ui.visualization_tab.hover_toggle.isChecked()
-        plot_candlestick(
-            self.ui.visualization_tab.main_plot,
-            self.ui.visualization_tab.volume_plot,
-            df,
-            enable_hover,
-            auto_range=auto_range,
-        )
+        print("toggle hover display:", enable_hover)
+        plot_candlestick(self.ui.visualization_tab.main_plot, df, enable_hover, auto_range)
+        axis = pg.DateAxisItem(orientation='bottom')
+        self.ui.visualization_tab.main_plot.setAxisItems({'bottom': axis})
+        x = np.arange(len(df))
+        ticks = [(x[i], df["Date"].iloc[i].strftime('%Y%m%d')) for i in range(0, len(df), 5)]
+        axis.setTicks([ticks])
+        
+    def plot_subplots(self, df):
+        splitter = self.ui.visualization_tab.splitter
+        # 移除除main_plot外的所有widget
+        while splitter.count() > 1:
+            widget = splitter.widget(1)
+            widget.setParent(None)
+            widget.deleteLater()
+        # 获取选择的subplot
+        selected_items = self.ui.visualization_tab.subplot_selector.selectedItems()
+        selected_subplots = [item.text() for item in selected_items]
+        for subplot_type in selected_subplots:
+            subplot = pg.PlotWidget()
+            if subplot_type == "Volume":
+                plot_volume(subplot, df)
+            elif subplot_type == "OBV":
+                plot_obv(subplot, df)
+            subplot.setXLink(self.ui.visualization_tab.main_plot)
+            splitter.addWidget(subplot)
+
+    def on_subplot_selection_changed(self):
+        if hasattr(self, 'current_df') and self.current_df is not None:
+            self.plot_subplots(self.current_df)
 
     # 显示错误消息
     def show_error(self, message):
