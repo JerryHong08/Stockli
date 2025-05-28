@@ -13,6 +13,7 @@ ny_tz = pytz.timezone('America/New_York')
 
 # LongPort API 配置
 config = Config.from_env()  # 从环境变量加载 LongPort 配置
+print("LongPort API Config:", config)
 ctx = QuoteContext(config)
 
 # 数据库连接函数

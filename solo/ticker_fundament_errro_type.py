@@ -1,7 +1,8 @@
+# 读取添加test_ticker_fundamental.py生成的error_log.csv里的ticker的type和primary_exchange
 import psycopg2
 import csv
-from config.db_config import DB_CONFIG  # 数据库配置
-from config.paths import ERRORstock_PATH  # 错误日志路径
+from src.config.db_config import DB_CONFIG  # 数据库配置
+from src.config.paths import ERRORstock_PATH  # 错误日志路径
 
 # 数据库连接函数
 def get_db_connection():

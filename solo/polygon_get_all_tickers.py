@@ -1,3 +1,8 @@
+import sys
+import os
+# 添加项目根目录到 sys.path，确保可以导入 src 包
+sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
+
 import psycopg2
 import requests
 import time
@@ -13,6 +18,18 @@ def insert_tickers_to_db(tickers):
     conn = get_db_connection()
     cursor = conn.cursor()
     
+    # 自动创建 tickers_fundamental 表（如果不存在）
+    cursor.execute("""
+        CREATE TABLE IF NOT EXISTS tickers_fundamental (
+            ticker TEXT PRIMARY KEY,
+            name TEXT,
+            type TEXT,
+            active BOOLEAN,
+            primary_exchange TEXT,
+            last_updated_utc TIMESTAMP
+        );
+    """)
+
     insert_query = """
         INSERT INTO tickers_fundamental (ticker, name, type, active, primary_exchange, last_updated_utc)
         VALUES (%s, %s, %s, %s, %s, %s)
@@ -23,6 +40,8 @@ def insert_tickers_to_db(tickers):
             primary_exchange = EXCLUDED.primary_exchange,
             last_updated_utc = EXCLUDED.last_updated_utc;
     """
+    
+    
     
     data_to_insert = [
         (
@@ -44,7 +63,7 @@ def insert_tickers_to_db(tickers):
     conn.close()
 
 # 获取所有 Polygon.io tickers 数据，带重试机制
-def fetch_tickers_from_polygon(api_key, max_retries=3):
+def fetch_tickers_from_polygon(polygon_api_key, max_retries=3):
     base_url = "https://api.polygon.io/v3/reference/tickers"
     params = {
         "market": "stocks",
@@ -52,7 +71,7 @@ def fetch_tickers_from_polygon(api_key, max_retries=3):
         "order": "asc",
         "limit": 1000,
         "sort": "ticker",
-        "apiKey": api_key
+        "apiKey": polygon_api_key
     }
     
     all_tickers = []
@@ -62,6 +81,7 @@ def fetch_tickers_from_polygon(api_key, max_retries=3):
     while True:
         retries = 0
         while retries < max_retries:
+            response = None
             try:
                 print(f"Fetching page {page_count + 1} at {datetime.now()} from {url}")
                 response = requests.get(
@@ -79,9 +99,10 @@ def fetch_tickers_from_polygon(api_key, max_retries=3):
                 print(f"Page {page_count}: Fetched {len(page_tickers)} tickers.")
                 print(f"Total tickers so far: {len(all_tickers)}")
                 
+                # return all_tickers 
                 next_url = data.get("next_url")
                 if next_url:
-                    url = f"{next_url}&apiKey={api_key}"
+                    url = f"{next_url}&apiKey={polygon_api_key}"
                     print(f"Next URL: {url}")
                 else:
                     print("No more pages to fetch.")
@@ -108,16 +129,17 @@ def fetch_tickers_from_polygon(api_key, max_retries=3):
 
 # 主函数
 def main():
-    api_key = "BCBarFeCkIC70Wzfjp3AgjqFw42moGbU"
+    polygon_api_key = os.getenv("POLYGON_API_KEY")
     print("Starting to fetch all tickers from Polygon.io using HTTP...")
     
-    tickers = fetch_tickers_from_polygon(api_key)
+    tickers = fetch_tickers_from_polygon(polygon_api_key)
     print(f"Total tickers fetched: {len(tickers)}")
+    print(f"First ticker: {tickers[0] if tickers else 'None'}")
     
-    if tickers:
-        insert_tickers_to_db(tickers)
-    else:
-        print("No tickers to insert.")
+    # if tickers:
+    #     insert_tickers_to_db(tickers)
+    # else:
+    #     print("No tickers to insert.")
 
 if __name__ == "__main__":
     main()

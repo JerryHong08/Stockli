@@ -7,7 +7,7 @@
 # Stock=# ALTER TABLE stock_daily ADD CONSTRAINT unique_ticker_timestamp UNIQUE (ticker, timestamp);
 
 import psycopg2
-from config.db_config import DB_CONFIG
+from src.config.db_config import DB_CONFIG
 
 def get_db_connection():
     return psycopg2.connect(**DB_CONFIG)

@@ -22,17 +22,6 @@ from config.paths import ERRORstock_PATH  # 错误日志路径
 def get_db_connection():
     return psycopg2.connect(**DB_CONFIG)
 
-# 从数据库获取所有 ticker
-def fetch_tickers_from_db():
-    conn = get_db_connection()
-    cursor = conn.cursor()
-    cursor.execute("SELECT ticker FROM tickers_fundamental WHERE active = true")
-    tickers = [row[0] for row in cursor.fetchall()]
-    cursor.close()
-    conn.close()
-    print(f"Fetched {len(tickers)} tickers from database")
-    return tickers
-
 class MainWindowLogic:
     def __init__(self, ui):
         self.ui = ui
@@ -79,8 +68,9 @@ class MainWindowLogic:
             self.loader = None
         # 清理数据库连接
         if hasattr(self, 'engine'):
-            self.engine.dispose()
-            print("Database engine disposed")
+            if self.engine is not None:
+                self.engine.dispose()
+                print("Database engine disposed")
 
     # 数据规范化
     def format_value(self, value):
@@ -100,7 +90,14 @@ class MainWindowLogic:
             self.ui.visualization_tab.stock_selector.clear()
             self.ui.visualization_tab.stock_selector.addItems(self.all_stock_symbols)
             return
-        filtered_symbols = [symbol for symbol in self.all_stock_symbols if search_text in symbol.lower()]
+        # 完全匹配
+        exact_matches = [symbol for symbol in self.all_stock_symbols if symbol.lower() == search_text]
+        # 前缀匹配（但排除完全匹配）
+        prefix_matches = [symbol for symbol in self.all_stock_symbols if symbol.lower().startswith(search_text) and symbol.lower() != search_text]
+        # 包含匹配（但排除前两种）
+        contains_matches = [symbol for symbol in self.all_stock_symbols if search_text in symbol.lower() and not symbol.lower().startswith(search_text)]
+
+        filtered_symbols = exact_matches + prefix_matches + contains_matches
         self.ui.visualization_tab.stock_selector.clear()
         self.ui.visualization_tab.stock_selector.addItems(filtered_symbols)
     
@@ -127,13 +124,13 @@ class MainWindowLogic:
         
     # 搜索文字框
     def confirm_search(self):
-        search_text = self.ui.visualization_tab.search_box.text().strip().upper()
+        search_text = self.ui.visualization_tab.search_box.text().strip().upper() # 转换为大写
         if search_text:
-            exact_matches = [symbol for symbol in self.all_stock_symbols if symbol.upper() == search_text]
+            exact_matches = [symbol for symbol in self.all_stock_symbols if symbol.upper() == search_text] # 完全匹配
             if not exact_matches:
-                partial_matches = [symbol for symbol in self.all_stock_symbols if search_text in symbol.upper()]
+                partial_matches = [symbol for symbol in self.all_stock_symbols if search_text in symbol.upper()] # 部分匹配
             if exact_matches:
-                self.ui.visualization_tab.stock_selector.setCurrentText(exact_matches[0])
+                self.ui.visualization_tab.stock_selector.setCurrentText(exact_matches[0]) # 将搜索框的内容设置为匹配的股票代码
             elif partial_matches:
                 self.ui.visualization_tab.stock_selector.setCurrentText(partial_matches[0])
             else:
@@ -157,13 +154,12 @@ class MainWindowLogic:
             if not stock_symbols:
                 QMessageBox.warning(self.ui, "错误", "数据库中没有找到有效的股票代码")
                 return
-
-            error_log_path = ERRORstock_PATH.replace('error_log.csv', 'error_log_enriched_errorout.csv')
+            error_log_path = ERRORstock_PATH
             error_tickers = set()
             try:
                 with open(error_log_path, mode='r', newline='', encoding='utf-8') as f:
                     reader = csv.DictReader(f)
-                    if 'Original Ticker' not in reader.fieldnames:
+                    if not reader.fieldnames or 'Original Ticker' not in reader.fieldnames:
                         print(f"警告: {error_log_path} 中缺少 'Original Ticker' 列，跳过错误 ticker 过滤")
                     else:
                         error_tickers = {row['Original Ticker'] for row in reader}
@@ -241,7 +237,6 @@ class MainWindowLogic:
         self.plot_main_chart(df)
         self.plot_subplots(df)
         
-
     
     def plot_main_chart(self, df, auto_range=True):
         self.ui.visualization_tab.main_plot.clear()
@@ -281,3 +276,17 @@ class MainWindowLogic:
     # 显示错误消息
     def show_error(self, message):
         QMessageBox.warning(self.ui, "错误", message)
+        
+
+    
+
+# 从数据库获取所有 ticker
+def fetch_tickers_from_db():
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    cursor.execute("SELECT ticker FROM tickers_fundamental WHERE active = true")
+    tickers = [row[0] for row in cursor.fetchall()]
+    cursor.close()
+    conn.close()
+    print(f"Fetched {len(tickers)} tickers from database")
+    return tickers

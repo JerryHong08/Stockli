@@ -7,6 +7,7 @@ from watchdog.events import FileSystemEventHandler
 from PySide6.QtWidgets import QApplication
 from PySide6.QtGui import QIcon
 from PySide6.QtCore import Qt
+from typing import Optional
 from ui.main_window import MainWindowUI
 
 # 图标路径
@@ -19,12 +20,19 @@ class FileChangeHandler(FileSystemEventHandler):
         self.debounce_interval = 1.0  # 防抖间隔1秒
 
     def on_modified(self, event):
-        if not event.is_directory and event.src_path.endswith('.py'):
+        # 1. watchdog 检测到文件被修改，自动调用这个方法
+        # 2. 判断是不是文件且是 .py 文件
+        if not event.is_directory and str(event.src_path).endswith('.py'):
+            # 3. 防抖处理，避免重复触发
             current_time = time.time()
             if current_time - self.last_modified > self.debounce_interval:
                 print(f"Detected change in {event.src_path}, restarting...")
                 self.last_modified = current_time
                 self.restart_func()
+
+class AppState:
+    app: Optional[QApplication] = None
+    window: Optional[MainWindowUI] = None
 
 def run_app():
     """运行 PySide6 应用程序"""
@@ -32,42 +40,42 @@ def run_app():
     app.setWindowIcon(QIcon(icon_path))
     window = MainWindowUI()
     window.showMaximized()
-    run_app.app = app
-    run_app.window = window
+    AppState.app = app
+    AppState.window = window
     sys.exit(app.exec())
 
 def main():
     def restart():
         """重启程序，确保关闭旧窗口"""
         try:
-            if hasattr(run_app, 'window') and run_app.window:
+            if AppState.window:
                 print("Attempting to close window...")
                 # 断开信号
                 try:
-                    run_app.window.visualization_tab.search_box.textChanged.disconnect()
+                    AppState.window.visualization_tab.search_box.textChanged.disconnect()
                     print("Disconnected visualization_tab.search_box.textChanged")
                 except Exception as e:
                     print(f"Error disconnecting signals: {e}")
                 # 清理 logic 资源（包括线程）
                 try:
-                    run_app.window.logic.cleanup()
+                    AppState.window.logic.cleanup()
                     print("Cleaned up MainWindowLogic resources")
                 except Exception as e:
                     print(f"Error cleaning up MainWindowLogic: {e}")
                 try:
-                    run_app.window.hide()
+                    AppState.window.hide()
                     print("Window hidden")
-                    run_app.window.centralWidget().deleteLater()
+                    AppState.window.centralWidget().deleteLater()
                     print("Central widget deleted")
                 except Exception as e:
                     print(f"Error deleting GUI resources: {e}")
-            if hasattr(run_app, 'app') and run_app.app:
+            if AppState.app:
                 print("Attempting to quit application...")
-                # run_app.app.processEvents()
-                # run_app.app.quit()
+                # AppState.app.processEvents()
+                # AppState.app.quit()
                 print("Application quit")
                 for _ in range(5):
-                    run_app.app.processEvents()
+                    AppState.app.processEvents()
                     time.sleep(0.05)
                 print("Window closed")
         except Exception as e:
@@ -82,18 +90,23 @@ def main():
         os._exit(0)
 
     # 监控文件变化
-    # event_handler = FileChangeHandler(restart)
-    # observer = Observer()
-    # observer.schedule(event_handler, path='.', recursive=True)
-    # observer.start()
+    # 1. 创建事件处理器
+    event_handler = FileChangeHandler(restart)
+
+    # 2. 创建 Observer 并绑定事件处理器
+    observer = Observer()
+    observer.schedule(event_handler, path='.', recursive=True)
+
+    # 3. 启动 Observer（开始自动检测变化）
+    observer.start()
 
     try:
         run_app()
     except Exception as e:
         print(f"Error in run_app: {e}")
-    # finally:
-        # observer.stop()
-        # observer.join()
+    finally:
+        observer.stop()
+        observer.join()
 
 if __name__ == "__main__":
     main()

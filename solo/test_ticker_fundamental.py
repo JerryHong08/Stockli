@@ -1,7 +1,8 @@
+# 测试数据库里的tickers_fundamental表的ticker是否能用longport的api获取到数据，也就是是否还有效。
 import psycopg2
 from longport.openapi import QuoteContext, Config, Period, AdjustType, OpenApiException
-from config.db_config import DB_CONFIG  # 数据库配置
-from config.paths import ERRORstock_PATH  # 错误日志路径
+from src.config.db_config import DB_CONFIG  # 数据库配置
+from src.config.paths import ERRORstock_PATH  # 错误日志路径
 import csv
 from datetime import datetime
 

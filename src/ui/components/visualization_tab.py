@@ -1,7 +1,7 @@
 from PySide6.QtWidgets import (
     QWidget, QGridLayout, QLabel, QLineEdit, 
     QPushButton, QComboBox, QCheckBox, QFrame,
-    QSplitter, QCompleter, QListWidget, QAbstractItemView,QHBoxLayout
+    QSplitter, QCompleter, QListWidget, QHBoxLayout, QAbstractItemView
 )
 from PySide6.QtCore import Qt
 import pyqtgraph as pg

@@ -43,6 +43,7 @@ class BatchDataFetcher(QThread):
 
             self.check_new_stocks(ctx)
             
+            # 获取 LongPort 最新数据日期,同时检查是否在交易时间内
             latest_date = self.get_latest_date_from_longport(ctx)
             if not latest_date:
                 logger.error("无法从 Longport 获取最新数据日期")
@@ -81,6 +82,9 @@ class BatchDataFetcher(QThread):
     def get_ticker_latest_dates_from_db(self):
         try:
             engine = get_engine()
+            if engine is None:
+                logger.error("数据库引擎未初始化，无法获取每个 ticker 的最新日期")
+                return {}
             with engine.connect() as conn:
                 result = conn.execute(text("""
                     SELECT ticker, MAX(timestamp) as latest_date
@@ -233,6 +237,9 @@ class BatchDataFetcher(QThread):
     def get_latest_date_from_db(self):
         try:
             engine = get_engine()
+            if engine is None:
+                logger.error("数据库引擎未初始化，无法获取数据库最新日期")
+                return None
             with engine.connect() as conn:
                 result = conn.execute(text("SELECT MAX(timestamp) FROM stock_daily"))
                 return result.fetchone()[0]
@@ -243,6 +250,9 @@ class BatchDataFetcher(QThread):
     def get_table_count_from_db(self):
         try:
             engine = get_engine()
+            if engine is None:
+                logger.error("数据库引擎未初始化，无法获取 ticker 数量")
+                return 0
             with engine.connect() as conn:
                 result = conn.execute(text("SELECT COUNT(DISTINCT ticker) FROM stock_daily"))
                 return result.fetchone()[0]

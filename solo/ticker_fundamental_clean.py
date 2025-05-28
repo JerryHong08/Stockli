@@ -1,8 +1,9 @@
+# 用于实验测试确认清洗逻辑
 import psycopg2
 import csv
 from longport.openapi import QuoteContext, Config, Period, AdjustType, OpenApiException
-from config.db_config import DB_CONFIG  # 数据库配置
-from config.paths import ERRORstock_PATH  # 错误日志路径
+from src.config.db_config import DB_CONFIG  # 数据库配置
+from src.config.paths import ERRORstock_PATH  # 错误日志路径
 from datetime import datetime
 
 config = Config.from_env()  # 从环境变量加载 LongPort 配置

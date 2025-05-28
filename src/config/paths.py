@@ -28,4 +28,4 @@ for directory in [RESOURCES_DIR, ERRORstock_DIR, CSV_DIR, ICONS_DIR, LOG_PATH]:
 STOCK_LIST_PATH = os.path.join(CSV_DIR, "stock_list.csv")
 REFRESH_ICON_PATH = os.path.join(ICONS_DIR, "refresh_icon.png")
 DOWNLOAD_ICON_PATH = os.path.join(ICONS_DIR, "download_icon.png")
-ERRORstock_PATH = os.path.join(ERRORstock_DIR, "error_log.csv")
+ERRORstock_PATH = os.path.join(ERRORstock_DIR, "error_log_enriched_errorout.csv")

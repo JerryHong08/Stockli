@@ -48,11 +48,11 @@ class MainWindowUI(QMainWindow):
 
     def init_ui(self):
         """初始化UI界面"""
-        self.layout = QVBoxLayout()
+        self.main_layout = QVBoxLayout()
         
         # 创建选项卡
         self.tabs = QTabWidget()
-        self.layout.addWidget(self.tabs)
+        self.main_layout.addWidget(self.tabs)
 
         # 初始化各个选项卡
         self.data_fetch_tab = DataFetchTab()
@@ -64,5 +64,5 @@ class MainWindowUI(QMainWindow):
 
         # 设置主窗口的中心部件
         container = QWidget()
-        container.setLayout(self.layout)
+        container.setLayout(self.main_layout)
         self.setCentralWidget(container)
