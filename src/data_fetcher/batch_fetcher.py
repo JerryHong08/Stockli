@@ -12,6 +12,7 @@ from sqlalchemy.sql import text
 from config.db_config import DB_CONFIG
 import psycopg2
 from pytz import timezone
+from utils.time_teller import get_latest_date_from_longport
 
 logger = setup_logger("batch_fetcher")
 
@@ -44,7 +45,7 @@ class BatchDataFetcher(QThread):
             self.check_new_stocks(ctx)
             
             # 获取 LongPort 最新数据日期,同时检查是否在交易时间内
-            latest_date = self.get_latest_date_from_longport(ctx)
+            latest_date = get_latest_date_from_longport(ctx)
             if not latest_date:
                 logger.error("无法从 Longport 获取最新数据日期")
                 return
@@ -161,7 +162,7 @@ class BatchDataFetcher(QThread):
 
     def check_new_stocks(self, ctx):
         engine = get_engine()
-        db_tickers = set(ticker for ticker in fetch_table_names(engine))  # 清洗已有 ticker
+        db_tickers = set(ticker for ticker in fetch_table_names(engine))  # 获取stock_daily表中的所有去重ticker
         total = len(self.stock_symbols)
         new_stocks_found = False
         ticker_details = self.fetch_ticker_details(self.stock_symbols)
@@ -206,34 +207,6 @@ class BatchDataFetcher(QThread):
                 'start_time': self.start_time
             })
 
-    # need to add a feature that determines whether now is a trading time
-    # def is_trading_time(self):
-    #     now = datetime.now()
-    #     # 假设交易时间为周一到周五的 9:30 到 16:00
-    #     if now.weekday() < 5 and now.hour >= 9 and now.hour < 16:
-    #         return True
-    #     return False
-    
-    def get_latest_date_from_longport(self, ctx):
-        try:
-            resp = ctx.candlesticks("NVDA.US", Period.Day, 2, AdjustType.ForwardAdjust)
-            if not resp:
-                return None
-            current_time = datetime.now(timezone('US/Eastern'))
-            # 检查当前时间是否在交易时间内
-            if (current_time.year == resp[0].timestamp.year and 
-                current_time.month == resp[0].timestamp.month and 
-                current_time.day == resp[0].timestamp.day and 
-                current_time.hour >= 9 and current_time.hour < 16):
-                # 如果当前时间年月日与longport api相同且正处于交易时间内，返回前一交易日日期
-                return datetime.combine(resp[0].timestamp.date(), datetime.min.time())
-            else:
-                # 如果不在交易时间内，返回最新的日期
-                return datetime.combine(resp[1].timestamp.date(), datetime.min.time())
-        except Exception as e:
-            logger.error(f"获取 Longport 最新日期失败: {e}")
-            return None
-
     def get_latest_date_from_db(self):
         try:
             engine = get_engine()
@@ -259,3 +232,4 @@ class BatchDataFetcher(QThread):
         except Exception as e:
             logger.error(f"获取数据库 ticker 数量失败: {e}")
             return 0
+

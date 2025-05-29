@@ -5,6 +5,7 @@ import pandas as pd
 import os
 import sys
 from database.db_operations import fetch_table_names
+from utils.time_teller import update_limit_date
 from data_fetcher.batch_fetcher import BatchDataFetcher
 from data_fetcher.data_loader import DataLoader
 from config.paths import STOCK_LIST_PATH
@@ -13,10 +14,13 @@ from database.db_connection import get_engine, check_connection, DatabaseConnect
 from config.db_config import DB_CONFIG
 import yfinance as yf
 import psycopg2
+from utils.logger import setup_logger
 import csv
 import pyqtgraph as pg
 import numpy as np
 from config.paths import ERRORstock_PATH  # 错误日志路径
+
+
 
 # 数据库连接函数
 def get_db_connection():
@@ -40,6 +44,8 @@ class MainWindowLogic:
             
         self.connect_signals()
         self.update_stock_selector()
+        self.ui.data_fetch_tab.limit_time_label.setText(f"获取数据的截至日期为：{update_limit_date().strftime('%Y-%m-%d')}")
+        
 
     # 连接信号和槽
     def connect_signals(self):
@@ -83,6 +89,7 @@ class MainWindowLogic:
                 return f"{value/1_000:.2f}K"
         return str(value)
     
+        
     # 清理股票选择器
     def filter_stock_selector(self):
         search_text = self.ui.visualization_tab.search_box.text().strip().lower()
@@ -276,9 +283,6 @@ class MainWindowLogic:
     # 显示错误消息
     def show_error(self, message):
         QMessageBox.warning(self.ui, "错误", message)
-        
-
-    
 
 # 从数据库获取所有 ticker
 def fetch_tickers_from_db():

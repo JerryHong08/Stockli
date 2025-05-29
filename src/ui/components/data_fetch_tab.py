@@ -20,7 +20,10 @@ class DataFetchTab(QWidget):
 
         # 实时更新ET时间
         self.task_timer_label = QLabel()
+        self.limit_time_label = QLabel()
+        
         layout.addWidget(self.task_timer_label, 0, 0, 1, 2)
+        layout.addWidget(self.limit_time_label, 0, 1, 1, 1)
         
         def update_et_time():
             et_timezone = timezone('US/Eastern')
