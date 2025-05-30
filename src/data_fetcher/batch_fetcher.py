@@ -45,7 +45,7 @@ class BatchDataFetcher(QThread):
             self.check_new_stocks(ctx)
             
             # 获取 LongPort 最新数据日期,同时检查是否在交易时间内
-            latest_date = get_latest_date_from_longport(ctx)
+            latest_date = get_latest_date_from_longport()
             if not latest_date:
                 logger.error("无法从 Longport 获取最新数据日期")
                 return

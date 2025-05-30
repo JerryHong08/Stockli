@@ -144,7 +144,6 @@ def fetch_delisted_tickers_from_polygon(polygon_api_key, max_retries=3):
     }
     return fetch_tickers_from_polygon(base_url, params, polygon_api_key, max_retries)
 
-
 # 获取 ipo tickers 数据 
 def fetch_ipo_tickers_from_polygon(polygon_api_key, max_retries=3):
     base_url = "https://api.polygon.io/vX/reference/ipos"

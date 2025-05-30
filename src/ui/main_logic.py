@@ -5,7 +5,7 @@ import pandas as pd
 import os
 import sys
 from database.db_operations import fetch_table_names
-from utils.time_teller import update_limit_date
+from utils.time_teller import get_latest_date_from_longport
 from data_fetcher.batch_fetcher import BatchDataFetcher
 from data_fetcher.data_loader import DataLoader
 from config.paths import STOCK_LIST_PATH
@@ -44,7 +44,7 @@ class MainWindowLogic:
             
         self.connect_signals()
         self.update_stock_selector()
-        self.ui.data_fetch_tab.limit_time_label.setText(f"获取数据的截至日期为：{update_limit_date().strftime('%Y-%m-%d')}")
+        self.ui.data_fetch_tab.limit_time_label.setText(f"获取数据的截至日期为：{get_latest_date_from_longport().strftime('%Y-%m-%d')}")
         
 
     # 连接信号和槽

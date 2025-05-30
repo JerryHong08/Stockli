@@ -9,9 +9,7 @@ from PySide6.QtGui import QIcon
 from PySide6.QtCore import Qt
 from typing import Optional
 from ui.main_window import MainWindowUI
-
-# 图标路径
-icon_path = os.path.abspath(os.path.join(os.path.dirname(__file__), '..', '..', 'resources', 'icons', 'refresh_icon.png'))
+from config.paths import ICON_PATH  # 确保导入
 
 class FileChangeHandler(FileSystemEventHandler):
     def __init__(self, restart_func):
@@ -37,7 +35,7 @@ class AppState:
 def run_app():
     """运行 PySide6 应用程序"""
     app = QApplication(sys.argv)
-    app.setWindowIcon(QIcon(icon_path))
+    app.setWindowIcon(QIcon(ICON_PATH))  # 全局设置任务栏图标
     window = MainWindowUI()
     window.showMaximized()
     AppState.app = app

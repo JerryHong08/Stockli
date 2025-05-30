@@ -5,12 +5,17 @@ from .components.data_fetch_tab import DataFetchTab
 from .components.visualization_tab import VisualizationTab
 from .main_logic import MainWindowLogic
 import os
+from config.paths import ICON_PATH
 
 class MainWindowUI(QMainWindow):
     def __init__(self):
         super().__init__()
         self.setWindowTitle("股票数据可视化工具")
         self.setGeometry(100, 100, 800, 600)
+        
+        # 设置窗口图标
+        icon_path = ICON_PATH
+        self.setWindowIcon(QIcon(icon_path))
         
         # 初始化UI
         self.init_ui()
