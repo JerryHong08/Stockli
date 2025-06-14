@@ -37,7 +37,7 @@ def get_latest_date_from_longport(): # 返回格式为 YYYY-MM-DD HH:MM:SS
     if today not in trade_days:
         # 如果不是交易日，返回上一个交易日
         prev_trade_day = max([d for d in trade_days if d < today])
-        limit_date = prev_trade_day.strftime("%Y-%m-%d")
+        limit_date = datetime.combine(prev_trade_day, datetime.min.time())
         print(f"今天不是交易日，返回上一个交易日: {limit_date}")
         return limit_date
 

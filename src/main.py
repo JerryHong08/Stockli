@@ -87,24 +87,24 @@ def main():
         # 强制退出
         os._exit(0)
 
-    # # 监控文件变化
-    # # 1. 创建事件处理器
-    # event_handler = FileChangeHandler(restart)
+    # 监控文件变化
+    # 1. 创建事件处理器
+    event_handler = FileChangeHandler(restart)
 
-    # # 2. 创建 Observer 并绑定事件处理器
-    # observer = Observer()
-    # observer.schedule(event_handler, path='.', recursive=True)
+    # 2. 创建 Observer 并绑定事件处理器
+    observer = Observer()
+    observer.schedule(event_handler, path='.', recursive=True)
 
-    # # 3. 启动 Observer（开始自动检测变化）
-    # observer.start()
+    # 3. 启动 Observer（开始自动检测变化）
+    observer.start()
 
     try:
         run_app()
     except Exception as e:
         print(f"Error in run_app: {e}")
-    # finally:
-    #     observer.stop()
-    #     observer.join()
+    finally:
+        observer.stop()
+        observer.join()
 
 if __name__ == "__main__":
     main()
