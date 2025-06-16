@@ -4,7 +4,7 @@ from PySide6.QtCore import Qt
 from .components.data_fetch_tab import DataFetchTab
 from .components.visualization_tab import VisualizationTab
 from .components.nlp_stock_screener import nlp_screener
-from .main_logic import MainWindowLogic
+from main_logic import MainWindowLogic
 import os
 from config.paths import ICON_PATH
 
@@ -66,10 +66,10 @@ class MainWindowUI(QMainWindow):
         self.nlp_stock_screener = nlp_screener()
         
         # 添加选项卡
-        self.tabs.addTab(self.visualization_tab, "数据可视化")
         self.tabs.addTab(self.data_fetch_tab, "数据获取")
         self.tabs.addTab(self.nlp_stock_screener, "AI智能股票筛选器")
-
+        self.tabs.addTab(self.visualization_tab, "数据可视化")
+        
         # 设置主窗口的中心部件
         container = QWidget()
         container.setLayout(self.main_layout)

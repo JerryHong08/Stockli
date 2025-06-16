@@ -402,8 +402,8 @@ def detect_delisted_tickers(tickers):
                 else:
                     ts_str = str(ts)
                 ts_cmp = ts_str.replace("T", " ").replace("Z", "")
-                print(f"Ticker: {cleaned_symbol}, delisted_utc: {ticker['delisted_utc']}, timestamp: {ts_cmp}")
-                if ts_cmp == "2025-06-06 12:00:00":
+                # print(f"Ticker: {cleaned_symbol}, delisted_utc: {ticker['delisted_utc']}, timestamp: {ts_cmp}")
+                if ts_cmp == "2025-06-13 12:00:00":
                     if not hasattr(detect_delisted_tickers, "splits_to_active_tickers"):
                         detect_delisted_tickers.splits_to_active_tickers = set()
                     if not hasattr(detect_delisted_tickers, "renew_to_active_tickers"):
@@ -446,14 +446,16 @@ def detect_delisted_tickers(tickers):
                     
                     if ts_cmp_dt < delisted_utc_dt:
                         before_nominate[diff_days].append(symbol)
-                        print(f"Ticker: {symbol}, {diff_days}天前退市")
+                        # print(f"Ticker: {symbol}, {diff_days}天前退市")
                     else:
                         after_nominate[diff_days].append(symbol)
-                        print(f"Ticker: {symbol}, {diff_days}天后退市")
+                        # print(f"Ticker: {symbol}, {diff_days}天后退市")
             print(f"Checking {cleaned_symbol}...")
             
         except Exception as e:
-                logger.error(f"{symbol} 获取数据异常: {e}\n{traceback.format_exc()}")
+                # logger.error(f"{symbol} 获取数据异常: {e}\n{traceback.format_exc()}")
+                print(f"Ticker {cleaned_symbol} is probably just delisted forever.")
+                detect_delisted_tickers.delisted_tickers.add((symbol))
                 continue
     print("\n=== 距离提名前退市天数统计 ===")
     for days in sorted(before_nominate.keys()):
@@ -466,13 +468,11 @@ def detect_delisted_tickers(tickers):
         print(f'进行股票拆分后继续交易股票{len(detect_delisted_tickers.splits_to_active_tickers)}个：{detect_delisted_tickers.splits_to_active_tickers}')
     if hasattr(detect_delisted_tickers, "renew_to_active_tickers"):
         print(f'重新作为新ticker继续交易的股票{len(detect_delisted_tickers.renew_to_active_tickers)}个：{detect_delisted_tickers.renew_to_active_tickers}')
-    # if hasattr(detect_delisted_tickers, "delisted_tickers"):
-    #     print(f'检测到退市股票{len(detect_delisted_tickers.delisted_tickers)}个: {detect_delisted_tickers.delisted_tickers}')
-    # else:
-    #     print('没有检测到退市股票')
-        # print(sorted(detect_delisted_tickers.still_active_tickers, key=lambda x: x[1]))
-    
-    
+    if hasattr(detect_delisted_tickers, "delisted_tickers"):
+        print(f'检测到被退市股票{len(detect_delisted_tickers.delisted_tickers)}个: {detect_delisted_tickers.delisted_tickers}')
+    else:
+        print('没有检测到退市股票')
+        print(sorted(detect_delisted_tickers.still_active_tickers, key=lambda x: x[1]))
 
 def fetch_ms_tickers_from_polygon(max_retries=3):
     base_url = "https://api.polygon.io/v3/reference/splits"

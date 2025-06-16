@@ -26,6 +26,6 @@ for directory in [RESOURCES_DIR, ERRORstock_DIR, CSV_DIR, ICONS_DIR, LOG_PATH]:
 
 # 具体文件路径
 STOCK_LIST_PATH = os.path.join(CSV_DIR, "stock_list.csv")
-ICON_PATH = os.path.join(ICONS_DIR, "ChatGPT Image May 30, 2025, 07_26_21 PM.png")
+ICON_PATH = os.path.join(ICONS_DIR, "ChatGPT Image Jun 15, 2025, 09_49_44 PM.png")
 DOWNLOAD_ICON_PATH = os.path.join(ICONS_DIR, "download_icon.png")
 ERRORstock_PATH = os.path.join(ERRORstock_DIR, "error_log_enriched_errorout.csv")

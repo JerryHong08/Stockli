@@ -53,9 +53,9 @@ def get_latest_date_from_longport(): # 返回格式为 YYYY-MM-DD HH:MM:SS
             break
     
     # if us_sessions:
-    #     # print(f"找到美股（US）市场的交易时段信息: {us_sessions}")
+    #     print(f"找到美股（US）市场的交易时段信息: {us_sessions}")
     # if not us_sessions:
-    #     # print("未找到美股（US）市场的交易时段信息！")
+    #     print("未找到美股（US）市场的交易时段信息！")
     #     return
 
     # 解析所有阶段时间段
@@ -68,14 +68,18 @@ def get_latest_date_from_longport(): # 返回格式为 YYYY-MM-DD HH:MM:SS
 
     # 当前时间
     current_time = datetime.now(timezone('US/Eastern')).time()
-
+    print ({current_time})
+    
     # 判断当前属于哪个阶段
-    current_stage = None
+    current_stage = 'OverNight'
     for begin, end, stage in session_times:
         if begin <= current_time < end:
             current_stage = stage
             break
 
+    # if current_stage is None:
+    #     print("当前不在任何已知交易阶段（可能是休市时段）")
+    # else:
     print(f"当前阶段: {current_stage}")
     
     

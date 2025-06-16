@@ -10,6 +10,8 @@ from PySide6.QtCore import Qt
 from typing import Optional
 from ui.main_window import MainWindowUI
 from config.paths import ICON_PATH  # 确保导入
+from qasync import QEventLoop
+import asyncio
 
 class FileChangeHandler(FileSystemEventHandler):
     def __init__(self, restart_func):
@@ -38,6 +40,11 @@ def run_app():
     app.setWindowIcon(QIcon(ICON_PATH))  # 全局设置任务栏图标
     window = MainWindowUI()
     window.showMaximized()
+    loop = QEventLoop(app)
+    asyncio.set_event_loop(loop)
+    with loop:
+        loop.run_forever()
+        
     AppState.app = app
     AppState.window = window
     sys.exit(app.exec())

@@ -21,7 +21,6 @@ import numpy as np
 from config.paths import ERRORstock_PATH  # 错误日志路径
 
 
-
 # 数据库连接函数
 def get_db_connection():
     return psycopg2.connect(**DB_CONFIG)
@@ -55,6 +54,7 @@ class MainWindowLogic:
         self.ui.visualization_tab.load_button.clicked.connect(self.load_stock_data)
         self.ui.visualization_tab.hover_toggle.stateChanged.connect(self.toggle_hover_display)
         self.ui.visualization_tab.search_box.textChanged.connect(self.filter_stock_selector)
+        
     
     # 关闭窗口时清理资源
     def cleanup(self):
@@ -283,6 +283,7 @@ class MainWindowLogic:
     # 显示错误消息
     def show_error(self, message):
         QMessageBox.warning(self.ui, "错误", message)
+        
 
 # 从数据库获取所有 ticker
 def fetch_tickers_from_db():
