@@ -6,7 +6,7 @@ from PySide6.QtWidgets import (
 from PySide6.QtCore import Qt, Slot
 import pyqtgraph as pg
 import numpy as np
-from agents.longport_mcp_agent import LongportMcpAgentWrapper
+from src.agents.longport_mcp_agent import LongportMcpAgentWrapper
 import asyncio
 
 class nlp_screener(QWidget):

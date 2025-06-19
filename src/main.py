@@ -8,8 +8,8 @@ from PySide6.QtWidgets import QApplication
 from PySide6.QtGui import QIcon
 from PySide6.QtCore import Qt
 from typing import Optional
-from ui.main_window import MainWindowUI
-from config.paths import ICON_PATH  # 确保导入
+from src.ui.main_window import MainWindowUI
+from src.config.paths import ICON_PATH  # 确保导入
 from qasync import QEventLoop
 import asyncio
 
@@ -87,7 +87,7 @@ def main():
             print(f"Error during cleanup: {e}")
         # 启动新进程
         try:
-            subprocess.Popen([sys.executable, __file__])
+            subprocess.Popen([sys.executable, '-m', 'src.main'])
             print("New process started")
         except Exception as e:
             print(f"Error starting new process: {e}")

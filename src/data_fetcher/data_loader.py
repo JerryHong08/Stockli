@@ -1,6 +1,6 @@
 from PySide6.QtCore import QThread, Signal
 import pandas as pd
-from database.db_operations import fetch_data_from_db
+from src.database.db_operations import fetch_data_from_db
 
 class DataLoader(QThread):
     data_loaded = Signal(pd.DataFrame)

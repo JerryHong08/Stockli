@@ -4,7 +4,7 @@ from sqlalchemy.exc import SQLAlchemyError, OperationalError
 import time
 import logging
 from typing import Optional
-from config.db_config import DB_CONFIG
+from src.config.db_config import DB_CONFIG
 from sqlalchemy.sql import text
 from functools import lru_cache
 

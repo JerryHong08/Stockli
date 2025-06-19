@@ -1,7 +1,7 @@
 import logging
 import os
 from datetime import datetime
-from config.paths import LOG_PATH
+from src.config.paths import LOG_PATH
 
 def setup_logger(name='app'):
     logger = logging.getLogger(name)

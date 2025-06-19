@@ -7,7 +7,7 @@ import psycopg2
 import requests
 import time
 from datetime import datetime
-from config.db_config import DB_CONFIG
+from src.config.db_config import DB_CONFIG
 
 # 数据库连接函数
 def get_db_connection():

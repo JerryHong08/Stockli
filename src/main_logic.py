@@ -4,21 +4,21 @@ from PySide6.QtWidgets import QMessageBox, QToolTip, QWidget, QLabel, QHBoxLayou
 import pandas as pd
 import os
 import sys
-from database.db_operations import fetch_table_names
-from utils.time_teller import get_latest_date_from_longport
-from data_fetcher.batch_fetcher import BatchDataFetcher
-from data_fetcher.data_loader import DataLoader
-from config.paths import STOCK_LIST_PATH
-from data_visualization.candlestick_plot import plot_candlestick, plot_volume, plot_obv
-from database.db_connection import get_engine, check_connection, DatabaseConnectionError
-from config.db_config import DB_CONFIG
+from src.database.db_operations import fetch_table_names
+from src.utils.time_teller import get_latest_date_from_longport
+from src.data_fetcher.batch_fetcher import BatchDataFetcher
+from src.data_fetcher.data_loader import DataLoader
+from src.config.paths import STOCK_LIST_PATH
+from src.data_visualization.candlestick_plot import plot_candlestick, plot_volume, plot_obv
+from src.database.db_connection import get_engine, check_connection, DatabaseConnectionError
+from src.config.db_config import DB_CONFIG
 import yfinance as yf
 import psycopg2
-from utils.logger import setup_logger
+from src.utils.logger import setup_logger
 import csv
 import pyqtgraph as pg
 import numpy as np
-from config.paths import ERRORstock_PATH  # 错误日志路径
+from src.config.paths import ERRORstock_PATH  # 错误日志路径
 
 
 # 数据库连接函数

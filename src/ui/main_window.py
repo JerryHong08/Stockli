@@ -1,12 +1,12 @@
 from PySide6.QtWidgets import QMainWindow, QVBoxLayout, QWidget, QTabWidget
 from PySide6.QtGui import QIcon
 from PySide6.QtCore import Qt
-from .components.data_fetch_tab import DataFetchTab
-from .components.visualization_tab import VisualizationTab
-from .components.nlp_stock_screener import nlp_screener
-from main_logic import MainWindowLogic
+from src.ui.components.data_fetch_tab import DataFetchTab
+from src.ui.components.visualization_tab import VisualizationTab
+from src.ui.components.nlp_stock_screener import nlp_screener
+from src.main_logic import MainWindowLogic
 import os
-from config.paths import ICON_PATH
+from src.config.paths import ICON_PATH
 
 class MainWindowUI(QMainWindow):
     def __init__(self):

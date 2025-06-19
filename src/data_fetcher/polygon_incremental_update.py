@@ -2,16 +2,16 @@ import sys
 import os
 # 添加项目根目录到 sys.path，确保可以导入 src 包
 sys.path.append(os.path.abspath(os.path.join(os.path.dirname(__file__), '..')))
-from utils.time_teller import get_latest_date_from_longport
+from src.utils.time_teller import get_latest_date_from_longport
 import psycopg2
 import requests
 import time
 from datetime import datetime, timedelta
-from config.db_config import DB_CONFIG
+from src.config.db_config import DB_CONFIG
 from longport.openapi import QuoteContext, Config, Period, AdjustType
-from database.db_operations import clean_symbol_for_postgres,save_to_table
-from database.db_connection import get_engine
-from utils.logger import setup_logger
+from src.database.db_operations import clean_symbol_for_postgres,save_to_table
+from src.database.db_connection import get_engine
+from src.utils.logger import setup_logger
 import traceback
 from collections import defaultdict
 
@@ -403,7 +403,7 @@ def detect_delisted_tickers(tickers):
                     ts_str = str(ts)
                 ts_cmp = ts_str.replace("T", " ").replace("Z", "")
                 # print(f"Ticker: {cleaned_symbol}, delisted_utc: {ticker['delisted_utc']}, timestamp: {ts_cmp}")
-                if ts_cmp == "2025-06-13 12:00:00":
+                if ts_cmp == "2025-06-18 12:00:00":
                     if not hasattr(detect_delisted_tickers, "splits_to_active_tickers"):
                         detect_delisted_tickers.splits_to_active_tickers = set()
                     if not hasattr(detect_delisted_tickers, "renew_to_active_tickers"):
@@ -568,27 +568,31 @@ def fetch_ms_tickers_from_polygon(max_retries=3):
 if __name__ == "__main__":
     # ipo_incremental_update()
     
-    
-    
-    delisted_tickers = delisedd_incremental_update()
-    # AGMH 2025-06-03T00:00:00Z OGEN 2025-06-03T00:00:00Z
-    detect_delisted_tickers(delisted_tickers)
+    # delisted_tickers = delisedd_incremental_update()
+    # # AGMH 2025-06-03T00:00:00Z OGEN 2025-06-03T00:00:00Z
+    # detect_delisted_tickers(delisted_tickers)
     
     
     
-    # Stock_splits
-    # ms_tickers = fetch_ms_tickers_from_polygon()
-    # # 只保留有 listing_date 且大于 上次更新日期 的
-    # ms_update_utc = get_last_stock_splits_updated_utc().strftime("%Y-%m-%d")
+    # Stock_splits start
+    ms_tickers = fetch_ms_tickers_from_polygon()
+    # 只保留有 listing_date 且大于 上次更新日期 的
+    ms_update_utc = get_last_stock_splits_updated_utc().strftime("%Y-%m-%d")
     
-    # ms_filtered = [
-    #     t for t in ms_tickers
-    #     if "execution_date" in t and t["execution_date"] > ms_update_utc and t["execution_date"] <= limit_date
-    # ]
-    # # insert_ms_to_stock_splits(ms_filtered) # 将 MS 数据插入数据库stock_splits表
-    # ms_future_filtered = [
-    #     t for t in ms_tickers
-    #     if "execution_date" in t and t["execution_date"] > limit_date
-    # ]
-    # print(f"Total ms tickers fetched: {ms_filtered}")
-    # print(f"Total future ms tickers fetched: {ms_future_filtered}")
+    ms_filtered = [
+        t for t in ms_tickers
+        if "execution_date" in t and t["execution_date"] > ms_update_utc and t["execution_date"] <= limit_date
+    ]
+    insert_ms_to_stock_splits(ms_filtered) # 将 MS 数据插入数据库stock_splits表
+    ms_future_filtered = [
+        t for t in ms_tickers
+        if "execution_date" in t and t["execution_date"] > limit_date
+    ]
+    print(f"Total ms tickers fetched: {len(ms_filtered)}")
+    print(f"Total future ms tickers fetched: {len(ms_future_filtered)}")
+    # Stock_splits end
+    
+    # 1. 更新获取stock_splits
+    # 2. 获取delisted, 标记到tickers_fundamental表的delisted_statue为on,then check if it's on stock_splits, if yes: off, else:on
+    # 3. 单独run statue is on tickers, 尝试获取其上一交易日数据, 若无,则标记成OTC, 若有,则继续为on
+    # 4. 更新stock_incremental_update, run everystock, if failed ,check if its statue is on, if yes: delisted
