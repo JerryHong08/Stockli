@@ -42,7 +42,7 @@ class BatchDataFetcher(QThread):
                 with open(self.error_log_path, mode="w", newline="", encoding="utf-8") as file:
                     file.write("Symbol,Error\n")
 
-            self.check_new_stocks(ctx)
+            # self.check_new_stocks(ctx)
             
             # 获取 LongPort 最新数据日期,同时检查是否在交易时间内
             latest_date = get_latest_date_from_longport()
@@ -121,6 +121,8 @@ class BatchDataFetcher(QThread):
     # 修改：incremental_update 根据每个 ticker 的最新日期决定更新
     def incremental_update(self, ctx, latest_date, ticker_latest_dates, ticker_details):
         total = len(self.stock_symbols)
+        conn = get_db_connection()
+        cursor = conn.cursor()
         for i, symbol in enumerate(self.stock_symbols, 1):
             try:
                 if symbol not in ticker_details:
@@ -144,12 +146,33 @@ class BatchDataFetcher(QThread):
                         'message': f"正在更新 {symbol} 的增量数据（最新至 {db_latest_date or '无数据'}）..."
                     })
                     logger.debug(f"Fetching data for {cleaned_symbol} with delta_days={delta_days}")
-                    resp = ctx.candlesticks(f"{cleaned_symbol}.US", Period.Day, delta_days, AdjustType.ForwardAdjust)
-                    if not resp:
+                    engine = get_engine()
+                    resp = ctx.candlesticks(f"{cleaned_symbol}.US", Period.Day, delta_days, AdjustType.ForwardAdjust)                        
+                    if resp and hasattr(resp[0], "timestamp"):
+                        # 假设timestamp为字符串或datetime对象
+                        ts = resp[-1].timestamp
+                        if isinstance(ts, datetime):
+                            ts_cmp = ts.strftime("%Y-%m-%d")
+                        else:
+                            ts_clean = ts.replace("T", " ").replace("Z", "")
+                            ts_cmp = datetime.strptime(ts_clean, "%Y-%m-%d %H:%M:%S").strftime("%Y-%m-%d")
+                        print(f"Ticker: {cleaned_symbol}, lates_longport_data_timestamp: {ts_cmp}, latest_date: {latest_date.strftime}")
+                        # 检查 LongPort 返回的该ticker的最新日期是否与 LongPort 能获取到的最新日期相同
+                        # 如果相同，则说明该ticker可以正常更新            
+                        if ts_cmp == latest_date.strftime("%Y-%m-%d"):
+                            continue
+                        # 如果不同，则说明该ticker没能获取到最新数据，进一步判断是因为早已在退市观察还是只是可能是临时停牌等原因
+                        else:
+                            cursor.execute("select active from tickers_fundamental where ticker = %s", (symbol,))
+                            active_status = cursor.fetchone()[0]
+                            # 如果 active_status 为 None,即被观察状态，则说明其在已退市不再更新数据
+                            if active_status is None:
+                                cursor.execute("UPDATE tickers_fundamental SET active = FALSE WHERE ticker = %s", (symbol,))
+                                conn.commit()
+                                continue  # 跳出循环，不再更新该ticker的数据
+                    else:
                         logger.warning(f"No data returned for {cleaned_symbol}")
                         continue
-
-                    engine = get_engine()
                     save_to_table(resp, cleaned_symbol, engine)
                 else:
                     logger.debug(f"{cleaned_symbol} 数据已是最新，无需更新")
@@ -159,6 +182,8 @@ class BatchDataFetcher(QThread):
                 logger.error(error_message)
                 with open(self.error_log_path, mode="a", newline="", encoding="utf-8") as file:
                     file.write(f"{symbol},{error_message}\n")
+        cursor.close()
+        conn.close()
 
     def check_new_stocks(self, ctx):
         engine = get_engine()
@@ -168,7 +193,6 @@ class BatchDataFetcher(QThread):
         ticker_details = self.fetch_ticker_details(self.stock_symbols)
         
         for i, symbol in enumerate(self.stock_symbols, 1):
-            
             if symbol not in ticker_details:
                 logger.warning(f"No details found for {symbol}")
                 continue

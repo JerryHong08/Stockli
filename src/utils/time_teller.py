@@ -101,3 +101,10 @@ def get_latest_date_from_longport(): # 返回格式为 YYYY-MM-DD HH:MM:SS
         # Overnight: 盘后结束到下一个盘前开始。无论是美东晚8点后：返回当日；美东早4点，返回前一交易日
         # print("当前为overnight（夜间）时段，返回longport最新交易日数据:")
         return datetime.combine(resp[1].timestamp.date(), datetime.min.time())
+    
+if __name__ == "__main__":
+    latest_date = get_latest_date_from_longport()
+    if latest_date:
+        print(f"Latest date from LongPort: {latest_date.strftime('%Y-%m-%d %H:%M:%S')}")
+    else:
+        print("Failed to fetch the latest date from LongPort.")

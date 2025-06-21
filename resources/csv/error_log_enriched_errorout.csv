@@ -76,3 +76,5 @@ VEC,VEC.US,CS,XNYS,"OpenApiException: OpenApiException: (code=301600, trace_id=)
 WDTI,WDTI.US,INDEX,ARCX,"OpenApiException: OpenApiException: (code=301600, trace_id=) invalid symbol",2025-03-18T16:41:48.667706
 WETF,WETF.US,N/A,XNAS,"OpenApiException: OpenApiException: (code=301600, trace_id=) invalid symbol",2025-03-18T16:41:48.667706
 WLTW,WLTW.US,N/A,XNAS,"OpenApiException: OpenApiException: (code=301600, trace_id=) invalid symbol",2025-03-18T16:41:48.667706
+AIRO,更新 AIRO 数据失败: OpenApiException: (code=301607, trace_id=) request too many klines
+BLNE,更新 BLNE 数据失败: OpenApiException: (code=301607, trace_id=) request too many klines

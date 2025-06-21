@@ -8,6 +8,7 @@ from src.database.db_operations import fetch_table_names
 from src.utils.time_teller import get_latest_date_from_longport
 from src.data_fetcher.batch_fetcher import BatchDataFetcher
 from src.data_fetcher.data_loader import DataLoader
+from src.data_fetcher.polygon_incremental_update import ipo_incremental_update, process_delisted, process_delisted_reverse, process_ms
 from src.config.paths import STOCK_LIST_PATH
 from src.data_visualization.candlestick_plot import plot_candlestick, plot_volume, plot_obv
 from src.database.db_connection import get_engine, check_connection, DatabaseConnectionError
@@ -19,7 +20,6 @@ import csv
 import pyqtgraph as pg
 import numpy as np
 from src.config.paths import ERRORstock_PATH  # 错误日志路径
-
 
 # 数据库连接函数
 def get_db_connection():
@@ -155,9 +155,9 @@ class MainWindowLogic:
             self.plot_main_chart(self.current_df, auto_range=False)
     
     # 批量获取股票数据
-    def batch_fetch_stocks(self):
+    def batch_fetch_stocks(self): 
         try:
-            stock_symbols = fetch_tickers_from_db()
+            stock_symbols = fetch_tickers_from_db() # 从tickers_fundamental数据库获取active为true或null的股票
             if not stock_symbols:
                 QMessageBox.warning(self.ui, "错误", "数据库中没有找到有效的股票代码")
                 return
@@ -185,6 +185,11 @@ class MainWindowLogic:
                 QMessageBox.warning(self.ui, "错误", "过滤掉错误 ticker 后没有剩余的股票代码")
                 return
             self.ui.data_fetch_tab.batch_fetch_button.setEnabled(False)
+            limit_date = get_latest_date_from_longport().strftime("%Y-%m-%d")
+            print(f"Limit date for fetching IPO and delisted tickers: {limit_date}")
+            self.ms_filtered = process_ms(limit_date)
+            self.limit_date = limit_date
+            process_delisted(limit_date)  
             self.batch_fetcher = BatchDataFetcher(stock_symbols)
             self.batch_fetcher.progress_updated.connect(self.update_progress)
             self.batch_fetcher.fetch_complete.connect(self.on_batch_fetch_complete)
@@ -193,7 +198,15 @@ class MainWindowLogic:
         except Exception as e:
             self.show_error(f"从数据库获取股票代码失败: {e}")
             print(e)
-
+            
+    # 批量获取完成
+    def on_batch_fetch_complete(self, message):
+        self.ui.data_fetch_tab.batch_fetch_button.setEnabled(True)
+        QMessageBox.information(self.ui, "完成", message)
+        process_delisted_reverse(self.ms_filtered)
+        ipo_incremental_update(self.limit_date)
+        self.update_stock_selector()
+    
     # 更新进度条
     def update_progress(self, progress_data):
         current = progress_data.get('current', 0)
@@ -210,12 +223,6 @@ class MainWindowLogic:
                 f"进度: {current}/{total} ({current/total*100:.1f}%) | "
                 f"已用: {elapsed_str} | 剩余: {remaining_str}"
             )
-
-    # 批量获取完成
-    def on_batch_fetch_complete(self, message):
-        self.ui.data_fetch_tab.batch_fetch_button.setEnabled(True)
-        QMessageBox.information(self.ui, "完成", message)
-        self.update_stock_selector()
 
     # 加载图表按钮    
     def load_stock_data(self):
@@ -284,12 +291,11 @@ class MainWindowLogic:
     def show_error(self, message):
         QMessageBox.warning(self.ui, "错误", message)
         
-
 # 从数据库获取所有 ticker
 def fetch_tickers_from_db():
     conn = get_db_connection()
     cursor = conn.cursor()
-    cursor.execute("SELECT ticker FROM tickers_fundamental WHERE active = true")
+    cursor.execute("SELECT ticker FROM tickers_fundamental WHERE active is not False")
     tickers = [row[0] for row in cursor.fetchall()]
     cursor.close()
     conn.close()

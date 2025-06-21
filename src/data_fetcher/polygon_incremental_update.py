@@ -6,7 +6,7 @@ from src.utils.time_teller import get_latest_date_from_longport
 import psycopg2
 import requests
 import time
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, date
 from src.config.db_config import DB_CONFIG
 from longport.openapi import QuoteContext, Config, Period, AdjustType
 from src.database.db_operations import clean_symbol_for_postgres,save_to_table
@@ -14,12 +14,11 @@ from src.database.db_connection import get_engine
 from src.utils.logger import setup_logger
 import traceback
 from collections import defaultdict
+from .incremental_ms import revese_all_histroical_before_ms
+
 
 logger = setup_logger("ipo&delisted incremental_update")
 polygon_api_key = os.getenv("POLYGON_API_KEY")
-
-limit_date = get_latest_date_from_longport().strftime("%Y-%m-%d")
-
 
 # 数据库连接函数
 def get_db_connection():
@@ -239,51 +238,6 @@ def fetch_ipo_tickers_from_polygon(polygon_api_key, last_updated_time, max_retri
                     print(f"Max retries ({max_retries}) exceeded. Stopping.")
                     return all_tickers
 
-# 增量更新 IPO 数据
-def ipo_incremental_update():
-    
-    last_updated_time = get_last_tickers_fundamental_updated_utc().strftime("%Y-%m-%d")
-    
-    print("Starting to fetch all ipo tickers from Polygon.io using HTTP...")
-    ipo_tickers = fetch_ipo_tickers_from_polygon(polygon_api_key, last_updated_time)
-    
-    # 只保留有 listing_date 且大于 上次更新日期 的
-    ipo_filtered = [
-        t for t in ipo_tickers
-        if "listing_date" in t and t["listing_date"] > last_updated_time and t["listing_date"] <= limit_date
-    ]
-    ipo_future_filtered = [
-        t for t in ipo_tickers
-        if "listing_date" in t and t["listing_date"] > limit_date
-    ]
-    
-    for t in ipo_filtered:
-        print(t["ticker"], t["listing_date"], end=' ')
-
-    for t in ipo_future_filtered:
-        print(t["ticker"], t["listing_date"], "Future IPO")
-        
-        
-    # 过滤掉不需要的类型
-    EXCLUDED_TYPES = ("FUND", "INDEX", "PFD", "RIGHT", "SP", "UNIT", "WARRANT")
-    ipo_filtered_tickers = [
-        (
-            t.get("ticker", ""),
-            t.get("issuer_name", ""),
-            t.get("security_type", ""),
-            t.get("active", True),
-            t.get("primary_exchange", ""),
-            t.get("listing_date")
-        )
-        for t in ipo_filtered
-        if t.get("security_type", "") not in EXCLUDED_TYPES
-    ]
-    
-    if ipo_filtered_tickers:
-        # print(f"Total tickers to insert: {tickers}")
-        insert_tickers_to_tickers_fundamental(ipo_filtered_tickers) # 将 IPO 数据插入数据库tickers_fundamental表
-        fetch_data_from_longprot_to_stock_daily(ipo_filtered_tickers) # 从 LongPort 获取 IPO 数据并保存到 stock_daily 表
-
 # 获取截至上次更新的所有退市股票数据
 # 通过 Polygon.io API 获取退市股票数据，带重试机制
 def fetch_delisted_tickers_from_polygon(polygon_api_key, last_updated_time, max_retries=3):
@@ -363,9 +317,22 @@ def fetch_delisted_tickers_from_polygon(polygon_api_key, last_updated_time, max_
                     return all_tickers
 
 # 增量更新退市股票数据
-def delisedd_incremental_update():
+def delisted_incremental_update(limit_date):
     # last_updated_time = get_last_tickers_fundamental_updated_utc().strftime("%Y-%m-%d")
-    last_updated_time = "2025-03-08"  # 手动设置日期，格式为YYYY-MM-DD
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    # 获取 tickers_fundamental 表中最新 active 为 NULL也就是待观察的ticker 的 last_updated_utc 时间戳 ‘YYYY-MM-DD HH:MM:SS’
+    cursor.execute("SELECT last_updated_utc FROM tickers_fundamental WHERE active IS NULL ORDER BY last_updated_utc DESC LIMIT 1")
+    
+    #转化为“YYYY-MM-DD"格式
+    row = cursor.fetchone()
+    if row and row[0]:
+        last_updated_time = row[0].strftime("%Y-%m-%d")
+    else:
+        # 没有数据时给一个默认值，比如 '1970-01-01'
+        last_updated_time = '2025-03-08'
+    print(f"Last updated time for delisted tickers: {last_updated_time}")
+    
     delisted_tickers = fetch_delisted_tickers_from_polygon(polygon_api_key, last_updated_time)
     # 只保留有 listing_date 且大于 上次更新日期 的
     delisted_filtered = [
@@ -375,6 +342,7 @@ def delisedd_incremental_update():
     print(f"Total delisted tickers fetched: {len(delisted_filtered)}")
     # for t in delisted_filtered:
     #     print(t["ticker"], t["delisted_utc"], end=' ')
+    
     return delisted_filtered
 
 # 检测退市股票是否仍然活跃
@@ -391,9 +359,8 @@ def detect_delisted_tickers(tickers):
         # print(ticker["market"])
         try:
             cleaned_symbol = clean_symbol_for_postgres(symbol, ticker["type"], ticker["primary_exchange"])
-            resp = ctx.candlesticks(f"{cleaned_symbol}.US", Period.Day, 100, AdjustType.ForwardAdjust)
+            resp = ctx.candlesticks(f"{cleaned_symbol}.US", Period.Day, 1000, AdjustType.ForwardAdjust)
             # print(resp)
-            # 判断longport返回的最新K线数据的timestamp是否为2025-06-05 12:00:00
             if resp and hasattr(resp[0], "timestamp"):
                 # 假设timestamp为字符串或datetime对象
                 ts = resp[-1].timestamp
@@ -402,8 +369,8 @@ def detect_delisted_tickers(tickers):
                 else:
                     ts_str = str(ts)
                 ts_cmp = ts_str.replace("T", " ").replace("Z", "")
-                # print(f"Ticker: {cleaned_symbol}, delisted_utc: {ticker['delisted_utc']}, timestamp: {ts_cmp}")
-                if ts_cmp == "2025-06-18 12:00:00":
+                print(f"Ticker: {cleaned_symbol}, delisted_utc: {ticker['delisted_utc']}, timestamp: {ts_cmp}")
+                if ts_cmp == "2025-06-20 12:00:00":
                     if not hasattr(detect_delisted_tickers, "splits_to_active_tickers"):
                         detect_delisted_tickers.splits_to_active_tickers = set()
                     if not hasattr(detect_delisted_tickers, "renew_to_active_tickers"):
@@ -564,18 +531,126 @@ def fetch_ms_tickers_from_polygon(max_retries=3):
                 if retries == max_retries:
                     print(f"Max retries ({max_retries}) exceeded. Stopping.")
                     return all_tickers
-                
-if __name__ == "__main__":
-    # ipo_incremental_update()
     
-    # delisted_tickers = delisedd_incremental_update()
-    # # AGMH 2025-06-03T00:00:00Z OGEN 2025-06-03T00:00:00Z
-    # detect_delisted_tickers(delisted_tickers)
+def delisted_confirm(new_tickers=None):
+    """
+    确认退市股票的状态，并更新数据库
+    """
+    conn = get_db_connection()
+    cursor = conn.cursor()
     
+    cursor.execute("""select ticker, last_updated_utc from tickers_fundamental where active is null""")
+    pending_tickers = cursor.fetchall()
     
+    combined_tickers = []
+    seen = set()
     
-    # Stock_splits start
+    if new_tickers:
+        for t in new_tickers:
+            if t['ticker'] not in seen:
+                combined_tickers.append((t['ticker'], t['delisted_utc']))
+                seen.add(t['ticker'])
+
+    for row in pending_tickers:
+        ticker, delisted_utc = row
+        if ticker not in seen:
+            combined_tickers.append((ticker, delisted_utc))
+            seen.add(ticker)
+    
+    for symbol,delisted_utc in combined_tickers:
+        print(f"Confirming delisted status for {symbol} with delisted_utc: {delisted_utc}")
+        
+        # 检查是否在 stock_splits 中
+        cursor.execute("SELECT COUNT(*) FROM stock_splits WHERE ticker = %s AND execution_date = %s", (symbol, delisted_utc))
+        count = cursor.fetchone()[0]
+        
+        if count > 0:
+            print(f"{symbol} is in stock_splits, marking as active.")
+            # do nothing, as it is still active
+        else:
+            print(f"{symbol} is not in stock_splits, checking if it is still active.")
+            cursor.execute("SELECT COUNT(*) FROM stock_daily WHERE ticker = %s AND timestamp >= %s", (symbol, delisted_utc))
+            count = cursor.fetchone()[0]
+            if count > 0:
+                # 判断longport是否还能返回delisted_utc之前的K线数据
+                past_data=check_ticker_past(symbol, delisted_utc,cursor)
+                # 如果没有过去的数据，则标记为非活跃
+                if not past_data:
+                    print(f"{symbol} has no historical data before delisted_utc, marking as OTC.")
+                    cursor.execute("UPDATE tickers_fundamental SET primary_exchange = 'OTCP' WHERE ticker = %s", (symbol,))
+                # 如果有过去的数据，则继续判断其是否处于标记观察状态
+                else:
+                    # 判断是否之前就被标记为观察状态
+                    cursor.execute("select active from tickers_fundamental where ticker = %s", (symbol,))
+                    active_status = cursor.fetchone()[0]
+                    # 如果 active 是 null，说明需要下次再检查
+                    if active_status is None:
+                        continue    
+                    # 如果 active 不是 null，说明需要更新其状态为观察状态，同时将 last_updated_utc 更新为 delisted_utc
+                    else:
+                        print(f"{symbol} has historical data after delisted_utc, marking as active.")
+                        # set active to null, meaning it needs to be checked next time
+                        cursor.execute("UPDATE tickers_fundamental SET active = null WHERE ticker = %s", (symbol,))
+                        cursor.execute("UPDATE tickers_fundamental SET last_updated_utc = %s WHERE ticker = %s", (delisted_utc, symbol))
+            else:
+                print(f"{symbol} has no data after delisted_utc, marking as inactive.")
+                cursor.execute("UPDATE tickers_fundamental SET active = FALSE WHERE ticker = %s", (symbol,))
+    
+    conn.commit()
+    cursor.close()
+    conn.close()
+    
+def check_ticker_past(symbol, delisted_utc, cursor):
+    """
+    检查 ticker 在 delisted_utc 之前是否有历史数据
+    """
+    config = Config.from_env()
+    ctx = QuoteContext(config=config)
+
+    cursor.execute("SELECT primary_exchange, type FROM tickers_fundamental WHERE ticker = %s", (symbol,))
+    result = cursor.fetchone()
+    
+    if not result:
+        print(f"[WARN] ticker {symbol} not found in tickers_fundamental.")
+        logger.warning(f"Ticker {symbol} not found in tickers_fundamental.")
+        return False
+    primary_exchange, ticker_type = result
+    
+    try:
+        cleaned_symbol = clean_symbol_for_postgres(symbol, ticker_type, primary_exchange)
+        resp = ctx.candlesticks(f"{cleaned_symbol}.US", Period.Day, 1000, AdjustType.ForwardAdjust)
+        delisted_utc_str = delisted_utc.replace('Z', '')
+        delisted_utc_dt = datetime.strptime(delisted_utc_str, "%Y-%m-%dT%H:%M:%S")
+        if resp and hasattr(resp[0], "timestamp"):
+            found = False
+            for candle in resp:
+                ts = getattr(candle, "timestamp", None)
+                # print(f"Ticker: {cleaned_symbol}, delisted_utc: {ticker['delisted_utc']}, {ts}")
+                if ts:
+                    if isinstance(ts, datetime):
+                        ts_dt = ts
+                    else:
+                        ts_dt = datetime.strptime(ts.replace("T", " ").replace("Z", ""), "%Y-%m-%d %H:%M:%S")
+                    # 判断是否有timestamp早于delisted_utc_dt至少3天
+                    if ts_dt <= delisted_utc_dt - timedelta(days=3):
+                        # print(f"Ticker {cleaned_symbol} is still active after delisting on {delisted_utc}.")
+                        found = True
+            if not found:          
+                print(f"Ticker {cleaned_symbol} has renewed trading after delisted.")
+                return False
+            else:
+                # print(f"Ticker {cleaned_symbol} has historical data before delisted.")
+                return True
+    except Exception as e:
+        print(f"Error checking past data for {cleaned_symbol}: {e}")
+        return False
+            
+# 1.       
+def process_ms(limit_date):
+    
+    # ms_tickers为增量更新获取ms股票数据
     ms_tickers = fetch_ms_tickers_from_polygon()
+    
     # 只保留有 listing_date 且大于 上次更新日期 的
     ms_update_utc = get_last_stock_splits_updated_utc().strftime("%Y-%m-%d")
     
@@ -583,14 +658,92 @@ if __name__ == "__main__":
         t for t in ms_tickers
         if "execution_date" in t and t["execution_date"] > ms_update_utc and t["execution_date"] <= limit_date
     ]
+    
     insert_ms_to_stock_splits(ms_filtered) # 将 MS 数据插入数据库stock_splits表
-    ms_future_filtered = [
-        t for t in ms_tickers
-        if "execution_date" in t and t["execution_date"] > limit_date
+    
+    # ms_future_filtered = [
+    #     t for t in ms_tickers
+    #     if "execution_date" in t and t["execution_date"] > limit_date
+    # ]
+    
+    # print(f"Total ms tickers fetched: {converted_tickers_info}")
+    # print(f"Total ms tickers fetched: {len(ms_filtered)}")
+    # print(f"Total future ms tickers fetched: {len(ms_future_filtered)}")
+# 2.
+def process_delisted(limit_date):
+    # 获取截至上一更新日期到今天最新的退市股票的列表
+    delisted_tickers = delisted_incremental_update(limit_date)
+    
+    # 检测从polygon.io API获取到的delisted_tickers股票的具体退市状态
+    ###### detect_delisted_tickers(delisted_tickers)
+    
+    # 标记检测退市股票状态并更新active状态到tickers_fundamental数据库
+    delisted_confirm(delisted_tickers)    
+# 3.stock_daily
+
+# 4.
+def process_delisted_reverse(ms_filtered):
+    cutoff_date = date(2025, 6, 19)  # 设置时间门槛
+
+    converted_tickers_info = [
+        (
+            item['ticker'],
+            execution_date,
+            float(item['split_from']),
+            float(item['split_to'])
+        )
+        for item in ms_filtered
+        if (execution_date := datetime.strptime(item['execution_date'], "%Y-%m-%d").date()) >= cutoff_date
     ]
-    print(f"Total ms tickers fetched: {len(ms_filtered)}")
-    print(f"Total future ms tickers fetched: {len(ms_future_filtered)}")
-    # Stock_splits end
+
+    revese_all_histroical_before_ms(converted_tickers_info)
+# 4.最后一步 更新IPO数据 #### ipo_incremental_update()
+def ipo_incremental_update(limit_date):
+    
+    last_updated_time = get_last_tickers_fundamental_updated_utc().strftime("%Y-%m-%d")
+    
+    print("Starting to fetch all ipo tickers from Polygon.io using HTTP...")
+    ipo_tickers = fetch_ipo_tickers_from_polygon(polygon_api_key, last_updated_time)
+    
+    # 只保留有 listing_date 且大于 上次更新日期 的
+    ipo_filtered = [
+        t for t in ipo_tickers
+        if "listing_date" in t and t["listing_date"] > last_updated_time and t["listing_date"] <= limit_date
+    ]
+    ipo_future_filtered = [
+        t for t in ipo_tickers
+        if "listing_date" in t and t["listing_date"] > limit_date
+    ]
+    
+    for t in ipo_filtered:
+        print(t["ticker"], t["listing_date"], end=' ')
+
+    for t in ipo_future_filtered:
+        print(t["ticker"], t["listing_date"], "Future IPO")
+        
+        
+    # 过滤掉不需要的类型
+    EXCLUDED_TYPES = ("FUND", "INDEX", "PFD", "RIGHT", "SP", "UNIT", "WARRANT")
+    ipo_filtered_tickers = [
+        (
+            t.get("ticker", ""),
+            t.get("issuer_name", ""),
+            t.get("security_type", ""),
+            t.get("active", True),
+            t.get("primary_exchange", ""),
+            t.get("listing_date")
+        )
+        for t in ipo_filtered
+        if t.get("security_type", "") not in EXCLUDED_TYPES
+    ]
+    
+    if ipo_filtered_tickers:
+        # print(f"Total tickers to insert: {tickers}")
+        insert_tickers_to_tickers_fundamental(ipo_filtered_tickers) # 将 IPO 数据插入数据库tickers_fundamental表
+        fetch_data_from_longprot_to_stock_daily(ipo_filtered_tickers) # 从 LongPort 获取 IPO 数据并保存到 stock_daily 表
+
+
+# if __name__ == "__main__":
     
     # 1. 更新获取stock_splits
     # 2. 获取delisted, 标记到tickers_fundamental表的delisted_statue为on,then check if it's on stock_splits, if yes: off, else:on
