@@ -174,7 +174,7 @@ def save_to_table(data, ticker, engine, batch_size=1000):
         logger.info(f"跳过保存 {ticker}，数据已是最新")
         return
     
-    logger.debug(f"开始保存数据到 stock_daily (ticker: {ticker})")
+    # logger.debug(f"开始保存数据到 stock_daily (ticker: {ticker})")s
     try:
         values = [
             (
@@ -199,13 +199,7 @@ def save_to_table(data, ticker, engine, batch_size=1000):
                         INSERT INTO stock_daily 
                         (ticker, timestamp, open, high, low, close, volume, turnover)
                         VALUES (:ticker, :timestamp, :open, :high, :low, :close, :volume, :turnover)
-                        ON CONFLICT (ticker, timestamp) DO UPDATE SET
-                            open = EXCLUDED.open,
-                            high = EXCLUDED.high,
-                            low = EXCLUDED.low,
-                            close = EXCLUDED.close,
-                            volume = EXCLUDED.volume,
-                            turnover = EXCLUDED.turnover
+                        ON CONFLICT (ticker, timestamp) DO NOTHING
                     """),
                     [{"ticker": row[0], "timestamp": row[1], "open": row[2], "high": row[3], 
                       "low": row[4], "close": row[5], "volume": row[6], "turnover": row[7]} 

@@ -174,7 +174,7 @@ def revese_all_histroical_before_ms(tickers_info):
 if __name__== "__main__":
     
     # 获取哪些进行过ms
-    tickers_info = fetch_ms_tickers('2024-12-01','2025-03-01')
+    tickers_info = fetch_ms_tickers('2025-06-19','2025-06-20')
     tickers = list({row[0] for row in tickers_info})
     print(tickers_info)
     # 删去这些ticker从24-12-01到今天的数据

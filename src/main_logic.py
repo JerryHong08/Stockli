@@ -8,7 +8,7 @@ from src.database.db_operations import fetch_table_names
 from src.utils.time_teller import get_latest_date_from_longport
 from src.data_fetcher.batch_fetcher import BatchDataFetcher
 from src.data_fetcher.data_loader import DataLoader
-from src.data_fetcher.polygon_incremental_update import ipo_incremental_update, process_delisted, process_delisted_reverse, process_ms
+from src.data_fetcher.polygon_incremental_update import ipo_incremental_update, process_delisted, process_delisted_reverse, DelistedProcessThread, MsProcessThread
 from src.config.paths import STOCK_LIST_PATH
 from src.data_visualization.candlestick_plot import plot_candlestick, plot_volume, plot_obv
 from src.database.db_connection import get_engine, check_connection, DatabaseConnectionError
@@ -177,7 +177,7 @@ class MainWindowLogic:
                 print(f"读取错误日志文件失败: {e}")
 
             original_count = len(stock_symbols)
-            stock_symbols = [symbol for symbol in stock_symbols if symbol not in error_tickers]
+            self.stock_symbols = [symbol for symbol in stock_symbols if symbol not in error_tickers]
             filtered_count = len(stock_symbols)
             print(f"Filtered out {original_count - filtered_count} error tickers, remaining: {filtered_count}")
 
@@ -185,24 +185,45 @@ class MainWindowLogic:
                 QMessageBox.warning(self.ui, "错误", "过滤掉错误 ticker 后没有剩余的股票代码")
                 return
             self.ui.data_fetch_tab.batch_fetch_button.setEnabled(False)
-            limit_date = get_latest_date_from_longport().strftime("%Y-%m-%d")
-            print(f"Limit date for fetching IPO and delisted tickers: {limit_date}")
-            self.ms_filtered = process_ms(limit_date)
-            self.limit_date = limit_date
-            process_delisted(limit_date)  
-            self.batch_fetcher = BatchDataFetcher(stock_symbols)
-            self.batch_fetcher.progress_updated.connect(self.update_progress)
-            self.batch_fetcher.fetch_complete.connect(self.on_batch_fetch_complete)
-            self.batch_fetcher.error_occurred.connect(self.show_error)
-            self.batch_fetcher.start()
+            
+            self.limit_date = get_latest_date_from_longport().strftime("%Y-%m-%d")
+            print(f"Limit date for fetching IPO and delisted tickers: {self.limit_date}")
+            
+            # Step 1: Run MS thread
+            self.ms_thread = MsProcessThread(self.limit_date)
+            self.ms_thread.finished_with_result.connect(self.on_ms_finished)
+            self.ms_thread.start()
         except Exception as e:
             self.show_error(f"从数据库获取股票代码失败: {e}")
             print(e)
             
+    def on_ms_finished(self, ms_filtered):
+        self.ms_filtered = ms_filtered
+        # 安全关闭 ms_thread
+        self.ms_thread.quit()
+        self.ms_thread.wait()
+        self.ms_thread = None
+        # Step 2: Run delisted thread
+        self.delisted_thread = DelistedProcessThread(self.limit_date)
+        self.delisted_thread.finished.connect(self.on_delisted_finished)
+        self.delisted_thread.start()
+    
+    def on_delisted_finished(self):
+        # 安全关闭 delisted_thread
+        self.delisted_thread.quit()
+        self.delisted_thread.wait()
+        self.delisted_thread = None
+        # Step 3: Now run batch fetcher
+        self.batch_fetcher = BatchDataFetcher(self.stock_symbols)
+        self.batch_fetcher.progress_updated.connect(self.update_progress)
+        self.batch_fetcher.fetch_complete.connect(self.on_batch_fetch_complete)
+        self.batch_fetcher.error_occurred.connect(self.show_error)
+        self.batch_fetcher.start()
+    
     # 批量获取完成
     def on_batch_fetch_complete(self, message):
         self.ui.data_fetch_tab.batch_fetch_button.setEnabled(True)
-        QMessageBox.information(self.ui, "完成", message)
+        QMessageBox.information(self.ui, "完成", message)    
         process_delisted_reverse(self.ms_filtered)
         ipo_incremental_update(self.limit_date)
         self.update_stock_selector()

@@ -70,6 +70,8 @@ class MainWindowUI(QMainWindow):
         self.tabs.addTab(self.nlp_stock_screener, "AI智能股票筛选器")
         self.tabs.addTab(self.visualization_tab, "数据可视化")
         
+        self.tabs.setCurrentIndex(2)
+        
         # 设置主窗口的中心部件
         container = QWidget()
         container.setLayout(self.main_layout)

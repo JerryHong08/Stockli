@@ -38,12 +38,6 @@ class BatchDataFetcher(QThread):
             ctx = QuoteContext(config)
             self.error_count = 0
 
-            if not os.path.exists(self.error_log_path):
-                with open(self.error_log_path, mode="w", newline="", encoding="utf-8") as file:
-                    file.write("Symbol,Error\n")
-
-            # self.check_new_stocks(ctx)
-            
             # 获取 LongPort 最新数据日期,同时检查是否在交易时间内
             latest_date = get_latest_date_from_longport()
             if not latest_date:
@@ -53,27 +47,8 @@ class BatchDataFetcher(QThread):
             # 获取所有 ticker 的最新日期
             ticker_latest_dates = self.get_ticker_latest_dates_from_db()
             ticker_details = self.fetch_ticker_details(self.stock_symbols)
-
-            # 检查哪些 ticker 需要更新
-            needs_update = False
-            for symbol in self.stock_symbols:
-                if symbol not in ticker_details:
-                    continue
-                cleaned_symbol = clean_symbol_for_postgres(symbol, *ticker_details[symbol])
-                db_latest_date = ticker_latest_dates.get(cleaned_symbol)
-                if db_latest_date is None or latest_date > db_latest_date:
-                    needs_update = True
-                    break
-
-            if needs_update:
-                self.progress_updated.emit({
-                    'message': f"检测到需要更新的数据，LongPort 最新日期为 {latest_date}",
-                    'start_time': self.start_time
-                })
-                self.incremental_update(ctx, latest_date, ticker_latest_dates, ticker_details)
-            else:
-                table_count = self.get_table_count_from_db()
-                self.fetch_complete.emit(f"最新最全数据，当前有 {table_count} 个股票截至 {latest_date} 的数据")
+            
+            self.incremental_update(ctx, latest_date, ticker_latest_dates, ticker_details)
 
         except Exception as e:
             logger.error(f"批量获取数据失败: {e}")
@@ -123,113 +98,77 @@ class BatchDataFetcher(QThread):
         total = len(self.stock_symbols)
         conn = get_db_connection()
         cursor = conn.cursor()
-        for i, symbol in enumerate(self.stock_symbols, 1):
-            try:
-                if symbol not in ticker_details:
-                    logger.warning(f"No details found for {symbol}")
-                    continue
-
-                ticker_type, primary_exchange = ticker_details[symbol]
-                cleaned_symbol = clean_symbol_for_postgres(symbol, ticker_type, primary_exchange)
-                db_latest_date = ticker_latest_dates.get(cleaned_symbol)
-                
-                # 如果数据库中没有数据或 LongPort 数据更新，则更新
-                if db_latest_date is None or latest_date > db_latest_date:
-                    delta_days = (latest_date - (db_latest_date or datetime.min)).days
-                    if delta_days <= 0:
+        try:
+            for i, symbol in enumerate(self.stock_symbols, 1):
+                try:
+                    if symbol not in ticker_details:
+                        logger.warning(f"No details found for {symbol}")
                         continue
 
-                    self.progress_updated.emit({
-                        'current': i,
-                        'total': total,
-                        'start_time': self.start_time,
-                        'message': f"正在更新 {symbol} 的增量数据（最新至 {db_latest_date or '无数据'}）..."
-                    })
-                    logger.debug(f"Fetching data for {cleaned_symbol} with delta_days={delta_days}")
-                    engine = get_engine()
-                    resp = ctx.candlesticks(f"{cleaned_symbol}.US", Period.Day, delta_days, AdjustType.ForwardAdjust)                        
-                    if resp and hasattr(resp[0], "timestamp"):
-                        # 假设timestamp为字符串或datetime对象
+                    ticker_type, primary_exchange = ticker_details[symbol]
+                    cleaned_symbol = clean_symbol_for_postgres(symbol, ticker_type, primary_exchange)
+                    db_latest_date = ticker_latest_dates.get(cleaned_symbol)
+                    
+                    # 如果数据库中没有数据或 LongPort 数据更新，则更新
+                    if db_latest_date is None or latest_date > db_latest_date:
+                        delta_days = (latest_date - (db_latest_date or datetime.min)).days
+                        if delta_days <= 0:
+                            continue
+
+                        self.progress_updated.emit({
+                            'current': i,
+                            'total': total,
+                            'start_time': self.start_time,
+                            'message': f"正在更新 {symbol} 的增量数据（最新至 {db_latest_date or '无数据'}）..."
+                        })
+                        print(f"Fetching data for {cleaned_symbol} with delta_days={delta_days}")
+                        engine = get_engine()
+                        resp = ctx.candlesticks(f"{cleaned_symbol}.US", Period.Day, delta_days, AdjustType.ForwardAdjust)                        
+                        if not resp or not hasattr(resp[0], "timestamp"):
+                            logger.warning(f"No data returned for {cleaned_symbol}")
+                            continue
+
+                        # 有数据，处理 timestamp
                         ts = resp[-1].timestamp
                         if isinstance(ts, datetime):
                             ts_cmp = ts.strftime("%Y-%m-%d")
                         else:
                             ts_clean = ts.replace("T", " ").replace("Z", "")
                             ts_cmp = datetime.strptime(ts_clean, "%Y-%m-%d %H:%M:%S").strftime("%Y-%m-%d")
-                        print(f"Ticker: {cleaned_symbol}, lates_longport_data_timestamp: {ts_cmp}, latest_date: {latest_date.strftime}")
-                        # 检查 LongPort 返回的该ticker的最新日期是否与 LongPort 能获取到的最新日期相同
-                        # 如果相同，则说明该ticker可以正常更新            
-                        if ts_cmp == latest_date.strftime("%Y-%m-%d"):
-                            continue
-                        # 如果不同，则说明该ticker没能获取到最新数据，进一步判断是因为早已在退市观察还是只是可能是临时停牌等原因
-                        else:
-                            cursor.execute("select active from tickers_fundamental where ticker = %s", (symbol,))
+
+                        print(f"Ticker: {cleaned_symbol}, lates_longport_data_timestamp: {ts_cmp}")
+
+                        # 判断是否能获取正常更新时间的数据
+                        if ts_cmp != latest_date.strftime("%Y-%m-%d"):
+                            cursor.execute("SELECT active FROM tickers_fundamental WHERE ticker = %s", (symbol,))
                             active_status = cursor.fetchone()[0]
-                            # 如果 active_status 为 None,即被观察状态，则说明其在已退市不再更新数据
                             if active_status is None:
+                                logger.warning(f"{cleaned_symbol} 在 tickers_fundamental 中没有 active 状态，无法判断是否退市")
                                 cursor.execute("UPDATE tickers_fundamental SET active = FALSE WHERE ticker = %s", (symbol,))
                                 conn.commit()
-                                continue  # 跳出循环，不再更新该ticker的数据
+                                continue
+
+                        # 其余情况都保存数据
+                        save_to_table(resp, cleaned_symbol, engine)
                     else:
-                        logger.warning(f"No data returned for {cleaned_symbol}")
-                        continue
-                    save_to_table(resp, cleaned_symbol, engine)
-                else:
-                    logger.debug(f"{cleaned_symbol} 数据已是最新，无需更新")
-            except Exception as e:
-                self.error_count += 1
-                error_message = f"更新 {symbol} 数据失败: {str(e)}"
-                logger.error(error_message)
-                with open(self.error_log_path, mode="a", newline="", encoding="utf-8") as file:
-                    file.write(f"{symbol},{error_message}\n")
-        cursor.close()
-        conn.close()
-
-    def check_new_stocks(self, ctx):
-        engine = get_engine()
-        db_tickers = set(ticker for ticker in fetch_table_names(engine))  # 获取stock_daily表中的所有去重ticker
-        total = len(self.stock_symbols)
-        new_stocks_found = False
-        ticker_details = self.fetch_ticker_details(self.stock_symbols)
-        
-        for i, symbol in enumerate(self.stock_symbols, 1):
-            if symbol not in ticker_details:
-                logger.warning(f"No details found for {symbol}")
-                continue
-
-            ticker_type, primary_exchange = ticker_details[symbol]
-            cleaned_symbol = clean_symbol_for_postgres(symbol, ticker_type, primary_exchange)
-            
-            if cleaned_symbol not in db_tickers:
-                new_stocks_found = True
-                try:
-                    
-                    self.progress_updated.emit({
-                        'current': i,
-                        'total': total,
-                        'start_time': self.start_time,
-                        'message': f"检测到新股票 {symbol}，正在获取数据..."
-                    })
-                    logger.debug(f"NEW TICKER: Fetching data for {cleaned_symbol} with 1000 days")
-                    resp = ctx.candlesticks(f"{cleaned_symbol}.US", Period.Day, 1000, AdjustType.ForwardAdjust)
-                    if not resp:
-                        logger.warning(f"No data returned for {cleaned_symbol}")
-                        continue
-                    engine = get_engine()
-                    save_to_table(resp, cleaned_symbol, engine)
-                    logger.info(f"成功获取新股票 {symbol} 的数据并保存")
+                        logger.debug(f"{cleaned_symbol} 数据已是最新，无需更新")
                 except Exception as e:
-                    error_message = str(e)
-                    logger.error(f"获取新股票 {symbol} 数据失败: {error_message}")
-                    # self.error_occurred.emit(f"获取新股票 {symbol} 数据失败: {error_message}")
+                    self.error_count += 1
+                    error_message = f"更新 {symbol} 数据失败: {str(e)}"
+                    logger.error(error_message)
                     with open(self.error_log_path, mode="a", newline="", encoding="utf-8") as file:
                         file.write(f"{symbol},{error_message}\n")
-
-        if not new_stocks_found:
-            self.progress_updated.emit({
-                'message': "没有检测到新股票",
-                'start_time': self.start_time
-            })
+        finally:
+            cursor.close()
+            conn.close()
+        table_count = self.get_table_count_from_db()
+        self.fetch_complete.emit(f"最新最全数据，当前有 {table_count} 个股票截至 {latest_date} 的数据")
+        self.progress_updated.emit({
+                            'current': total,
+                            'total': total,
+                            'start_time': self.start_time,
+                            'message': f"最新最全数据，当前有 {table_count} 个股票截至 {latest_date} 的数据"
+                        })
 
     def get_latest_date_from_db(self):
         try:

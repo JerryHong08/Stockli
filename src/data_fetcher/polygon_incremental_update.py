@@ -15,6 +15,7 @@ from src.utils.logger import setup_logger
 import traceback
 from collections import defaultdict
 from .incremental_ms import revese_all_histroical_before_ms
+from PySide6.QtCore import QThread, Signal
 
 
 logger = setup_logger("ipo&delisted incremental_update")
@@ -557,26 +558,26 @@ def delisted_confirm(new_tickers=None):
             combined_tickers.append((ticker, delisted_utc))
             seen.add(ticker)
     
-    for symbol,delisted_utc in combined_tickers:
-        print(f"Confirming delisted status for {symbol} with delisted_utc: {delisted_utc}")
+    for symbol, delisted_utc in combined_tickers:
+        logger.info(f"Confirming delisted status for {symbol} with delisted_utc: {delisted_utc}")
         
         # 检查是否在 stock_splits 中
         cursor.execute("SELECT COUNT(*) FROM stock_splits WHERE ticker = %s AND execution_date = %s", (symbol, delisted_utc))
         count = cursor.fetchone()[0]
         
         if count > 0:
-            print(f"{symbol} is in stock_splits, marking as active.")
+            logger.info(f"{symbol} is in stock_splits, marking as active.")
             # do nothing, as it is still active
         else:
-            print(f"{symbol} is not in stock_splits, checking if it is still active.")
+            logger.info(f"{symbol} is not in stock_splits, checking if it is still active.")
             cursor.execute("SELECT COUNT(*) FROM stock_daily WHERE ticker = %s AND timestamp >= %s", (symbol, delisted_utc))
             count = cursor.fetchone()[0]
             if count > 0:
                 # 判断longport是否还能返回delisted_utc之前的K线数据
-                past_data=check_ticker_past(symbol, delisted_utc,cursor)
+                past_data = check_ticker_past(symbol, delisted_utc, cursor)
                 # 如果没有过去的数据，则标记为非活跃
                 if not past_data:
-                    print(f"{symbol} has no historical data before delisted_utc, marking as OTC.")
+                    logger.info(f"{symbol} has no historical data before delisted_utc, marking as OTC.")
                     cursor.execute("UPDATE tickers_fundamental SET primary_exchange = 'OTCP' WHERE ticker = %s", (symbol,))
                 # 如果有过去的数据，则继续判断其是否处于标记观察状态
                 else:
@@ -588,12 +589,12 @@ def delisted_confirm(new_tickers=None):
                         continue    
                     # 如果 active 不是 null，说明需要更新其状态为观察状态，同时将 last_updated_utc 更新为 delisted_utc
                     else:
-                        print(f"{symbol} has historical data after delisted_utc, marking as active.")
+                        logger.info(f"{symbol} has historical data after delisted_utc, marking as active.")
                         # set active to null, meaning it needs to be checked next time
                         cursor.execute("UPDATE tickers_fundamental SET active = null WHERE ticker = %s", (symbol,))
                         cursor.execute("UPDATE tickers_fundamental SET last_updated_utc = %s WHERE ticker = %s", (delisted_utc, symbol))
             else:
-                print(f"{symbol} has no data after delisted_utc, marking as inactive.")
+                logger.info(f"{symbol} has no data after delisted_utc, marking as inactive.")
                 cursor.execute("UPDATE tickers_fundamental SET active = FALSE WHERE ticker = %s", (symbol,))
     
     conn.commit()
@@ -645,22 +646,34 @@ def check_ticker_past(symbol, delisted_utc, cursor):
         print(f"Error checking past data for {cleaned_symbol}: {e}")
         return False
             
-# 1.       
-def process_ms(limit_date):
-    
-    # ms_tickers为增量更新获取ms股票数据
-    ms_tickers = fetch_ms_tickers_from_polygon()
-    
-    # 只保留有 listing_date 且大于 上次更新日期 的
-    ms_update_utc = get_last_stock_splits_updated_utc().strftime("%Y-%m-%d")
-    
-    ms_filtered = [
-        t for t in ms_tickers
-        if "execution_date" in t and t["execution_date"] > ms_update_utc and t["execution_date"] <= limit_date
-    ]
-    
-    insert_ms_to_stock_splits(ms_filtered) # 将 MS 数据插入数据库stock_splits表
-    
+# 1.
+class MsProcessThread(QThread):
+    finished_with_result = Signal(object)
+
+    def __init__(self, limit_date):
+        super().__init__()
+        self.limit_date = limit_date
+
+    def run(self):
+        try:
+            # ms_tickers为增量更新获取ms股票数据
+            ms_tickers = fetch_ms_tickers_from_polygon()
+            
+            # 只保留有 listing_date 且大于 上次更新日期 的
+            ms_update_utc = get_last_stock_splits_updated_utc().strftime("%Y-%m-%d")
+            
+            ms_filtered = [
+                t for t in ms_tickers
+                if "execution_date" in t and t["execution_date"] > ms_update_utc and t["execution_date"] <= self.limit_date
+            ]
+            logger.debug(f"New MS tickers fetched: {ms_filtered}")
+            insert_ms_to_stock_splits(ms_filtered) # 将 MS 数据插入数据库stock_splits表
+
+            self.finished_with_result.emit(ms_filtered)
+        except Exception as e:
+            print(f"process_ms failed: {e}")
+            self.finished_with_result.emit([])
+
     # ms_future_filtered = [
     #     t for t in ms_tickers
     #     if "execution_date" in t and t["execution_date"] > limit_date
@@ -669,11 +682,26 @@ def process_ms(limit_date):
     # print(f"Total ms tickers fetched: {converted_tickers_info}")
     # print(f"Total ms tickers fetched: {len(ms_filtered)}")
     # print(f"Total future ms tickers fetched: {len(ms_future_filtered)}")
+
 # 2.
+class DelistedProcessThread(QThread):
+    finished = Signal()
+
+    def __init__(self, limit_date):
+        super().__init__()
+        self.limit_date = limit_date
+
+    def run(self):
+        try:
+            process_delisted(self.limit_date)
+        except Exception as e:
+            print(f"process_delisted failed: {e}")
+        self.finished.emit()
+        
 def process_delisted(limit_date):
     # 获取截至上一更新日期到今天最新的退市股票的列表
     delisted_tickers = delisted_incremental_update(limit_date)
-    
+    logger.debug(f"New delisted fetched: {delisted_tickers}")
     # 检测从polygon.io API获取到的delisted_tickers股票的具体退市状态
     ###### detect_delisted_tickers(delisted_tickers)
     
@@ -683,8 +711,12 @@ def process_delisted(limit_date):
 
 # 4.
 def process_delisted_reverse(ms_filtered):
+    if not ms_filtered:
+        print("ms_filtered 为空，跳过 reverse split 处理")
+        return
+    
     cutoff_date = date(2025, 6, 19)  # 设置时间门槛
-
+    
     converted_tickers_info = [
         (
             item['ticker'],
@@ -695,7 +727,7 @@ def process_delisted_reverse(ms_filtered):
         for item in ms_filtered
         if (execution_date := datetime.strptime(item['execution_date'], "%Y-%m-%d").date()) >= cutoff_date
     ]
-
+    print(f"Total converted tickers for reverse split: {converted_tickers_info}")
     revese_all_histroical_before_ms(converted_tickers_info)
 # 4.最后一步 更新IPO数据 #### ipo_incremental_update()
 def ipo_incremental_update(limit_date):
@@ -715,11 +747,11 @@ def ipo_incremental_update(limit_date):
         if "listing_date" in t and t["listing_date"] > limit_date
     ]
     
-    for t in ipo_filtered:
-        print(t["ticker"], t["listing_date"], end=' ')
+    # for t in ipo_filtered:
+    #     print(t["ticker"], t["listing_date"], end=' ')
 
-    for t in ipo_future_filtered:
-        print(t["ticker"], t["listing_date"], "Future IPO")
+    # for t in ipo_future_filtered:
+    #     print(t["ticker"], t["listing_date"], "Future IPO")
         
         
     # 过滤掉不需要的类型
@@ -736,16 +768,15 @@ def ipo_incremental_update(limit_date):
         for t in ipo_filtered
         if t.get("security_type", "") not in EXCLUDED_TYPES
     ]
-    
+    logger.debug(f"New IPO tickers fetched: {ipo_filtered_tickers}")
     if ipo_filtered_tickers:
         # print(f"Total tickers to insert: {tickers}")
         insert_tickers_to_tickers_fundamental(ipo_filtered_tickers) # 将 IPO 数据插入数据库tickers_fundamental表
         fetch_data_from_longprot_to_stock_daily(ipo_filtered_tickers) # 从 LongPort 获取 IPO 数据并保存到 stock_daily 表
 
-
 # if __name__ == "__main__":
     
     # 1. 更新获取stock_splits
     # 2. 获取delisted, 标记到tickers_fundamental表的delisted_statue为on,then check if it's on stock_splits, if yes: off, else:on
-    # 3. 单独run statue is on tickers, 尝试获取其上一交易日数据, 若无,则标记成OTC, 若有,则继续为on
+    # 3. 单独run statue is on tickers, 尝试获取其上一交易日数据, 若无,则标记成OTC, 若有,則继续为on
     # 4. 更新stock_incremental_update, run everystock, if failed ,check if its statue is on, if yes: delisted

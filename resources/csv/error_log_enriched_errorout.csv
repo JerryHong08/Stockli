@@ -78,3 +78,48 @@ WETF,WETF.US,N/A,XNAS,"OpenApiException: OpenApiException: (code=301600, trace_i
 WLTW,WLTW.US,N/A,XNAS,"OpenApiException: OpenApiException: (code=301600, trace_id=) invalid symbol",2025-03-18T16:41:48.667706
 AIRO,更新 AIRO 数据失败: OpenApiException: (code=301607, trace_id=) request too many klines
 BLNE,更新 BLNE 数据失败: OpenApiException: (code=301607, trace_id=) request too many klines
+FMTO,更新 FMTO 数据失败: OpenApiException: (code=301607, trace_id=) request too many klines
+GITS,更新 GITS 数据失败: OpenApiException: (code=301607, trace_id=) request too many klines
+JXG,更新 JXG 数据失败: OpenApiException: (code=301607, trace_id=) request too many klines
+LDDR,更新 LDDR 数据失败: OpenApiException: (code=301607, trace_id=) request too many klines
+LDER,更新 LDER 数据失败: OpenApiException: (code=301607, trace_id=) request too many klines
+LDRR,更新 LDRR 数据失败: OpenApiException: (code=301607, trace_id=) request too many klines
+LFBD,更新 LFBD 数据失败: OpenApiException: (code=301607, trace_id=) request too many klines
+LFBE,更新 LFBE 数据失败: OpenApiException: (code=301607, trace_id=) request too many klines
+LFDR,更新 LFDR 数据失败: OpenApiException: (code=301607, trace_id=) request too many klines
+LIAY,更新 LIAY 数据失败: OpenApiException: (code=301607, trace_id=) request too many klines
+LIBD,更新 LIBD 数据失败: OpenApiException: (code=301607, trace_id=) request too many klines
+QVCGA,更新 QVCGA 数据失败: OpenApiException: (code=301607, trace_id=) request too many klines
+SVA,更新 SVA 数据失败: OpenApiException: (code=301607, trace_id=) request too many klines
+UOKA,更新 UOKA 数据失败: OpenApiException: (code=301607, trace_id=) request too many klines
+XAGE,更新 XAGE 数据失败: OpenApiException: (code=301607, trace_id=) request too many klines
+YHC,更新 YHC 数据失败: OpenApiException: (code=301607, trace_id=) request too many klines
+TOPW,更新 TOPW 数据失败: cursor already closed
+AVTE,更新 AVTE 数据失败: cursor already closed
+BGNE,更新 BGNE 数据失败: cursor already closed
+CARA,更新 CARA 数据失败: cursor already closed
+CSWI,更新 CSWI 数据失败: cursor already closed
+DIST,更新 DIST 数据失败: cursor already closed
+GLYC,更新 GLYC 数据失败: cursor already closed
+GXTG,更新 GXTG 数据失败: cursor already closed
+HCVI,更新 HCVI 数据失败: cursor already closed
+HSUN,更新 HSUN 数据失败: cursor already closed
+JNVR,更新 JNVR 数据失败: cursor already closed
+KRUZ,更新 KRUZ 数据失败: cursor already closed
+MYTE,更新 MYTE 数据失败: cursor already closed
+NAYA,更新 NAYA 数据失败: cursor already closed
+NEP,更新 NEP 数据失败: cursor already closed
+NVW,更新 NVW 数据失败: cursor already closed
+OCX,更新 OCX 数据失败: cursor already closed
+OPT,更新 OPT 数据失败: cursor already closed
+SAG,更新 SAG 数据失败: cursor already closed
+SJW,更新 SJW 数据失败: cursor already closed
+SMI,更新 SMI 数据失败: cursor already closed
+SPGC,更新 SPGC 数据失败: cursor already closed
+SQ,更新 SQ 数据失败: cursor already closed
+TSW,更新 TSW 数据失败: cursor already closed
+VINE,更新 VINE 数据失败: cursor already closed
+X,更新 X 数据失败: cursor already closed
+YY,更新 YY 数据失败: cursor already closed
+ZI,更新 ZI 数据失败: cursor already closed
+HCHL,更新 HCHL 数据失败: OpenApiException: (code=301607, trace_id=) request too many klines
