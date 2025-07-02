@@ -645,7 +645,34 @@ def check_ticker_past(symbol, delisted_utc, cursor):
     except Exception as e:
         print(f"Error checking past data for {cleaned_symbol}: {e}")
         return False
-            
+
+def get_ticker_stock_daily_updated_timestamp(ticker):
+    """
+    获取 ticker 在 stock_daily 表中最新的更新时间戳
+    """
+    conn = get_db_connection()
+    cursor = conn.cursor()
+    
+    cursor.execute("""
+        SELECT MAX(timestamp) FROM stock_daily WHERE ticker = %s
+    """, (ticker,))
+    
+    result = cursor.fetchone()
+    cursor.close()
+    conn.close()
+    
+    if result and result[0]:
+        return result[0]
+    else:
+        return None        
+    
+def get_stock_daily_updated_utc(tickers_info):
+    for ticker in tickers_info:
+        last_update_time = get_ticker_stock_daily_updated_timestamp(ticker["ticker"])
+        # last_update_time = datetime(2025, 6, 20)
+        ticker["last_update_time"] = last_update_time
+    return tickers_info
+
 # 1.
 class MsProcessThread(QThread):
     finished_with_result = Signal(object)
@@ -656,32 +683,58 @@ class MsProcessThread(QThread):
 
     def run(self):
         try:
+            print("=== MsProcessThread.run() 开始执行 ===")
+            
             # ms_tickers为增量更新获取ms股票数据
             ms_tickers = fetch_ms_tickers_from_polygon()
+            print(f"从Polygon获取到 {len(ms_tickers)} 个MS tickers")
             
             # 只保留有 listing_date 且大于 上次更新日期 的
             ms_update_utc = get_last_stock_splits_updated_utc().strftime("%Y-%m-%d")
+            print(f"最后更新时间: {ms_update_utc}")
+            
+            # 将 limit_date 转换为字符串格式进行比较
+            limit_date_str = self.limit_date.strftime("%Y-%m-%d") if hasattr(self.limit_date, 'strftime') else str(self.limit_date)
+            print(f"限制日期: {limit_date_str}")
             
             ms_filtered = [
                 t for t in ms_tickers
-                if "execution_date" in t and t["execution_date"] > ms_update_utc and t["execution_date"] <= self.limit_date
+                if "execution_date" in t and t["execution_date"] > ms_update_utc and t["execution_date"] <= limit_date_str
             ]
+            print(f"过滤后的MS tickers: {len(ms_filtered)}")
+            
             logger.debug(f"New MS tickers fetched: {ms_filtered}")
             insert_ms_to_stock_splits(ms_filtered) # 将 MS 数据插入数据库stock_splits表
-
+            
+            # 获取每个ticker在stock_daily表中最新的更新时间戳
+            ms_filtered = get_stock_daily_updated_utc(ms_filtered)
+            # print(f"添加时间戳后的MS tickers: {len(ms_filtered)}")
+            
+            # print("=== 即将发射finished_with_result信号 ===")
+            # print(f"要发射的数据类型: {type(ms_filtered)}")
+            # print(f"要发射的数据长度: {len(ms_filtered)}")
+            
+            # 测试信号是否能正确发射
             self.finished_with_result.emit(ms_filtered)
+            print("=== finished_with_result.emit() 已调用 ===")
+            
+            # 强制刷新，确保信号发出
+            from PySide6.QtCore import QCoreApplication
+            if QCoreApplication.instance():
+                QCoreApplication.instance().processEvents()
+                print("=== 已处理待处理事件 ===")
+            
         except Exception as e:
-            print(f"process_ms failed: {e}")
+            print(f"=== MsProcessThread.run() 异常 ===")
+            print(f"错误: {e}")
+            import traceback
+            print(f"详细错误: {traceback.format_exc()}")
+            
+            # 即使出错也要发射信号
             self.finished_with_result.emit([])
-
-    # ms_future_filtered = [
-    #     t for t in ms_tickers
-    #     if "execution_date" in t and t["execution_date"] > limit_date
-    # ]
-    
-    # print(f"Total ms tickers fetched: {converted_tickers_info}")
-    # print(f"Total ms tickers fetched: {len(ms_filtered)}")
-    # print(f"Total future ms tickers fetched: {len(ms_future_filtered)}")
+        
+        finally:
+            print("=== MsProcessThread.run() 执行完毕 ===")
 
 # 2.
 class DelistedProcessThread(QThread):
@@ -708,31 +761,146 @@ def process_delisted(limit_date):
     # 标记检测退市股票状态并更新active状态到tickers_fundamental数据库
     delisted_confirm(delisted_tickers)    
 # 3.stock_daily
+def fetch_after_last_update_but_before_execution_date_rows(ticker, last_update_time, execution_date):
+    conn = get_db_connection()
+    cursor = conn.cursor()
+
+    cursor.execute("""
+        SELECT id, timestamp, open, high, low, close, volume
+        FROM stock_daily
+        WHERE ticker = %s
+        AND timestamp > %s
+        AND timestamp < %s
+        """, (ticker, last_update_time, execution_date))
+    rows = cursor.fetchall()  # 每行为一个元组
+    cursor.close()
+    conn.close()
+    return rows
+
+def adjust_ticker_split(ticker, execution_date, split_from, split_to, last_update_time):
+    try:    
+        ratio = split_to / split_from  # 比如 1 / 15
+        rows = fetch_after_last_update_but_before_execution_date_rows(ticker, last_update_time, execution_date)
+
+        if not rows:
+            logger.info(f"No rows to update for ticker {ticker} between {last_update_time} and {execution_date}")
+            return
+            
+        # 将字符串格式的 execution_date 转换为 date 对象
+        if isinstance(execution_date, str):
+            execution_date = datetime.strptime(execution_date, "%Y-%m-%d").date()
+        elif isinstance(execution_date, datetime):
+            execution_date = execution_date.date()
+        
+        # 只调整 execution_date 之前的行
+        execution_date_dt = datetime.combine(execution_date, datetime.min.time())
+        to_update = [row for row in rows if row[1] < execution_date_dt]
+        
+        conn = get_db_connection()
+        cursor = conn.cursor()
+        try:
+            for row in to_update:
+                row_id, ts, o, h, l, c, v = row
+
+                new_o = round(o * ratio, 3)
+                new_h = round(h * ratio, 3)
+                new_l = round(l * ratio, 3)
+                new_c = round(c * ratio, 3)
+                new_v = int(round(v / ratio))  # volume 反向变换，split_from 较大则 volume 应变大
+                print(new_o)
+                cursor.execute("""
+                    UPDATE stock_daily
+                    SET open = %s, high = %s, low = %s, close = %s, volume = %s
+                    WHERE id = %s;
+                """, (new_o, new_h, new_l, new_c, new_v, row_id))
+
+            conn.commit()
+        except Exception as e:
+                conn.rollback()
+                logger.error(f"Error updating data for ticker {ticker}: {e}")
+                raise
+        finally:
+            cursor.close()
+            conn.close()
+    except Exception as e:
+        logger.error(f"Failed to adjust ticker split for {ticker}: {e}")
+
+def update_stock_daily_with_ms_ratio(tickers_info):
+    """
+    处理股票拆分数据，跳过没有 last_update_time 的记录
+    """
+    if not tickers_info:
+        print("tickers_info 为空，无需处理")
+        return
+    
+    processed_count = 0
+    skipped_count = 0
+    
+    for ticker_info in tickers_info:
+        ticker = ticker_info["ticker"]
+        
+        # # 排除 CLRB ticker
+        # if ticker == "CLRB":
+        #     print(f"跳过 CLRB ticker")
+        #     skipped_count += 1
+        #     continue
+            
+        # 检查是否有 last_update_time
+        last_update_time = ticker_info.get("last_update_time")
+        if last_update_time is None:
+            print(f"跳过 {ticker}：没有 last_update_time")
+            skipped_count += 1
+            continue
+        
+        # 获取其他必要信息
+        execution_date = ticker_info["execution_date"]
+        split_from = float(ticker_info["split_from"])
+        split_to = float(ticker_info["split_to"])
+        
+        print(f"处理 {ticker} 的拆股数据（{split_from} -> {split_to}），最后更新时间：{last_update_time}")
+        
+        try:
+            adjust_ticker_split(ticker, execution_date, split_from, split_to, last_update_time)
+            processed_count += 1
+            print(f"✓ {ticker} 拆股调整完成")
+        except Exception as e:
+            print(f"✗ {ticker} 拆股调整失败: {e}")
+            skipped_count += 1
+    
+    print(f"拆股处理统计：处理成功 {processed_count} 个，跳过 {skipped_count} 个")
 
 # 4.
 def process_delisted_reverse(ms_filtered):
     if not ms_filtered:
         print("ms_filtered 为空，跳过 reverse split 处理")
         return
+    print(f'成功接受到：{ms_filtered}')
+    update_stock_daily_with_ms_ratio(ms_filtered)
     
-    cutoff_date = date(2025, 6, 19)  # 设置时间门槛
+    # cutoff_date = date(2025, 6, 19)  # 设置时间门槛
+    # cutoff_date = get_last_stock_splits_updated_utc().date() - timedelta(days=1)  # 获取最新的 execution_date 前一天作为门槛日期
     
     converted_tickers_info = [
         (
             item['ticker'],
-            execution_date,
+            datetime.strptime(item['execution_date'], "%Y-%m-%d").date(),  # 转换为 date 对象
             float(item['split_from']),
             float(item['split_to'])
         )
         for item in ms_filtered
-        if (execution_date := datetime.strptime(item['execution_date'], "%Y-%m-%d").date()) >= cutoff_date
-    ]
+        # if (execution_date := datetime.strptime(item['execution_date'], "%Y-%m-%d").date()) >= cutoff_date
+    ]    
+    
     print(f"Total converted tickers for reverse split: {converted_tickers_info}")
     revese_all_histroical_before_ms(converted_tickers_info)
+    
 # 4.最后一步 更新IPO数据 #### ipo_incremental_update()
 def ipo_incremental_update(limit_date):
     
     last_updated_time = get_last_tickers_fundamental_updated_utc().strftime("%Y-%m-%d")
+    
+    # 将 limit_date 转换为字符串格式
+    limit_date_str = limit_date.strftime("%Y-%m-%d") if hasattr(limit_date, 'strftime') else str(limit_date)
     
     print("Starting to fetch all ipo tickers from Polygon.io using HTTP...")
     ipo_tickers = fetch_ipo_tickers_from_polygon(polygon_api_key, last_updated_time)
@@ -740,11 +908,11 @@ def ipo_incremental_update(limit_date):
     # 只保留有 listing_date 且大于 上次更新日期 的
     ipo_filtered = [
         t for t in ipo_tickers
-        if "listing_date" in t and t["listing_date"] > last_updated_time and t["listing_date"] <= limit_date
+        if "listing_date" in t and t["listing_date"] > last_updated_time and t["listing_date"] <= limit_date_str
     ]
     ipo_future_filtered = [
         t for t in ipo_tickers
-        if "listing_date" in t and t["listing_date"] > limit_date
+        if "listing_date" in t and t["listing_date"] > limit_date_str
     ]
     
     # for t in ipo_filtered:
@@ -774,7 +942,88 @@ def ipo_incremental_update(limit_date):
         insert_tickers_to_tickers_fundamental(ipo_filtered_tickers) # 将 IPO 数据插入数据库tickers_fundamental表
         fetch_data_from_longprot_to_stock_daily(ipo_filtered_tickers) # 从 LongPort 获取 IPO 数据并保存到 stock_daily 表
 
-# if __name__ == "__main__":
+def print_ms(ms_filtered):
+    print("=== print_ms 函数被调用 ===")
+    print(f"ms_filtered 类型: {type(ms_filtered)}")
+    print(f"ms_filtered 长度: {len(ms_filtered) if hasattr(ms_filtered, '__len__') else 'N/A'}")
+    print(f"ms_filtered 内容: {ms_filtered}")
+    
+    if ms_filtered and len(ms_filtered) > 0:
+        print("=== ms_filtered 详细内容 ===")
+        for i, item in enumerate(ms_filtered):
+            print(f"Item {i}: {item}")
+    else:
+        print("ms_filtered 为空或无有效数据")
+    
+    # 处理完成后退出应用
+    from PySide6.QtCore import QCoreApplication
+    app = QCoreApplication.instance()
+    if app:
+        print("退出应用程序...")
+        app.quit()
+    else:
+        print("没有找到应用程序实例")
+
+if __name__ == "__main__":
+    import sys
+    from PySide6.QtCore import QCoreApplication
+    
+    print("=== 脚本开始执行 ===")
+    
+    # 检查是否已经存在QApplication实例
+    app = QCoreApplication.instance()
+    if app is None:
+        print("创建新的 QCoreApplication")
+        app = QCoreApplication(sys.argv)
+        app_created = True
+    else:
+        print("使用现有的 QCoreApplication")
+        app_created = False
+    
+    print("=== 准备创建线程 ===")
+    ms_thread = MsProcessThread(get_latest_date_from_longport())
+    
+    print("=== 连接信号槽 ===")
+    # 检查连接是否成功
+    connection_result = ms_thread.finished_with_result.connect(print_ms)
+    print(f"信号槽连接结果: {connection_result}")
+    
+    # 添加线程完成信号来确认线程是否真的完成了
+    def on_thread_finished():
+        print("=== QThread.finished 信号被触发 ===")
+        if app_created:
+            app.quit()
+    
+    ms_thread.finished.connect(on_thread_finished)
+    
+    print("=== 启动线程 ===")
+    ms_thread.start()
+    
+    if app_created:
+        print("=== 运行事件循环 ===")
+        sys.exit(app.exec())
+    else:
+        print("=== 进入事件循环等待 ===")
+        # 手动处理事件循环
+        import time
+        start_time = time.time()
+        timeout = 300  # 5分钟超时
+        
+        while ms_thread.isRunning():
+            app.processEvents()
+            time.sleep(0.1)
+            
+            # 超时检查
+            if time.time() - start_time > timeout:
+                print("=== 超时，强制退出 ===")
+                ms_thread.terminate()
+                ms_thread.wait()
+                break
+        
+        # 线程完成后再处理一次事件
+        print("=== 线程结束，最后处理事件 ===")
+        app.processEvents()
+# ---------------------------------------------
     
     # 1. 更新获取stock_splits
     # 2. 获取delisted, 标记到tickers_fundamental表的delisted_statue为on,then check if it's on stock_splits, if yes: off, else:on

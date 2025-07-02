@@ -64,7 +64,7 @@ def delete_data(tickers):
     conn.close()
 
 
-def fetch_last_201_rows(ticker):
+def fetch_since20241201_rows(ticker):
     conn = get_db_connection()
     cursor = conn.cursor()
 
@@ -72,8 +72,7 @@ def fetch_last_201_rows(ticker):
         SELECT id, timestamp, open, high, low, close, volume
         FROM stock_daily
         WHERE ticker = %s
-        ORDER BY timestamp DESC
-        LIMIT 201;
+        and timestamp > '2024-12-01';
     """, (ticker,))
 
     rows = cursor.fetchall()  # 每行为一个元组
@@ -83,17 +82,18 @@ def fetch_last_201_rows(ticker):
 
 def adjust_ticker_split(ticker, execution_date, split_from, split_to):
     ratio = split_to / split_from  # 比如 1 / 15
-    rows = fetch_last_201_rows(ticker)
+    rows = fetch_since20241201_rows(ticker)
+    # print(rows)
 
     # 只调整 execution_date 之前的行
     execution_date_dt = datetime.combine(execution_date, datetime.min.time())
     to_update = [row for row in rows if row[1] < execution_date_dt]
 
-    print(to_update)
+    # print(to_update)
     
     conn = get_db_connection()
     cursor = conn.cursor()
-
+    # for row in rows:
     for row in to_update:
         row_id, ts, o, h, l, c, v = row
 
@@ -174,7 +174,7 @@ def revese_all_histroical_before_ms(tickers_info):
 if __name__== "__main__":
     
     # 获取哪些进行过ms
-    tickers_info = fetch_ms_tickers('2025-06-19','2025-06-20')
+    tickers_info = fetch_ms_tickers('2025-06-22','2025-06-25')
     tickers = list({row[0] for row in tickers_info})
     print(tickers_info)
     # 删去这些ticker从24-12-01到今天的数据
@@ -187,8 +187,8 @@ if __name__== "__main__":
     
     ## 这里有个bug 是重新获取数据是覆盖了从24-08-29到25-06-18，最大total为201行数据
     
-    #将所有这些ticker在stock_daily的行数按照timestamp往回201行，每一行的ochlv的数值都按照split_from和split_to进行转化
     # update_stock_daily_with_ms_ratio(tickers_info)
     
     # 将所有历史数据都reverse回来
-    ##### revese_all_histroical_before_ms(tickers_info)
+    # revese_all_histroical_before_ms(tickers_info)
+    

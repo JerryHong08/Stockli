@@ -198,6 +198,9 @@ class MainWindowLogic:
             print(e)
             
     def on_ms_finished(self, ms_filtered):
+        # print("=== on_ms_finished 被调用 ===")
+        # print(f"接收到的 ms_filtered 类型: {type(ms_filtered)}")
+        # print(f"接收到的 ms_filtered 长度: {len(ms_filtered) if hasattr(ms_filtered, '__len__') else 'N/A'}")
         self.ms_filtered = ms_filtered
         # 安全关闭 ms_thread
         self.ms_thread.quit()
