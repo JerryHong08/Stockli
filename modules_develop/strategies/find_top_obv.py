@@ -237,8 +237,124 @@ def calculate_obv_and_score(df: pd.DataFrame, window: int = 252, mean_window: in
     print("✅ 指标计算完成")
     return df
 
-# ----------------------------Process-----------------------------------
+# def calculate_obv_and_score(df: pd.DataFrame, window: int = 252, mean_window: int = 20, slope_window: int = 20) -> pd.DataFrame:
+    """
+    新版本：quantile + slope + cross-sectional z-score + 排除流动性差
+    """
+    print("⚙️ 正在计算指标...")
+    df = df.sort_values(['ticker', 'timestamp']).copy()
 
+    # 添加交易日索引（可选）
+    df = create_trading_day_index(df)
+
+    # OBV
+    df['price_diff'] = df.groupby('ticker')['close'].diff()
+    df['direction'] = np.sign(df['price_diff']).fillna(0)
+    df['obv_step'] = df['direction'] * df['volume']
+    df['obv'] = df.groupby('ticker')['obv_step'].cumsum()
+
+    window_min_periods = min(50, window // 3)
+    mean_min_periods = min(5, mean_window // 2)
+
+    # rolling quantile 替代 min/max
+    df['obv_q_low'] = df.groupby('ticker')['obv'].transform(
+        lambda x: x.rolling(window, min_periods=window_min_periods).quantile(0.05))
+    df['obv_q_high'] = df.groupby('ticker')['obv'].transform(
+        lambda x: x.rolling(window, min_periods=window_min_periods).quantile(0.95))
+    obv_range = df['obv_q_high'] - df['obv_q_low']
+    df['obv_pct'] = np.where(obv_range > 1e-10, (df['obv'] - df['obv_q_low']) / obv_range, 0.5)
+
+    df['close_q_low'] = df.groupby('ticker')['close'].transform(
+        lambda x: x.rolling(window, min_periods=window_min_periods).quantile(0.05))
+    df['close_q_high'] = df.groupby('ticker')['close'].transform(
+        lambda x: x.rolling(window, min_periods=window_min_periods).quantile(0.95))
+    close_range = df['close_q_high'] - df['close_q_low']
+    df['close_pct'] = np.where(close_range > 1e-10, (df['close'] - df['close_q_low']) / close_range, 0.5)
+
+    # 中期均值
+    df['obv_pct_mean'] = df.groupby('ticker')['obv_pct'].transform(
+        lambda x: x.rolling(mean_window, min_periods=mean_min_periods).mean())
+    df['close_pct_mean'] = df.groupby('ticker')['close_pct'].transform(
+        lambda x: x.rolling(mean_window, min_periods=mean_min_periods).mean())
+    
+    # 对中期均值做 z-score 标准化（每只股票内部）- 增强数值稳定性
+    def safe_zscore(x):
+        """安全的Z-score计算"""
+        valid_data = x.dropna()
+        if len(valid_data) < 2:  # 需要至少2个有效值
+            return pd.Series(np.zeros(len(x)), index=x.index)
+        
+        mean_val = valid_data.mean()
+        std_val = valid_data.std()
+        
+        if std_val < 1e-10:  # 标准差太小，认为是常数序列
+            return pd.Series(np.zeros(len(x)), index=x.index)
+        
+        return (x - mean_val) / std_val
+
+    df['obv_z'] = df.groupby('ticker')['obv_pct_mean'].transform(safe_zscore)
+    df['close_z'] = df.groupby('ticker')['close_pct_mean'].transform(safe_zscore)
+    
+    # obv slope
+    def calc_slope(x):
+        if len(x.dropna()) < slope_window:
+            return np.nan
+        y = x.values
+        x_idx = np.arange(len(y))
+        slope = np.polyfit(x_idx, y, 1)[0]
+        return slope
+
+    df['obv_slope'] = df.groupby('ticker')['obv'].transform(
+        lambda x: x.rolling(slope_window, min_periods=5).apply(calc_slope, raw=False))
+
+    # cross-sectional z-score（只做最新日期）
+    latest = df.sort_values(['ticker', 'timestamp']).groupby('ticker').tail(1).copy()
+    for col in ['obv_pct_mean', 'close_pct_mean', 'obv_slope']:
+        mean = latest[col].mean()
+        std = latest[col].std()
+        latest[f'{col}_z'] = (latest[col] - mean) / (std + 1e-5)
+
+    # score: obv_pct_mean 越高 + obv_slope 越大 + close_pct_mean 越低
+    latest['score'] = latest['obv_pct_mean_z'] + latest['obv_slope_z'] - latest['close_pct_mean_z']
+
+    # 排除流动性差：volume 均值最低1%剔除
+    # vol_mean = df.groupby('ticker')['volume'].mean()
+    # vol_threshold = vol_mean.quantile(0.01)
+    # liquid_tickers = vol_mean[vol_mean > vol_threshold].index
+    # latest = latest[latest['ticker'].isin(liquid_tickers)]
+
+    print("✅ 指标计算完成")
+    return latest
+
+# ----------------------------Process-----------------------------------
+# 为这些tickers生成图表
+def chart_tickers(tickers: list, test_date: str, days: int = 1000, df_all: pd.DataFrame = None):
+    # 为每个股票生成图表
+    print(f"\n📈 正在为 {len(tickers)} 只股票生成图表...")
+    
+    for ticker in tickers:
+        ticker_data = df_all[df_all['ticker'] == ticker].copy()
+        
+        if not ticker_data.empty:
+            print(f"📊 正在生成 {ticker} 的图表...")
+            
+            # 获取更详细的OHLC数据
+            detailed_data = get_ticker_detailed_data(ticker, test_date, days)
+            
+            # 合并计算的指标到详细数据
+            if not detailed_data.empty:
+                detailed_data = detailed_data.merge(
+                    ticker_data[['timestamp', 'obv', 'obv_pct', 'obv_pct_mean', 'obv_z', 'close_z', 'score']], 
+                    on='timestamp', 
+                    how='left'
+                )
+                plot_interactive_candlestick_with_obv(ticker, detailed_data, test_date)
+            else:
+                plot_interactive_candlestick_with_obv(ticker, ticker_data, test_date)
+        else:
+            print(f"❌ {ticker} 没有足够的数据生成图表")
+    
+    print("✅ 所有图表生成完成!") 
 # 1.1
 def calculate_tickers_with_charts(tickers: list, test_date: str, days: int = 1000):
     """
@@ -274,32 +390,7 @@ def calculate_tickers_with_charts(tickers: list, test_date: str, days: int = 100
         print(f"\n🏆 指定股票 OBV 背离结果：")
         print(df_result.to_string(index=False, float_format="%.4f"))
     
-    # 为每个股票生成图表
-    print(f"\n📈 正在为 {len(tickers)} 只股票生成图表...")
-    
-    for ticker in tickers:
-        ticker_data = df_all[df_all['ticker'] == ticker].copy()
-        
-        if not ticker_data.empty:
-            print(f"📊 正在生成 {ticker} 的图表...")
-            
-            # 获取更详细的OHLC数据
-            detailed_data = get_ticker_detailed_data(ticker, test_date, days)
-            
-            # 合并计算的指标到详细数据
-            if not detailed_data.empty:
-                detailed_data = detailed_data.merge(
-                    ticker_data[['timestamp', 'obv', 'obv_pct', 'obv_pct_mean', 'obv_z', 'close_z', 'score']], 
-                    on='timestamp', 
-                    how='left'
-                )
-                plot_interactive_candlestick_with_obv(ticker, detailed_data, test_date)
-            else:
-                plot_interactive_candlestick_with_obv(ticker, ticker_data, test_date)
-        else:
-            print(f"❌ {ticker} 没有足够的数据生成图表")
-    
-    print("✅ 所有图表生成完成!")
+    chart_tickers(tickers,test_date,days,df_all)
 # 1.2 图表
 def plot_interactive_candlestick_with_obv(ticker: str, df_ticker: pd.DataFrame, test_date: str, save_chart: bool = True):
     """
@@ -420,7 +511,21 @@ def plot_interactive_candlestick_with_obv(ticker: str, df_ticker: pd.DataFrame, 
             ),
             row=2, col=1, secondary_y=True
         )
-    
+
+    # obv_slope 曲线（右轴）
+    # if 'obv_slope' in df_ticker.columns:
+    #     fig.add_trace(
+    #         go.Scatter(
+    #             x=df_ticker['date'],
+    #             y=df_ticker['obv_slope'],
+    #             mode='lines',
+    #             name='OBV Slope',
+    #             line=dict(color='teal', width=1, dash='dot'),
+    #             connectgaps=False
+    #         ),
+    #         row=2, col=1, secondary_y=True
+    #     )
+        
     # 添加关键水平线
     fig.add_hline(y=0.5, line_dash="dot", line_color="gray", row=2, col=1, secondary_y=True)
     fig.add_hline(y=0.8, line_dash="dot", line_color="red", row=2, col=1, secondary_y=True)
@@ -562,7 +667,7 @@ def verify_rolling_calculation(df: pd.DataFrame, ticker: str, window: int = 20):
     recent_data = ticker_data.tail(window + 5)
     
     print(f"最近 {len(recent_data)} 条记录的时间间隔：")
-    recent_data['time_gap'] = recent_data['timestamp'].diff().dt.days
+    recent_data.loc[:, 'time_gap'] = recent_data['timestamp'].diff().dt.days
     for i, row in recent_data.iterrows():
         gap = row['time_gap']
         date_str = row['timestamp'].strftime('%Y-%m-%d')
@@ -659,7 +764,7 @@ def check_market_ranking(tickers: list, test_date: str, days: int = 1000):
     
     return results
 # 3. 查找 top N OBV 背离股票
-def find_top_obv_stocks(test_date: str, top_n: int = 10, days: int = 1000, window: int = 252, mean_window: int = 20, tickers: list = None, return_all: bool = False):
+def find_top_obv_stocks(test_date: str, top_n: int = 10, days: int = 1000, window: int = 252, mean_window: int = 20, tickers: list = None, return_all: bool = False, generate_charts: bool = False) -> pd.DataFrame:
     """
     主函数：加载数据 → 计算指标 → 返回 top_n 股票
     """
@@ -678,14 +783,17 @@ def find_top_obv_stocks(test_date: str, top_n: int = 10, days: int = 1000, windo
               .tail(1)
               .dropna(subset=['score'])
     )
+    
     if not return_all:
         df_top = df_latest[['ticker', 'score', 'obv_z', 'close_z', 'obv_pct_mean', 'close_pct_mean']] \
                     .sort_values('score', ascending=False).head(top_n)
-        return df_top
+        
     else:
         df_top = df_latest[['ticker', 'score', 'obv_z', 'close_z', 'obv_pct_mean', 'close_pct_mean']] \
                     .sort_values('score', ascending=False)
-        return df_top
+    if generate_charts:
+        chart_tickers(df_top['ticker'].tolist(), test_date, days, df_all)  # 传递完整的df_all
+    return df_top
 
 # 修改主函数
 if __name__ == "__main__":
@@ -703,10 +811,12 @@ if __name__ == "__main__":
         test_date = input("请输入要查询的日期，格式如2025-05-28: ")
         check_market_ranking(test_tickers, test_date)
     elif choice == "3":
-        top_n = input("请输入要查询的前 N 名股票数量 (默认 50): ")
-        top_n = int(top_n) if top_n.isdigit() else 50
+        top_n = input("请输入要查询的前 N 名股票数量 (默认 10): ")
+        top_n = int(top_n) if top_n.isdigit() else 10
+        if_generate = input("是否生成图表？(y/n, 默认n): ").strip().lower() == 'y'
         test_date = input("请输入要查询的日期，格式如2025-05-28: ")
-        df_result = find_top_obv_stocks(test_date=test_date, top_n=top_n, days=1000, window=252, mean_window=20)
+        test_date = test_date if test_date else '2025-05-28'
+        df_result = find_top_obv_stocks(test_date=test_date, top_n=top_n, days=1000, window=252, mean_window=20, generate_charts=if_generate)
         print(f"\n🏆 Top {top_n} OBV 背离股票：")
         print(df_result.to_string(index=False, float_format="%.4f"))
     else:
